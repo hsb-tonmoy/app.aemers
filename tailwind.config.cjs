@@ -23,10 +23,15 @@ const config = {
 		}
 	},
 
+	daisyui: {
+		themes: false
+	},
+
 	plugins: [
 		require('@tailwindcss/forms')({
 			strategy: 'class'
-		})
+		}),
+		require('daisyui')
 	]
 };
 
