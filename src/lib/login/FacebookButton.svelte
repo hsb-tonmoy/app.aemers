@@ -5,6 +5,6 @@
 <button
 	disabled
 	type="button"
-	class="flex gap-x-2 w-72 h-12 items-center text-white text-sm bg-[#4267B2] px-4 text-center rounded shadow-lg hover:shadow transition-all ease-in-out duration-200"
-	><span class="block text-white w-4 h-4">{@html facebook}</span>Sign-in with Facebook</button
+	class="flex gap-x-2 items-center text-[#1877F2] text-lg font-bold border border-borderColor rounded-xl px-7 py-3"
+	><span class="block text-[#1877F2] w-4 h-4">{@html facebook}</span>Facebook</button
 >

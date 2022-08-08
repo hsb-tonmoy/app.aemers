@@ -8,7 +8,8 @@ const config = {
 				primary: '#7443FF',
 				secondary: '#232323',
 				lightText: '#898989',
-				borderColor: '#E3D9FF'
+				borderColor: '#E3D9FF',
+				dividerColor: 'rgba(190, 190, 190, 1)'
 			},
 			width: {
 				120: '30rem'
@@ -23,15 +24,10 @@ const config = {
 		}
 	},
 
-	daisyui: {
-		themes: false
-	},
-
 	plugins: [
 		require('@tailwindcss/forms')({
 			strategy: 'class'
-		}),
-		require('daisyui')
+		})
 	]
 };
 

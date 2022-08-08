@@ -13,7 +13,9 @@
 
 	import SocialLogin from '$lib/login/SocialLogin.svelte';
 
-	import { visibility } from '$lib/svg/form-icons';
+	import { Eye, EyeOff } from '$lib/components/Icons';
+
+	let passwordVisible = false;
 
 	const schema = yup.object().shape({
 		email: yup
@@ -57,9 +59,9 @@
 </svelte:head>
 
 <main class="flex flex-wrap flex-1">
-	<aside class="flex justify-center items-center w-full lg:w-3/4">
-		<div class="flex flex-col justify-center w-1/3">
-			<h2 class="text-3xl font-semibold">Log in to your Account</h2>
+	<aside class="flex justify-center items-center w-full md:w-3/5 xl:w-3/4">
+		<div class="flex flex-col justify-center px-20 xl:px-0 xl:w-1/3">
+			<h2 class="text-3xl font-bold">Log in to your Account</h2>
 			<p class="mt-2 text-sm text-lightText leading-normal">
 				Welcome back! Enter your email and password here to log in to your account!
 			</p>
@@ -78,69 +80,63 @@
 				</div>
 			{/if}
 			<form use:form>
-				<fieldset class="flex flex-col mt-8">
-					<div class="flex flex-col gap-y-8">
-						<label class="block">
-							<span class="label-style">Email Address</span>
-							<input type="email" name="email" id="email" class="form-input input-styles" />
-						</label>
-
-						<label class="block relative">
-							<span class="label-style">Password</span>
-							<input
-								type="password"
-								name="password"
-								id="password"
-								class="form-input input-styles"
-							/>
-							<span class="absolute right-0 w-5 h-5">{@html visibility}</span>
-						</label>
+				<fieldset class="flex flex-col mt-8 border-b border-dividerColor">
+					<div class="mb-8">
+						<label for="email" class="block mb-2 text-base">Email Address</label>
+						<input
+							type="email"
+							name="email"
+							id="email"
+							class="border border-borderColor text-sm rounded-xl block w-full py-4 px-5"
+							placeholder="example@example.com"
+						/>
 					</div>
-					<a href="/login/forgot" class="self-end text-sm mt-2 mb-8 text-lightText hover:text-black"
-						>Forgot password?</a
-					>
+					<label for="password" class="block mb-2 text-base">Password</label>
+					<div class="relative mb-6">
+						<input
+							type={passwordVisible ? 'text' : 'password'}
+							name="password"
+							id="password"
+							class="border border-borderColor text-sm rounded-xl block w-full py-4 px-5"
+							placeholder="***********"
+						/>
+						<div
+							on:click={() => (passwordVisible = !passwordVisible)}
+							class="flex absolute inset-y-0 right-0 items-center pr-6 cursor-pointer"
+						>
+							{#if passwordVisible}
+								<Eye size="20" />
+							{:else}
+								<EyeOff size="20" />
+							{/if}
+						</div>
+					</div>
+
 					<button
-						class="px-6 lg:px-12 py-2 lg:py-4 ml-2 lg:ml-0 bg-accent1 hover:bg-accent2 disabled:bg-thinAccent text-white font-light text-sm uppercase"
+						class="mt-8 w-full bg-primary text-white font-bold text-base py-4 rounded-xl"
 						disabled={!$isValid}>Login</button
 					>
-					<span class="self-center text-xs md:text-sm mt-4 text-gray-600"
-						>Don't have an account? Go ahead and <a
-							href="/register"
-							class="font-medium text-lightText hover:underline">Sign-up</a
-						></span
-					>
-					<span class="self-center flex gap-x-4 items-center text-xs md:text-sm mt-4 text-gray-600"
-						><a href="/privacy-policy" class="font-medium text-lightText hover:underline"
-							>Privacy Policy</a
-						><a href="/terms-conditions" class="font-medium text-lightText hover:underline"
-							>Terms & Conditions</a
-						></span
-					>
+					<div class="flex flex-col items-center self-center mt-8 mb-4">
+						<span class="text-xs md:text-base"
+							>Don't have an account? <a href="/register" class="font-bold text-primary underline"
+								>Signup</a
+							></span
+						>
+						<span class="text-xs md:text-base"
+							><a href="/login/forgot" class="font-bold text-primary underline">Forgot password?</a
+							></span
+						>
+					</div>
 				</fieldset>
 			</form>
+			<SocialLogin />
 		</div>
 	</aside>
-	<aside class="bg bg-cover bg-center bg-no-repeat w-full lg:w-1/4" />
+	<aside class="hidden md:block bg bg-cover bg-center bg-no-repeat w-full md:w-2/5 xl:w-1/4" />
 </main>
 
 <style lang="postcss">
 	.bg {
 		background-image: url('/images/login-bg.png');
-	}
-
-	.input-styles {
-		@apply mt-2
-							px-6
-							py-3
-              block
-              w-full
-              rounded-xl
-              border-borderColor
-              shadow-sm
-              focus:border-primary;
-	}
-
-	.label-style {
-		@apply text-sm;
 	}
 </style>

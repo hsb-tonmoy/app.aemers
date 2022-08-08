@@ -31,8 +31,8 @@
 <button
 	on:click={openGoogleLoginPage}
 	type="button"
-	class="google inline-flex items-center gap-x-2 px-4 w-72 h-12 text-sm"
-	>{@html google} <span class="text-black/50">Sign in with Google</span></button
+	class="flex gap-x-2 items-center text-secondary text-lg font-bold border border-borderColor rounded-xl px-10 py-3"
+	><span class="block w-4 h-4">{@html google}</span>Google</button
 >
 
 <style lang="postcss">

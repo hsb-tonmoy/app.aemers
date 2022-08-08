@@ -2,45 +2,39 @@
 	import { goto } from '$app/navigation';
 
 	import { post } from '$lib/utils.js';
-	import { firstname, lastname, email } from '$lib/home/stores';
 
-	import { createForm } from 'svelte-forms-lib';
+	import { createForm } from 'felte';
+	import { validator } from '@felte/validator-yup';
 	import * as yup from 'yup';
 
 	import { notificationToast } from '$lib/NotificationToast';
 
 	import SocialLogin from '$lib/login/SocialLogin.svelte';
 
-	const { form, state, isValid, handleChange, handleSubmit } = createForm({
+	import { Eye, EyeOff } from '$lib/components/Icons';
+
+	let passwordVisible = false;
+
+	const schema = yup.object().shape({
+		email: yup.string().email().required('Email address is required').trim(),
+		password: yup.string().required('Password is required'),
+		passwordConfirmation: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match')
+	});
+
+	const { form, data, errors, isValid } = createForm({
 		initialValues: {
-			first_name: $firstname,
-			last_name: $lastname,
-			email: $email,
+			email: '',
 			password: '',
 			passwordConfirmation: ''
 		},
-		validationSchema: yup.object().shape({
-			first_name: yup.string().required('First name is required').trim(),
-			last_name: yup.string().required('Last name is required').trim(),
-			email: yup.string().email().required('Email address is required').trim(),
-			password: yup.string().required('Password is required'),
-			passwordConfirmation: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match')
-		}),
-		onSubmit: (values) => {
-			handleRegister(
-				values.first_name,
-				values.last_name,
-				values.email,
-				values.password,
-				values.passwordConfirmation
-			);
+		extend: validator({ schema }),
+		onSubmit: (values, context) => {
+			handleRegister(values.email, values.password, values.passwordConfirmation);
 		}
 	});
 
-	async function handleRegister(first_name, last_name, email, password, passwordConfirmation) {
+	async function handleRegister(email, password, passwordConfirmation) {
 		const response = await post(`auth/register`, {
-			first_name,
-			last_name,
 			email,
 			password,
 			passwordConfirmation
@@ -64,163 +58,92 @@
 </script>
 
 <svelte:head>
-	<title>app.mrashid.net - Register</title>
+	<title>app.aemers.com - Signup</title>
 </svelte:head>
 
-<main class="flex flex-wrap h-screen font-montserrat">
-	<aside class="bg bg-cover bg-center bg-no-repeat w-full py-32 lg:py-0 xl:w-3/5" />
-	<aside
-		class="flex flex-col items-center 2xl:items-start justify-center w-full p-6 lg:p-0 xl:p-6 2xl:p-0 xl:w-2/5"
-	>
-		<h2
-			class="text-2xl lg:text-3xl xl:text-xl 2xl:text-3xl text-lightText font-semibold leading-loose"
-		>
-			Hello, <br /> Let's grab the key to your dashboard!
-		</h2>
+<main class="flex flex-wrap flex-1">
+	<aside class="hidden md:block bg bg-cover bg-center bg-no-repeat w-full md:w-2/5 xl:w-1/4" />
+	<aside class="flex justify-center items-center w-full md:w-3/5 xl:w-3/4">
+		<div class="flex flex-col justify-center px-20 xl:px-0 xl:w-1/3">
+			<h2 class="text-3xl font-bold">Create an Account</h2>
+			<p class="mt-2 text-sm text-lightText leading-normal">
+				Creating an account is the easiest task ever. You are about to land in the universe of
+				Aemers.
+			</p>
 
-		<div
-			id="register"
-			class="flex flex-col w-full md:w-2/4 xl:w-3/5 mt-12 md:mt-20 xl:mt-12 2xl:mt-20"
-		>
-			<SocialLogin />
-			<div
-				class="relative w-full flex justify-center items-center border-b-2 border-gray-200 my-12"
-			>
-				<span class="absolute px-2 bg-white text-gray-400">Or</span>
-			</div>
-			<form on:submit|preventDefault={handleSubmit}>
-				<fieldset class="flex flex-col mt-5">
-					<div class="flex flex-col gap-y-8">
-						<div class="flex gap-x-4">
-							<span class="w-2/4">
-								<label class="block">
-									<span class="text-lightText">First name</span>
-									<input
-										type="text"
-										name="first_name"
-										id="first_name"
-										class="form-input
-									mt-1
-									block
-									w-full
-									rounded-md
-									border-gray-300
-									shadow-sm
-									focus:border-accent2 focus:ring focus:ring-accent2 focus:ring-opacity-50
-								"
-										bind:value={$form.first_name}
-										on:change={handleChange}
-									/>
-								</label>
-							</span>
-							<span class="w-2/4">
-								<label class="block">
-									<span class="text-lightText">Last name</span>
-									<input
-										type="text"
-										name="last_name"
-										id="last_name"
-										class="form-input
-									mt-1
-									block
-									w-full
-									rounded-md
-									border-gray-300
-									shadow-sm
-									focus:border-accent2 focus:ring focus:ring-accent2 focus:ring-opacity-50
-								"
-										bind:value={$form.last_name}
-										on:change={handleChange}
-									/>
-								</label>
-							</span>
+			<form use:form>
+				<fieldset class="flex flex-col mt-8 border-b border-dividerColor">
+					<div class="mb-8">
+						<label for="email" class="block mb-2 text-base">Email Address</label>
+						<input
+							type="email"
+							name="email"
+							id="email"
+							class="border border-borderColor text-sm rounded-xl block w-full py-4 px-5"
+							placeholder="example@example.com"
+						/>
+					</div>
+					<label for="password" class="block mb-2 text-base">Choose a Password</label>
+					<div class="relative mb-8">
+						<input
+							type={passwordVisible ? 'text' : 'password'}
+							name="password"
+							id="password"
+							class="border border-borderColor text-sm rounded-xl block w-full py-4 px-5"
+							placeholder="***********"
+						/>
+						<div
+							on:click={() => (passwordVisible = !passwordVisible)}
+							class="flex absolute inset-y-0 right-0 items-center pr-6 cursor-pointer"
+						>
+							{#if passwordVisible}
+								<Eye size="20" />
+							{:else}
+								<EyeOff size="20" />
+							{/if}
 						</div>
-						<label class="block">
-							<span class="text-lightText">Email</span>
-							<input
-								type="email"
-								name="email"
-								id="email"
-								class="form-input
-              mt-1
-              block
-              w-full
-              rounded-md
-              border-gray-300
-              shadow-sm
-              focus:border-accent2 focus:ring focus:ring-accent2 focus:ring-opacity-50
-            "
-								bind:value={$form.email}
-								on:change={handleChange}
-							/>
-							<span class="text-xs text-orange-600"
-								>Make sure to use the same email address you used in the form!</span
-							>
-						</label>
-						<div class="flex gap-x-4">
-							<span class="w-2/4">
-								<label class="block">
-									<span class="text-lightText">Password</span>
-									<input
-										type="password"
-										name="password"
-										id="password"
-										class="form-input
-              mt-1
-              block
-              w-full
-              rounded-md
-              border-gray-300
-              shadow-sm
-              focus:border-accent2 focus:ring focus:ring-accent2 focus:ring-opacity-50
-            "
-										bind:value={$form.password}
-										on:change={handleChange}
-									/>
-								</label>
-							</span>
-							<span class="w-2/4">
-								<label class="block">
-									<span class="text-lightText">Password confirmation</span>
-									<input
-										type="password"
-										name="passwordConfirmation"
-										id="passwordConfirmation"
-										class="form-input
-              mt-1
-              block
-              w-full
-              rounded-md
-              border-gray-300
-              shadow-sm
-              focus:border-accent2 focus:ring focus:ring-accent2 focus:ring-opacity-50
-            "
-										bind:value={$form.passwordConfirmation}
-										on:change={handleChange}
-									/>
-								</label>
-							</span>
+					</div>
+					<label for="passwordConfirmation" class="block mb-2 text-base">Confirm Password</label>
+					<div class="relative">
+						<input
+							type={passwordVisible ? 'text' : 'password'}
+							name="passwordConfirmation"
+							id="passwordConfirmation"
+							class="border border-borderColor text-sm rounded-xl block w-full py-4 px-5"
+							placeholder="***********"
+						/>
+						<div
+							on:click={() => (passwordVisible = !passwordVisible)}
+							class="flex absolute inset-y-0 right-0 items-center pr-6 cursor-pointer"
+						>
+							{#if passwordVisible}
+								<Eye size="20" />
+							{:else}
+								<EyeOff size="20" />
+							{/if}
 						</div>
 					</div>
 
 					<button
-						class="mt-8 px-6 lg:px-12 py-2 lg:py-4 ml-2 lg:ml-0 bg-accent1 hover:bg-accent2 disabled:bg-thinAccent text-white font-light text-sm uppercase"
-						disabled={!$isValid}>Register</button
+						class="mt-8 w-full bg-primary text-white font-bold text-base py-4 rounded-xl"
+						disabled={!$isValid}>Login</button
 					>
-					<span class="self-center text-xs md:text-sm mt-4 text-gray-600"
-						>Already have an account? Go ahead and <a
-							href="/login"
-							class="font-medium text-lightText hover:underline">Sign-in</a
-						></span
-					>
+					<div class="flex flex-col items-center self-center mt-8 mb-4">
+						<span class="text-xs md:text-base"
+							>Already have an account? <a href="/login" class="font-bold text-primary underline"
+								>Signup</a
+							></span
+						>
+					</div>
 				</fieldset>
 			</form>
+			<SocialLogin />
 		</div>
 	</aside>
 </main>
 
-<style>
+<style lang="postcss">
 	.bg {
-		background-image: url('/images/login-bg.svg');
+		background-image: url('/images/register-bg.png');
 	}
 </style>

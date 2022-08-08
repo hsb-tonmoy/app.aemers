@@ -37,7 +37,7 @@
 
 <script>
 	import { onMount } from 'svelte/internal';
-	import { login_message } from '$lib/layout/stores';
+	import { login_message } from '$lib/login/stores';
 	import { goto } from '$app/navigation';
 	import { createForm } from 'felte';
 	import { validator } from '@felte/validator-yup';
