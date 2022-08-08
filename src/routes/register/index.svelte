@@ -6,6 +6,9 @@
 	import { createForm } from 'felte';
 	import { validator } from '@felte/validator-yup';
 	import * as yup from 'yup';
+	import YupPassword from 'yup-password';
+
+	YupPassword(yup);
 
 	import { notificationToast } from '$lib/NotificationToast';
 
@@ -13,11 +16,24 @@
 
 	import { Eye, EyeOff } from '$lib/components/Icons';
 
+	import { Label, Input, Button, Error } from '$lib/components/Form';
+
 	let passwordVisible = false;
 
 	const schema = yup.object().shape({
-		email: yup.string().email().required('Email address is required').trim(),
-		password: yup.string().required('Password is required'),
+		email: yup
+			.string()
+			.email('Please enter a valid email address')
+			.required('Email address is required')
+			.trim(),
+		password: yup
+			.string()
+			.min(8, 'Password must be at least 8 characters long')
+			.minLowercase(2, 'Password must have at least 2 lowercase characters')
+			.minUppercase(1, 'Password must have at least 1 uppercase character')
+			.minNumbers(1, 'Password must have at least 1 numeric character')
+			.minSymbols(1, 'Password must have at least 1 symbol')
+			.required('Password is required'),
 		passwordConfirmation: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match')
 	});
 
@@ -74,24 +90,28 @@
 			<form use:form>
 				<fieldset class="flex flex-col mt-8 border-b border-dividerColor">
 					<div class="mb-8">
-						<label for="email" class="block mb-2 text-base">Email Address</label>
-						<input
+						<Label label_for="email" label="Email" />
+						<Input
 							type="email"
 							name="email"
 							id="email"
-							class="border border-borderColor text-sm rounded-xl block w-full py-4 px-5"
 							placeholder="example@example.com"
+							error={$errors.email}
 						/>
+						{#if $errors.email}
+							<Error message={$errors.email} />
+						{/if}
 					</div>
-					<label for="password" class="block mb-2 text-base">Choose a Password</label>
-					<div class="relative mb-8">
-						<input
+					<Label label_for="password" label="Choose a Password" />
+					<div class="relative">
+						<Input
 							type={passwordVisible ? 'text' : 'password'}
 							name="password"
 							id="password"
-							class="border border-borderColor text-sm rounded-xl block w-full py-4 px-5"
 							placeholder="***********"
+							error={$errors.password}
 						/>
+
 						<div
 							on:click={() => (passwordVisible = !passwordVisible)}
 							class="flex absolute inset-y-0 right-0 items-center pr-6 cursor-pointer"
@@ -103,15 +123,19 @@
 							{/if}
 						</div>
 					</div>
-					<label for="passwordConfirmation" class="block mb-2 text-base">Confirm Password</label>
+					{#if $errors.password}
+						<Error classes="self-start" message={$errors.password} />
+					{/if}
+					<Label classes="mt-8" label_for="passwordConfirmation" label="Confirm Password" />
 					<div class="relative">
-						<input
+						<Input
 							type={passwordVisible ? 'text' : 'password'}
 							name="passwordConfirmation"
 							id="passwordConfirmation"
-							class="border border-borderColor text-sm rounded-xl block w-full py-4 px-5"
 							placeholder="***********"
+							error={$errors.passwordConfirmation}
 						/>
+
 						<div
 							on:click={() => (passwordVisible = !passwordVisible)}
 							class="flex absolute inset-y-0 right-0 items-center pr-6 cursor-pointer"
@@ -123,15 +147,15 @@
 							{/if}
 						</div>
 					</div>
+					{#if $errors.passwordConfirmation}
+						<Error classes="self-start" message={$errors.passwordConfirmation} />
+					{/if}
 
-					<button
-						class="mt-8 w-full bg-primary text-white font-bold text-base py-4 rounded-xl"
-						disabled={!$isValid}>Login</button
-					>
+					<Button type="submit" classes="mt-8 py-4" disabled={!isValid} />
 					<div class="flex flex-col items-center self-center mt-8 mb-4">
 						<span class="text-xs md:text-base"
 							>Already have an account? <a href="/login" class="font-bold text-primary underline"
-								>Signup</a
+								>Login</a
 							></span
 						>
 					</div>

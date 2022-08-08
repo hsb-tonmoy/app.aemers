@@ -3,7 +3,7 @@
 		if (session.user) {
 			return {
 				status: 302,
-				redirect: '/dashboard'
+				redirect: '/'
 			};
 		}
 
@@ -43,6 +43,12 @@
 	import { validator } from '@felte/validator-yup';
 	import * as yup from 'yup';
 
+	import { header_bg } from '$lib/login/stores';
+
+	import { Success } from '$lib/components/Icons';
+
+	import { Input, Button, Error } from '$lib/components/Form';
+
 	export let message;
 
 	let resend_email;
@@ -51,7 +57,6 @@
 		if (message === 'success') {
 			$login_message.type = 'success';
 			$login_message.message = 'Your account has been verified. You can login now.';
-			goto('/login');
 		}
 	});
 
@@ -62,7 +67,7 @@
 			.required('Email Address is required')
 	});
 
-	const { form, errors } = createForm({
+	const { form, errors, isValid } = createForm({
 		extend: validator({ schema }),
 		onSubmit(values, context) {
 			handleSubmit(JSON.stringify(values));
@@ -86,43 +91,49 @@
 			console.log(res);
 		}
 	}
+	$header_bg = '#F9F6FF';
 </script>
 
-<div class="flex flex-col justify-center items-center w-full h-screen">
-	{#if message === 'invalid'}
-		<h2
-			class="animate__animated animate__slideInLeft text-lg md:text-xl lg:text-3xl text-lightText text-center font-semibold drop-shadow"
-			style="--animate-duration: 800ms"
-		>
-			Looks like your verification email has expired!
-		</h2>
+<section class="flex flex-1 justify-center items-center bg-bgColor">
+	<div
+		class="flex flex-col justify-center p-12 md:px-40 md:py-32 lg:px-60 lg:py-52 bg-white rounded-3xl"
+	>
+		{#if message === 'invalid'}
+			<h2 class="text-3xl font-bold">Oops, looks like your verification email has expired!</h2>
+			<p class="mt-2 text-sm text-lightText leading-normal">
+				Don’t worry! We can send you the link again. Just enter your email address below:
+			</p>
+			<form use:form>
+				<fieldset class="flex flex-col mt-8 border-b border-dividerColor">
+					<div class="mb-8">
+						<Input
+							type="email"
+							id="email"
+							name="email"
+							placeholder="example@example.com"
+							error={$errors.email}
+						/>
+						{#if $errors.email}
+							<Error message={$errors.email} />
+						{/if}
+					</div>
 
-		<span class="text-sm md:text-base lg:text-lg text-center font-medium"
-			>Enter your email address here to receive another verification email</span
-		>
-		<form class="mt-6 flex justify-center w-full" use:form>
-			<div class="relative flex items-stretch w-3/4 md:w-2/4 lg:w-1/5 mb-3">
-				<input
-					id="email"
-					name="email"
-					type="email"
-					placeholder="Email Address"
-					class="form-input p-3 h-10 placeholder:text-accent1 relative bg-white text-base border-0 border-b border-accent1 focus:border-0 focus:border-b-2 focus:outline-none w-full pr-10"
-				/>
-				<button
-					class="z-10 h-full leading-snug font-normal absolute text-center text-blueGray-300 rounded text-accent1 text-base items-center justify-center  right-0 pr-3 py-3"
-				>
-					<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24">
-						<path fill="currentcolor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
-					</svg>
-				</button>
-			</div>
-		</form>
-		{#if resend_email}
-			<span class="text-green-600 text-center text-sm">{resend_email}</span>
+					<Button text="Submit" disabled={!isValid} classes="py-3 px-12" />
+				</fieldset>
+			</form>
+		{:else if message === 'success'}
+			<span class="self-center"><Success /></span>
+			<h2 class="text-3xl font-bold">Your account has been verified!</h2>
+			<Button
+				on:click={() => goto('/login')}
+				type="button"
+				text="Login"
+				classes="mt-6 px-12 py-3"
+			/>
 		{/if}
-	{/if}
-</div>
+	</div>
+</section>
+
 <svelte:head>
-	<title>app.mrashid.net - Verification</title>
+	<title>app.aemers.com - Verification</title>
 </svelte:head>

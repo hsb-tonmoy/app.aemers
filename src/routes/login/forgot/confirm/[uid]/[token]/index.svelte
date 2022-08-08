@@ -1,8 +1,6 @@
 <script>
 	import { page } from '$app/stores';
 
-	const { uid, token } = $page.params;
-
 	import { goto } from '$app/navigation';
 
 	import { notificationToast } from '$lib/NotificationToast';
@@ -11,12 +9,30 @@
 	import { validator } from '@felte/validator-yup';
 	import * as yup from 'yup';
 	import YupPassword from 'yup-password';
+
+	import { header_bg } from '$lib/login/stores';
+
+	import { Label, Input, Button, Error } from '$lib/components/Form';
+
+	import { Eye, EyeOff } from '$lib/components/Icons';
+
 	YupPassword(yup);
+
+	const { uid, token } = $page.params;
 
 	let success = false;
 
+	let passwordVisible = false;
+
 	const schema = yup.object({
-		new_password1: yup.string().password().required('New password is required'),
+		new_password1: yup
+			.string()
+			.min(8, 'Password must be at least 8 characters long')
+			.minLowercase(2, 'Password must have at least 2 lowercase characters')
+			.minUppercase(1, 'Password must have at least 1 uppercase character')
+			.minNumbers(1, 'Password must have at least 1 numeric character')
+			.minSymbols(1, 'Password must have at least 1 symbol')
+			.required('Password is required'),
 		new_password2: yup
 			.string()
 			.oneOf([yup.ref('new_password1'), null], 'Passwords must match')
@@ -49,7 +65,7 @@
 			if (response.ok) {
 				success = true;
 				setTimeout(() => {
-					goto('/login');
+					goto('/success');
 				}, 3000);
 			} else if (data.token) {
 				notificationToast(
@@ -68,96 +84,78 @@
 			console.log(e);
 		}
 	}
+	$header_bg = '#F9F6FF';
 </script>
 
 <svelte:head>
-	<title>app.mrashid.net - Forgot Password</title>
+	<title>app.aemers.com - Set New Password</title>
 </svelte:head>
 
-<main class="flex flex-wrap h-screen font-montserrat">
-	<aside class="bg bg-cover bg-center bg-no-repeat w-full py-32 lg:py-0 xl:w-3/5" />
-	<aside
-		class="flex flex-col items-center 2xl:items-start justify-center w-full p-6 lg:p-0 xl:p-6 2xl:p-0 xl:w-2/6"
-	>
-		<h2
-			class="text-2xl lg:text-3xl xl:text-xl 2xl:text-3xl text-lightText font-semibold leading-loose"
-		>
-			Hello, <br /> Lost the key to your door?
-		</h2>
-		<h3 class="mt-6 text-base font-medium text-gray-800">Set a new password below</h3>
-		<div class="text-xs mt-4">
-			<p class="text-sm">
-				New password must be a minimum of eight (8) characters long and must contain at least two
-				(2) of the following character classes:
-			</p>
-			<div class="flex flex-col gap-y-2 ml-4 mt-4">
-				<p>Upper-case alphabetic character (A-Z)</p>
-				<p>Lower-case alphabetic character (a-z)</p>
-				<p>Numeric digit (0-9)</p>
-				<p>Punctuation or symbol character, e.g. ^, $, #.</p>
+<section class="flex flex-1 justify-center items-center bg-bgColor">
+	<div class="relative flex flex-col p-12 md:px-40 md:py-32 lg:px-60 lg:py-52 bg-white rounded-3xl">
+		<h2 class="text-3xl font-bold">Set a New Password</h2>
+		<p class="mt-2 text-sm text-lightText leading-normal">
+			You are just one step away! Set a new password for your account.
+		</p>
+
+		{#if success}
+			<div class="mt-12">
+				<span class="text-green-600 text-sm text-center font-medium"
+					>A password reset link has been sent to the email address.</span
+				>
 			</div>
-		</div>
-
-		<div id="login" class="flex flex-col w-full md:w-2/4 xl:w-3/4 2xl:w-3/5 mt-6">
-			{#if success}
-				<div class="mt-12">
-					<span class="text-green-600 text-sm text-center font-medium"
-						>Your password has been reset successfully! Taking you to the login page now.</span
+		{/if}
+		<form use:form>
+			<fieldset class="flex flex-col mt-8 border-b border-dividerColor">
+				<Label label="Password" label_for="new_password1" />
+				<div class="relative">
+					<Input
+						type={passwordVisible ? 'text' : 'password'}
+						name="new_password1"
+						id="new_password1"
+						placeholder="**************"
+						error={$errors.new_password1}
+					/>
+					<div
+						on:click={() => (passwordVisible = !passwordVisible)}
+						class="flex absolute inset-y-0 right-0 items-center pr-6 cursor-pointer"
 					>
-				</div>
-			{/if}
-			<form use:form>
-				<fieldset class="flex flex-col mt-5">
-					<div class="flex flex-col gap-y-8 mb-4">
-						<label class="block">
-							<span class="text-lightText">New Password</span>
-							<input
-								type="password"
-								name="new_password1"
-								id="new_password1"
-								class="form-input
-              mt-1
-              block
-              w-full
-              rounded-md
-              border-gray-300
-              shadow-sm
-              focus:border-accent2 focus:ring focus:ring-accent2 focus:ring-opacity-50
-            "
-							/>
-						</label>
-						<label class="block">
-							<span class="text-lightText">Confirm New Password</span>
-							<input
-								type="password"
-								name="new_password2"
-								id="new_password2"
-								class="form-input
-              mt-1
-              block
-              w-full
-              rounded-md
-              border-gray-300
-              shadow-sm
-              focus:border-accent2 focus:ring focus:ring-accent2 focus:ring-opacity-50
-            "
-							/>
-						</label>
+						{#if passwordVisible}
+							<Eye size="20" />
+						{:else}
+							<EyeOff size="20" />
+						{/if}
 					</div>
-
-					<button
-						disabled={!$isValid}
-						class="px-6 lg:px-12 py-2 lg:py-4 ml-2 lg:ml-0 bg-accent1 hover:bg-accent2 disabled:bg-thinAccent text-white font-light text-sm uppercase"
-						>Submit</button
+				</div>
+				{#if $errors.new_password1}
+					<Error classes="self-start mt-2" message={$errors.new_password1} />
+				{/if}
+				<Label label="Confirm Password" label_for="new_password2" classes="mt-8" />
+				<div class="relative">
+					<Input
+						type={passwordVisible ? 'text' : 'password'}
+						name="new_password2"
+						id="new_password2"
+						placeholder="**************"
+						error={$errors.new_password2}
+					/>
+					<div
+						on:click={() => (passwordVisible = !passwordVisible)}
+						class="flex absolute inset-y-0 right-0 items-center pr-6 cursor-pointer"
 					>
-				</fieldset>
-			</form>
-		</div>
-	</aside>
-</main>
+						{#if passwordVisible}
+							<Eye size="20" />
+						{:else}
+							<EyeOff size="20" />
+						{/if}
+					</div>
+				</div>
+				{#if $errors.new_password2}
+					<Error classes="self-start mt-2 w-full" message={$errors.new_password2} />
+				{/if}
 
-<style>
-	.bg {
-		background-image: url('/images/login-bg.svg');
-	}
-</style>
+				<Button type="submit" text="Submit" classes="py-4 mt-8" disabled={!$isValid} />
+			</fieldset>
+		</form>
+	</div>
+</section>

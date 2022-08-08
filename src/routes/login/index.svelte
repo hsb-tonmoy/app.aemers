@@ -8,12 +8,17 @@
 	import { createForm } from 'felte';
 	import { validator } from '@felte/validator-yup';
 	import * as yup from 'yup';
+	import YupPassword from 'yup-password';
+
+	YupPassword(yup);
 
 	import { login_message } from '$lib/login/stores';
 
 	import SocialLogin from '$lib/login/SocialLogin.svelte';
 
 	import { Eye, EyeOff } from '$lib/components/Icons';
+
+	import { Label, Input, Button, Error } from '$lib/components/Form';
 
 	let passwordVisible = false;
 
@@ -23,7 +28,14 @@
 			.email('Please enter a valid e-mail address')
 			.required('Email address is required')
 			.trim(),
-		password: yup.string().required('Password is required')
+		password: yup
+			.string()
+			.min(8, 'Password must be at least 8 characters long')
+			.minLowercase(2, 'Password must have at least 2 lowercase characters')
+			.minUppercase(1, 'Password must have at least 1 uppercase character')
+			.minNumbers(1, 'Password must have at least 1 numeric character')
+			.minSymbols(1, 'Password must have at least 1 symbol')
+			.required('Password is required')
 	});
 
 	const { form, data, errors, isValid } = createForm({
@@ -82,23 +94,26 @@
 			<form use:form>
 				<fieldset class="flex flex-col mt-8 border-b border-dividerColor">
 					<div class="mb-8">
-						<label for="email" class="block mb-2 text-base">Email Address</label>
-						<input
-							type="email"
-							name="email"
+						<Label for="email" label="Email" />
+						<Input
 							id="email"
-							class="border border-borderColor text-sm rounded-xl block w-full py-4 px-5"
+							name="email"
+							type="email"
 							placeholder="example@example.com"
+							error={$errors.email}
 						/>
+						{#if $errors.email}
+							<Error message={$errors.email} />
+						{/if}
 					</div>
-					<label for="password" class="block mb-2 text-base">Password</label>
-					<div class="relative mb-6">
-						<input
-							type={passwordVisible ? 'text' : 'password'}
-							name="password"
+					<Label for="password" label="Password" />
+					<div class="relative">
+						<Input
 							id="password"
-							class="border border-borderColor text-sm rounded-xl block w-full py-4 px-5"
+							name="password"
+							type={passwordVisible ? 'text' : 'password'}
 							placeholder="***********"
+							error={$errors.password}
 						/>
 						<div
 							on:click={() => (passwordVisible = !passwordVisible)}
@@ -111,11 +126,12 @@
 							{/if}
 						</div>
 					</div>
+					{#if $errors.password}
+						<Error classes="self-start" message={$errors.password} />
+					{/if}
 
-					<button
-						class="mt-8 w-full bg-primary text-white font-bold text-base py-4 rounded-xl"
-						disabled={!$isValid}>Login</button
-					>
+					<Button type="submit" text="Login" disabled={!$isValid} classes="mt-4 py-4 w-full" />
+
 					<div class="flex flex-col items-center self-center mt-8 mb-4">
 						<span class="text-xs md:text-base"
 							>Don't have an account? <a href="/register" class="font-bold text-primary underline"

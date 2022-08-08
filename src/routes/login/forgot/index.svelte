@@ -8,12 +8,14 @@
 
 	import { Cross } from '$lib/components/Icons';
 
+	import { Label, Input, Button, Error } from '$lib/components/Form';
+
 	let success = false;
 
 	const schema = yup.object({
-		email: yup.string().email().required()
+		email: yup.string().email('Please enter a valid email').required('Email is required')
 	});
-	const { form, isValid } = createForm({
+	const { form, isValid, errors } = createForm({
 		initialValues: {
 			email: ''
 		},
@@ -69,20 +71,20 @@
 		<form use:form>
 			<fieldset class="flex flex-col mt-8 border-b border-dividerColor">
 				<div class="mb-8">
-					<label for="email" class="block mb-2 text-base">Email Address</label>
-					<input
-						type="email"
-						name="email"
+					<Label label_for="email" label="Email Address" />
+					<Input
 						id="email"
-						class="border border-borderColor text-sm rounded-xl block w-full py-4 px-5"
+						name="email"
+						type="email"
+						error={$errors.email}
 						placeholder="example@example.com"
 					/>
+					{#if $errors.email}
+						<Error message={$errors.email} />
+					{/if}
 				</div>
 
-				<button
-					class="w-full bg-primary text-white font-bold text-base py-4 rounded-xl"
-					disabled={!$isValid}>Submit</button
-				>
+				<Button type="submit" text="Submit" classes="py-4" disabled={!$isValid} />
 			</fieldset>
 		</form>
 	</div>
