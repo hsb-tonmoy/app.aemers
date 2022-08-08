@@ -3,7 +3,7 @@
 	import { page, session } from '$app/stores';
 	import { goto } from '$app/navigation';
 
-	import { login_message } from '$lib/layout/stores';
+	import { login_message } from '$lib/login/stores';
 
 	let query = decodeURIComponent($page.url.search);
 

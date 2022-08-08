@@ -17,5 +17,7 @@
 
 <div class="flex flex-col h-screen">
 	<Header />
-	<slot />
+	<div class="flex flex-col flex-1">
+		<slot />
+	</div>
 </div>

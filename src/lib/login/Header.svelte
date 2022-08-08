@@ -1,3 +1,7 @@
-<header class="flex items-center p-12 w-full h-12">
+<script>
+	import { header_bg } from '$lib/login/stores';
+</script>
+
+<header class="flex items-center p-12 w-full h-12" style={`background: ${$header_bg} `}>
 	<img src="/logo.png" alt="app.aemers.com" class="w-[30vw] md:w-[15vw] lg:w-[9vw]" />
 </header>
