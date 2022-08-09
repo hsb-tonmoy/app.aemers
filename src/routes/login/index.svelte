@@ -50,18 +50,23 @@
 	});
 
 	async function handleLogin(email, password) {
-		const response = await post(`auth/login`, { email, password });
+		try {
+			const response = await post(`auth/login`, { email, password });
 
-		if (
-			response.non_field_errors &&
-			response.non_field_errors[0] == 'Unable to log in with provided credentials.'
-		) {
-			notificationToast('Your email or password is incorrect. Please try again', true, 10000);
-		}
+			if (
+				response.non_field_errors &&
+				response.non_field_errors[0] == 'Unable to log in with provided credentials.'
+			) {
+				notificationToast('Your email or password is incorrect. Please try again', true, 10000);
+			}
 
-		if (response.user) {
-			$session.user = response.user;
-			goto('/dashboard');
+			if (response.user) {
+				$session.user = response.user;
+				goto('/');
+			}
+		} catch (e) {
+			console.log(e);
+			notificationToast('Internal Server Error. Please try again later', true, 10000);
 		}
 	}
 </script>
