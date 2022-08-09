@@ -8,6 +8,7 @@ const config = {
 				primary: '#7443FF',
 				secondary: '#232323',
 				lightText: '#898989',
+				lighterText: '#727272',
 				borderColor: '#E3D9FF',
 				bgColor: '#F9F6FF',
 				dividerColor: 'rgba(190, 190, 190, 1)'
