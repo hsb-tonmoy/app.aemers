@@ -10,3 +10,4 @@ export { default as Account } from './Account.svelte';
 export { default as Logout } from './Logout.svelte';
 export { default as Notification } from './Notification.svelte';
 export { default as AccountCircular } from './AccountCircular.svelte';
+export { default as Menu } from './Menu.svelte';

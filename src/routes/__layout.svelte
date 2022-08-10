@@ -14,15 +14,16 @@
 <script>
 	import '../app.css';
 	import Sidebar from '$lib/dashboard/layout/Sidebar/Sidebar.svelte';
+	import { sidebarState } from '$lib/dashboard/home/stores';
 </script>
 
 <svelte:head><title>app.aemers.com - US Scholarship Mentoring</title></svelte:head>
 
-<div class="flex w-full h-screen bg-blue-600">
-	<aside class="flex-col fixed left-0 top-0 w-[20%]">
+<div class="flex w-full h-screen bg-bgColor">
+	<aside class:hidden={$sidebarState} class="lg:block fixed left-0 top-0 w-2/4 lg:w-[15%]">
 		<Sidebar />
 	</aside>
-	<main class="flex-1 ml-[20%] w-[80%]">
+	<main class="flex-1 lg:ml-[15%]">
 		<slot />
 	</main>
 </div>

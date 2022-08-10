@@ -9,6 +9,6 @@
 	on:click
 	{disabled}
 	{type}
-	class={`bg-primary disabled:bg-borderColor text-white font-bold text-base rounded-xl ${classes}`}
+	class={`${classes} bg-primary disabled:bg-borderColor text-white font-bold text-base rounded-xl`}
 	>{text}</button
 >
