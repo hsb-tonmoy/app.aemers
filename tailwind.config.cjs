@@ -6,6 +6,7 @@ const config = {
 		extend: {
 			colors: {
 				primary: '#7443FF',
+				primaryDarker: '#5F27FF',
 				secondary: '#232323',
 				lightText: '#898989',
 				lighterText: '#727272',
