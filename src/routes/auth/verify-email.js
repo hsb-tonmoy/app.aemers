@@ -1,6 +1,6 @@
 import * as api from '$lib/api';
 
-export async function post({ request }) {
+export async function POST({ request }) {
 	const { key } = await request.json();
 
 	const res = await api.post('auth/registration/verify-email/', { key });

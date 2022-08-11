@@ -1,6 +1,6 @@
 import * as api from '$lib/api';
 
-export async function post({ request }) {
+export async function POST({ request }) {
 	const { email } = await request.json();
 
 	const res = await api.post('auth/registration/resend-email/', { email });
