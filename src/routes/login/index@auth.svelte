@@ -28,14 +28,7 @@
 			.email('Please enter a valid e-mail address')
 			.required('Email address is required')
 			.trim(),
-		password: yup
-			.string()
-			.min(8, 'Password must be at least 8 characters long')
-			.minLowercase(2, 'Password must have at least 2 lowercase characters')
-			.minUppercase(1, 'Password must have at least 1 uppercase character')
-			.minNumbers(1, 'Password must have at least 1 numeric character')
-			.minSymbols(1, 'Password must have at least 1 symbol')
-			.required('Password is required')
+		password: yup.string().required('Password is required')
 	});
 
 	const { form, data, errors, isValid } = createForm({
