@@ -2,7 +2,7 @@
 	import { session } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import { post } from '$lib/utils.js';
-
+	import { useQuery, useMutation } from '@sveltestack/svelte-query';
 	import { notificationToast } from '$lib/NotificationToast';
 
 	import { createForm } from 'felte';
@@ -16,11 +16,38 @@
 
 	import SocialLogin from '$lib/login/SocialLogin.svelte';
 
+	import { Spinner } from 'flowbite-svelte';
+
 	import { Eye, EyeOff } from '$lib/components/Icons';
 
 	import { Label, Input, Button, Error } from '$lib/components/Form';
 
 	let passwordVisible = false;
+
+	const login = useMutation(
+		(formData) => {
+			return fetch('auth/login', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(formData)
+			});
+		},
+		{
+			onError: (error, variables, context) => {
+				console.log(error);
+			},
+
+			onSuccess: async (data, variables, context) => {
+				const json = await data.json();
+				if (json.user) {
+					$session.user = json.user;
+					goto('/');
+				}
+			}
+		}
+	);
 
 	const schema = yup.object().shape({
 		email: yup
@@ -38,7 +65,8 @@
 		},
 		extend: validator({ schema }),
 		onSubmit: (values, context) => {
-			handleLogin(values.email, values.password);
+			// handleLogin(values.email, values.password);
+			$login.mutate(values);
 		}
 	});
 
@@ -128,7 +156,12 @@
 						<Error classes="self-start" message={$errors.password} />
 					{/if}
 
-					<Button type="submit" text="Login" disabled={!$isValid} classes="mt-4 py-4 w-full" />
+					<Button type="submit" disabled={!$isValid || $login.isLoading} classes="mt-4 py-4 w-full">
+						Login
+						{#if $login.isLoading}
+							<Spinner class="ml-2" color="white" size="4" />
+						{/if}
+					</Button>
 
 					<div class="flex flex-col items-center self-center mt-8 mb-4">
 						<span class="text-xs md:text-base"
