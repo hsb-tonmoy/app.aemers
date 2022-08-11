@@ -5,19 +5,20 @@
 
 <header class="flex justify-between items-center">
 	<div class="flex flex-col gap-y-2">
-		<h2 class="text-5xl font-bold">Hello Evan</h2>
-		<h6 class="text-lighterText text-xl">Explore Aemers from here...</h6>
+		<h2 class="text-3xl md:text-4xl 2xl:text-5xl font-bold">Hello Evan</h2>
+		<h6 class="text-lighterText text-base md:text-lg 2xl:text-xl">Explore Aemers from here...</h6>
 	</div>
 	<div class="flex items-center gap-x-6">
 		<span
 			on:click={() => ($sidebarState = !$sidebarState)}
-			class="lg:hidden w-10 h-10 text-secondary hover:text-primary cursor-pointer"><Menu /></span
+			class="lg:hidden w-6 h-6 md:w-10 md:h-10 text-secondary hover:text-primary cursor-pointer"
+			><Menu /></span
 		>
-		<span class="text-secondary">
-			<Notification size="40" />
+		<span class="text-secondary w-6 h-6 md:w-10 md:h-10">
+			<Notification />
 		</span>
-		<span class="text-primary">
-			<AccountCircular size="40" />
+		<span class="text-primary w-6 h-6 md:w-10 md:h-10">
+			<AccountCircular />
 		</span>
 	</div>
 </header>

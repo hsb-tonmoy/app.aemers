@@ -11,3 +11,6 @@ export { default as Logout } from './Logout.svelte';
 export { default as Notification } from './Notification.svelte';
 export { default as AccountCircular } from './AccountCircular.svelte';
 export { default as Menu } from './Menu.svelte';
+export { default as Circle } from './Circle.svelte';
+export { default as CheckedCircle } from './CheckedCircle.svelte';
+export { default as CheckMark } from './CheckMark.svelte';
