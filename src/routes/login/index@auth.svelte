@@ -2,7 +2,7 @@
 	import { session } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import { post } from '$lib/utils.js';
-	import { useQuery, useMutation } from '@sveltestack/svelte-query';
+	import { useMutation } from '@sveltestack/svelte-query';
 	import { notificationToast } from '$lib/NotificationToast';
 
 	import { createForm } from 'felte';
@@ -65,7 +65,6 @@
 		},
 		extend: validator({ schema }),
 		onSubmit: (values, context) => {
-			// handleLogin(values.email, values.password);
 			$login.mutate(values);
 		}
 	});

@@ -1,7 +1,7 @@
-<script>
+<script lang="ts">
 	import { goto } from '$app/navigation';
 
-	import { post } from '$lib/utils.js';
+	import { useMutation } from '@sveltestack/svelte-query';
 
 	import { createForm } from 'felte';
 	import { validator } from '@felte/validator-yup';
@@ -14,11 +14,37 @@
 
 	import SocialLogin from '$lib/login/SocialLogin.svelte';
 
+	import { Spinner } from 'flowbite-svelte';
+
 	import { Eye, EyeOff } from '$lib/components/Icons';
 
 	import { Label, Input, Button, Error } from '$lib/components/Form';
 
 	let passwordVisible = false;
+
+	const register = useMutation(
+		(formData) => {
+			return fetch('auth/register', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(formData)
+			});
+		},
+		{
+			onError: (error, variables, context) => {
+				console.log(error);
+			},
+
+			onSuccess: async (data, variables, context) => {
+				const json = await data.json();
+				if (json.detail && json.detail === 'Verification e-mail sent.') {
+					goto('/register/confirmation');
+				}
+			}
+		}
+	);
 
 	const schema = yup.object().shape({
 		email: yup
@@ -45,7 +71,7 @@
 		},
 		extend: validator({ schema }),
 		onSubmit: (values, context) => {
-			handleRegister(values.email, values.password, values.passwordConfirmation);
+			$register.mutate(values);
 		}
 	});
 
@@ -151,7 +177,12 @@
 						<Error classes="self-start" message={$errors.passwordConfirmation} />
 					{/if}
 
-					<Button type="submit" classes="mt-8 py-4" disabled={!isValid} />
+					<Button type="submit" disabled={!$isValid || $register.isLoading} classes="mt-8 py-4">
+						Signup
+						{#if $register.isLoading}
+							<Spinner class="ml-2" color="white" size="4" />
+						{/if}
+					</Button>
 					<div class="flex flex-col items-center self-center mt-8 mb-4">
 						<span class="text-xs md:text-base"
 							>Already have an account? <a href="/login" class="font-bold text-primary underline"
