@@ -45,6 +45,14 @@
 					$session.user = json.user;
 					goto('/');
 				}
+				if (
+					json.non_field_errors &&
+					json.non_field_errors[0] == 'Unable to log in with provided credentials.'
+				) {
+					notificationToast('Your email or password is incorrect. Please try again', true, 10000);
+				} else {
+					notificationToast('Internal Server Error. Please try again later', true, 10000);
+				}
 			}
 		}
 	);

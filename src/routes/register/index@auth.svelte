@@ -42,6 +42,15 @@
 				if (json.detail && json.detail === 'Verification e-mail sent.') {
 					goto('/register/confirmation');
 				}
+				if (
+					json.email &&
+					json.email[0] === 'A user is already registered with this e-mail address.'
+				) {
+					notificationToast('You are already registered with this email address.');
+				} else {
+					notificationToast('Something went wrong, please try again later');
+					console.log(json);
+				}
 			}
 		}
 	);
