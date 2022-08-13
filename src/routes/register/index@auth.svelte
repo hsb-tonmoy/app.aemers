@@ -151,11 +151,13 @@
 							on:click={() => (passwordVisible = !passwordVisible)}
 							class="flex absolute inset-y-0 right-0 items-center pr-6 cursor-pointer"
 						>
-							{#if passwordVisible}
-								<Eye size="20" />
-							{:else}
-								<EyeOff size="20" />
-							{/if}
+							<span class="w-5 h-5">
+								{#if passwordVisible}
+									<Eye />
+								{:else}
+									<EyeOff />
+								{/if}
+							</span>
 						</div>
 					</div>
 					{#if $errors.password}
@@ -175,11 +177,13 @@
 							on:click={() => (passwordVisible = !passwordVisible)}
 							class="flex absolute inset-y-0 right-0 items-center pr-6 cursor-pointer"
 						>
-							{#if passwordVisible}
-								<Eye size="20" />
-							{:else}
-								<EyeOff size="20" />
-							{/if}
+							<span class="w-5 h-5">
+								{#if passwordVisible}
+									<Eye />
+								{:else}
+									<EyeOff />
+								{/if}
+							</span>
 						</div>
 					</div>
 					{#if $errors.passwordConfirmation}

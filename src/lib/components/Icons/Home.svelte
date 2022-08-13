@@ -1,15 +1,4 @@
-<script lang="ts">
-	export let size: string = '24';
-	export let color: string = '#727272';
-</script>
-
-<svg
-	width={size}
-	height={size}
-	viewBox={`0 0 42 42`}
-	fill="none"
-	xmlns="http://www.w3.org/2000/svg"
->
+<svg viewBox={`0 0 42 42`} fill="none" xmlns="http://www.w3.org/2000/svg">
 	<mask
 		id="mask0_418_4724"
 		style="mask-type:alpha"

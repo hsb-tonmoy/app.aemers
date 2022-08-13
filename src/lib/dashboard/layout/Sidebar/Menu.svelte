@@ -33,7 +33,9 @@
 <section id="menu" class="flex flex-col gap-y-10">
 	{#each menuitems as item}
 		<a href={item.link} class="menuItem"
-			><svelte:component this={item.icon} size="28" /> <span class="">{item.name}</span></a
+			><span class="w-7 h-7">
+				<svelte:component this={item.icon} />
+			</span> <span class="">{item.name}</span></a
 		>
 	{/each}
 </section>

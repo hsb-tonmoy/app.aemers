@@ -43,14 +43,17 @@
 	export let size = vertical ? '2rem' : '3rem';
 	export let line = vertical ? '0.15rem' : '0.3rem';
 	export let lineHeight = undefined;
+	export let iconSize = '1rem';
 	export let primary = 'var(--bs-primary, #3a86ff)';
 	export let secondary = 'var(--bs-secondary, #bbbbc0)';
 	export let light = 'var(--bs-light, white)';
 	export let dark = 'var(--bs-dark, black)';
 	export let borderRadius = '50%';
+	export let lineColor = 'var(--line-color, #D9D9D9)';
 	export let fontFamily = '';
 	export let reverse = false;
 	export let clickable = true;
+	export let keepIcon = false;
 
 	const minStepSize = '5rem';
 	const stepLabelSpace = '1rem';
@@ -130,6 +133,7 @@
       --light: ${light};
       --dark: ${dark};
       --border-radius: ${borderRadius};
+      --line-color: ${lineColor};
       --font-family: ${fontFamily || "'Helvetica Neue', Helvetica, Arial, sans-serif"};
     display: flex; 
     `}
@@ -151,7 +155,7 @@
 		<div
 			style:width={vertical ? line : `${total}px`}
 			style:height={vertical ? `${total}px` : line}
-			class="bg-secondary"
+			class="line-color"
 			style="display: flex; align-items:center;"
 			style:flex-direction={vertical ? 'column' : reverse ? 'row-reverse' : 'row'}
 		>
@@ -191,9 +195,11 @@
 				>
 					<!-- circle -->
 					<div
-						class="step
-              {i <= $progress ? `bg-primary text-light` : `bg-secondary text-light`}
+						class="step 
+              {i <= $progress ? `text-primary` : `text-secondary`}
               "
+						class:step-border__completed={i <= $progress}
+						class:step-border={!(i <= $progress)}
 						class:hover-highlight={clickable}
 						class:shadow={i == current}
 						on:click={() => {
@@ -201,14 +207,18 @@
 						}}
 					>
 						{#if step.icon}
-							{#if i < $progress}
+							{#if i < $progress && !keepIcon}
 								<Check />
 							{:else if step.iconProps}
-								<svelte:component this={step.icon} {...step.iconProps} />
+								<span style="width: {iconSize}; height: {iconSize}">
+									<svelte:component this={step.icon} {...step.iconProps} />
+								</span>
 							{:else}
-								<svelte:component this={step.icon} />
+								<span style="width: {iconSize}; height: {iconSize}">
+									<svelte:component this={step.icon} />
+								</span>
 							{/if}
-						{:else if i < $progress}
+						{:else if i < $progress && !keepIcon}
 							<Check />
 						{:else}
 							<span class="steps__number">{i + 1}</span>
@@ -248,6 +258,8 @@
 	}
 
 	.step {
+		background: white;
+
 		border-radius: var(--border-radius);
 		display: flex;
 		align-items: center;
@@ -256,7 +268,16 @@
 		min-width: var(--size);
 		height: var(--size);
 		min-height: var(--size);
-		font-size: calc(var(--size) * 0.5);
+		font-size: calc(var(--size) * 1);
+	}
+	.line-color {
+		background-color: #d9d9d9;
+	}
+	.step-border {
+		border: 3px solid var(--secondary);
+	}
+	.step-border__completed {
+		border: 3px solid var(--primary);
 	}
 	.hover-highlight:hover {
 		cursor: pointer;

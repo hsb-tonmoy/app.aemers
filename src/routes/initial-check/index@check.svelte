@@ -13,4 +13,14 @@
 	let currentIndex: number = 0;
 </script>
 
-<Steps {steps} bind:current={currentIndex} size="4rem" primary={'#7443FF'} secondary={'#949494'} />
+<header class="bg-[#F8F8F8] py-8 mx-auto">
+	<Steps
+		{steps}
+		bind:current={currentIndex}
+		size="4rem"
+		primary={'#7443FF'}
+		secondary={'#BEBEBE'}
+		iconSize={'2.5rem'}
+		keepIcon={true}
+	/>
+</header>
