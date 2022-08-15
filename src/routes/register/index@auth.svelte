@@ -41,8 +41,7 @@
 				const json = await data.json();
 				if (json.detail && json.detail === 'Verification e-mail sent.') {
 					goto('/register/confirmation');
-				}
-				if (
+				} else if (
 					json.email &&
 					json.email[0] === 'A user is already registered with this e-mail address.'
 				) {
@@ -83,29 +82,6 @@
 			$register.mutate(values);
 		}
 	});
-
-	async function handleRegister(email, password, passwordConfirmation) {
-		const response = await post(`auth/register`, {
-			email,
-			password,
-			passwordConfirmation
-		});
-
-		if (response.detail && response.detail === 'Verification e-mail sent.') {
-			goto('/register/confirmation');
-			return;
-		}
-
-		if (
-			response.email &&
-			response.email[0] === 'A user is already registered with this e-mail address.'
-		) {
-			notificationToast('You are already registered with this email address.');
-		} else {
-			notificationToast('Something went wrong, please try again later');
-			console.log(response);
-		}
-	}
 </script>
 
 <svelte:head>

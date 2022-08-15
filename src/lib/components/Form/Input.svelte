@@ -4,7 +4,7 @@
 	export let id: string;
 	export let classes: string;
 	export let placeholder: string;
-	export let error: boolean = false;
+	export let error = false;
 </script>
 
 <input

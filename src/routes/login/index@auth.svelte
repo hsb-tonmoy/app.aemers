@@ -8,9 +8,6 @@
 	import { createForm } from 'felte';
 	import { validator } from '@felte/validator-yup';
 	import * as yup from 'yup';
-	import YupPassword from 'yup-password';
-
-	YupPassword(yup);
 
 	import { login_message } from '$lib/login/stores';
 
@@ -44,8 +41,7 @@
 				if (json.user) {
 					$session.user = json.user;
 					goto('/');
-				}
-				if (
+				} else if (
 					json.non_field_errors &&
 					json.non_field_errors[0] == 'Unable to log in with provided credentials.'
 				) {
@@ -76,27 +72,6 @@
 			$login.mutate(values);
 		}
 	});
-
-	async function handleLogin(email, password) {
-		try {
-			const response = await post(`auth/login`, { email, password });
-
-			if (
-				response.non_field_errors &&
-				response.non_field_errors[0] == 'Unable to log in with provided credentials.'
-			) {
-				notificationToast('Your email or password is incorrect. Please try again', true, 10000);
-			}
-
-			if (response.user) {
-				$session.user = response.user;
-				goto('/');
-			}
-		} catch (e) {
-			console.log(e);
-			notificationToast('Internal Server Error. Please try again later', true, 10000);
-		}
-	}
 </script>
 
 <svelte:head>
@@ -127,7 +102,7 @@
 			<form use:form>
 				<fieldset class="flex flex-col mt-8 border-b border-dividerColor">
 					<div class="mb-8">
-						<Label for="email" label="Email" />
+						<Label label_for="email" label="Email" />
 						<Input
 							id="email"
 							name="email"
@@ -139,7 +114,7 @@
 							<Error message={$errors.email} />
 						{/if}
 					</div>
-					<Label for="password" label="Password" />
+					<Label label_for="password" label="Password" />
 					<div class="relative">
 						<Input
 							id="password"

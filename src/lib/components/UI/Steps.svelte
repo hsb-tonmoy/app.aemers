@@ -44,12 +44,13 @@
 	export let line = vertical ? '0.15rem' : '0.3rem';
 	export let lineHeight = undefined;
 	export let iconSize = '1rem';
+	export let iconColor = '#949494';
 	export let primary = 'var(--bs-primary, #3a86ff)';
 	export let secondary = 'var(--bs-secondary, #bbbbc0)';
 	export let light = 'var(--bs-light, white)';
 	export let dark = 'var(--bs-dark, black)';
 	export let borderRadius = '50%';
-	export let lineColor = 'var(--line-color, #D9D9D9)';
+	export let lineColor = '#d9d9d9';
 	export let fontFamily = '';
 	export let reverse = false;
 	export let clickable = true;
@@ -134,6 +135,7 @@
       --dark: ${dark};
       --border-radius: ${borderRadius};
       --line-color: ${lineColor};
+			--icon-color: ${iconColor};
       --font-family: ${fontFamily || "'Helvetica Neue', Helvetica, Arial, sans-serif"};
     display: flex; 
     `}
@@ -196,7 +198,7 @@
 					<!-- circle -->
 					<div
 						class="step 
-              {i <= $progress ? `text-primary` : `text-secondary`}
+              {i <= $progress ? `text-primary` : `icon-color`}
               "
 						class:step-border__completed={i <= $progress}
 						class:step-border={!(i <= $progress)}
@@ -259,7 +261,6 @@
 
 	.step {
 		background: white;
-
 		border-radius: var(--border-radius);
 		display: flex;
 		align-items: center;
@@ -271,7 +272,10 @@
 		font-size: calc(var(--size) * 1);
 	}
 	.line-color {
-		background-color: #d9d9d9;
+		background-color: var(--line-color);
+	}
+	.icon-color {
+		color: var(--icon-color);
 	}
 	.step-border {
 		border: 3px solid var(--secondary);
