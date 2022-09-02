@@ -1,6 +1,6 @@
+import * as api from '$lib/api';
 import * as cookie from 'cookie';
 import jwt_decode from 'jwt-decode';
-import * as api from '$lib/api';
 
 const getJWTExp = (token) => {
 	const { exp } = jwt_decode(token);
@@ -36,19 +36,4 @@ export async function handle({ event, resolve }) {
 	}
 
 	return response;
-}
-
-export function getSession({ locals }) {
-	return {
-		user: locals.user && {
-			id: locals.user.pk,
-			username: locals.user.username,
-			email: locals.user.email,
-			first_name: locals.user.first_name,
-			last_name: locals.user.last_name,
-			account_type: locals.user.account_type,
-			profile_pic: locals.user.profile_pic,
-			student_id: locals.user.student_id
-		}
-	};
 }

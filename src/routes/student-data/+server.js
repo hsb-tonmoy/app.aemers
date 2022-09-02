@@ -1,20 +1,17 @@
 import * as api from '$lib/api';
+import { json } from '@sveltejs/kit';
 
 export async function POST({ request }) {
 	const body = await request.json();
 	const res = await api.post('student_data/', body);
 
 	if (res.status === 400) {
-		return {
-			status: 400,
-			ok: false,
-			body: res
-		};
+		return json(res, {
+			status: 400
+		});
 	}
 
-	return {
-		status: 201,
-		ok: true,
-		body: res
-	};
+	return json(res, {
+		status: 201
+	});
 }
