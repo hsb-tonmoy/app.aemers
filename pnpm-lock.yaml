@@ -1,38 +1,38 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@felte/validator-yup': ^1.0.3
+  '@felte/validator-yup': ^1.0.9
   '@sveltejs/adapter-auto': next
   '@sveltejs/adapter-netlify': next
   '@sveltejs/kit': next
   '@sveltestack/svelte-query': ^1.6.0
-  '@tailwindcss/forms': ^0.4.0
-  '@zerodevx/svelte-toast': ^0.7.1
-  autoprefixer: ^10.4.2
+  '@tailwindcss/forms': ^0.4.1
+  '@zerodevx/svelte-toast': ^0.7.2
+  autoprefixer: ^10.4.8
   broadcast-channel: ^4.14.0
   cookie: ^0.4.2
-  country-data-list: ^1.2.1
+  country-data-list: ^1.2.2
   eslint: ^7.32.0
-  eslint-config-prettier: ^8.3.0
-  eslint-plugin-svelte3: ^3.2.1
-  felte: ^1.1.4
-  flowbite: ^1.5.2
-  flowbite-svelte: ^0.24.6
-  javascript-time-ago: ^2.3.13
+  eslint-config-prettier: ^8.5.0
+  eslint-plugin-svelte3: ^3.4.1
+  felte: ^1.2.3
+  flowbite: ^1.5.3
+  flowbite-svelte: 0.26.6
+  javascript-time-ago: ^2.5.7
   jwt-decode: ^3.1.2
-  postcss: ^8.4.6
-  prettier: ^2.4.1
-  prettier-plugin-svelte: ^2.4.0
-  svelte: ^3.49.0
-  svelte-file-dropzone: ^1.0.0-dev.1
+  postcss: ^8.4.16
+  prettier: ^2.7.1
+  prettier-plugin-svelte: ^2.7.0
+  svelte: ^3.50.0
+  svelte-file-dropzone: ^1.0.0
   svelte-forms-lib: ^2.0.1
-  svelte-heros: ^2.3.3
-  svelte-pdf: ^1.0.10
-  svelte-preprocess: ^4.10.2
-  tailwindcss: ^3.0.19
-  toastify-js: ^1.11.2
-  tslib: ^2.3.1
-  typescript: ^4.7.4
+  svelte-heros: ^2.3.5
+  svelte-pdf: ^1.0.13
+  svelte-preprocess: ^4.10.7
+  tailwindcss: ^3.1.8
+  toastify-js: ^1.12.0
+  tslib: ^2.4.0
+  typescript: ^4.8.2
   vite: 3.1.0-beta.2
   yup: ^0.32.11
   yup-password: ^0.2.2
@@ -64,7 +64,7 @@ devDependencies:
   eslint-config-prettier: 8.5.0_eslint@7.32.0
   eslint-plugin-svelte3: 3.4.1_tzmpswlvyhfga4f2mpgjy3kmae
   flowbite: 1.5.3
-  flowbite-svelte: 0.24.19
+  flowbite-svelte: 0.26.6
   postcss: 8.4.16
   prettier: 2.7.1
   prettier-plugin-svelte: 2.7.0_jkiirj7yro4cfik5roozpcraa4
@@ -165,14 +165,14 @@ packages:
       yup: 0.32.11
     dev: false
 
-  /@floating-ui/core/0.7.3:
-    resolution: {integrity: sha512-buc8BXHmG9l82+OQXOFU3Kr2XQx9ys01U/Q9HMIrZ300iLc8HLMgh7dcCqgYzAzf4BkoQvDcXf5Y+CuEZ5JBYg==}
+  /@floating-ui/core/1.0.1:
+    resolution: {integrity: sha512-bO37brCPfteXQfFY0DyNDGB3+IMe4j150KFQcgJ5aBP295p9nBGeHEs/p0czrRbtlHq4Px/yoPXO/+dOCcF4uA==}
     dev: true
 
-  /@floating-ui/dom/0.5.4:
-    resolution: {integrity: sha512-419BMceRLq0RrmTSDxn8hf9R3VCJv2K9PUfugh5JyEFmdjzDo+e8U5EdR8nzKq8Yj1htzLm3b6eQEEam3/rrtg==}
+  /@floating-ui/dom/1.0.1:
+    resolution: {integrity: sha512-wBDiLUKWU8QNPNOTAFHiIAkBv1KlHauG2AhqjSeh2H+wR8PX+AArXfz8NkRexH5PgMJMmSOS70YS89AbWYh5dA==}
     dependencies:
-      '@floating-ui/core': 0.7.3
+      '@floating-ui/core': 1.0.1
     dev: true
 
   /@humanwhocodes/config-array/0.5.0:
@@ -1472,11 +1472,12 @@ packages:
     resolution: {integrity: sha512-5nqDSxl8nn5BSNxyR3n4I6eDmbolI6WT+QqR547RwxQapgjQBmtktdP+HTBb/a/zLsbzERTONyUB5pefh5TtjQ==}
     dev: true
 
-  /flowbite-svelte/0.24.19:
-    resolution: {integrity: sha512-p5NBfMMRo3Ea4+uHS7HAEk/WHJdAW3GRGKrXyZyzhOncVE/mUTJtUcH9vnD6LKv/NAyXtnNZrmza99eCNNHVIw==}
+  /flowbite-svelte/0.26.6:
+    resolution: {integrity: sha512-52EoIms+olYJ75M1Pop6fL74pMiwhsjs5nn1MbXJoz9azFQ7jDOOG6lPqnT/yM3TAIh05uenj+YN/95/jlE5Bw==}
     engines: {node: '>=16.0.0', npm: '>=7.0.0'}
     dependencies:
-      '@floating-ui/dom': 0.5.4
+      '@floating-ui/dom': 1.0.1
+      '@popperjs/core': 2.11.6
       classnames: 2.3.1
       flowbite: 1.5.3
     dev: true

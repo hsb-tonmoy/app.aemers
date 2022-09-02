@@ -3,21 +3,23 @@
 	import { Dropdown, DropdownDivider, DropdownItem } from 'flowbite-svelte';
 </script>
 
-<Dropdown class="w-full max-w-sm">
-	<div slot="trigger" class="inline-flex items-center ">
+<Dropdown label="User Dropdown" class="w-44">
+	<div slot="trigger" class="inline-flex items-center">
 		<span class="text-primary w-6 h-6 md:w-10 md:h-10">
 			<AccountCircular />
 		</span>
 	</div>
-	<ul slot="content" class="rounded-3xl text-lighterText">
-		<DropdownItem class="flex gap-x-4">
-			<span class="w-4 h-4">
+	<ul slot="content" class="rounded-3xl py-2">
+		<DropdownItem class="flex items-center gap-x-4 text-lighterText">
+			<span class="w-6 h-6">
 				<Account />
 			</span> Edit Profile
 		</DropdownItem>
-		<DropdownDivider />
-		<DropdownItem class="flex gap-x-4 text-lighterText">
-			<Logout /> Logout
+		<DropdownDivider divClass="my-1 h-px bg-lighterText" />
+		<DropdownItem class="flex items-center gap-x-4 text-lighterText">
+			<span class="w-6 h-6">
+				<Logout />
+			</span> <a href="/logout">Logout</a>
 		</DropdownItem>
 	</ul>
 </Dropdown>

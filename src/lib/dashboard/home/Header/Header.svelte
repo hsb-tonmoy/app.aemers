@@ -1,6 +1,6 @@
 <script>
 	export let user;
-	import { AccountCircular, Menu, Notification } from '$lib/components/Icons';
+	import { Menu, Notification } from '$lib/components/Icons';
 	import { sidebarState } from '../stores';
 	import AccountDropdown from './AccountDropdown.svelte';
 </script>

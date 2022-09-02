@@ -6,7 +6,7 @@
 	}
 </script>
 
-<div class="flex gap-x-4">
+<div class="flex gap-x-4 mt-20">
 	<button
 		type="button"
 		on:click={handleBack}
@@ -16,8 +16,7 @@
 	>
 	<button
 		type="submit"
-		disabled={currentIndex === steps.length - 1}
 		class="border border-primary bg-primary hover:bg-primaryDarker rounded-2xl text-white font-bold text-base md:text-lg px-14 md:px-24 py-3"
-		>Next</button
+		>{currentIndex === steps.length - 1 ? 'Submit' : 'Next'}</button
 	>
 </div>
