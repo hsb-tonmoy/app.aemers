@@ -1,6 +1,6 @@
 <script>
-	import { Dropdown, DropdownItem, DropdownDivider } from 'flowbite-svelte';
 	import { Account, AccountCircular, Logout } from '$lib/components/Icons';
+	import { Dropdown, DropdownDivider, DropdownItem } from 'flowbite-svelte';
 </script>
 
 <Dropdown class="w-full max-w-sm">
@@ -11,7 +11,9 @@
 	</div>
 	<ul slot="content" class="rounded-3xl text-lighterText">
 		<DropdownItem class="flex gap-x-4">
-			<Account /> Edit Profile
+			<span class="w-4 h-4">
+				<Account />
+			</span> Edit Profile
 		</DropdownItem>
 		<DropdownDivider />
 		<DropdownItem class="flex gap-x-4 text-lighterText">

@@ -5,14 +5,14 @@
 
 	import { notificationToast } from '$lib/NotificationToast';
 
-	import { createForm } from 'felte';
 	import { validator } from '@felte/validator-yup';
+	import { createForm } from 'felte';
 	import * as yup from 'yup';
 	import YupPassword from 'yup-password';
 
 	import { header_bg } from '$lib/login/stores';
 
-	import { Label, Input, Button, Error } from '$lib/components/Form';
+	import { Button, Error, Input, Label } from '$lib/components/Form';
 
 	import { Eye, EyeOff } from '$lib/components/Icons';
 
@@ -65,7 +65,7 @@
 			if (response.ok) {
 				success = true;
 				setTimeout(() => {
-					goto('/success');
+					goto('login/forgot/success');
 				}, 3000);
 			} else if (data.token) {
 				notificationToast(
@@ -120,11 +120,13 @@
 						on:click={() => (passwordVisible = !passwordVisible)}
 						class="flex absolute inset-y-0 right-0 items-center pr-6 cursor-pointer"
 					>
-						{#if passwordVisible}
-							<Eye size="20" />
-						{:else}
-							<EyeOff size="20" />
-						{/if}
+						<span class="w-5 h-5">
+							{#if passwordVisible}
+								<Eye />
+							{:else}
+								<EyeOff />
+							{/if}
+						</span>
 					</div>
 				</div>
 				{#if $errors.new_password1}
@@ -143,11 +145,13 @@
 						on:click={() => (passwordVisible = !passwordVisible)}
 						class="flex absolute inset-y-0 right-0 items-center pr-6 cursor-pointer"
 					>
-						{#if passwordVisible}
-							<Eye size="20" />
-						{:else}
-							<EyeOff size="20" />
-						{/if}
+						<span class="w-5 h-5">
+							{#if passwordVisible}
+								<Eye />
+							{:else}
+								<EyeOff />
+							{/if}
+						</span>
 					</div>
 				</div>
 				{#if $errors.new_password2}

@@ -1,5 +1,5 @@
 <script>
-	import { goto } from '$app/navigation';
+	import { goto, invalidate } from '$app/navigation';
 	import { notificationToast } from '$lib/NotificationToast';
 	import { post } from '$lib/utils.js';
 	import { useMutation } from '@sveltestack/svelte-query';
@@ -40,7 +40,8 @@
 
 				if (json.user) {
 					// $session.user = json.user;
-					goto('/');
+
+					window.location.href = '/';
 				} else if (
 					json.non_field_errors &&
 					json.non_field_errors[0] == 'Unable to log in with provided credentials.'

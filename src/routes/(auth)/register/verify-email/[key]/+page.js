@@ -1,21 +1,20 @@
 import { redirect } from '@sveltejs/kit';
 
-
-export async function load({ params, session, fetch }) {
-	if (session.user) {
+export async function load({ params, parent, fetch }) {
+	const { user } = await parent();
+	console.log(user);
+	if (user) {
 		throw redirect(302, '/');
 	}
 
 	const key = params.key;
 
-	const res = await fetch('/auth/verify-email', {
+	const res = await fetch('auth/verify-email', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify({
-			key
-		})
+		body: JSON.stringify({ key })
 	});
 
 	if (res.ok) {

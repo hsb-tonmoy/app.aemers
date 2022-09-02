@@ -1,27 +1,23 @@
-
-
 <script>
-	throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
-
-	import { onMount } from 'svelte/internal';
-	import { login_message } from '$lib/login/stores';
 	import { goto } from '$app/navigation';
-	import { createForm } from 'felte';
+	import { login_message } from '$lib/login/stores';
 	import { validator } from '@felte/validator-yup';
+	import { createForm } from 'felte';
+	import { onMount } from 'svelte/internal';
 	import * as yup from 'yup';
 
 	import { header_bg } from '$lib/login/stores';
 
 	import { Success } from '$lib/components/Icons';
 
-	import { Input, Button, Error } from '$lib/components/Form';
+	import { Button, Error, Input } from '$lib/components/Form';
 
-	export let message;
+	export let data;
 
 	let resend_email;
 
 	onMount(() => {
-		if (message === 'success') {
+		if (data.message === 'success') {
 			$login_message.type = 'success';
 			$login_message.message = 'Your account has been verified. You can login now.';
 		}
@@ -65,7 +61,7 @@
 	<div
 		class="flex flex-col justify-center p-12 md:px-40 md:py-32 lg:px-60 lg:py-52 bg-white rounded-3xl"
 	>
-		{#if message === 'invalid'}
+		{#if data.message === 'invalid'}
 			<h2 class="text-3xl font-bold">Oops, looks like your verification email has expired!</h2>
 			<p class="mt-2 text-sm text-lightText leading-normal">
 				Don’t worry! We can send you the link again. Just enter your email address below:
@@ -88,7 +84,7 @@
 					<Button text="Submit" disabled={!isValid} classes="py-3 px-12" />
 				</fieldset>
 			</form>
-		{:else if message === 'success'}
+		{:else if data.message === 'success'}
 			<span class="self-center"><Success /></span>
 			<h2 class="text-3xl font-bold">Your account has been verified!</h2>
 			<Button
