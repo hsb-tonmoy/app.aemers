@@ -1,14 +1,14 @@
 <script lang="ts">
-	import Steps from '$lib/components/UI/Steps.svelte';
-	import MultiStepForm from '$lib/evalutation/MultiStepForm.svelte';
 	import {
 		AccountFilled,
 		GraduationCap,
-		OpenBook,
-		Medal,
 		Language,
+		Medal,
+		OpenBook,
 		Pound
 	} from '$lib/components/Icons';
+	import Steps from '$lib/components/UI/Steps.svelte';
+	import MultiStepForm from '$lib/evalutation/MultiStepForm.svelte';
 
 	let steps = [
 		{ icon: AccountFilled },
@@ -21,6 +21,10 @@
 
 	let currentIndex: number = 0;
 </script>
+
+<svelte:head>
+	<title>app.aemers - Evaluation</title>
+</svelte:head>
 
 <div class="flex flex-col h-screen">
 	<header class="hidden md:block bg-[#F8F8F8] py-8">
