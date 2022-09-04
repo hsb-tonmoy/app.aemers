@@ -5,6 +5,7 @@
 	import * as yup from 'yup';
 	import Buttons from '../Buttons.svelte';
 	import StepTemplate from '../StepTemplate.svelte';
+	import { evaluationData } from './stores';
 
 	export let steps;
 	export let currentIndex: number;
@@ -18,17 +19,17 @@
 	});
 	const { form, data, errors, isValid } = createForm({
 		initialValues: {
-			degree: ''
+			degree: $evaluationData.degree || ''
 		},
 		extend: validator({ schema }),
 		onSubmit: (values, context) => {
-			console.log(values);
+			$evaluationData.degree = values.degree;
 			handleNext();
 		}
 	});
 </script>
 
-<StepTemplate {steps} bind:currentIndex heading="Select the Degree you wish to achieve!">
+<StepTemplate heading="Select the Degree you wish to achieve!">
 	<form use:form>
 		<fieldset class="flex flex-wrap gap-6">
 			<RadioNoIcon name="degree" value="undergrad">Undergraduate</RadioNoIcon>

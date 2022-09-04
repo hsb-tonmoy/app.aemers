@@ -1,10 +1,11 @@
 <script lang="ts">
-	import StepTemplate from '../StepTemplate.svelte';
-	import Buttons from '../Buttons.svelte';
-	import { createForm } from 'felte';
+	import { Error, Input, Label } from '$lib/components/Form';
 	import { validator } from '@felte/validator-yup';
+	import { createForm } from 'felte';
 	import * as yup from 'yup';
-	import { Label, Input, Error } from '$lib/components/Form';
+	import Buttons from '../Buttons.svelte';
+	import StepTemplate from '../StepTemplate.svelte';
+	import { evaluationData } from './stores';
 	export let steps;
 	export let currentIndex: number;
 
@@ -18,22 +19,25 @@
 		phone_number: yup.string().required('Phone Number is required').trim(),
 		country: yup.string().required('Country is required').trim()
 	});
-	const { form, data, errors, isValid } = createForm({
+	const { form, data, errors, isValid, touched } = createForm({
 		initialValues: {
-			first_name: '',
-			last_name: '',
-			phone_number: '',
-			country: ''
+			first_name: $evaluationData.first_name || '',
+			last_name: $evaluationData.last_name || '',
+			phone_number: $evaluationData.phone_number || '',
+			country: $evaluationData.country || ''
 		},
 		extend: validator({ schema }),
 		onSubmit: (values, context) => {
-			console.log(values);
+			$evaluationData = {
+				...$evaluationData,
+				...values
+			};
 			handleNext();
 		}
 	});
 </script>
 
-<StepTemplate {steps} bind:currentIndex heading="Personal Information">
+<StepTemplate heading="Personal Information">
 	<form use:form>
 		<fieldset class="grid grid-cols-2 gap-x-4 md:gap-x-8 gap-y-6">
 			<div class="">
@@ -43,7 +47,9 @@
 					name="first_name"
 					type="text"
 					placeholder="Ex. Abdullah"
+					touched={$touched.first_name}
 					error={$errors.first_name}
+					classes="w-full"
 				/>
 				{#if $errors.first_name}
 					<Error classes="self-start" message={$errors.first_name} />
@@ -56,7 +62,9 @@
 					name="last_name"
 					type="text"
 					placeholder="Ex. Abdullah"
+					touched={$touched.last_name}
 					error={$errors.last_name}
+					classes="w-full"
 				/>
 				{#if $errors.last_name}
 					<Error classes="self-start" message={$errors.last_name} />
@@ -70,7 +78,9 @@
 					name="phone_number"
 					type="text"
 					placeholder="+8801XXXXXXXXX"
+					touched={$touched.phone_number}
 					error={$errors.phone_number}
+					classes="w-full"
 				/>
 				{#if $errors.phone_number}
 					<Error classes="self-start" message={$errors.phone_number} />
@@ -83,7 +93,9 @@
 					name="country"
 					type="text"
 					placeholder="Bangladesh"
+					touched={$touched.country}
 					error={$errors.country}
+					classes="w-full"
 				/>
 				{#if $errors.country}
 					<Error classes="self-start" message={$errors.country} />

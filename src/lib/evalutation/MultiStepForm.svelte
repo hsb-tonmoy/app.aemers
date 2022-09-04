@@ -1,6 +1,8 @@
 <script lang="ts">
 	import Degree from './steps/Degree.svelte';
+	import EnglishProficiency from './steps/EnglishProficiency.svelte';
 	import Major from './steps/Major.svelte';
+	import Message from './steps/Message.svelte';
 	import PersonalInformation from './steps/PersonalInformation.svelte';
 	export let currentIndex: number = 0;
 	export let steps;
@@ -13,5 +15,9 @@
 		<Degree {steps} bind:currentIndex />
 	{:else if currentIndex === 2}
 		<Major {steps} bind:currentIndex />
+	{:else if currentIndex === 3}
+		<EnglishProficiency {steps} bind:currentIndex />
+	{:else if currentIndex === 4}
+		<Message {steps} bind:currentIndex />
 	{/if}
 </main>

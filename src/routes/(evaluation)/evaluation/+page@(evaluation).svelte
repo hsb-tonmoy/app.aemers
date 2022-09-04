@@ -14,7 +14,7 @@
 		{ icon: AccountFilled },
 		{ icon: GraduationCap },
 		{ icon: OpenBook },
-		{ icon: Medal },
+		// { icon: Medal },
 		{ icon: Language },
 		{ icon: Pound }
 	];

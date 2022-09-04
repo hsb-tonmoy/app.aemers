@@ -14,7 +14,10 @@
 			<span class="text-center w-full text-lg font-semibold"><slot /></span>
 		</div>
 		<div class="hidden peer-checked:block">
-			<Badge rounded index baseClass="inline-flex items-center justify-center -mb-0.5 bg-[#01CF85]"
+			<Badge
+				rounded
+				index
+				baseClass="inline-flex items-center justify-center -mb-0.5 bg-greenSignal"
 				><span class="w-3 h-3 text-white"><CheckMark /></span></Badge
 			>
 		</div>

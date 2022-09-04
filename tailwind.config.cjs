@@ -15,7 +15,8 @@ const config = {
 				lighterText: '#727272',
 				borderColor: '#E3D9FF',
 				bgColor: '#F9F6FF',
-				dividerColor: 'rgba(190, 190, 190, 1)'
+				dividerColor: 'rgba(190, 190, 190, 1)',
+				greenSignal: '#01CF85'
 			},
 			width: {
 				120: '30rem'

@@ -5,6 +5,7 @@
 	import * as yup from 'yup';
 	import Buttons from '../Buttons.svelte';
 	import StepTemplate from '../StepTemplate.svelte';
+	import { evaluationData } from './stores';
 
 	import {
 		Business,
@@ -29,11 +30,11 @@
 	});
 	const { form, data, errors, isValid } = createForm({
 		initialValues: {
-			major: ''
+			major: $evaluationData.major || ''
 		},
 		extend: validator({ schema }),
 		onSubmit: (values, context) => {
-			console.log(values);
+			$evaluationData.major = values.major;
 			handleNext();
 		}
 	});
@@ -50,7 +51,7 @@
 	];
 </script>
 
-<StepTemplate {steps} bind:currentIndex heading="Select the subject you wish to study!">
+<StepTemplate heading="Select the Major you wish to study!">
 	<form use:form>
 		<fieldset class="flex flex-wrap gap-6">
 			{#each options as option}

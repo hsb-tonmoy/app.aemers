@@ -17,6 +17,6 @@
 	<button
 		type="submit"
 		class="border border-primary bg-primary hover:bg-primaryDarker rounded-2xl text-white font-bold text-base md:text-lg px-14 md:px-24 py-3"
-		>{currentIndex === steps.length - 1 ? 'Submit' : 'Next'}</button
+		>{currentIndex === steps.length - 1 ? 'Finish!' : 'Next'}</button
 	>
 </div>
