@@ -30,11 +30,11 @@
 	});
 	const { form, data, errors, isValid } = createForm({
 		initialValues: {
-			major: $evaluationData.major || ''
+			major: $evaluationData.profile.major || ''
 		},
 		extend: validator({ schema }),
 		onSubmit: (values, context) => {
-			$evaluationData.major = values.major;
+			$evaluationData.profile.major = values.major;
 			handleNext();
 		}
 	});
@@ -55,7 +55,7 @@
 	<form use:form>
 		<fieldset class="flex flex-wrap gap-6">
 			{#each options as option}
-				<RadioIcon name={option.name} value={option.value} icon={option.icon}
+				<RadioIcon name={option.name} value={option.label} icon={option.icon}
 					>{option.label}</RadioIcon
 				>
 			{/each}

@@ -16,22 +16,23 @@
 	const schema = yup.object().shape({
 		first_name: yup.string().required('First Name is required').trim(),
 		last_name: yup.string().required('Last Name is required').trim(),
-		phone_number: yup.string().required('Phone Number is required').trim(),
+		phone: yup.string().required('Phone Number is required').trim(),
 		country: yup.string().required('Country is required').trim()
 	});
 	const { form, data, errors, isValid, touched } = createForm({
 		initialValues: {
 			first_name: $evaluationData.first_name || '',
 			last_name: $evaluationData.last_name || '',
-			phone_number: $evaluationData.phone_number || '',
-			country: $evaluationData.country || ''
+			phone: $evaluationData.profile.phone || '',
+			country: $evaluationData.profile.country || ''
 		},
 		extend: validator({ schema }),
 		onSubmit: (values, context) => {
-			$evaluationData = {
-				...$evaluationData,
-				...values
-			};
+			$evaluationData.first_name = values.first_name;
+			$evaluationData.last_name = values.last_name;
+			$evaluationData.profile.phone = values.phone;
+			$evaluationData.profile.country = values.country;
+
 			handleNext();
 		}
 	});
@@ -72,18 +73,18 @@
 			</div>
 
 			<div class="">
-				<Label label_for="phone_number" label="Phone Number" />
+				<Label label_for="phone" label="Phone Number" />
 				<Input
-					id="phone_number"
-					name="phone_number"
+					id="phone"
+					name="phone"
 					type="text"
 					placeholder="+8801XXXXXXXXX"
-					touched={$touched.phone_number}
-					error={$errors.phone_number}
+					touched={$touched.phone}
+					error={$errors.phone}
 					classes="w-full"
 				/>
-				{#if $errors.phone_number}
-					<Error classes="self-start" message={$errors.phone_number} />
+				{#if $errors.phone}
+					<Error classes="self-start" message={$errors.phone} />
 				{/if}
 			</div>
 			<div class="">

@@ -18,7 +18,7 @@
 		{ value: 'ielts', label: 'IELTS' },
 		{ value: 'toefl', label: 'TOEFL' },
 		{ value: 'duolingo', label: 'Duolingo' },
-		{ value: 'will-take', label: 'Wish to Take IELTS' },
+		{ value: 'plan-to', label: 'Wish to Take IELTS' },
 		{ value: 'no-test', label: 'Wish to get enrolled with no test' },
 		{ value: 'moi', label: 'Wish to get enrolled with Medium of Instruction' }
 	];
@@ -32,13 +32,13 @@
 	});
 	const { form, data, errors, isValid, touched } = createForm({
 		initialValues: {
-			english_proficiency: $evaluationData.english_proficiency || '',
-			english_proficiency_score: $evaluationData.english_proficiency_score || ''
+			english_proficiency: $evaluationData.profile.english_proficiency || '',
+			english_proficiency_score: $evaluationData.profile.english_proficiency_score || ''
 		},
 		extend: validator({ schema }),
 		onSubmit: (values, context) => {
-			$evaluationData.english_proficiency = values.english_proficiency;
-			$evaluationData.english_proficiency_score = values.english_proficiency_score || '';
+			$evaluationData.profile.english_proficiency = values.english_proficiency;
+			$evaluationData.profile.english_proficiency_score = values.english_proficiency_score || '';
 			handleNext();
 		}
 	});

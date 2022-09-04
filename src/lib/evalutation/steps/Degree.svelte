@@ -19,11 +19,11 @@
 	});
 	const { form, data, errors, isValid } = createForm({
 		initialValues: {
-			degree: $evaluationData.degree || ''
+			degree: $evaluationData.profile.degree || ''
 		},
 		extend: validator({ schema }),
 		onSubmit: (values, context) => {
-			$evaluationData.degree = values.degree;
+			$evaluationData.profile.degree = values.degree;
 			handleNext();
 		}
 	});
