@@ -1,10 +1,7 @@
 <script>
-	import { goto, invalidate } from '$app/navigation';
 	import { notificationToast } from '$lib/NotificationToast';
-	import { post } from '$lib/utils.js';
-	import { useMutation } from '@sveltestack/svelte-query';
-
 	import { validator } from '@felte/validator-yup';
+	import { useMutation } from '@sveltestack/svelte-query';
 	import { createForm } from 'felte';
 	import * as yup from 'yup';
 
@@ -110,6 +107,7 @@
 							type="email"
 							placeholder="example@example.com"
 							error={$errors.email}
+							classes="w-full"
 						/>
 						{#if $errors.email}
 							<Error message={$errors.email} />
@@ -123,6 +121,7 @@
 							type={passwordVisible ? 'text' : 'password'}
 							placeholder="***********"
 							error={$errors.password}
+							classes="w-full"
 						/>
 						<div
 							on:click={() => (passwordVisible = !passwordVisible)}

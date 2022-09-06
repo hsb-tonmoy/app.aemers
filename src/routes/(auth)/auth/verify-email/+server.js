@@ -6,11 +6,13 @@ export async function POST({ request }) {
 
 	const res = await api.post('auth/registration/verify-email/', { key });
 
-	if (res.detail === 'ok') {
-		return json(res, { status: 200 });
+	const data = await res.json();
+
+	if (data.detail === 'ok') {
+		return json(data, { status: 200 });
 	}
 
-	return json(res, {
+	return json(data, {
 		status: 400
 	});
 }

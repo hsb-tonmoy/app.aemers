@@ -5,10 +5,11 @@ export async function POST({ request }) {
 	const req = await request.json();
 
 	const res = await api.post('auth/password/reset/', req);
+	const data = await res.json();
 
-	if (res.errors) {
-		return json(res, { status: 400 });
+	if (data.errors) {
+		return json(data, { status: 400 });
 	}
 
-	return json(res, { status: 200 });
+	return json(data, { status: 200 });
 }

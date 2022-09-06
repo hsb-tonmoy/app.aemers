@@ -10,13 +10,15 @@ export async function POST({ request }) {
 		password2: req.passwordConfirmation
 	});
 
-	if (!body.email) {
-		return json(body, {
+	const data = await body.json();
+
+	if (body.status === 400) {
+		return json(data, {
 			status: 400
 		});
 	}
 
-	return json(body, {
+	return json(data, {
 		status: 201
 	});
 }

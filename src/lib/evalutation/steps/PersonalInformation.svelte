@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Error, Input, Label } from '$lib/components/Form';
+	import { countries } from '$lib/data/countries';
 	import { validator } from '@felte/validator-yup';
 	import { createForm } from 'felte';
 	import * as yup from 'yup';
@@ -89,15 +90,23 @@
 			</div>
 			<div class="">
 				<Label label_for="country" label="Country" />
-				<Input
-					id="country"
+				<select
 					name="country"
-					type="text"
 					placeholder="Bangladesh"
-					touched={$touched.country}
-					error={$errors.country}
-					classes="w-full"
-				/>
+					id="country"
+					class={`form-select w-full border border-borderColor focus:border-primary focus:ring focus:ring-primary ${
+						$errors.country ? 'border-red-600 focus:border-red-600 focus:ring-red-600' : ''
+					} ${
+						$touched.country && !$errors.country
+							? 'border-2 border-greenSignal ring-greenSignal'
+							: ''
+					} text-sm rounded-xl block py-4 px-5`}
+				>
+					<option value="" disabled selected hidden>Bangladesh</option>
+					{#each countries as country}
+						<option value={country.name}>{country.name}</option>
+					{/each}
+				</select>
 				{#if $errors.country}
 					<Error classes="self-start" message={$errors.country} />
 				{/if}

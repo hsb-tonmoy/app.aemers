@@ -5,5 +5,9 @@ export async function load({ locals }) {
 		throw redirect(302, '/login');
 	}
 
+	if (locals.user && !locals.user.isEvaluated) {
+		throw redirect(302, '/evaluation');
+	}
+
 	return {};
 }

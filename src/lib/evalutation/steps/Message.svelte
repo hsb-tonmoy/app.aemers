@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { Error, Input } from '$lib/components/Form';
+	import { goto } from '$app/navigation';
+	import { notificationToast } from '$lib/NotificationToast';
 	import { validator } from '@felte/validator-yup';
 	import { useMutation } from '@sveltestack/svelte-query';
 	import { createForm } from 'felte';
@@ -11,9 +12,9 @@
 	export let steps;
 	export let currentIndex: number;
 
-	function handleNext() {
-		currentIndex = Math.min(steps.length - 1, currentIndex + 1);
-	}
+	// function handleNext() {
+	// 	currentIndex = Math.min(steps.length - 1, currentIndex + 1);
+	// }
 
 	const submitData = useMutation(
 		(formData) => {
@@ -28,9 +29,10 @@
 		{
 			onError: (error, variables, context) => {
 				console.log(error);
+				notificationToast('Something went wrong, please try again later');
 			},
 			onSuccess: async (data, variables, context) => {
-				console.log(data);
+				goto('/evaluation/success');
 			}
 		}
 	);

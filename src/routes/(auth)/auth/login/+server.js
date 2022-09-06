@@ -7,6 +7,7 @@ export async function POST({ request }) {
 		email: json.email,
 		password: json.password
 	});
+	const data = await body.json();
 
-	return respond(body);
+	return respond(data);
 }

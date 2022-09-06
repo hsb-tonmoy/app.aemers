@@ -6,11 +6,13 @@ export async function POST({ request }) {
 
 	const res = await api.post('auth/password/reset/confirm/', req);
 
-	if (!res.detail) {
-		return json(res, {
+	const data = await res.json();
+
+	if (res.status === 400) {
+		return json(data, {
 			status: 400
 		});
 	}
 
-	return json(res, { status: 200 });
+	return json(data, { status: 200 });
 }

@@ -31,8 +31,8 @@
   -->
 <script lang="ts">
 	// A bootstrap step component
-	import { tweened } from 'svelte/motion';
 	import { cubicOut } from 'svelte/easing';
+	import { tweened } from 'svelte/motion';
 
 	import { createEventDispatcher } from 'svelte';
 	import Check from '../Icons/CheckMark.svelte';
@@ -116,7 +116,7 @@
 
 	const dispatch = createEventDispatcher();
 	let onClick = (i: number) => {
-		if (clickable) {
+		if (clickable && i < current) {
 			let last = current;
 			current = i;
 			// $progress = i
