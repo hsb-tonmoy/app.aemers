@@ -18,7 +18,7 @@
 
 	const submitData = useMutation(
 		(formData) => {
-			return fetch('evaluation', {
+			return fetch('evaluation/submit', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -27,12 +27,13 @@
 			});
 		},
 		{
-			onError: (error, variables, context) => {
-				console.log(error);
-				notificationToast('Something went wrong, please try again later');
-			},
-			onSuccess: async (data, variables, context) => {
-				goto('/evaluation/success');
+			onSettled: async (data, error, variables, context) => {
+				if (!data.ok || error) {
+					notificationToast('Something went wrong, please try again later');
+					console.log(await data.json(), error);
+				} else {
+					goto('/evaluation/success');
+				}
 			}
 		}
 	);

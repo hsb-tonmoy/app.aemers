@@ -3,6 +3,8 @@
 	import ApplicationProgress from '$lib/dashboard/home/Tiles/ApplicationTile/ApplicationProgress.svelte';
 
 	let value = 20;
+
+	export let application_status;
 </script>
 
 <div class="flex flex-col rounded-2xl py-8 px-10 bg-primary">
@@ -25,6 +27,6 @@
 				</div>
 			</CircularProgress>
 		</div>
-		<ApplicationProgress />
+		<ApplicationProgress {application_status} />
 	</div>
 </div>

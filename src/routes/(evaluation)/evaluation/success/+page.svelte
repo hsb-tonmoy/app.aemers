@@ -4,6 +4,10 @@
 	import { Button } from '$lib/components/Form';
 </script>
 
+<svelte:head>
+	<title>ap.aemers - Evaluation Complete</title>
+</svelte:head>
+
 <main class="flex flex-col justify-center items-center h-screen">
 	<iframe title="success" width="800px" src="https://embed.lottiefiles.com/animation/79952" />
 	<h6 class="font-bold text-center text-secondary text-5xl">Profile Completed!</h6>
