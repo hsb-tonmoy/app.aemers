@@ -5,7 +5,7 @@
 	export let application_status;
 </script>
 
-<div class="flex flex-col rounded-2xl py-8 px-10 bg-primary">
+<div class="flex flex-col rounded-2xl py-8 px-10 bg-primary ">
 	<div class="2xl:w-2/4">
 		<div class="flex gap-x-3 items-center">
 			<h2 class="font-bold text-white text-xl md:text-2xl 2xl:text-3xl">My Application</h2>

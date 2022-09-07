@@ -1,7 +1,7 @@
 <script>
+	import CTA from './CTA.svelte';
 	import Logo from './Logo.svelte';
 	import Menu from './Menu.svelte';
-	import CTA from './CTA.svelte';
 </script>
 
 <div class="bg-white">

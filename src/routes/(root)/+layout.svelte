@@ -8,7 +8,7 @@
 <div class="flex w-full h-screen bg-bgColor">
 	<aside
 		class:hidden={$sidebarState}
-		class="xl:block fixed left-0 top-0 w-2/4 xl:w-[20%] 2xl:w-[15%]"
+		class="xl:block fixed left-0 top-0 w-2/4 xl:w-[20%] 2xl:w-[15%] z-[5000]"
 	>
 		<Sidebar />
 	</aside>

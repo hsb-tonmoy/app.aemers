@@ -33,7 +33,7 @@
 	aria-valuenow={value}
 	class="s-progress-circular {klass}"
 	class:indeterminate
-	style="width:{size}px;height:{size}px;{style}"
+	style="width:{size}px;height:{size}px;z-index:1;{style}"
 >
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
