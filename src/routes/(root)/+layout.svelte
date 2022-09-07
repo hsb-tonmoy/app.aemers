@@ -12,7 +12,7 @@
 	>
 		<Sidebar />
 	</aside>
-	<main class="flex-1 xl:ml-[20%] 2xl:ml-[15%]">
+	<main class="flex-1 px-6 py-10 md:px-10 md:py-16 xl:ml-[20%] 2xl:ml-[15%]">
 		<slot />
 	</main>
 </div>

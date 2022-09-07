@@ -1,5 +1,6 @@
 <script>
-	import { Home, Application, Video, Account, Logout } from '$lib/components/Icons';
+	import { page } from '$app/stores';
+	import { Account, Application, Home, Logout, Video } from '$lib/components/Icons';
 
 	let menuitems = [
 		{
@@ -20,7 +21,7 @@
 		{
 			name: 'Edit Profile',
 			icon: Account,
-			link: '/account'
+			link: '/profile/edit'
 		},
 		{
 			name: 'Logout',
@@ -32,7 +33,7 @@
 
 <section id="menu" class="flex flex-col gap-y-10">
 	{#each menuitems as item}
-		<a href={item.link} class="menuItem"
+		<a href={item.link} class="menuItem {$page.url.pathname === item.link ? 'menuItem-active' : ''}"
 			><span class="w-7 h-7">
 				<svelte:component this={item.icon} />
 			</span> <span class="">{item.name}</span></a
@@ -46,6 +47,6 @@
 	}
 
 	.menuItem-active {
-		@apply text-primary;
+		@apply font-bold text-primary;
 	}
 </style>

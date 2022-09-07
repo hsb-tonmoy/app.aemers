@@ -1,14 +1,14 @@
 <script>
 	import { goto } from '$app/navigation';
-	import { createForm } from 'felte';
 	import { validator } from '@felte/validator-yup';
+	import { createForm } from 'felte';
 	import * as yup from 'yup';
 
 	import { header_bg } from '$lib/login/stores';
 
 	import { Cross } from '$lib/components/Icons';
 
-	import { Label, Input, Button, Error } from '$lib/components/Form';
+	import { Button, Error, Input, Label } from '$lib/components/Form';
 
 	let success = false;
 
@@ -50,12 +50,12 @@
 
 <section class="flex flex-1 justify-center items-center bg-bgColor">
 	<div class="relative flex flex-col p-12 md:px-40 md:py-32 lg:px-60 lg:py-52 bg-white rounded-3xl">
-		<div
+		<button
 			on:click={() => goto('/login')}
 			class="absolute right-8 top-10 flex justify-center items-center bg-borderColor rounded-full cursor-pointer"
 		>
 			<span class="block p-1 w-8 h-8 md:w-12 md:h-12"><Cross /></span>
-		</div>
+		</button>
 		<h2 class="text-3xl font-bold">Forgot password?</h2>
 		<p class="mt-2 text-sm text-lightText leading-normal">
 			Don’t worry! It’s really simple to reset your password in a few steps!

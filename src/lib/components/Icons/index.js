@@ -25,5 +25,6 @@ export { default as Pound } from './Pound.svelte';
 export { default as Sciences } from './Sciences.svelte';
 export { default as Social_Sciences } from './Social_Sciences.svelte';
 export { default as Success } from './Success.svelte';
+export { default as Trash } from './Trash.svelte';
 export { default as Video } from './Video.svelte';
 export { default as Warning } from './Warning.svelte';

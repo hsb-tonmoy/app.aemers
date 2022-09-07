@@ -5,51 +5,51 @@
 	const items = [
 		{
 			title: 'Create Profile',
-			done: true
+			status: 2
 		},
 		{
 			title: 'Open a File',
-			done: application_status.file_opening
+			status: application_status.file_opening
 		},
 		{
 			title: 'Orientation',
-			done: application_status.orientation
+			status: application_status.orientation
 		},
 		{
 			title: 'Pre-Application Form',
-			done: application_status.pre_application_form
+			status: application_status.pre_application_form
 		},
 		{
 			title: 'Documents Upload',
-			done: application_status.documents_upload
+			status: application_status.documents_upload
 		},
 		{
 			title: 'I-20 Upload',
-			done: application_status.i_20_upload
+			status: application_status.i_20_upload
 		},
 		{
 			title: 'DS-160 Filed',
-			done: application_status.ds_160_filed
+			status: application_status.ds_160_filed
 		},
 		{
 			title: 'SEVIS Payment',
-			done: application_status.sevis_payment
+			status: application_status.sevis_payment
 		},
 		{
 			title: 'Visa Fee Payment',
-			done: application_status.visa_fee_payment
+			status: application_status.visa_fee_payment
 		},
 		{
 			title: 'Visa Interview',
-			done: application_status.visa_interview
+			status: application_status.visa_interview
 		},
 		{
 			title: 'Pre-Departure Session',
-			done: application_status.pre_departure_session
+			status: application_status.pre_departure_session
 		},
 		{
 			title: 'Welcome to USA',
-			done: application_status.welcome_to_usa
+			status: application_status.welcome_to_usa
 		}
 	];
 </script>
@@ -62,13 +62,15 @@
 			style="opacity: {100 - index * 30}%;"
 		>
 			<span class="w-4 h-4 md:w-6 md:h-6">
-				{#if item.done}
+				{#if item.status === 2}
 					<CheckedCircle />
 				{:else}
 					<Circle />
 				{/if}
 			</span>
-			<span class={`text-sm md:text-base ${item.done ? 'line-through' : ''} `}>{item.title}</span>
+			<span class={`text-sm md:text-base ${item.status === 2 ? 'line-through' : ''} `}
+				>{item.title}</span
+			>
 		</li>
 	{/each}
 	<button
