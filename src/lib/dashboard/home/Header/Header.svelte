@@ -3,6 +3,7 @@
 	import { Menu, Notification } from '$lib/components/Icons';
 	import { sidebarState } from '../stores';
 	import AccountDropdown from './AccountDropdown.svelte';
+	import NotificationDropDown from './Notifications/NotificationDropDown.svelte';
 </script>
 
 <header class="flex justify-between items-center overflow-hidden">
@@ -16,9 +17,8 @@
 			class="lg:hidden w-6 h-6 md:w-10 md:h-10 text-secondary hover:text-primary cursor-pointer"
 			><Menu /></span
 		>
-		<span class="text-secondary w-6 h-6 md:w-10 md:h-10">
-			<Notification />
-		</span>
+
+		<NotificationDropDown />
 		<AccountDropdown />
 	</div>
 </header>

@@ -168,4 +168,13 @@
 			classes="self-center md:self-end mt-8 md:mt-4 px-8 py-3"
 		/>
 	</form>
+	<div class="divider h-px w-full bg-borderColor my-10" />
+	<h6 class="text-3xl font-bold mb-2">Reset Password</h6>
+	<p class="text-lighterText text-sm">Click here to reset your password.</p>
+	<Button
+		on:click={() => goto('/profile/reset-password/')}
+		type="button"
+		text="Reset Password"
+		classes="mt-8 px-8 py-3"
+	/>
 </div>
