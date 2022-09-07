@@ -3,7 +3,8 @@
 	export let name: string;
 	export let id: string;
 	export let classes: string = '';
-	export let placeholder: string;
+	export let placeholder: string = '';
+	export let disabled: boolean = false;
 	export let touched: boolean = false;
 	export let error: boolean = false;
 </script>
@@ -12,7 +13,8 @@
 	{type}
 	{name}
 	{id}
-	class={`form-input border border-borderColor focus:border-primary focus:ring focus:ring-primary ${
+	{disabled}
+	class={`form-input border border-borderColor focus:border-primary focus:ring focus:ring-primary disabled:bg-gray-300 ${
 		error ? 'border-red-600 focus:border-red-600 focus:ring-red-600' : ''
 	} ${
 		touched && !error ? 'border-2 border-greenSignal ring-greenSignal' : ''
