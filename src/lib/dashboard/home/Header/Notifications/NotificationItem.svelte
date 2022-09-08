@@ -1,11 +1,36 @@
 <script>
 	import { AemersCircular, CheckedCircle, RedCircularCross } from '$lib/components/Icons';
+	import { useMutation } from '@sveltestack/svelte-query';
 	import { DropdownItem } from 'flowbite-svelte';
 
 	export let notification;
+
+	const markAsRead = useMutation(
+		() => {
+			return fetch(`/notifications?id=${notification.id}/`, {
+				method: 'PATCH',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ unread: false })
+			});
+		},
+		{
+			onSettled: async (error, data, variables, context) => {
+				notification.unread = false;
+				if (!data.ok || error) {
+					notificationToast('Something went wrong, please try again later');
+					console.log(await data.json(), error);
+				}
+			}
+		}
+	);
 </script>
 
 <DropdownItem
+	on:click={() => {
+		$markAsRead.mutate();
+	}}
 	class={`flex flex-col px-5 py-5 rounded-xl 
 ${notification.level === 'success' ? 'bg-[#E9FFF7]' : ''} ${
 		notification.level === 'info' ? 'bg-[#F7F4FF]' : ''
