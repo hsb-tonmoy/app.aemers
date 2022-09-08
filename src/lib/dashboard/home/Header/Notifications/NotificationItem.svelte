@@ -1,5 +1,5 @@
 <script>
-	import { AemersCircular, CheckedCircle, RedCircularCross } from '$lib/components/Icons';
+	import { AemersCircular,CheckedCircle,OpenEnvelope,RedCircularCross } from '$lib/components/Icons';
 	import { useMutation } from '@sveltestack/svelte-query';
 	import { DropdownItem } from 'flowbite-svelte';
 

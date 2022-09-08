@@ -19,9 +19,15 @@
 	<ul slot="content" class="px-6 py-8">
 		<h6 class="text-xl md:text-2xl text-secondary font-bold mb-6">Notifications</h6>
 		<div class="flex flex-col gap-y-4">
-			{#each notifications as notification}
-				<NotificationItem {notification} />
-			{/each}
+			{#if notifications.length > 0}
+				{#each notifications as notification}
+					<NotificationItem {notification} />
+				{/each}
+			{:else}
+				<div class="text-center text-sm md:text-base text-lighterText">
+					No new notifications to show
+				</div>
+			{/if}
 		</div>
 	</ul>
 </Dropdown>
