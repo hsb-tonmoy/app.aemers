@@ -14,6 +14,7 @@ export async function load({ locals }) {
 		`application_status/${locals.user.pk}/`,
 		locals.access
 	);
+
 	const application_status_data = await application_status_fetch.json();
 
 	if (!application_status_fetch.ok) {

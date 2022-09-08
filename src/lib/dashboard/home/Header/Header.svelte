@@ -1,6 +1,7 @@
 <script>
 	export let user;
-	import { Menu, Notification } from '$lib/components/Icons';
+	export let notifications;
+	import { Menu } from '$lib/components/Icons';
 	import { sidebarState } from '../stores';
 	import AccountDropdown from './AccountDropdown.svelte';
 	import NotificationDropDown from './Notifications/NotificationDropDown.svelte';
@@ -8,7 +9,7 @@
 
 <header class="flex justify-between items-center overflow-hidden">
 	<div class="flex flex-col gap-y-2">
-		<h2 class="text-3xl md:text-4xl 2xl:text-5xl font-bold">Hello {user.first_name}</h2>
+		<h2 class="text-2xl md:text-4xl 2xl:text-5xl font-bold">Hello {user.first_name}</h2>
 		<h6 class="text-lighterText text-base md:text-lg 2xl:text-xl">Explore Aemers from here...</h6>
 	</div>
 	<div class="flex items-center gap-x-6">
@@ -18,7 +19,7 @@
 			><Menu /></span
 		>
 
-		<NotificationDropDown />
+		<NotificationDropDown {notifications} />
 		<AccountDropdown />
 	</div>
 </header>

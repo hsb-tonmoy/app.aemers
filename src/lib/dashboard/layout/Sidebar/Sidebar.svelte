@@ -5,7 +5,7 @@
 </script>
 
 <div class="bg-white">
-	<div class="flex flex-col gap-y-20 px-10 pt-8 pb-52">
+	<div class="flex flex-col gap-y-20 px-4 md:px-10 pt-8 pb-52">
 		<Logo />
 		<Menu />
 	</div>

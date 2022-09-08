@@ -5,9 +5,12 @@
 
 <Dropdown label="User Dropdown" class="w-44">
 	<div slot="trigger" class="inline-flex items-center">
-		<span class="text-primary w-6 h-6 md:w-10 md:h-10">
+		<button
+			type="button"
+			class="text-primary w-6 h-6 md:w-10 md:h-10 focus:ring-0 focus:outline-none"
+		>
 			<AccountCircular />
-		</span>
+		</button>
 	</div>
 	<ul slot="content" class="rounded-3xl py-2">
 		<DropdownItem class="flex items-center gap-x-4 text-lighterText">

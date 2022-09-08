@@ -1,6 +1,7 @@
 export { default as Account } from './Account.svelte';
 export { default as AccountCircular } from './AccountCircular.svelte';
 export { default as AccountFilled } from './AccountFilled.svelte';
+export { default as AemersCircular } from './AemersCircular.svelte';
 export { default as Application } from './Application.svelte';
 export { default as Business } from './Business.svelte';
 export { default as CheckedCircle } from './CheckedCircle.svelte';
@@ -22,6 +23,7 @@ export { default as Menu } from './Menu.svelte';
 export { default as Notification } from './Notification.svelte';
 export { default as OpenBook } from './OpenBook.svelte';
 export { default as Pound } from './Pound.svelte';
+export { default as RedCircularCross } from './RedCircularCross.svelte';
 export { default as Sciences } from './Sciences.svelte';
 export { default as Social_Sciences } from './Social_Sciences.svelte';
 export { default as Success } from './Success.svelte';

@@ -10,8 +10,8 @@
 </script>
 
 <div class="flex flex-col">
-	<Header user={data.user} />
-	<div class="grid grid-cols-1 xl:grid-cols-2 gap-x-3 gap-y-6 mt-5">
+	<Header notifications={data.notifications} user={data.user} />
+	<div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mt-5">
 		<ApplicationTile application_status={data.application_status} />
 		<KnowledgebaseTile />
 		<MockVisaTile />
