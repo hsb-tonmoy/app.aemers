@@ -7,6 +7,7 @@ export { default as Business } from './Business.svelte';
 export { default as CheckedCircle } from './CheckedCircle.svelte';
 export { default as CheckMark } from './CheckMark.svelte';
 export { default as Circle } from './Circle.svelte';
+export { default as ClosedEnvelope } from './ClosedEnvelope.svelte';
 export { default as Computer } from './Computer.svelte';
 export { default as Cross } from './Cross.svelte';
 export { default as Engineering } from './Engineering.svelte';
