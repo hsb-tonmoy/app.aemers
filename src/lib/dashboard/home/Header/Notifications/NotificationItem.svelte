@@ -34,15 +34,12 @@
 </script>
 
 <DropdownItem
-	on:click={() => {
-		$markAsRead.mutate();
-	}}
 	class={`flex flex-col px-5 py-5 rounded-xl 
 ${notification.level === 'success' ? 'bg-[#E9FFF7]' : ''} ${
 		notification.level === 'info' ? 'bg-[#F7F4FF]' : ''
 	} ${notification.level === 'error' ? 'bg-[#FFEEEE]' : ''}`}
 >
-	<div class="flex justify-between items-center gap-x-4">
+	<div class="flex justify-between items-center gap-x-8">
 		<div class="flex items-center gap-x-4">
 			{#if notification.level === 'success'}
 				<span class="block w-8 h-8 md:w-10 md:h-10 text-greenSignal">
@@ -68,6 +65,12 @@ ${notification.level === 'success' ? 'bg-[#E9FFF7]' : ''} ${
 				<time class="text-xs text-lighterText">{notification.timestamp}</time>
 			</div>
 		</div>
-		<button class="w-5 h-5 block"><ClosedEnvelope /></button>
+
+		<button
+			on:click={() => {
+				$markAsRead.mutate();
+			}}
+			class="w-5 h-5 block text-primary font-bold"><OpenEnvelope /></button
+		>
 	</div>
 </DropdownItem>
