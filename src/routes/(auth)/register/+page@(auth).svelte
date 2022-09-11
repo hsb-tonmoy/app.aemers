@@ -3,8 +3,8 @@
 
 	import { useMutation } from '@sveltestack/svelte-query';
 
-	import { createForm } from 'felte';
 	import { validator } from '@felte/validator-yup';
+	import { createForm } from 'felte';
 	import * as yup from 'yup';
 	import YupPassword from 'yup-password';
 
@@ -18,7 +18,7 @@
 
 	import { Eye, EyeOff } from '$lib/components/Icons';
 
-	import { Label, Input, Button, Error } from '$lib/components/Form';
+	import { Button, Error, Input, Label } from '$lib/components/Form';
 
 	let passwordVisible = false;
 
@@ -108,6 +108,7 @@
 							id="email"
 							placeholder="example@example.com"
 							error={$errors.email}
+							classes="w-full"
 						/>
 						{#if $errors.email}
 							<Error message={$errors.email} />
@@ -121,6 +122,7 @@
 							id="password"
 							placeholder="***********"
 							error={$errors.password}
+							classes="w-full"
 						/>
 
 						<div
@@ -147,6 +149,7 @@
 							id="passwordConfirmation"
 							placeholder="***********"
 							error={$errors.passwordConfirmation}
+							classes="w-full"
 						/>
 
 						<div

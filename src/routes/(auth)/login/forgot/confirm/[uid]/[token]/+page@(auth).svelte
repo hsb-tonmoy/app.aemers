@@ -115,6 +115,7 @@
 						id="new_password1"
 						placeholder="**************"
 						error={$errors.new_password1}
+						classes="w-full"
 					/>
 					<div
 						on:click={() => (passwordVisible = !passwordVisible)}
@@ -140,6 +141,7 @@
 						id="new_password2"
 						placeholder="**************"
 						error={$errors.new_password2}
+						classes="w-full"
 					/>
 					<div
 						on:click={() => (passwordVisible = !passwordVisible)}

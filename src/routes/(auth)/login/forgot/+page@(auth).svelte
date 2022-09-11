@@ -78,6 +78,7 @@
 						type="email"
 						error={$errors.email}
 						placeholder="example@example.com"
+						classes="w-full"
 					/>
 					{#if $errors.email}
 						<Error message={$errors.email} />
