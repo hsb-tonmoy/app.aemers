@@ -3,9 +3,10 @@ import { error } from '@sveltejs/kit';
 
 export async function GET({ url, request, locals }) {
 	const res = await api.get('notifications/' + url.search, locals.access);
+	const data = await res.json();
 
 	if (res.ok) {
-		return new Response(JSON.stringify({ success: true }));
+		return new Response(JSON.stringify(data));
 	} else {
 		throw error(500, 'Something went wrong');
 	}

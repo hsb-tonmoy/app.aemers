@@ -26,6 +26,7 @@ export { default as OpenBook } from './OpenBook.svelte';
 export { default as OpenEnvelope } from './OpenEnvelope.svelte';
 export { default as Pound } from './Pound.svelte';
 export { default as RedCircularCross } from './RedCircularCross.svelte';
+export { default as RoundArrows } from './RoundArrows.svelte';
 export { default as Sciences } from './Sciences.svelte';
 export { default as Social_Sciences } from './Social_Sciences.svelte';
 export { default as Success } from './Success.svelte';

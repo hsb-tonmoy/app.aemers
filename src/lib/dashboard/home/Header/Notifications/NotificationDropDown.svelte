@@ -1,19 +1,18 @@
 <script>
-	import { Notification } from '$lib/components/Icons';
-	import { useQuery } from '@sveltestack/svelte-query';
-	import { Dropdown } from 'flowbite-svelte';
+	import { Notification, RoundArrows } from '$lib/components/Icons';
+	import { Badge, Dropdown } from 'flowbite-svelte';
 	import NotificationItem from './NotificationItem.svelte';
 
 	export let notifications;
 
-	const notificationQuery = useQuery('notifications', async () => {
-		const res = await fetch('/notifications');
+	async function fetchNotifications() {
+		const res = await fetch('notifications/');
 		const data = await res.json();
+		console.log(data);
 		if (res.ok) {
-			return data;
+			notifications = data;
 		}
-	});
-
+	}
 	async function markAllAsRead() {
 		const res = await fetch('/notifications/?markAsRead=true');
 		if (res.ok) {
@@ -27,7 +26,7 @@
 </script>
 
 <Dropdown label="Notifications" class="w-full rounded-none">
-	<div slot="trigger" class="inline-flex items-center">
+	<div slot="trigger" class="relative inline-flex items-center">
 		<button
 			type="button"
 			id="notification"
@@ -35,10 +34,21 @@
 		>
 			<Notification />
 		</button>
+		<div
+			class="inline-flex absolute -bottom-1 -right-1 justify-center items-center w-5 h-5 text-xs font-bold text-white bg-primary rounded-full border-2 border-white dark:border-gray-900"
+		>
+			{notifications.length}
+		</div>
 	</div>
 	<ul slot="content" class="flex flex-col px-6 py-8">
 		<div class="flex justify-between items-center">
-			<h6 class="text-xl md:text-2xl text-secondary font-bold">Notifications</h6>
+			<div class="flex items-center gap-x-2">
+				<h6 class="text-xl md:text-2xl text-secondary font-bold">Notifications</h6>
+				<button
+					on:click={fetchNotifications}
+					class="block w-4 h-4 text-secondary hover:text-primary"><RoundArrows /></button
+				>
+			</div>
 			{#if notifications.length > 0}
 				<button
 					on:click={markAllAsRead}
