@@ -8,24 +8,21 @@
 	async function fetchNotifications() {
 		const res = await fetch('notifications/');
 		const data = await res.json();
-		console.log(data);
 		if (res.ok) {
 			notifications = data;
 		}
 	}
 	async function markAllAsRead() {
 		const res = await fetch('/notifications/?markAsRead=true');
-		if (res.ok) {
-			notifications.forEach((notification) => {
-				notification.unread = false;
-			});
+		if (res.status === 200) {
+			notifications = notifications.map((notification) => ({ ...notification, unread: false }));
 		} else {
 			console.log(await res.json());
 		}
 	}
 </script>
 
-<Dropdown label="Notifications" class="w-full rounded-none">
+<Dropdown label="Notifications" class="min-w-[30rem] w-full rounded-none">
 	<div slot="trigger" class="relative inline-flex items-center">
 		<button
 			type="button"

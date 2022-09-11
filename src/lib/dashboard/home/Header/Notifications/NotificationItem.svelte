@@ -5,7 +5,6 @@
 		OpenEnvelope,
 		RedCircularCross
 	} from '$lib/components/Icons';
-	import ClosedEnvelope from '$lib/components/Icons/ClosedEnvelope.svelte';
 	import { useMutation } from '@sveltestack/svelte-query';
 	import { DropdownItem } from 'flowbite-svelte';
 
@@ -22,11 +21,11 @@
 			});
 		},
 		{
-			onSettled: async (error, data, variables, context) => {
+			onSuccess: async (data, variables, context) => {
 				notification.unread = false;
-				if (!data.ok || error) {
+				if (!(data.status === 200)) {
 					notificationToast('Something went wrong, please try again later');
-					console.log(await data.json(), error);
+					console.log(await data.json());
 				}
 			}
 		}

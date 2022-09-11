@@ -18,8 +18,11 @@ export async function PATCH({ url, request, locals }) {
 
 	const req = await api.patch(`notifications/${id}`, values, locals.access);
 
-	if (req.ok) {
-		return new Response(JSON.stringify({ success: true }));
+	if (req.status === 200) {
+		return new Response(JSON.stringify({ success: true }), {
+			status: 200,
+			statusText: 'OK'
+		});
 	}
 
 	throw error(req.status, req.statusText);
