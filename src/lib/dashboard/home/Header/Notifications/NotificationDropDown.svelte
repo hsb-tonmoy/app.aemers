@@ -1,6 +1,6 @@
 <script>
 	import { Notification, RoundArrows } from '$lib/components/Icons';
-	import { Badge, Dropdown } from 'flowbite-svelte';
+	import { Dropdown } from 'flowbite-svelte';
 	import NotificationItem from './NotificationItem.svelte';
 
 	export let notifications;
