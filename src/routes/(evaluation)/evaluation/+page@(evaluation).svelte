@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { AccountFilled, GraduationCap, Language, OpenBook, Pound } from '$lib/components/Icons';
-	import Steps from '$lib/components/UI/Steps.svelte';
+	import Steps from '$lib/components/UI/EvaluationSteps.svelte';
 	import MultiStepForm from '$lib/evalutation/MultiStepForm.svelte';
 
 	let steps = [

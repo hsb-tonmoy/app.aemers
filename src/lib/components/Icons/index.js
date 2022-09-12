@@ -18,6 +18,7 @@ export { default as Health_Sciences } from './Health_Sciences.svelte';
 export { default as Home } from './Home.svelte';
 export { default as Humanities } from './Humanities.svelte';
 export { default as Language } from './Language.svelte';
+export { default as LeftArrow } from './LeftArrow.svelte';
 export { default as Logout } from './Logout.svelte';
 export { default as Medal } from './Medal.svelte';
 export { default as Menu } from './Menu.svelte';

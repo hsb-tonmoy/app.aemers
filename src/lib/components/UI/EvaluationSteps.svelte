@@ -1,34 +1,3 @@
-<!--
-  @component 
-  ## svelte-steps
-  ## props 
-    
-  - `steps`:
-    - Array of object. Length has to be more than 1
-    - Required
-    - Each item is a step object that can have:
-      - `text`: The text displayed below each steps.
-      - `icon`: A svelte component displayed inside each steps.
-      - `iconProps`: An object that will be passed as props to the `icon` component.
-  - `current`: current step index. Number. Default `0`
-  - `size`: size of the step buttons. String. Default `"3rem"`
-  - `line`: thickness of the connecting lines between the step buttons. String. Default `"0.3rem"`
-  - `primary`: Primary color of passed and current steps. String. Default `'var(--bs-primary, #3a86ff)'`
-  - `secondary`: Secondary color of future steps. String. Default `'var(--bs-secondary, #bbbbc0)'`
-  - `light`: Primary color of text color in passed anc current steps. String. Default `'var(--bs-light, white)'`
-  - `dark`: Secondary color of text color in future steps. String. Default `'var(--bs-dark, black)'`
-  - `borderRadius`: Border radius of the step buttons. String. Default `'50%'` (circle)
-  - `fontFamily`: Font family of the component. String. Default `"'Helvetica Neue', Helvetica, Arial, sans-serif"`
-  - `vertical`: Vertical steps
-  - `reverse`: For horizontal steps, reverse the step from right to the left; for vertical steps, reverse puts text labels to the left. Default `false`
-  - `clickable`: When set to `false`, Clicking icons and labels will not change step. You have to change `current` to change step. Default `true`
- 
-  ## events
-  - `on:click(e)`: click event. Event detail object has two keys:
-    - `e.detail.current`: the index of current step
-    - `e.detail.last`: the index of last step
-    
-  -->
 <script lang="ts">
 	// A bootstrap step component
 	import { cubicOut } from 'svelte/easing';
@@ -128,17 +97,17 @@
 <div
 	class="steps-container"
 	style={`--size: ${size}; 
-      --line-thickness: ${line};
-      --primary: ${primary}; 
-      --secondary: ${secondary};
-      --light: ${light};
-      --dark: ${dark};
-      --border-radius: ${borderRadius};
-      --line-color: ${lineColor};
-			--icon-color: ${iconColor};
-      --font-family: ${fontFamily || "'Helvetica Neue', Helvetica, Arial, sans-serif"};
-    display: flex; 
-    `}
+				--line-thickness: ${line};
+				--primary: ${primary}; 
+				--secondary: ${secondary};
+				--light: ${light};
+				--dark: ${dark};
+				--border-radius: ${borderRadius};
+				--line-color: ${lineColor};
+				--icon-color: ${iconColor};
+				--font-family: ${fontFamily || "'Helvetica Neue', Helvetica, Arial, sans-serif"};
+			display: flex; 
+			`}
 	style:flex-direction={vertical ? (reverse ? 'row-reverse' : 'row') : 'column'}
 >
 	<!-- progress line container -->
@@ -198,8 +167,8 @@
 					<!-- circle -->
 					<div
 						class="step 
-              {i <= $progress ? `text-primary` : `icon-color`}
-              "
+								{i <= $progress ? `text-primary` : `icon-color`}
+								"
 						class:step-border__completed={i <= $progress}
 						class:step-border={!(i <= $progress)}
 						class:hover-highlight={clickable}

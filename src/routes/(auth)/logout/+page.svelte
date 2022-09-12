@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
 
 	async function logout() {
-		await post(`/auth/logout`);
+		await post(`/logout`);
 		window.location.href = '/';
 	}
 

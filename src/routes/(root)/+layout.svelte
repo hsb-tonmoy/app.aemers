@@ -3,6 +3,7 @@
 	import ApplicationSidebar from '$lib/dashboard/application/layout/Sidebar/Sidebar.svelte';
 	import { sidebarState } from '$lib/dashboard/home/stores';
 	import Sidebar from '$lib/dashboard/layout/Sidebar/Sidebar.svelte';
+	export let data;
 </script>
 
 <svelte:head><title>app.aemers.com - US Scholarship Mentoring</title></svelte:head>
@@ -13,7 +14,7 @@
 		class="xl:block fixed left-0 top-0 w-2/4 xl:w-[20%] 2xl:w-[15%] h-screen z-[5000] overflow-y-auto"
 	>
 		{#if $page.url.pathname.startsWith('/application')}
-			<ApplicationSidebar />
+			<ApplicationSidebar {data} />
 		{:else}
 			<Sidebar />
 		{/if}

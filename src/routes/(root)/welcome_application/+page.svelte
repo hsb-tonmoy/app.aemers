@@ -1,6 +1,26 @@
 <script>
-	import { goto } from '$app/navigation';
+	import { goto, invalidate } from '$app/navigation';
 	import { Button } from '$lib/components/Form';
+	import { notificationToast } from '$lib/NotificationToast';
+	export let data;
+
+	async function handleStart() {
+		const res = await fetch('/application/submit', {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				application_started: true
+			})
+		});
+		if (res.ok) {
+			window.location.href = '/application';
+		} else {
+			console.log(await res.json());
+			notificationToast('Something went wrong. Please contact support@aemers.com');
+		}
+	}
 </script>
 
 <div
@@ -12,11 +32,6 @@
 		Get one step closer to achieving your dream. To learn more about the application process, watch
 		the video!
 	</p>
-	<Button
-		on:click={() => goto('/application/file_completion')}
-		type="button"
-		text="Start Now"
-		classes="py-3 px-10 mb-8"
-	/>
+	<Button on:click={handleStart} type="button" text="Start Now" classes="py-3 px-10 mb-8" />
 	<img src="/images/video.png" alt="Application Process Video" />
 </div>
