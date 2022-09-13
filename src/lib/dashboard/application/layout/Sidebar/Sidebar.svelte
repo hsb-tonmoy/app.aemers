@@ -3,11 +3,11 @@
 	import Steps from '$lib/components/UI/ApplicationSteps.svelte';
 	import CircularProgress from '$lib/components/UI/CircularProgress.svelte';
 	import Logo from '$lib/dashboard/layout/Sidebar/Logo.svelte';
-	export let data;
+	import { application_status, application_steps } from '$lib/data/stores';
 
-	export let currentIndex = 7;
+	export let currentIndex = 1;
 
-	$: data.application_steps.map((step, index) => {
+	$: $application_steps.map((step, index) => {
 		if ($page.url.pathname === step.path) {
 			currentIndex = index;
 			return;
@@ -26,11 +26,11 @@
 				size={150}
 				progressWidth="2"
 				width="10"
-				value={data.application_status.progress_percentage}
+				value={$application_status.progress_percentage}
 			>
 				<div class="flex flex-col justify-center">
 					<span class="font-bold text-xl text-center"
-						>{data.application_status.progress_percentage}%</span
+						>{$application_status.progress_percentage}%</span
 					>
 					<span class="font-normal text-xs">Completed</span>
 				</div>
@@ -41,7 +41,7 @@
 	</div>
 	<div class="steps sidebarpadding">
 		<Steps
-			steps={data.application_steps}
+			bind:steps={$application_steps}
 			vertical={true}
 			bind:current={currentIndex}
 			size="1.5rem"

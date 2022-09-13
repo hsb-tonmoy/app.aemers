@@ -1,8 +1,8 @@
 <script>
-	import { goto, invalidate } from '$app/navigation';
+	import { goto } from '$app/navigation';
 	import { Button } from '$lib/components/Form';
+	import { application_status } from '$lib/data/stores';
 	import { notificationToast } from '$lib/NotificationToast';
-	export let data;
 
 	async function handleStart() {
 		const res = await fetch('/application/submit', {
@@ -15,7 +15,8 @@
 			})
 		});
 		if (res.ok) {
-			window.location.href = '/application';
+			$application_status.application_started = true;
+			goto('/application/file_opening');
 		} else {
 			console.log(await res.json());
 			notificationToast('Something went wrong. Please contact support@aemers.com');

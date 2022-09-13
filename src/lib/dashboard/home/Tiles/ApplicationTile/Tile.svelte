@@ -2,8 +2,7 @@
 	import CircularProgress from '$lib/components/UI/CircularProgress.svelte';
 	import ApplicationProgress from '$lib/dashboard/home/Tiles/ApplicationTile/ApplicationProgress.svelte';
 
-	export let application_status;
-	export let application_steps;
+	import { application_status } from '$lib/data/stores';
 </script>
 
 <div class="flex flex-col rounded-2xl py-8 px-10 bg-primary ">
@@ -24,16 +23,16 @@
 				size={150}
 				progressWidth="2"
 				width="10"
-				value={application_status.progress_percentage}
+				bind:value={$application_status.progress_percentage}
 			>
 				<div class="flex flex-col justify-center">
 					<span class="font-bold text-xl text-center"
-						>{application_status.progress_percentage}%</span
+						>{$application_status.progress_percentage}%</span
 					>
 					<span class="font-normal text-xs">Completed</span>
 				</div>
 			</CircularProgress>
 		</div>
-		<ApplicationProgress {application_steps} />
+		<ApplicationProgress />
 	</div>
 </div>

@@ -1,10 +1,10 @@
 <script>
-	export let application_steps;
 	import { CheckedCircle, Circle } from '$lib/components/Icons';
+	import { application_steps } from '$lib/data/stores';
 </script>
 
 <div class="flex flex-col gap-y-2 text-white">
-	{#each application_steps as item, index}
+	{#each $application_steps as item, index}
 		<li
 			class="flex items-center gap-x-2"
 			class:hidden={index > 3}

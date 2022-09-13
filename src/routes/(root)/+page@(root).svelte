@@ -12,10 +12,7 @@
 <div class="flex flex-col">
 	<Header notifications={data.notifications} user={data.user} />
 	<div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mt-5">
-		<ApplicationTile
-			application_steps={data.application_steps}
-			application_status={data.application_status}
-		/>
+		<ApplicationTile />
 		<KnowledgebaseTile />
 		<MockVisaTile />
 		<NewsPortalTile />

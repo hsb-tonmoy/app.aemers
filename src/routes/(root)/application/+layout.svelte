@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 
 	import { page } from '$app/stores';
-	export let data;
+	import { application_steps } from '$lib/data/stores';
 
 	import { LeftArrow } from '$lib/components/Icons';
 
@@ -10,12 +10,11 @@
 	let previousURL = null;
 	let nextURL = null;
 
-	$: data.application_steps.map((step, index) => {
+	$: $application_steps.map((step, index) => {
 		if ($page.url.pathname === step.path) {
 			pageTitle = step.text;
-			previousURL = index === 1 ? '/' : data.application_steps[index - 1]?.path;
-			nextURL =
-				data.application_steps[index + 1].status > 0 && data.application_steps[index + 1]?.path;
+			previousURL = index === 1 ? '/' : $application_steps[index - 1]?.path;
+			nextURL = $application_steps[index + 1].status > 0 && $application_steps[index + 1]?.path;
 			return;
 		}
 	});
