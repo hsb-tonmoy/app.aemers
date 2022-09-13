@@ -19,22 +19,24 @@
 	<div class="sidebarpadding py-3">
 		<Logo />
 	</div>
-	<div class="bg-primary flex flex-col items-center text-white sidebarpadding py-10">
-		<CircularProgress
-			rotate={-90}
-			size={150}
-			progressWidth="2"
-			width="10"
-			value={data.application_status.progress_percentage}
-		>
-			<div class="flex flex-col justify-center">
-				<span class="font-bold text-xl text-center"
-					>{data.application_status.progress_percentage}%</span
-				>
-				<span class="font-normal text-xs">Completed</span>
-			</div>
-		</CircularProgress>
-		<h6 class="self-start font-bold text-xl mt-4">File Completion</h6>
+	<div class="bg-primary flex flex-col text-white sidebarpadding py-10">
+		<div class="self-center">
+			<CircularProgress
+				rotate={-90}
+				size={150}
+				progressWidth="2"
+				width="10"
+				value={data.application_status.progress_percentage}
+			>
+				<div class="flex flex-col justify-center">
+					<span class="font-bold text-xl text-center"
+						>{data.application_status.progress_percentage}%</span
+					>
+					<span class="font-normal text-xs">Completed</span>
+				</div>
+			</CircularProgress>
+		</div>
+		<h6 class="font-bold text-xl mt-4">File Completion</h6>
 		<p class="text-xs">Follow the steps to complete your File for US Admission.</p>
 	</div>
 	<div class="steps sidebarpadding">

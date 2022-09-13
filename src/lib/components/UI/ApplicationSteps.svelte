@@ -204,7 +204,8 @@
 					>
 						{#if typeof step.text != 'undefined'}
 							<div
-								class:text-primary={i <= $progress}
+								class:text-primary={i === $progress}
+								class:font-bold={i === $progress}
 								on:click={() => {
 									onClick(i);
 								}}
