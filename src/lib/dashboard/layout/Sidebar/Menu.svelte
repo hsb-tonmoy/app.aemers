@@ -11,7 +11,7 @@
 		{
 			name: 'Application',
 			icon: Application,
-			link: '/application'
+			link: '/welcome_application'
 		},
 		{
 			name: 'Mock Interview',

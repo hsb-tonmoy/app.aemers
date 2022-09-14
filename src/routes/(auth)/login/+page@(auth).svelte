@@ -140,12 +140,14 @@
 						<Error classes="self-start" message={$errors.password} />
 					{/if}
 
-					<Button type="submit" disabled={!$isValid || $login.isLoading} classes="mt-4 py-4 w-full">
-						Login
-						{#if $login.isLoading}
-							<Spinner class="ml-2" color="white" size="4" />
-						{/if}
-					</Button>
+					<Button
+						type="submit"
+						loading={$login.isLoading}
+						disabled={!$isValid || $login.isLoading}
+						classes="mt-4 py-4 w-full"
+					>
+						Login</Button
+					>
 
 					<div class="flex flex-col items-center self-center mt-8 mb-4">
 						<span class="text-xs md:text-base"

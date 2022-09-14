@@ -13,7 +13,7 @@
 	$: $application_steps.map((step, index) => {
 		if ($page.url.pathname === step.path) {
 			pageTitle = step.text;
-			previousURL = index === 1 ? '/' : $application_steps[index - 1]?.path;
+			previousURL = $application_steps[index - 1]?.path;
 			nextURL = $application_steps[index + 1].status > 0 && $application_steps[index + 1]?.path;
 			return;
 		}
@@ -23,7 +23,9 @@
 <header class="flex justify-between items-center border-b border-borderColor pb-4 mb-6">
 	<div class="flex items-center gap-x-6">
 		<div class="border border-borderColor rounded-2xl px-5 py-2 bg-transparent">
-			<span class="block w-6 h-6 text-primary"><LeftArrow /></span>
+			<button on:click={() => goto('/welcome_application')} class="block w-6 h-6 text-primary"
+				><LeftArrow /></button
+			>
 		</div>
 		<h1 class="text-secondary font-bold text-3xl">{pageTitle}</h1>
 	</div>

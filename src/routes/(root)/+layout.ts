@@ -25,11 +25,6 @@ export async function load({ parent }) {
 
 	const application_steps_data = [
 		{
-			text: 'Create Profile',
-			path: '/application',
-			status: 2
-		},
-		{
 			text: 'Open a File',
 			path: '/application/file_opening',
 

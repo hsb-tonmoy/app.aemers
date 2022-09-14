@@ -9,7 +9,7 @@
 
 <button
 	on:click
-	{disabled}
+	disabled={loading || disabled}
 	{type}
 	class={`inline-flex items-center justify-center bg-primary disabled:bg-borderColor text-white font-bold text-base rounded-xl ${classes}`}
 	>{text}
