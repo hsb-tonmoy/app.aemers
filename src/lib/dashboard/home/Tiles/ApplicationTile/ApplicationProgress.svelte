@@ -1,4 +1,5 @@
 <script>
+	import { goto } from '$app/navigation';
 	import { CheckedCircle, Circle } from '$lib/components/Icons';
 	import { application_steps } from '$lib/data/stores';
 </script>
@@ -23,6 +24,7 @@
 		</li>
 	{/each}
 	<button
+		on:click={() => goto('/welcome_application')}
 		type="button"
 		class="text-primary bg-white hover:text-white hover:bg-primaryDarker rounded-xl px-1 py-2 md:py-3 font-bold text-sm md:text-base mt-3 transition-all ease-in-out duration-150"
 		>Proceed</button

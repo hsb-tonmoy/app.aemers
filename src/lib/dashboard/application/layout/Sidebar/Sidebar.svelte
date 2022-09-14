@@ -3,7 +3,7 @@
 	import Steps from '$lib/components/UI/ApplicationSteps.svelte';
 	import CircularProgress from '$lib/components/UI/CircularProgress.svelte';
 	import Logo from '$lib/dashboard/layout/Sidebar/Logo.svelte';
-	import { application_status, application_steps } from '$lib/data/stores';
+	import { application_percentage, application_steps } from '$lib/data/stores';
 
 	export let currentIndex = 1;
 
@@ -26,12 +26,10 @@
 				size={150}
 				progressWidth="2"
 				width="10"
-				value={$application_status.progress_percentage}
+				value={$application_percentage}
 			>
 				<div class="flex flex-col justify-center">
-					<span class="font-bold text-xl text-center"
-						>{$application_status.progress_percentage}%</span
-					>
+					<span class="font-bold text-xl text-center">{$application_percentage}%</span>
 					<span class="font-normal text-xs">Completed</span>
 				</div>
 			</CircularProgress>

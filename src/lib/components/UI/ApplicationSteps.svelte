@@ -166,9 +166,8 @@
 						class="step 
                 {i <= $progress ? `text-primary` : `text-white`}
                 "
-						class:step__completed={iconBorder && i <= $progress}
-						class:step-border={iconBorder && !(i <= $progress)}
-						class:hover-highlight={clickable}
+						class:step__completed={step.status === 2}
+						class:step-border={step.status === 2}
 						class:shadow={i == current}
 						on:click={() => {
 							onClick(i);
