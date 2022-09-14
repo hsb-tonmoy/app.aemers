@@ -1,5 +1,5 @@
 import * as api from '$lib/api';
-import { application_status, application_steps } from '$lib/data/stores';
+
 import { error, redirect } from '@sveltejs/kit';
 
 export async function load({ parent }) {
@@ -20,8 +20,6 @@ export async function load({ parent }) {
 	if (!application_status_fetch.ok) {
 		throw error(application_status_fetch.status, 'Error fetching application status');
 	}
-
-	application_status.set(application_status_data);
 
 	const application_steps_data = [
 		{
@@ -92,7 +90,8 @@ export async function load({ parent }) {
 		}
 	];
 
-	application_steps.set(application_steps_data);
-
-	return {};
+	return {
+		application_status: application_status_data,
+		application_steps: application_steps_data
+	};
 }

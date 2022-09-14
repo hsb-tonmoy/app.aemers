@@ -3,6 +3,12 @@
 	import ApplicationSidebar from '$lib/dashboard/application/layout/Sidebar/Sidebar.svelte';
 	import { sidebarState } from '$lib/dashboard/home/stores';
 	import Sidebar from '$lib/dashboard/layout/Sidebar/Sidebar.svelte';
+	import { application_status, application_steps } from '$lib/data/stores';
+
+	export let data;
+
+	$: application_status.set(data.application_status);
+	$: application_steps.set(data.application_steps);
 </script>
 
 <svelte:head><title>app.aemers.com - US Scholarship Mentoring</title></svelte:head>
