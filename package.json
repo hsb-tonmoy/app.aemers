@@ -17,7 +17,7 @@
 		"@sveltejs/kit": "next",
 		"@sveltestack/svelte-query": "^1.6.0",
 		"@zerodevx/svelte-toast": "^0.7.2",
-		"autoprefixer": "^10.4.8",
+		"autoprefixer": "^10.4.11",
 		"eslint": "^7.32.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-svelte3": "^3.4.1",
@@ -39,7 +39,7 @@
 	"dependencies": {
 		"@felte/validator-yup": "^1.0.9",
 		"@tailwindcss/forms": "^0.4.1",
-		"broadcast-channel": "^4.14.0",
+		"broadcast-channel": "^4.17.0",
 		"cookie": "^0.4.2",
 		"country-data-list": "^1.2.2",
 		"felte": "^1.2.3",
