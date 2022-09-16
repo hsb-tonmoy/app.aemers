@@ -9,16 +9,16 @@ export async function load({ parent }) {
 		throw redirect(302, '/login');
 	}
 
-	if (user && !user.isEvaluated) {
-		throw redirect(302, '/evaluation');
-	}
-
 	const application_status_fetch = await api.get(`application_status/${user.pk}/`, access);
 
 	const application_status_data = await application_status_fetch.json();
 
 	if (!application_status_fetch.ok) {
 		throw error(application_status_fetch.status, 'Error fetching application status');
+	}
+
+	if (!application_status_data.isEvaluated) {
+		throw redirect(302, '/evaluation');
 	}
 
 	const application_steps_data = [

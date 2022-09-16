@@ -1,11 +1,16 @@
 <script>
-	import { goto } from '$app/navigation';
+	import { goto, invalidateAll } from '$app/navigation';
 
 	import { Button } from '$lib/components/Form';
+
+	async function handleSubmit() {
+		await invalidateAll();
+		goto('/');
+	}
 </script>
 
 <svelte:head>
-	<title>ap.aemers - Evaluation Complete</title>
+	<title>app.aemers - Evaluation Complete</title>
 </svelte:head>
 
 <main class="flex flex-col justify-center items-center h-screen">
@@ -15,7 +20,7 @@
 		Congrats! You have completed your profile. Let’s explore the universe of Aemers.
 	</p>
 	<Button
-		on:click={() => goto('/logout')}
+		on:click={handleSubmit}
 		classes="text-lg py-4 px-12"
 		type="button"
 		text="Go to my Dashboard"
