@@ -1,4 +1,4 @@
-import * as api from '$lib/api.js';
+import * as api from '$lib/api';
 import { respond } from './_respond';
 
 export async function POST({ request }) {

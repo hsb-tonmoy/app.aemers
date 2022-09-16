@@ -1,6 +1,6 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
-async function send({ server_fetch, method, path, data, token, file = false }) {
+async function send({ method, path, data, token, file = false }) {
 	const opts = {
 		method,
 		headers: {}
@@ -18,11 +18,8 @@ async function send({ server_fetch, method, path, data, token, file = false }) {
 	if (token) {
 		opts.headers['Authorization'] = `JWT ${token}`;
 	}
-	if (server_fetch) {
-		return server_fetch(`${API_URL}${path}`, opts);
-	} else {
-		return fetch(`${API_URL}/${path}`, opts);
-	}
+
+	return fetch(`${API_URL}/${path}`, opts);
 }
 
 export function get(path, token) {

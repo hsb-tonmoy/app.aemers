@@ -1,24 +1,18 @@
-import { redirect } from '@sveltejs/kit';
-
-import * as api from '$lib/api';
-
-export async function load({ cookies, locals }) {
-	// const res = await api.post('auth/logout/', locals.access);
-
-	cookies.set('user', '', {
+export async function load({ cookies }) {
+	await cookies.set('user', '', {
 		httpOnly: true,
 		path: '/',
 		maxAge: 0
 	});
-	cookies.set('access', '', {
+	await cookies.set('access', '', {
 		httpOnly: true,
 		path: '/',
 		maxAge: 0
 	});
-	cookies.set('refresh', '', {
+	await cookies.set('refresh', '', {
 		httpOnly: true,
 		path: '/',
 		maxAge: 0
 	});
-	throw redirect(302, '/login');
+	return { ok: true };
 }
