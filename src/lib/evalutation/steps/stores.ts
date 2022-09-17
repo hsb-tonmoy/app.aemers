@@ -10,7 +10,6 @@ export const evaluationData = writable({
 		major: '',
 		english_proficiency: '',
 		english_proficiency_score: '',
-		message: '',
-		isEvaluated: true
+		message: ''
 	}
 });

@@ -12,10 +12,6 @@
 	export let steps;
 	export let currentIndex: number;
 
-	// function handleNext() {
-	// 	currentIndex = Math.min(steps.length - 1, currentIndex + 1);
-	// }
-
 	const submitData = useMutation(
 		(formData) => {
 			return fetch('evaluation/submit', {

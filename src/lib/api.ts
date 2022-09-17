@@ -1,6 +1,6 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
-async function send({ method, path, data, token, file = false }) {
+async function send({ method, path, data, token, file = null }) {
 	const opts = {
 		method,
 		headers: {}

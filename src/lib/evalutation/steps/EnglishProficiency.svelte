@@ -26,7 +26,7 @@
 	const schema = yup.object().shape({
 		english_proficiency: yup.string().required('Please choose an option'),
 		english_proficiency_score: yup.string().when('english_proficiency', {
-			is: (value) => value !== 'plan-to' && 'no-test' && value !== 'moi',
+			is: (value) => value !== 'plan-to' && value !== 'no-test' && value !== 'moi',
 			then: yup.string().required('Please enter your score')
 		})
 	});

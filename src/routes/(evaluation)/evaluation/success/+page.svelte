@@ -4,8 +4,7 @@
 	import { Button } from '$lib/components/Form';
 
 	async function handleSubmit() {
-		await invalidateAll();
-		goto('/');
+		window.location.href = '/';
 	}
 </script>
 
