@@ -3,6 +3,7 @@ import { derived, writable } from 'svelte/store';
 export const application_status = writable();
 export const application_percentage = derived(application_status, ($application_status) => {
 	const items = [
+		$application_status.applicated_started,
 		$application_status.file_opening,
 		$application_status.orientation,
 		$application_status.pre_application_form,
@@ -15,7 +16,7 @@ export const application_percentage = derived(application_status, ($application_
 		$application_status.pre_departure_session,
 		$application_status.welcome_to_usa
 	];
-	const done = items.filter((item) => item === 2).length;
+	const done = items.filter((item) => item === 2 || item === true).length;
 	const percentage = Math.round(((done / items.length) * 100) / 10) * 10;
 	return percentage;
 });
