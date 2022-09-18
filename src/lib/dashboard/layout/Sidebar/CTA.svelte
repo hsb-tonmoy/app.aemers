@@ -11,15 +11,6 @@
 </div>
 
 <style>
-	.mamoon {
-		background-image: url('/images/mamoon_rashid.png');
-		background-size: 100%;
-		background-repeat: no-repeat;
-		width: 100%;
-		padding-top: 65%;
-		height: 0;
-	}
-
 	.mamoon_pic {
 		background-image: url('/images/mamoon_rashid.png');
 	}
