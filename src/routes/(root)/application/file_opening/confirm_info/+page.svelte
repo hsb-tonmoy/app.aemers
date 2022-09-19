@@ -54,8 +54,11 @@
 		},
 		extend: validator({ schema }),
 		onSubmit: (values, context) => {
-			delete values.email;
-			$submitData.mutate(values);
+			if ($isDirty) {
+				delete values.email;
+				$submitData.mutate(values);
+			}
+			goto('/application/file_opening/make_payment');
 		}
 	});
 </script>
@@ -137,11 +140,20 @@
 				{/if}
 			</div>
 		</fieldset>
-		<Button
-			disabled={!$isValid}
-			loading={$submitData.isLoading}
-			text="Confirm"
-			classes="self-center md:self-end mt-8 md:mt-4 px-8 py-3"
-		/>
+		<div class="flex justify-between items-center">
+			<Button
+				on:click={() => goto('/application/file_opening/open_a_file')}
+				type="button"
+				text="Go Back"
+				classes="px-4 py-3 md:px-12 md:py-4 text-sm md:text-base font-bold mt-8 self-start bg-lightText text-white"
+			/>
+			<Button
+				type="submit"
+				disabled={!$isValid}
+				loading={$submitData.isLoading}
+				text="Confirm"
+				classes="px-4 py-3 md:px-12 md:py-4 text-sm md:text-base font-bold mt-8 self-start hover:bg-primaryDarker"
+			/>
+		</div>
 	</form>
 </div>

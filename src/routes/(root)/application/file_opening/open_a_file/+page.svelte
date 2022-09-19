@@ -33,10 +33,18 @@
 			</ul>
 		</div>
 	</div>
-	<Button
-		on:click={() => goto('/application/file_opening/confirm_info')}
-		type="button"
-		text="Make Payment"
-		classes="px-12 py-4 font-bold mt-8 self-start hover:bg-primaryDarker"
-	/>
+	<div class="flex justify-between items-center">
+		<Button
+			on:click={() => goto('/application/file_opening')}
+			type="button"
+			text="Go Back"
+			classes="px-4 py-3 md:px-12 md:py-4 text-sm md:text-base font-bold mt-8 self-start bg-lightText text-white"
+		/>
+		<Button
+			on:click={() => goto('/application/file_opening/confirm_info')}
+			type="button"
+			text="Make Payment"
+			classes="px-4 py-3 md:px-12 md:py-4 text-sm md:text-base font-bold mt-8 self-start hover:bg-primaryDarker"
+		/>
+	</div>
 </div>

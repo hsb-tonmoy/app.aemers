@@ -11,7 +11,7 @@
 	let nextURL = null;
 
 	$: $application_steps.map((step, index) => {
-		if ($page.url.pathname === step.path) {
+		if ($page.url.pathname.includes(step.path)) {
 			pageTitle = step.text;
 			previousURL = $application_steps[index - 1]?.path;
 			nextURL = step.status === 2 && $application_steps[index + 1]?.path;
