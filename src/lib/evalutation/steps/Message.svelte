@@ -14,7 +14,7 @@
 
 	const submitData = useMutation(
 		(formData) => {
-			return fetch('evaluation/submit', {
+			return fetch('/profile/submit', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'

@@ -26,6 +26,7 @@ export { default as Notification } from './Notification.svelte';
 export { default as OpenBook } from './OpenBook.svelte';
 export { default as OpenEnvelope } from './OpenEnvelope.svelte';
 export { default as Pound } from './Pound.svelte';
+export { default as Priority } from './Priority.svelte';
 export { default as RedCircularCross } from './RedCircularCross.svelte';
 export { default as RoundArrows } from './RoundArrows.svelte';
 export { default as Sciences } from './Sciences.svelte';

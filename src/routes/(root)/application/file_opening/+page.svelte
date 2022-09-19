@@ -1,4 +1,5 @@
 <script>
+	import { goto } from '$app/navigation';
 	import Button from '$lib/components/Form/Button.svelte';
 	const items = ['Click ‘Open a File', 'Confirm Personal Info', 'Make Payment', 'Done!'];
 </script>
@@ -14,7 +15,12 @@
 				All your data is stored under the file. You have to pay 15000 BDT to open a file. Trust me,
 				it’s worth it!
 			</p>
-			<Button type="button" text="Open a File" classes="self-start px-8 py-3" />
+			<Button
+				on:click={() => goto('/application/file_opening/open_a_file')}
+				type="button"
+				text="Open a File"
+				classes="self-start px-8 py-3"
+			/>
 		</div>
 	</div>
 	<div class="flex flex-col w-full md:w-2/4">
