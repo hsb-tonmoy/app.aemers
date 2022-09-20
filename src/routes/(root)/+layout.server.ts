@@ -29,12 +29,6 @@ export async function load({ parent }) {
 			status: application_status_data.file_opening
 		},
 		{
-			text: 'Orientation',
-			path: '/application/orientation',
-
-			status: application_status_data.orientation
-		},
-		{
 			text: 'Pre-Application Form',
 			path: '/application/pre_application_form',
 
