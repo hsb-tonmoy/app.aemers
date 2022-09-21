@@ -1,7 +1,6 @@
 <script>
-	import { goto, invalidateAll } from '$app/navigation';
-
 	import { Button } from '$lib/components/Form';
+	import Success from '$lib/components/UI/Success.svelte';
 
 	async function handleSubmit() {
 		window.location.href = '/';
@@ -13,7 +12,7 @@
 </svelte:head>
 
 <main class="flex flex-col justify-center items-center h-screen">
-	<iframe title="success" width="800px" src="https://embed.lottiefiles.com/animation/79952" />
+	<Success width="800px" />
 	<h6 class="font-bold text-center text-secondary text-5xl">Profile Completed!</h6>
 	<p class="text-lighterText text-lg font-normal text-center mt-4 mb-8">
 		Congrats! You have completed your profile. Let’s explore the universe of Aemers.

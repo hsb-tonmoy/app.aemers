@@ -1,8 +1,9 @@
 <script>
 	import { goto } from '$app/navigation';
-
 	import { page } from '$app/stores';
 	import { application_steps } from '$lib/data/stores';
+	import { Tooltip } from 'flowbite-svelte';
+	import { showNextToolTip } from './stores';
 
 	import { LeftArrow } from '$lib/components/Icons';
 
@@ -33,16 +34,28 @@
 		</div>
 		<nav class="flex items-center gap-x-3">
 			<button
+				id="previousButton"
 				disabled={!previousURL}
 				on:click={() => goto(previousURL)}
 				class="border-2 border-lighterText disabled:border-lighterText/60 text-lighterText disabled:text-lighterText/60 text-sm md:text-base font-bold hover:text-lightText px-4 py-2 rounded-2xl"
 				>Previous</button
 			>
 			<button
+				id="nextButton"
 				disabled={!nextURL}
 				on:click={() => goto(nextURL)}
 				class="border-2 border-primary disabled:border-primary/60 text-white bg-primary hover:bg-primaryDarker disabled:bg-primary/60 text-sm md:text-base font-bold px-4 py-2 rounded-2xl"
 				>Next</button
+			>
+			<Tooltip
+				bind:open={$showNextToolTip}
+				style="custom"
+				defaultClass=""
+				color="nextButtonToolTip bg-white text-primary text-center w-52 border-2 border-primary"
+				offset="20"
+				placement="bottom"
+				triggeredBy="#nextButton"
+				trigger="click"><span class="font-bold">Click here to go next!</span></Tooltip
 			>
 		</nav>
 	</header>

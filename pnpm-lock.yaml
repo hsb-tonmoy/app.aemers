@@ -8,7 +8,7 @@ specifiers:
   '@sveltestack/svelte-query': ^1.6.0
   '@tailwindcss/forms': ^0.4.1
   '@zerodevx/svelte-toast': ^0.7.2
-  autoprefixer: ^10.4.11
+  autoprefixer: ^10.4.12
   broadcast-channel: ^4.17.0
   cookie: ^0.4.2
   country-data-list: ^1.2.2
@@ -59,10 +59,10 @@ dependencies:
 devDependencies:
   '@sveltejs/adapter-auto': 1.0.0-next.76
   '@sveltejs/adapter-netlify': 1.0.0-next.78
-  '@sveltejs/kit': 1.0.0-next.489_svelte@3.50.1+vite@3.1.0
+  '@sveltejs/kit': 1.0.0-next.491_svelte@3.50.1+vite@3.1.0
   '@sveltestack/svelte-query': 1.6.0_broadcast-channel@4.17.0
   '@zerodevx/svelte-toast': 0.7.2
-  autoprefixer: 10.4.11_postcss@8.4.16
+  autoprefixer: 10.4.12_postcss@8.4.16
   eslint: 7.32.0
   eslint-config-prettier: 8.5.0_eslint@7.32.0
   eslint-plugin-svelte3: 3.4.1_h6mj7kqrx5bjoqhpkr3vcyocra
@@ -289,8 +289,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.489_svelte@3.50.1+vite@3.1.0:
-    resolution: {integrity: sha512-7oag1fimI9f8e8mNy2wQRgMCXSov5dASqeTdXffgnptWBpuEjr8myffJ9djoRVQXoFjCja39lCHBo239iY8+KA==}
+  /@sveltejs/kit/1.0.0-next.491_svelte@3.50.1+vite@3.1.0:
+    resolution: {integrity: sha512-KO/t0OPxBWF5ZXp8RtIOVkQczo8NPHD6xqRVpSe/gZy9MmCmW/vhK2ifsENjayutyUNi7GzvrBgPyD91YHtm5g==}
     engines: {node: '>=16.14'}
     hasBin: true
     requiresBuild: true
@@ -529,15 +529,15 @@ packages:
     resolution: {integrity: sha512-tLRNUXati5MFePdAk8dw7Qt7DpxPB60ofAgn8WRhW6a2rcimZnYBP9oxHiv0OHy+Wz7kPMG+t4LGdt31+4EmGg==}
     dev: true
 
-  /autoprefixer/10.4.11_postcss@8.4.16:
-    resolution: {integrity: sha512-5lHp6DgRodxlBLSkzHOTcufWFflH1ewfy2hvFQyjrblBFlP/0Yh4O/Wrg4ow8WRlN3AAUFFLAQwX8hTptzqVHg==}
+  /autoprefixer/10.4.12_postcss@8.4.16:
+    resolution: {integrity: sha512-WrCGV9/b97Pa+jtwf5UGaRjgQIg7OK3D06GnoYoZNcG1Xb8Gt3EfuKjlhh9i/VtT16g6PYjZ69jdJ2g8FxSC4Q==}
     engines: {node: ^10 || ^12 || >=14}
     hasBin: true
     peerDependencies:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.21.4
-      caniuse-lite: 1.0.30001407
+      caniuse-lite: 1.0.30001409
       fraction.js: 4.2.0
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -584,8 +584,8 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001407
-      electron-to-chromium: 1.4.255
+      caniuse-lite: 1.0.30001409
+      electron-to-chromium: 1.4.256
       node-releases: 2.0.6
       update-browserslist-db: 1.0.9_browserslist@4.21.4
     dev: true
@@ -603,8 +603,8 @@ packages:
     resolution: {integrity: sha512-QOSvevhslijgYwRx6Rv7zKdMF8lbRmx+uQGx2+vDc+KI/eBnsy9kit5aj23AgGu3pa4t9AgwbnXWqS+iOY+2aA==}
     engines: {node: '>= 6'}
 
-  /caniuse-lite/1.0.30001407:
-    resolution: {integrity: sha512-4ydV+t4P7X3zH83fQWNDX/mQEzYomossfpViCOx9zHBSMV+rIe3LFqglHHtVyvNl1FhTNxPxs3jei82iqOW04w==}
+  /caniuse-lite/1.0.30001409:
+    resolution: {integrity: sha512-V0mnJ5dwarmhYv8/MzhJ//aW68UpvnQBXv8lJ2QUsvn2pHcmAuNtu8hQEDz37XnA1iE+lRR9CIfGWWpgJ5QedQ==}
     dev: true
 
   /chalk/2.4.2:
@@ -673,7 +673,7 @@ packages:
     dev: true
 
   /concat-map/0.0.1:
-    resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
+    resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
 
   /console-control-strings/1.1.0:
     resolution: {integrity: sha512-ty/fTekppD2fIwRvnZAVdeOiGd1c7YXEixbgJTNzqcxJWKQnjJ/V1bNEEE6hygpM3WjwHFUVK6HTjWSzV4a8sQ==}
@@ -798,8 +798,8 @@ packages:
     resolution: {integrity: sha512-l32Xp/TLgWb8ReqbVJAFIvXmY7go4nTxxlWiAFyhoQw9RKEOHBZNnyGvJWqDVSPmq3Y9HlM4npqF/T6VMOXhww==}
     dev: true
 
-  /electron-to-chromium/1.4.255:
-    resolution: {integrity: sha512-H+mFNKow6gi2P5Gi2d1Fvd3TUEJlB9CF7zYaIV9T83BE3wP1xZ0mRPbNTm0KUjyd1QiVy7iKXuIcjlDtBQMiAQ==}
+  /electron-to-chromium/1.4.256:
+    resolution: {integrity: sha512-x+JnqyluoJv8I0U9gVe+Sk2st8vF0CzMt78SXxuoWCooLLY2k5VerIBdpvG7ql6GKI4dzNnPjmqgDJ76EdaAKw==}
     dev: true
 
   /emoji-regex/8.0.0:
