@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let message: string;
-	export let classes: string;
+	export let classes: string = '';
 </script>
 
 {#if message}
@@ -8,8 +8,3 @@
 		{message}
 	</span>
 {/if}
-<!-- <style>
-	span::first-letter {
-		text-transform: capitalize;
-	}
-</style> -->
