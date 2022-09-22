@@ -1,5 +1,6 @@
 <script>
-	import { Button, Error, Input, Label } from '$lib/components/Form';
+	import { Button, Error, IconInput, Input, Label } from '$lib/components/Form';
+	import { CalendarDays } from '$lib/components/Icons';
 	import { validator } from '@felte/validator-yup';
 	import { createForm } from 'felte';
 	import * as yup from 'yup';
@@ -188,13 +189,16 @@
 			</div>
 			<div class="">
 				<Label label_for="date_of_birth" label="Date of Birth" />
-				<Input
+				<IconInput
+					iconClass="block w-7 h-7 text-primary mr-3"
 					type="date"
 					id="date_of_birth"
 					name="date_of_birth"
 					placeholder="Date of Birth"
 					error={$errors.date_of_birth}
-				/>
+					classes="w-full"
+					><CalendarDays />
+				</IconInput>
 
 				<Error message={$errors.date_of_birth} />
 			</div>

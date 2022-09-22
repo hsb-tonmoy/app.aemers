@@ -4,6 +4,7 @@ export { default as AccountFilled } from './AccountFilled.svelte';
 export { default as AemersCircular } from './AemersCircular.svelte';
 export { default as Application } from './Application.svelte';
 export { default as Business } from './Business.svelte';
+export { default as CalendarDays } from './CalendarDays.svelte';
 export { default as CheckedCircle } from './CheckedCircle.svelte';
 export { default as CheckMark } from './CheckMark.svelte';
 export { default as Circle } from './Circle.svelte';
