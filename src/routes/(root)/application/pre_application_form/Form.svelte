@@ -1,5 +1,5 @@
 <script>
-	import { Button, Error, IconInput, Input, Label } from '$lib/components/Form';
+	import { Button, Error, IconInput, Input, Label, Select } from '$lib/components/Form';
 	import { CalendarDays } from '$lib/components/Icons';
 	import { validator } from '@felte/validator-yup';
 	import { createForm } from 'felte';
@@ -201,6 +201,15 @@
 				</IconInput>
 
 				<Error message={$errors.date_of_birth} />
+			</div>
+			<div class="">
+				<Label label_for="gender" label="Gender" />
+				<Select id="gender" name="gender" classes="w-full">
+					<option value="male">Male</option>
+					<option value="female">Female</option>
+					<option value="other">Other</option>
+					<option value="prefer_not">Prefer Not to Say</option>
+				</Select>
 			</div>
 		</div>
 	</section>
