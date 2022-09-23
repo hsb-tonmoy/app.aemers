@@ -16,7 +16,7 @@
 <div class="flex w-full h-full bg-bgColor">
 	<aside
 		class:hidden={$sidebarState}
-		class="xl:block fixed left-0 top-0 w-2/4 xl:w-[20%] 2xl:w-[15%] h-screen z-[5000] overflow-y-auto"
+		class="xl:block fixed xl:sticky left-0 top-0 w-2/4 xl:w-[20%] 2xl:w-[15%] h-screen z-[5000] overflow-y-auto"
 	>
 		{#if $page.url.pathname.startsWith('/application')}
 			<ApplicationSidebar />
@@ -24,7 +24,7 @@
 			<Sidebar />
 		{/if}
 	</aside>
-	<main class="flex-1 px-6 py-10 md:px-10 md:py-16 xl:ml-[20%] 2xl:ml-[15%]">
+	<main class="flex-1 px-6 py-10 md:px-10 md:py-16">
 		<slot />
 	</main>
 </div>
