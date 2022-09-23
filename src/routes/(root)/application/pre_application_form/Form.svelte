@@ -4,6 +4,7 @@
 	import { countries } from '$lib/data/countries';
 	import { validator } from '@felte/validator-yup';
 	import { createForm } from 'felte';
+	import { fly } from 'svelte/transition';
 	import * as yup from 'yup';
 	export let profile_data;
 	export let pre_application_form;
@@ -388,6 +389,334 @@
 				/>
 
 				<Error message={$errors.zip_code} />
+			</div>
+		</div>
+	</section>
+	<section class="form-section">
+		<h2>Permanent Address</h2>
+		<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+			<div class="md:col-span-4">
+				<Label label_for="perma_address_line_1" label="Address Line 1" />
+				<Input
+					id="perma_address_line_1"
+					name="perma_address_line_1"
+					type="text"
+					error={$errors.perma_address_line_1}
+					classes="w-full"
+				/>
+
+				<Error message={$errors.perma_address_line_1} />
+			</div>
+			<div class="md:col-span-4">
+				<Label label_for="perma_address_line_2" label="Address Line 2" />
+				<Input
+					id="perma_address_line_2"
+					name="perma_address_line_2"
+					type="text"
+					error={$errors.perma_address_line_2}
+					classes="w-full"
+				/>
+
+				<Error message={$errors.perma_address_line_2} />
+			</div>
+			<div class="">
+				<Label label_for="perma_city" label="City" />
+				<Input
+					id="perma_city"
+					name="perma_city"
+					type="text"
+					error={$errors.perma_city}
+					classes="w-full"
+				/>
+
+				<Error message={$errors.perma_city} />
+			</div>
+
+			<div class="">
+				<Label label_for="perma_state" label="State" />
+				<Input
+					id="perma_state"
+					name="perma_state"
+					type="text"
+					error={$errors.perma_state}
+					classes="w-full"
+				/>
+
+				<Error message={$errors.perma_state} />
+			</div>
+			<div class="">
+				<Label label_for="perma_country" label="Country" />
+				<Select
+					id="perma_country"
+					name="perma_country"
+					error={$errors.perma_country}
+					classes="w-full"
+				>
+					{#each countries as country}
+						<option value={country.name}>{country.name}</option>
+					{/each}
+				</Select>
+
+				<Error message={$errors.perma_country} />
+			</div>
+			<div class="">
+				<Label label_for="perma_zip_code" label="Zip Code" />
+				<Input
+					id="perma_zip_code"
+					name="perma_zip_code"
+					type="text"
+					error={$errors.perma_zip_code}
+					classes="w-full"
+				/>
+
+				<Error message={$errors.perma_zip_code} />
+			</div>
+		</div>
+	</section>
+	<section class="form-section">
+		<h2>Passport Information</h2>
+		<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+			<div class="">
+				<Label label_for="passport_number" label="Passpot No." />
+				<Input
+					id="passport_number"
+					name="passport_number"
+					type="text"
+					error={$errors.passport_number}
+					classes="w-full"
+				/>
+
+				<Error message={$errors.passport_number} />
+			</div>
+			<div class="">
+				<Label label_for="passport_issue_date" label="Issue Date" />
+				<IconInput
+					iconClass="block w-7 h-7 text-primary mr-3"
+					type="date"
+					id="passport_issue_date"
+					name="passport_issue_date"
+					error={$errors.passport_issue_date}
+					classes="w-full"
+					><CalendarDays />
+				</IconInput>
+
+				<Error message={$errors.passport_issue_date} />
+			</div>
+			<div class="">
+				<Label label_for="passport_expiry_date" label="Expiry Date" />
+				<IconInput
+					iconClass="block w-7 h-7 text-primary mr-3"
+					type="date"
+					id="passport_expiry_date"
+					name="passport_expiry_date"
+					error={$errors.passport_expiry_date}
+					classes="w-full"
+					><CalendarDays />
+				</IconInput>
+
+				<Error message={$errors.passport_expiry_date} />
+			</div>
+
+			<div class="">
+				<Label label_for="passport_issue_country" label="Passport Issue Country" />
+				<Select
+					id="passport_issue_country"
+					name="passport_issue_country"
+					error={$errors.passport_issue_country}
+					classes="w-full"
+				>
+					{#each countries as country}
+						<option value={country.name}>{country.name}</option>
+					{/each}
+				</Select>
+
+				<Error message={$errors.passport_issue_country} />
+			</div>
+			<div class="">
+				<Label label_for="city_of_birth" label="City of Birth" />
+				<Input
+					id="city_of_birth"
+					name="city_of_birth"
+					type="text"
+					error={$errors.city_of_birth}
+					classes="w-full"
+				/>
+
+				<Error message={$errors.city_of_birth} />
+			</div>
+			<div class="">
+				<Label label_for="country_of_birth" label="Country of Birth" />
+				<Select
+					id="country_of_birth"
+					name="country_of_birth"
+					error={$errors.country_of_birth}
+					classes="w-full"
+				>
+					{#each countries as country}
+						<option value={country.name}>{country.name}</option>
+					{/each}
+				</Select>
+
+				<Error message={$errors.country_of_birth} />
+			</div>
+		</div>
+	</section>
+	<section class="form-section">
+		<h2>Background Information</h2>
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+			<div class="">
+				<Label label_for="nationality" label="Nationality" />
+				<Input
+					id="nationality"
+					name="nationality"
+					type="text"
+					error={$errors.nationality}
+					classes="w-full"
+				/>
+
+				<Error message={$errors.nationality} />
+			</div>
+
+			<div class="">
+				<Label label_for="country_of_citizenship" label="Country of Citizenship" />
+				<Select
+					id="country_of_citizenship"
+					name="country_of_citizenship"
+					error={$errors.country_of_citizenship}
+					classes="w-full"
+				>
+					{#each countries as country}
+						<option value={country.name}>{country.name}</option>
+					{/each}
+				</Select>
+
+				<Error message={$errors.country_of_citizenship} />
+			</div>
+			<div class="col-span-2">
+				<Label
+					label_for="are_you_citizen_of_more_than_one_country"
+					label="Are you a citizen of more than one country?"
+				/>
+				<Select
+					id="are_you_citizen_of_more_than_one_country"
+					name="are_you_citizen_of_more_than_one_country"
+					error={$errors.are_you_citizen_of_more_than_one_country}
+					classes="w-full"
+				>
+					<option value={false}>No</option>
+					<option value={true}>Yes</option>
+				</Select>
+
+				<Error message={$errors.are_you_citizen_of_more_than_one_country} />
+			</div>
+			{#if $data.are_you_citizen_of_more_than_one_country == 'true'}
+				<div
+					in:fly={{ y: -50, duration: 500 }}
+					out:fly={{ y: 50, duration: 300 }}
+					class="col-span-2"
+				>
+					<Label
+						label_for="names_of_countries_of_citizenship"
+						label="Names of Countries of Citizenship"
+					/>
+					<Input
+						type="text"
+						id="names_of_countries_of_citizenship"
+						name="names_of_countries_of_citizenship"
+						placeholder="Separate by commas"
+						error={$errors.names_of_countries_of_citizenship}
+					/>
+					<Error message={$errors.names_of_countries_of_citizenship} />
+				</div>
+			{/if}
+			<div class="col-span-2">
+				<Label
+					label_for="are_you_living_in_other_country"
+					label="Are you living and studying in any other country?"
+				/>
+				<Select
+					id="are_you_living_in_other_country"
+					name="are_you_living_in_other_country"
+					error={$errors.are_you_living_in_other_country}
+					classes="w-full"
+				>
+					<option value={false}>No</option>
+					<option value={true}>Yes</option>
+				</Select>
+
+				<Error message={$errors.are_you_living_in_other_country} />
+			</div>
+			{#if $data.are_you_living_in_other_country == 'true'}
+				<div
+					in:fly={{ y: -50, duration: 500 }}
+					out:fly={{ y: 50, duration: 300 }}
+					class="col-span-2"
+				>
+					<Label
+						label_for="names_of_countries_living_in"
+						label="Name of the country you are living in"
+					/>
+					<Select
+						id="names_of_countries_living_in"
+						name="names_of_countries_living_in"
+						error={$errors.names_of_countries_living_in}
+					>
+						{#each countries as country}
+							<option value={country.name}>{country.name}</option>
+						{/each}
+					</Select>
+
+					<Error message={$errors.names_of_countries_living_in} />
+				</div>
+			{/if}
+			<div class="col-span-2">
+				<Label
+					label_for="has_applied_for_immigration"
+					label="Have you applied for any type of immigration into any country?"
+				/>
+				<Select
+					id="has_applied_for_immigration"
+					name="has_applied_for_immigration"
+					error={$errors.has_applied_for_immigration}
+					classes="w-full"
+				>
+					<option value={false}>No</option>
+					<option value={true}>Yes</option>
+				</Select>
+
+				<Error message={$errors.has_applied_for_immigration} />
+			</div>
+			<div class="col-span-2">
+				<Label
+					label_for="has_been_refused_Visa"
+					label="Have you been refused Visa for any country?"
+				/>
+				<Select
+					id="has_been_refused_Visa"
+					name="has_been_refused_Visa"
+					error={$errors.has_been_refused_Visa}
+				>
+					<option value={false}>No</option>
+					<option value={true}>Yes</option>
+				</Select>
+
+				<Error message={$errors.has_been_refused_Visa} />
+			</div>
+			<div class="col-span-2">
+				<Label
+					label_for="has_been_convicted"
+					label="Have you ever been convicted of a criminal offence?"
+				/>
+				<Select
+					id="has_been_convicted"
+					name="has_been_convicted"
+					error={$errors.has_been_convicted}
+				>
+					<option value={false}>No</option>
+					<option value={true}>Yes</option>
+				</Select>
+
+				<Error message={$errors.has_been_convicted} />
 			</div>
 		</div>
 	</section>
