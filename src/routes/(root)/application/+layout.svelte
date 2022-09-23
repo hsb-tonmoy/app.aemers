@@ -19,6 +19,15 @@
 			return;
 		}
 	});
+
+	const handlePrevious = () => {
+		goto(previousURL);
+	};
+
+	const handleNext = () => {
+		goto(nextURL);
+		$showNextToolTip === true ? ($showNextToolTip = false) : null;
+	};
 </script>
 
 <div class="flex flex-col h-full">
@@ -36,14 +45,14 @@
 			<button
 				id="previousButton"
 				disabled={!previousURL}
-				on:click={() => goto(previousURL)}
+				on:click={handlePrevious}
 				class="border-2 border-lighterText disabled:border-lighterText/60 text-lighterText disabled:text-lighterText/60 text-sm md:text-base font-bold hover:text-lightText px-4 py-2 rounded-2xl"
 				>Previous</button
 			>
 			<button
 				id="nextButton"
 				disabled={!nextURL}
-				on:click={() => goto(nextURL)}
+				on:click={handleNext}
 				class="border-2 border-primary disabled:border-primary/60 text-white bg-primary hover:bg-primaryDarker disabled:bg-primary/60 text-sm md:text-base font-bold px-4 py-2 rounded-2xl"
 				>Next</button
 			>

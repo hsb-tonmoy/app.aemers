@@ -1,6 +1,7 @@
 <script>
 	import { Button, Error, IconInput, Input, Label, Select } from '$lib/components/Form';
 	import { CalendarDays } from '$lib/components/Icons';
+	import { countries } from '$lib/data/countries';
 	import { validator } from '@felte/validator-yup';
 	import { createForm } from 'felte';
 	import * as yup from 'yup';
@@ -329,7 +330,7 @@
 	<section class="form-section">
 		<h2>Present Address</h2>
 		<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-			<div class="col-span-4">
+			<div class="md:col-span-4">
 				<Label label_for="address_line_1" label="Address Line 1" />
 				<Input
 					id="address_line_1"
@@ -341,7 +342,7 @@
 
 				<Error message={$errors.address_line_1} />
 			</div>
-			<div class="col-span-4">
+			<div class="md:col-span-4">
 				<Label label_for="address_line_2" label="Address Line 2" />
 				<Input
 					id="address_line_2"
@@ -354,44 +355,39 @@
 				<Error message={$errors.address_line_2} />
 			</div>
 			<div class="">
-				<Label label_for="emergency_contact_relationship" label="Relation" />
-				<Input
-					id="emergency_contact_relationship"
-					name="emergency_contact_relationship"
-					type="text"
-					placeholder="Ex. Father"
-					error={$errors.emergency_contact_relationship}
-					classes="w-full"
-				/>
+				<Label label_for="city" label="City" />
+				<Input id="city" name="city" type="text" error={$errors.city} classes="w-full" />
 
-				<Error message={$errors.emergency_contact_relationship} />
+				<Error message={$errors.city} />
 			</div>
 
 			<div class="">
-				<Label label_for="emergency_contact_phone" label="Phone Number" />
-				<Input
-					id="emergency_contact_phone"
-					name="emergency_contact_phone"
-					type="text"
-					placeholder="+8801XXXXXXXXX"
-					error={$errors.emergency_contact_phone}
-					classes="w-full"
-				/>
+				<Label label_for="state" label="State" />
+				<Input id="state" name="state" type="text" error={$errors.state} classes="w-full" />
 
-				<Error message={$errors.emergency_contact_phone} />
+				<Error message={$errors.state} />
 			</div>
 			<div class="">
-				<Label label_for="emergency_contact_email" label="Email" />
+				<Label label_for="country" label="Country" />
+				<Select id="country" name="country" error={$errors.country} classes="w-full">
+					{#each countries as country}
+						<option value={country.name}>{country.name}</option>
+					{/each}
+				</Select>
+
+				<Error message={$errors.country} />
+			</div>
+			<div class="">
+				<Label label_for="zip_code" label="Zip Code" />
 				<Input
-					id="emergency_contact_email"
-					name="emergency_contact_email"
+					id="zip_code"
+					name="zip_code"
 					type="text"
-					placeholder="example@example.com"
-					error={$errors.emergency_contact_email}
+					error={$errors.zip_code}
 					classes="w-full"
 				/>
 
-				<Error message={$errors.emergency_contact_email} />
+				<Error message={$errors.zip_code} />
 			</div>
 		</div>
 	</section>
