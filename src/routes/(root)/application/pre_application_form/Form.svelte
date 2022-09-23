@@ -204,12 +204,194 @@
 			</div>
 			<div class="">
 				<Label label_for="gender" label="Gender" />
-				<Select id="gender" name="gender" classes="w-full">
+				<Select
+					id="gender"
+					name="gender"
+					placeholder="Gender"
+					error={$errors.gender}
+					classes="w-full"
+				>
 					<option value="male">Male</option>
 					<option value="female">Female</option>
 					<option value="other">Other</option>
 					<option value="prefer_not">Prefer Not to Say</option>
 				</Select>
+				<Error message={$errors.gender} />
+			</div>
+			<div class="">
+				<Label label_for="marital_status" label="Marital Status" />
+				<Select
+					id="marital_status"
+					name="marital_status"
+					placeholder="Marital Status"
+					error={$errors.marital_status}
+					classes="w-full"
+				>
+					<option value="single">Single</option>
+					<option value="married">Married</option>
+					<option value="divorced">Divorced</option>
+					<option value="other">Other</option>
+					<option value="prefer_not">Prefer Not to Say</option>
+				</Select>
+				<Error message={$errors.marital_status} />
+			</div>
+		</div>
+	</section>
+	<section class="form-section">
+		<h2>Contact Information</h2>
+		<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+			<div class="">
+				<Label label_for="phone" label="Phone Number" />
+				<Input
+					id="phone"
+					name="phone"
+					type="text"
+					placeholder="+8801XXXXXXXXX"
+					error={$errors.phone}
+					classes="w-full"
+				/>
+
+				<Error message={$errors.phone} />
+			</div>
+			<div class="">
+				<Label label_for="email" label="Email" />
+				<Input
+					id="email"
+					name="email"
+					type="text"
+					placeholder="example@example.com"
+					error={$errors.email}
+					classes="w-full"
+				/>
+
+				<Error message={$errors.email} />
+			</div>
+		</div>
+	</section>
+	<section class="form-section">
+		<h2>Emergency Contact Information</h2>
+		<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+			<div class="">
+				<Label label_for="emergency_contact_name" label="Name" />
+				<Input
+					id="emergency_contact_name"
+					name="emergency_contact_name"
+					type="text"
+					placeholder="Ex. Abdullah"
+					error={$errors.emergency_contact_name}
+					classes="w-full"
+				/>
+
+				<Error message={$errors.emergency_contact_name} />
+			</div>
+			<div class="">
+				<Label label_for="emergency_contact_relationship" label="Relation" />
+				<Input
+					id="emergency_contact_relationship"
+					name="emergency_contact_relationship"
+					type="text"
+					placeholder="Ex. Father"
+					error={$errors.emergency_contact_relationship}
+					classes="w-full"
+				/>
+
+				<Error message={$errors.emergency_contact_relationship} />
+			</div>
+
+			<div class="">
+				<Label label_for="emergency_contact_phone" label="Phone Number" />
+				<Input
+					id="emergency_contact_phone"
+					name="emergency_contact_phone"
+					type="text"
+					placeholder="+8801XXXXXXXXX"
+					error={$errors.emergency_contact_phone}
+					classes="w-full"
+				/>
+
+				<Error message={$errors.emergency_contact_phone} />
+			</div>
+			<div class="">
+				<Label label_for="emergency_contact_email" label="Email" />
+				<Input
+					id="emergency_contact_email"
+					name="emergency_contact_email"
+					type="text"
+					placeholder="example@example.com"
+					error={$errors.emergency_contact_email}
+					classes="w-full"
+				/>
+
+				<Error message={$errors.emergency_contact_email} />
+			</div>
+		</div>
+	</section>
+	<section class="form-section">
+		<h2>Present Address</h2>
+		<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+			<div class="col-span-4">
+				<Label label_for="address_line_1" label="Address Line 1" />
+				<Input
+					id="address_line_1"
+					name="address_line_1"
+					type="text"
+					error={$errors.address_line_1}
+					classes="w-full"
+				/>
+
+				<Error message={$errors.address_line_1} />
+			</div>
+			<div class="col-span-4">
+				<Label label_for="address_line_2" label="Address Line 2" />
+				<Input
+					id="address_line_2"
+					name="address_line_2"
+					type="text"
+					error={$errors.address_line_2}
+					classes="w-full"
+				/>
+
+				<Error message={$errors.address_line_2} />
+			</div>
+			<div class="">
+				<Label label_for="emergency_contact_relationship" label="Relation" />
+				<Input
+					id="emergency_contact_relationship"
+					name="emergency_contact_relationship"
+					type="text"
+					placeholder="Ex. Father"
+					error={$errors.emergency_contact_relationship}
+					classes="w-full"
+				/>
+
+				<Error message={$errors.emergency_contact_relationship} />
+			</div>
+
+			<div class="">
+				<Label label_for="emergency_contact_phone" label="Phone Number" />
+				<Input
+					id="emergency_contact_phone"
+					name="emergency_contact_phone"
+					type="text"
+					placeholder="+8801XXXXXXXXX"
+					error={$errors.emergency_contact_phone}
+					classes="w-full"
+				/>
+
+				<Error message={$errors.emergency_contact_phone} />
+			</div>
+			<div class="">
+				<Label label_for="emergency_contact_email" label="Email" />
+				<Input
+					id="emergency_contact_email"
+					name="emergency_contact_email"
+					type="text"
+					placeholder="example@example.com"
+					error={$errors.emergency_contact_email}
+					classes="w-full"
+				/>
+
+				<Error message={$errors.emergency_contact_email} />
 			</div>
 		</div>
 	</section>
@@ -217,7 +399,7 @@
 
 <style lang="postcss">
 	.form-section {
-		@apply flex flex-col mx-auto px-10 py-6 xl:px-20 xl:py-12 bg-white rounded-2xl;
+		@apply flex flex-col mx-auto px-10 py-6 xl:px-20 xl:py-12 bg-white rounded-2xl mb-6;
 	}
 
 	h2 {

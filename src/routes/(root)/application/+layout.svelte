@@ -21,7 +21,7 @@
 	});
 </script>
 
-<div class="flex flex-col h-screen">
+<div class="flex flex-col h-full">
 	<header class="flex justify-between items-center border-b border-borderColor pb-4 mb-6">
 		<div class="flex items-center gap-x-6">
 			<button

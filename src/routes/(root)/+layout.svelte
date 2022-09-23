@@ -13,7 +13,7 @@
 
 <svelte:head><title>app.aemers.com - US Scholarship Mentoring</title></svelte:head>
 
-<div class="flex w-full h-full 2xl:h-screen bg-bgColor">
+<div class="flex w-full h-full bg-bgColor">
 	<aside
 		class:hidden={$sidebarState}
 		class="xl:block fixed left-0 top-0 w-2/4 xl:w-[20%] 2xl:w-[15%] h-screen z-[5000] overflow-y-auto"
