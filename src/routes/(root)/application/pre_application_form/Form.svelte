@@ -720,6 +720,52 @@
 			</div>
 		</div>
 	</section>
+	<section class="form-section">
+		<h2>Acadmeic Qualifications</h2>
+		<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+			<div class="">
+				<Label label_for="highest_education_level" label="Highest Education Level" />
+				<Select
+					id="highest_education_level"
+					name="highest_education_level"
+					error={$errors.highest_education_level}
+				>
+					<option value="pre-high">Pre-high School</option>
+					<option value="high-school">High School</option>
+					<option value="diploma">Diploma</option>
+					<option value="associate">Associate's Degree</option>
+					<option value="bachelor">Bachelor's Degree</option>
+					<option value="master">Master's Degree</option>
+					<option value="phd">PhD</option>
+					<option value="doctorate">Doctorate</option>
+				</Select>
+				<Error message={$errors.highest_education_level} />
+			</div>
+		</div>
+	</section>
+	<section class="form-section">
+		<h2>Grade 10th or Equivalent</h2>
+		<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+			<div class="">
+				<Label label_for="highest_education_level" label="Highest Education Level" />
+				<Select
+					id="highest_education_level"
+					name="highest_education_level"
+					error={$errors.highest_education_level}
+				>
+					<option value="pre-high">Pre-high School</option>
+					<option value="high-school">High School</option>
+					<option value="diploma">Diploma</option>
+					<option value="associate">Associate's Degree</option>
+					<option value="bachelor">Bachelor's Degree</option>
+					<option value="master">Master's Degree</option>
+					<option value="phd">PhD</option>
+					<option value="doctorate">Doctorate</option>
+				</Select>
+				<Error message={$errors.highest_education_level} />
+			</div>
+		</div>
+	</section>
 </form>
 
 <style lang="postcss">
