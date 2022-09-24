@@ -10,7 +10,7 @@
 	export let pre_application_form;
 
 	let education_data = {
-		level_of_study: '',
+		name_of_exam: '',
 		name_of_board: '',
 		name_of_institution: '',
 		country_of_study: '',
@@ -19,7 +19,7 @@
 		degree_achieved: '',
 		grading_system: '',
 		score: '',
-		primary_language_of_institution: '',
+		primary_language: '',
 		start_date: '',
 		end_date: ''
 	};
@@ -746,23 +746,95 @@
 	<section class="form-section">
 		<h2>Grade 10th or Equivalent</h2>
 		<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+			<div class="col-span-3">
+				<Label label_for="grade_10th_name_of_exam" label="Name of the Examination" />
+				<Input
+					type="text"
+					id="grade_10th_name_of_exam"
+					name="grade_10th_name_of_exam"
+					placeholder="Name of the Examination"
+					bind:value={$data.grade_10th_or_equivalent.name_of_exam}
+				/>
+			</div>
 			<div class="">
-				<Label label_for="highest_education_level" label="Highest Education Level" />
-				<Select
-					id="highest_education_level"
-					name="highest_education_level"
-					error={$errors.highest_education_level}
+				<Label label_for="grade_10th_primary_language" label="Primary Language of Study" />
+				<Input
+					type="text"
+					id="grade_10th_primary_language"
+					name="grade_10th_primary_language"
+					placeholder="Primary Language of Study"
+					bind:value={$data.grade_10th_or_equivalent.primary_language}
+				/>
+			</div>
+			<div class="">
+				<Label label_for="grade_10th_name_of_board" label="Name of Board" />
+				<Input
+					type="text"
+					id="grade_10th_name_of_board"
+					name="grade_10th_name_of_board"
+					placeholder="Name of Board"
+					bind:value={$data.grade_10th_or_equivalent.name_of_board}
+				/>
+			</div>
+			<div class="col-span-2">
+				<Label label_for="grade_10th_name_of_institution" label="Name of Institution" />
+				<Input
+					type="text"
+					id="grade_10th_name_of_institution"
+					name="grade_10th_name_of_institution"
+					placeholder="Name of Institution"
+					bind:value={$data.grade_10th_or_equivalent.name_of_institution}
+				/>
+			</div>
+			<div class="">
+				<Label label_for="grade_10th_country_of_study" label="Country of Education" />
+				<Input
+					type="text"
+					id="grade_10th_country_of_study"
+					name="grade_10th_country_of_study"
+					placeholder="Country of Education"
+					bind:value={$data.grade_10th_or_equivalent.country_of_study}
+				/>
+			</div>
+			<div class="">
+				<Label label_for="grade_10th_grading_system" label="Grading System" />
+				<Input
+					type="text"
+					id="grade_10th_grading_system"
+					name="grade_10th_grading_system"
+					placeholder="Grading System"
+					bind:value={$data.grade_10th_or_equivalent.grading_system}
+				/>
+			</div>
+			<div class="">
+				<Label label_for="grade_10th_score" label="Score" />
+				<Input
+					type="text"
+					id="grade_10th_score"
+					name="grade_10th_score"
+					placeholder="Score"
+					bind:value={$data.grade_10th_or_equivalent.score}
+				/>
+			</div>
+			<div class="">
+				<Label label_for="grade_10th_start_date" label="Start Date" />
+				<IconInput
+					type="date"
+					id="grade_10th_start_date"
+					name="grade_10th_start_date"
+					placeholder="Start Date"
+					bind:value={$data.grade_10th_or_equivalent.start_date}><CalendarDays /></IconInput
 				>
-					<option value="pre-high">Pre-high School</option>
-					<option value="high-school">High School</option>
-					<option value="diploma">Diploma</option>
-					<option value="associate">Associate's Degree</option>
-					<option value="bachelor">Bachelor's Degree</option>
-					<option value="master">Master's Degree</option>
-					<option value="phd">PhD</option>
-					<option value="doctorate">Doctorate</option>
-				</Select>
-				<Error message={$errors.highest_education_level} />
+			</div>
+			<div class="">
+				<Label label_for="grade_10th_end_date" label="End Date" />
+				<IconInput
+					type="date"
+					id="grade_10th_end_date"
+					name="grade_10th_end_date"
+					placeholder="End Date"
+					bind:value={$data.grade_10th_or_equivalent.end_date}><CalendarDays /></IconInput
+				>
 			</div>
 		</div>
 	</section>

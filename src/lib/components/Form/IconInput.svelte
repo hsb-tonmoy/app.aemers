@@ -4,7 +4,7 @@
 	export let type: string = 'text';
 	export let name: string;
 	export let id: string;
-	export let classes: string = '';
+	export let classes: string = 'w-full';
 	export let placeholder: string = '';
 	export let disabled: boolean = false;
 	export let touched: boolean = false;
