@@ -1,5 +1,14 @@
 <script>
-	import { Button, Error, IconInput, Input, Label, Select } from '$lib/components/Form';
+	import {
+		Button,
+		Error,
+		IconInput,
+		IconInputExposed,
+		Input,
+		InputExposed,
+		Label,
+		Select
+	} from '$lib/components/Form';
 	import { CalendarDays } from '$lib/components/Icons';
 	import { countries } from '$lib/data/countries';
 	import { validator } from '@felte/validator-yup';
@@ -748,7 +757,7 @@
 		<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
 			<div class="col-span-3">
 				<Label label_for="grade_10th_name_of_exam" label="Name of the Examination" />
-				<Input
+				<InputExposed
 					type="text"
 					id="grade_10th_name_of_exam"
 					name="grade_10th_name_of_exam"
@@ -758,7 +767,7 @@
 			</div>
 			<div class="">
 				<Label label_for="grade_10th_primary_language" label="Primary Language of Study" />
-				<Input
+				<InputExposed
 					type="text"
 					id="grade_10th_primary_language"
 					name="grade_10th_primary_language"
@@ -768,7 +777,7 @@
 			</div>
 			<div class="">
 				<Label label_for="grade_10th_name_of_board" label="Name of Board" />
-				<Input
+				<InputExposed
 					type="text"
 					id="grade_10th_name_of_board"
 					name="grade_10th_name_of_board"
@@ -778,7 +787,7 @@
 			</div>
 			<div class="col-span-2">
 				<Label label_for="grade_10th_name_of_institution" label="Name of Institution" />
-				<Input
+				<InputExposed
 					type="text"
 					id="grade_10th_name_of_institution"
 					name="grade_10th_name_of_institution"
@@ -788,7 +797,7 @@
 			</div>
 			<div class="">
 				<Label label_for="grade_10th_country_of_study" label="Country of Education" />
-				<Input
+				<InputExposed
 					type="text"
 					id="grade_10th_country_of_study"
 					name="grade_10th_country_of_study"
@@ -798,7 +807,7 @@
 			</div>
 			<div class="">
 				<Label label_for="grade_10th_grading_system" label="Grading System" />
-				<Input
+				<InputExposed
 					type="text"
 					id="grade_10th_grading_system"
 					name="grade_10th_grading_system"
@@ -808,7 +817,7 @@
 			</div>
 			<div class="">
 				<Label label_for="grade_10th_score" label="Score" />
-				<Input
+				<InputExposed
 					type="text"
 					id="grade_10th_score"
 					name="grade_10th_score"
@@ -818,22 +827,22 @@
 			</div>
 			<div class="">
 				<Label label_for="grade_10th_start_date" label="Start Date" />
-				<IconInput
+				<IconInputExposed
 					type="date"
 					id="grade_10th_start_date"
 					name="grade_10th_start_date"
 					placeholder="Start Date"
-					bind:value={$data.grade_10th_or_equivalent.start_date}><CalendarDays /></IconInput
+					bind:value={$data.grade_10th_or_equivalent.start_date}><CalendarDays /></IconInputExposed
 				>
 			</div>
 			<div class="">
 				<Label label_for="grade_10th_end_date" label="End Date" />
-				<IconInput
+				<IconInputExposed
 					type="date"
 					id="grade_10th_end_date"
 					name="grade_10th_end_date"
 					placeholder="End Date"
-					bind:value={$data.grade_10th_or_equivalent.end_date}><CalendarDays /></IconInput
+					bind:value={$data.grade_10th_or_equivalent.end_date}><CalendarDays /></IconInputExposed
 				>
 			</div>
 		</div>
