@@ -8,3 +8,4 @@ export { default as Label } from './Label.svelte';
 export { default as RadioIcon } from './RadioIcon.svelte';
 export { default as RadioNoIcon } from './RadioNoIcon.svelte';
 export { default as Select } from './Select.svelte';
+export { default as SelectExposed } from './SelectExposed.svelte';

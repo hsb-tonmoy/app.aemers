@@ -7,7 +7,8 @@
 		Input,
 		InputExposed,
 		Label,
-		Select
+		Select,
+		SelectExposed
 	} from '$lib/components/Form';
 	import { CalendarDays } from '$lib/components/Icons';
 	import { countries } from '$lib/data/countries';
@@ -61,7 +62,7 @@
 		email: yup.string().email().required()
 	});
 
-	const { form, data, errors } = createForm({
+	const { form, data, errors, isValid } = createForm({
 		initialValues: {
 			first_name: pre_application_form.first_name || profile_data.first_name,
 			middle_initials: pre_application_form.middle_initials || '',
@@ -150,7 +151,7 @@
 
 		extend: validator({ schema }),
 		onSubmit(values, context) {
-			console.log(JSON.stringify(values));
+			console.log(values);
 		}
 	});
 </script>
@@ -167,7 +168,6 @@
 					type="text"
 					placeholder="Ex. Abdullah"
 					error={$errors.first_name}
-					classes="w-full"
 				/>
 
 				<Error message={$errors.first_name} />
@@ -180,7 +180,6 @@
 					type="text"
 					placeholder="Ex. Abdullah"
 					error={$errors.middle_initials}
-					classes="w-full"
 				/>
 
 				<Error message={$errors.middle_initials} />
@@ -193,7 +192,6 @@
 					type="text"
 					placeholder="Ex. Abdullah"
 					error={$errors.last_name}
-					classes="w-full"
 				/>
 
 				<Error message={$errors.last_name} />
@@ -207,7 +205,6 @@
 					name="date_of_birth"
 					placeholder="Date of Birth"
 					error={$errors.date_of_birth}
-					classes="w-full"
 					><CalendarDays />
 				</IconInput>
 
@@ -215,13 +212,7 @@
 			</div>
 			<div class="">
 				<Label label_for="gender" label="Gender" />
-				<Select
-					id="gender"
-					name="gender"
-					placeholder="Gender"
-					error={$errors.gender}
-					classes="w-full"
-				>
+				<Select id="gender" name="gender" placeholder="Gender" error={$errors.gender}>
 					<option value="male">Male</option>
 					<option value="female">Female</option>
 					<option value="other">Other</option>
@@ -236,7 +227,6 @@
 					name="marital_status"
 					placeholder="Marital Status"
 					error={$errors.marital_status}
-					classes="w-full"
 				>
 					<option value="single">Single</option>
 					<option value="married">Married</option>
@@ -259,7 +249,6 @@
 					type="text"
 					placeholder="+8801XXXXXXXXX"
 					error={$errors.phone}
-					classes="w-full"
 				/>
 
 				<Error message={$errors.phone} />
@@ -272,7 +261,6 @@
 					type="text"
 					placeholder="example@example.com"
 					error={$errors.email}
-					classes="w-full"
 				/>
 
 				<Error message={$errors.email} />
@@ -290,7 +278,6 @@
 					type="text"
 					placeholder="Ex. Abdullah"
 					error={$errors.emergency_contact_name}
-					classes="w-full"
 				/>
 
 				<Error message={$errors.emergency_contact_name} />
@@ -303,7 +290,6 @@
 					type="text"
 					placeholder="Ex. Father"
 					error={$errors.emergency_contact_relationship}
-					classes="w-full"
 				/>
 
 				<Error message={$errors.emergency_contact_relationship} />
@@ -317,7 +303,6 @@
 					type="text"
 					placeholder="+8801XXXXXXXXX"
 					error={$errors.emergency_contact_phone}
-					classes="w-full"
 				/>
 
 				<Error message={$errors.emergency_contact_phone} />
@@ -330,7 +315,6 @@
 					type="text"
 					placeholder="example@example.com"
 					error={$errors.emergency_contact_email}
-					classes="w-full"
 				/>
 
 				<Error message={$errors.emergency_contact_email} />
@@ -347,7 +331,6 @@
 					name="address_line_1"
 					type="text"
 					error={$errors.address_line_1}
-					classes="w-full"
 				/>
 
 				<Error message={$errors.address_line_1} />
@@ -359,27 +342,26 @@
 					name="address_line_2"
 					type="text"
 					error={$errors.address_line_2}
-					classes="w-full"
 				/>
 
 				<Error message={$errors.address_line_2} />
 			</div>
 			<div class="">
 				<Label label_for="city" label="City" />
-				<Input id="city" name="city" type="text" error={$errors.city} classes="w-full" />
+				<Input id="city" name="city" type="text" error={$errors.city} />
 
 				<Error message={$errors.city} />
 			</div>
 
 			<div class="">
 				<Label label_for="state" label="State" />
-				<Input id="state" name="state" type="text" error={$errors.state} classes="w-full" />
+				<Input id="state" name="state" type="text" error={$errors.state} />
 
 				<Error message={$errors.state} />
 			</div>
 			<div class="">
 				<Label label_for="country" label="Country" />
-				<Select id="country" name="country" error={$errors.country} classes="w-full">
+				<Select id="country" name="country" error={$errors.country}>
 					{#each countries as country}
 						<option value={country.name}>{country.name}</option>
 					{/each}
@@ -389,13 +371,7 @@
 			</div>
 			<div class="">
 				<Label label_for="zip_code" label="Zip Code" />
-				<Input
-					id="zip_code"
-					name="zip_code"
-					type="text"
-					error={$errors.zip_code}
-					classes="w-full"
-				/>
+				<Input id="zip_code" name="zip_code" type="text" error={$errors.zip_code} />
 
 				<Error message={$errors.zip_code} />
 			</div>
@@ -411,7 +387,6 @@
 					name="perma_address_line_1"
 					type="text"
 					error={$errors.perma_address_line_1}
-					classes="w-full"
 				/>
 
 				<Error message={$errors.perma_address_line_1} />
@@ -423,44 +398,26 @@
 					name="perma_address_line_2"
 					type="text"
 					error={$errors.perma_address_line_2}
-					classes="w-full"
 				/>
 
 				<Error message={$errors.perma_address_line_2} />
 			</div>
 			<div class="">
 				<Label label_for="perma_city" label="City" />
-				<Input
-					id="perma_city"
-					name="perma_city"
-					type="text"
-					error={$errors.perma_city}
-					classes="w-full"
-				/>
+				<Input id="perma_city" name="perma_city" type="text" error={$errors.perma_city} />
 
 				<Error message={$errors.perma_city} />
 			</div>
 
 			<div class="">
 				<Label label_for="perma_state" label="State" />
-				<Input
-					id="perma_state"
-					name="perma_state"
-					type="text"
-					error={$errors.perma_state}
-					classes="w-full"
-				/>
+				<Input id="perma_state" name="perma_state" type="text" error={$errors.perma_state} />
 
 				<Error message={$errors.perma_state} />
 			</div>
 			<div class="">
 				<Label label_for="perma_country" label="Country" />
-				<Select
-					id="perma_country"
-					name="perma_country"
-					error={$errors.perma_country}
-					classes="w-full"
-				>
+				<Select id="perma_country" name="perma_country" error={$errors.perma_country}>
 					{#each countries as country}
 						<option value={country.name}>{country.name}</option>
 					{/each}
@@ -475,7 +432,6 @@
 					name="perma_zip_code"
 					type="text"
 					error={$errors.perma_zip_code}
-					classes="w-full"
 				/>
 
 				<Error message={$errors.perma_zip_code} />
@@ -492,7 +448,6 @@
 					name="passport_number"
 					type="text"
 					error={$errors.passport_number}
-					classes="w-full"
 				/>
 
 				<Error message={$errors.passport_number} />
@@ -505,7 +460,6 @@
 					id="passport_issue_date"
 					name="passport_issue_date"
 					error={$errors.passport_issue_date}
-					classes="w-full"
 					><CalendarDays />
 				</IconInput>
 
@@ -519,7 +473,6 @@
 					id="passport_expiry_date"
 					name="passport_expiry_date"
 					error={$errors.passport_expiry_date}
-					classes="w-full"
 					><CalendarDays />
 				</IconInput>
 
@@ -532,7 +485,6 @@
 					id="passport_issue_country"
 					name="passport_issue_country"
 					error={$errors.passport_issue_country}
-					classes="w-full"
 				>
 					{#each countries as country}
 						<option value={country.name}>{country.name}</option>
@@ -543,24 +495,13 @@
 			</div>
 			<div class="">
 				<Label label_for="city_of_birth" label="City of Birth" />
-				<Input
-					id="city_of_birth"
-					name="city_of_birth"
-					type="text"
-					error={$errors.city_of_birth}
-					classes="w-full"
-				/>
+				<Input id="city_of_birth" name="city_of_birth" type="text" error={$errors.city_of_birth} />
 
 				<Error message={$errors.city_of_birth} />
 			</div>
 			<div class="">
 				<Label label_for="country_of_birth" label="Country of Birth" />
-				<Select
-					id="country_of_birth"
-					name="country_of_birth"
-					error={$errors.country_of_birth}
-					classes="w-full"
-				>
+				<Select id="country_of_birth" name="country_of_birth" error={$errors.country_of_birth}>
 					{#each countries as country}
 						<option value={country.name}>{country.name}</option>
 					{/each}
@@ -575,13 +516,7 @@
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 			<div class="">
 				<Label label_for="nationality" label="Nationality" />
-				<Input
-					id="nationality"
-					name="nationality"
-					type="text"
-					error={$errors.nationality}
-					classes="w-full"
-				/>
+				<Input id="nationality" name="nationality" type="text" error={$errors.nationality} />
 
 				<Error message={$errors.nationality} />
 			</div>
@@ -592,7 +527,6 @@
 					id="country_of_citizenship"
 					name="country_of_citizenship"
 					error={$errors.country_of_citizenship}
-					classes="w-full"
 				>
 					{#each countries as country}
 						<option value={country.name}>{country.name}</option>
@@ -610,7 +544,6 @@
 					id="are_you_citizen_of_more_than_one_country"
 					name="are_you_citizen_of_more_than_one_country"
 					error={$errors.are_you_citizen_of_more_than_one_country}
-					classes="w-full"
 				>
 					<option value={false}>No</option>
 					<option value={true}>Yes</option>
@@ -647,7 +580,6 @@
 					id="are_you_living_in_other_country"
 					name="are_you_living_in_other_country"
 					error={$errors.are_you_living_in_other_country}
-					classes="w-full"
 				>
 					<option value={false}>No</option>
 					<option value={true}>Yes</option>
@@ -687,7 +619,6 @@
 					id="has_applied_for_immigration"
 					name="has_applied_for_immigration"
 					error={$errors.has_applied_for_immigration}
-					classes="w-full"
 				>
 					<option value={false}>No</option>
 					<option value={true}>Yes</option>
@@ -730,7 +661,7 @@
 		</div>
 	</section>
 	<section class="form-section">
-		<h2>Acadmeic Qualifications</h2>
+		<h2>Academic Qualifications</h2>
 		<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 			<div class="">
 				<Label label_for="highest_education_level" label="Highest Education Level" />
@@ -749,6 +680,19 @@
 					<option value="doctorate">Doctorate</option>
 				</Select>
 				<Error message={$errors.highest_education_level} />
+			</div>
+			<div class="">
+				<Label label_for="country_of_education" label="Country of Education" />
+				<SelectExposed
+					bind:value={$data.country_of_education}
+					id="country_of_education"
+					name="country_of_education"
+				>
+					{#each countries as country}
+						<option value={country.name}>{country.name}</option>
+					{/each}
+				</SelectExposed>
+				<Error message={$errors.country_of_education} />
 			</div>
 		</div>
 	</section>
@@ -797,13 +741,15 @@
 			</div>
 			<div class="">
 				<Label label_for="grade_10th_country_of_study" label="Country of Education" />
-				<InputExposed
-					type="text"
+				<SelectExposed
+					bind:value={$data.grade_10th_or_equivalent.country_of_study}
 					id="grade_10th_country_of_study"
 					name="grade_10th_country_of_study"
-					placeholder="Country of Education"
-					bind:value={$data.grade_10th_or_equivalent.country_of_study}
-				/>
+				>
+					{#each countries as country}
+						<option value={country.name}>{country.name}</option>
+					{/each}
+				</SelectExposed>
 			</div>
 			<div class="">
 				<Label label_for="grade_10th_grading_system" label="Grading System" />
@@ -845,6 +791,309 @@
 					bind:value={$data.grade_10th_or_equivalent.end_date}><CalendarDays /></IconInputExposed
 				>
 			</div>
+		</div>
+	</section>
+	<section class="form-section">
+		<h2>Grade 12th or Equivalent</h2>
+		<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+			<div class="col-span-3">
+				<Label label_for="grade_12th_name_of_exam" label="Name of the Examination" />
+				<InputExposed
+					type="text"
+					id="grade_12th_name_of_exam"
+					name="grade_12th_name_of_exam"
+					placeholder="Name of the Examination"
+					bind:value={$data.grade_12th_or_equivalent.name_of_exam}
+				/>
+			</div>
+			<div class="">
+				<Label label_for="grade_12th_primary_language" label="Primary Language of Study" />
+				<InputExposed
+					type="text"
+					id="grade_12th_primary_language"
+					name="grade_12th_primary_language"
+					placeholder="Primary Language of Study"
+					bind:value={$data.grade_12th_or_equivalent.primary_language}
+				/>
+			</div>
+			<div class="">
+				<Label label_for="grade_12th_name_of_board" label="Name of Board" />
+				<InputExposed
+					type="text"
+					id="grade_12th_name_of_board"
+					name="grade_12th_name_of_board"
+					placeholder="Name of Board"
+					bind:value={$data.grade_12th_or_equivalent.name_of_board}
+				/>
+			</div>
+			<div class="col-span-2">
+				<Label label_for="grade_12th_name_of_institution" label="Name of Institution" />
+				<InputExposed
+					type="text"
+					id="grade_12th_name_of_institution"
+					name="grade_12th_name_of_institution"
+					placeholder="Name of Institution"
+					bind:value={$data.grade_12th_or_equivalent.name_of_institution}
+				/>
+			</div>
+			<div class="">
+				<Label label_for="grade_12th_country_of_study" label="Country of Education" />
+				<SelectExposed
+					bind:value={$data.grade_12th_or_equivalent.country_of_study}
+					id="grade_12th_country_of_study"
+					name="grade_12th_country_of_study"
+				>
+					{#each countries as country}
+						<option value={country.name}>{country.name}</option>
+					{/each}
+				</SelectExposed>
+			</div>
+			<div class="">
+				<Label label_for="grade_12th_grading_system" label="Grading System" />
+				<InputExposed
+					type="text"
+					id="grade_12th_grading_system"
+					name="grade_12th_grading_system"
+					placeholder="Grading System"
+					bind:value={$data.grade_12th_or_equivalent.grading_system}
+				/>
+			</div>
+			<div class="">
+				<Label label_for="grade_12th_score" label="Score" />
+				<InputExposed
+					type="text"
+					id="grade_12th_score"
+					name="grade_12th_score"
+					placeholder="Score"
+					bind:value={$data.grade_12th_or_equivalent.score}
+				/>
+			</div>
+			<div class="">
+				<Label label_for="grade_12th_start_date" label="Start Date" />
+				<IconInputExposed
+					type="date"
+					id="grade_12th_start_date"
+					name="grade_12th_start_date"
+					placeholder="Start Date"
+					bind:value={$data.grade_12th_or_equivalent.start_date}><CalendarDays /></IconInputExposed
+				>
+			</div>
+			<div class="">
+				<Label label_for="grade_12th_end_date" label="End Date" />
+				<IconInputExposed
+					type="date"
+					id="grade_12th_end_date"
+					name="grade_12th_end_date"
+					placeholder="End Date"
+					bind:value={$data.grade_12th_or_equivalent.end_date}><CalendarDays /></IconInputExposed
+				>
+			</div>
+		</div>
+	</section>
+	<section class="form-section">
+		<h2>Undergraduate (Bachelor's) or Equivalent</h2>
+		<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+			<div class="col-span-3">
+				<Label label_for="undergraduate_degree_name_of_exam" label="Name of the Examination" />
+				<InputExposed
+					type="text"
+					id="undergraduate_degree_name_of_exam"
+					name="undergraduate_degree_name_of_exam"
+					placeholder="Name of the Examination"
+					bind:value={$data.undergraduate_degree_or_equivalent.name_of_exam}
+				/>
+			</div>
+			<div class="">
+				<Label
+					label_for="undergraduate_degree_primary_language"
+					label="Primary Language of Study"
+				/>
+				<InputExposed
+					type="text"
+					id="undergraduate_degree_primary_language"
+					name="undergraduate_degree_primary_language"
+					placeholder="Primary Language of Study"
+					bind:value={$data.undergraduate_degree_or_equivalent.primary_language}
+				/>
+			</div>
+			<div class="">
+				<Label label_for="undergraduate_degree_name_of_board" label="Name of Board" />
+				<InputExposed
+					type="text"
+					id="undergraduate_degree_name_of_board"
+					name="undergraduate_degree_name_of_board"
+					placeholder="Name of Board"
+					bind:value={$data.undergraduate_degree_or_equivalent.name_of_board}
+				/>
+			</div>
+			<div class="col-span-2">
+				<Label label_for="undergraduate_degree_name_of_institution" label="Name of Institution" />
+				<InputExposed
+					type="text"
+					id="undergraduate_degree_name_of_institution"
+					name="undergraduate_degree_name_of_institution"
+					placeholder="Name of Institution"
+					bind:value={$data.undergraduate_degree_or_equivalent.name_of_institution}
+				/>
+			</div>
+			<div class="">
+				<Label label_for="undergraduate_degree_country_of_study" label="Country of Education" />
+				<SelectExposed
+					bind:value={$data.undergraduate_degree_or_equivalent.country_of_study}
+					id="undergraduate_degree_country_of_study"
+					name="undergraduate_degree_country_of_study"
+				>
+					{#each countries as country}
+						<option value={country.name}>{country.name}</option>
+					{/each}
+				</SelectExposed>
+			</div>
+			<div class="">
+				<Label label_for="undergraduate_degree_grading_system" label="Grading System" />
+				<InputExposed
+					type="text"
+					id="undergraduate_degree_grading_system"
+					name="undergraduate_degree_grading_system"
+					placeholder="Grading System"
+					bind:value={$data.undergraduate_degree_or_equivalent.grading_system}
+				/>
+			</div>
+			<div class="">
+				<Label label_for="undergraduate_degree_score" label="Score" />
+				<InputExposed
+					type="text"
+					id="undergraduate_degree_score"
+					name="undergraduate_degree_score"
+					placeholder="Score"
+					bind:value={$data.undergraduate_degree_or_equivalent.score}
+				/>
+			</div>
+			<div class="">
+				<Label label_for="undergraduate_degree_start_date" label="Start Date" />
+				<IconInputExposed
+					type="date"
+					id="undergraduate_degree_start_date"
+					name="undergraduate_degree_start_date"
+					placeholder="Start Date"
+					bind:value={$data.undergraduate_degree_or_equivalent.start_date}
+					><CalendarDays /></IconInputExposed
+				>
+			</div>
+			<div class="">
+				<Label label_for="undergraduate_degree_end_date" label="End Date" />
+				<IconInputExposed
+					type="date"
+					id="undergraduate_degree_end_date"
+					name="undergraduate_degree_end_date"
+					placeholder="End Date"
+					bind:value={$data.undergraduate_degree_or_equivalent.end_date}
+					><CalendarDays /></IconInputExposed
+				>
+			</div>
+		</div>
+	</section>
+	<section class="form-section">
+		<h2>Graduate (Master's) or Equivalent</h2>
+		<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+			<div class="col-span-3">
+				<Label label_for="graduate_degree_name_of_exam" label="Name of the Examination" />
+				<InputExposed
+					type="text"
+					id="graduate_degree_name_of_exam"
+					name="graduate_degree_name_of_exam"
+					placeholder="Name of the Examination"
+					bind:value={$data.graduate_degree_or_equivalent.name_of_exam}
+				/>
+			</div>
+			<div class="">
+				<Label label_for="graduate_degree_primary_language" label="Primary Language of Study" />
+				<InputExposed
+					type="text"
+					id="graduate_degree_primary_language"
+					name="graduate_degree_primary_language"
+					placeholder="Primary Language of Study"
+					bind:value={$data.graduate_degree_or_equivalent.primary_language}
+				/>
+			</div>
+			<div class="">
+				<Label label_for="graduate_degree_name_of_board" label="Name of Board" />
+				<InputExposed
+					type="text"
+					id="graduate_degree_name_of_board"
+					name="graduate_degree_name_of_board"
+					placeholder="Name of Board"
+					bind:value={$data.graduate_degree_or_equivalent.name_of_board}
+				/>
+			</div>
+			<div class="col-span-2">
+				<Label label_for="graduate_degree_name_of_institution" label="Name of Institution" />
+				<InputExposed
+					type="text"
+					id="graduate_degree_name_of_institution"
+					name="graduate_degree_name_of_institution"
+					placeholder="Name of Institution"
+					bind:value={$data.graduate_degree_or_equivalent.name_of_institution}
+				/>
+			</div>
+			<div class="">
+				<Label label_for="graduate_degree_country_of_study" label="Country of Education" />
+				<SelectExposed
+					bind:value={$data.graduate_degree_or_equivalent.country_of_study}
+					id="graduate_degree_country_of_study"
+					name="graduate_degree_country_of_study"
+				>
+					{#each countries as country}
+						<option value={country.name}>{country.name}</option>
+					{/each}
+				</SelectExposed>
+			</div>
+			<div class="">
+				<Label label_for="graduate_degree_grading_system" label="Grading System" />
+				<InputExposed
+					type="text"
+					id="graduate_degree_grading_system"
+					name="graduate_degree_grading_system"
+					placeholder="Grading System"
+					bind:value={$data.graduate_degree_or_equivalent.grading_system}
+				/>
+			</div>
+			<div class="">
+				<Label label_for="graduate_degree_score" label="Score" />
+				<InputExposed
+					type="text"
+					id="graduate_degree_score"
+					name="graduate_degree_score"
+					placeholder="Score"
+					bind:value={$data.graduate_degree_or_equivalent.score}
+				/>
+			</div>
+			<div class="">
+				<Label label_for="graduate_degree_start_date" label="Start Date" />
+				<IconInputExposed
+					type="date"
+					id="graduate_degree_start_date"
+					name="graduate_degree_start_date"
+					placeholder="Start Date"
+					bind:value={$data.graduate_degree_or_equivalent.start_date}
+					><CalendarDays /></IconInputExposed
+				>
+			</div>
+			<div class="">
+				<Label label_for="graduate_degree_end_date" label="End Date" />
+				<IconInputExposed
+					type="date"
+					id="graduate_degree_end_date"
+					name="graduate_degree_end_date"
+					placeholder="End Date"
+					bind:value={$data.graduate_degree_or_equivalent.end_date}
+					><CalendarDays /></IconInputExposed
+				>
+			</div>
+		</div>
+	</section>
+	<section class="form-section">
+		<div class="flex w-full justify-end">
+			<Button type="submit" classes="px-20 py-4" text="Submit" disabled={!$isValid} />
 		</div>
 	</section>
 </form>
