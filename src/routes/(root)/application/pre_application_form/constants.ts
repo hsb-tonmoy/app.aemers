@@ -67,6 +67,15 @@ export const education_level = [
 	}
 ];
 
+export const english_proficiency_tests = [
+	{ value: 'ielts', label: 'IELTS' },
+	{ value: 'toefl', label: 'TOEFL' },
+	{ value: 'duolingo', label: 'Duolingo' },
+	{ value: 'plan-to', label: 'Wish to Take IELTS' },
+	{ value: 'no-test', label: 'Wish to get enrolled with no test' },
+	{ value: 'moi', label: 'Wish to get enrolled with Medium of Instruction' }
+];
+
 export const schema = yup.object({
 	first_name: yup.string().required('First name is required'),
 	middle_name: yup.string(),

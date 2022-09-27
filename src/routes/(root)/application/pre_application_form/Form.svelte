@@ -8,7 +8,8 @@
 		InputExposed,
 		Label,
 		Select,
-		SelectExposed
+		SelectExposed,
+		TextArea
 	} from '$lib/components/Form';
 	import { CalendarDays } from '$lib/components/Icons';
 	import { countries } from '$lib/data/countries';
@@ -16,7 +17,13 @@
 	import { createForm } from 'felte';
 	import { fly } from 'svelte/transition';
 
-	import { education_data, education_level, schema, work_experience } from './constants';
+	import {
+		education_data,
+		education_level,
+		english_proficiency_tests,
+		schema,
+		work_experience
+	} from './constants';
 
 	export let profile_data;
 	export let pre_application_form;
@@ -80,24 +87,17 @@
 				pre_application_form.undergraduate_degree_or_equivalent || education_data,
 			graduate_degree_or_equivalent:
 				pre_application_form.graduate_degree_or_equivalent || education_data,
-			english_proficiency: pre_application_form.english_proficiency || '',
-			ielts_waivers: pre_application_form.ielts_waivers,
-			ielts_date_of_examination: pre_application_form.ielts_date_of_examination,
-			ielts_score: pre_application_form.ielts_score,
-			ielts_listening: pre_application_form.ielts_listening,
-			ielts_reading: pre_application_form.ielts_reading,
-			ielts_writing: pre_application_form.ielts_writing,
-			ielts_speaking: pre_application_form.ielts_speaking,
-			ielts_trf_no: pre_application_form.ielts_trf_no,
-			toefl_score: pre_application_form.toefl_score,
-			toefl_date_of_examination: pre_application_form.toefl_date_of_examination,
-			toefl_listening: pre_application_form.toefl_listening,
-			toefl_reading: pre_application_form.toefl_reading,
-			toefl_writing: pre_application_form.toefl_writing,
-			toefl_speaking: pre_application_form.toefl_speaking,
-			toefl_trf_no: pre_application_form.toefl_trf_no,
-			duolingo_score: pre_application_form.duolingo_score,
-			duolingo_date_of_examination: pre_application_form.duolingo_date_of_examination,
+			english_proficiency:
+				pre_application_form.english_proficiency || profile_data.profile.english_proficiency,
+			english_proficiency_score: pre_application_form.english_proficiency_score,
+			english_proficiency_date_of_examination:
+				pre_application_form.english_proficiency_date_of_examination || '',
+			english_proficiency_trf_no: pre_application_form.english_proficiency_trf_no || '',
+			english_proficiency_waivers: String(pre_application_form.english_proficiency_waivers) || '',
+			english_proficiency_listening: pre_application_form.english_proficiency_listening || '',
+			english_proficiency_speaking: pre_application_form.english_proficiency_speaking || '',
+			english_proficiency_reading: pre_application_form.english_proficiency_reading || '',
+			english_proficiency_writing: pre_application_form.english_proficiency_writing || '',
 			sat_score: pre_application_form.sat_score,
 			sat_date_of_examination: pre_application_form.sat_date_of_examination,
 			sat_ebrw: pre_application_form.sat_ebrw,
@@ -1086,6 +1086,293 @@
 			</section>
 		{/if}
 	{/if}
+	<section class="form-section">
+		<h2>Language Proficiency Test</h2>
+		<div class="grid grid-cols-1 md:grid-cols-6 gap-6">
+			<div class="col-span-4">
+				<Label label_for="english_proficiency" label="Name of the Test" />
+				<Select id="english_proficiency" name="english_proficiency" placeholder="Name of the Test">
+					{#each english_proficiency_tests as test}
+						<option value={test.value}>{test.label}</option>
+					{/each}
+				</Select>
+				<Error message={$errors.english_proficiency} />
+			</div>
+			<div class="col-start-1 col-span-2">
+				<Label label_for="english_proficiency_waivers" label="Do you have IELTS Waiver?" />
+				<Select
+					id="english_proficiency_waivers"
+					name="english_proficiency_waivers"
+					placeholder="Do you have IELTS Waiver?"
+				>
+					<option value={false}>No</option>
+					<option value={true}>Yes</option>
+				</Select>
+				<Error message={$errors.english_proficiency_waivers} />
+			</div>
+			<div class="col-span-2">
+				<Label label_for="english_proficiency_date_of_examination" label="Date of Examination" />
+				<IconInput
+					type="date"
+					id="english_proficiency_date_of_examination"
+					name="english_proficiency_date_of_examination"
+					placeholder="Date of Examination"><CalendarDays /></IconInput
+				>
+				<Error message={$errors.english_proficiency_date_of_examination} />
+			</div>
+			<div class="col-start-1 col-span-2">
+				<Label label_for="english_proficiency_score" label="Overall Score" />
+				<Input
+					type="text"
+					id="english_proficiency_score"
+					name="english_proficiency_score"
+					placeholder="Overall Score"
+				/>
+				<Error message={$errors.english_proficiency_score} />
+			</div>
+			<div class="col-span-2">
+				<Label label_for="english_proficiency_trf_no" label="IELTS TRF No." />
+				<Input
+					type="text"
+					id="english_proficiency_trf_no"
+					name="english_proficiency_trf_no"
+					placeholder="IELTS TRF No."
+				/>
+				<Error message={$errors.english_proficiency_trf_no} />
+			</div>
+			<div class="col-start-1">
+				<Label label_for="english_proficiency_listening" label="Listening" />
+				<Input
+					type="text"
+					id="english_proficiency_listening"
+					name="english_proficiency_listening"
+					placeholder="Listening"
+				/>
+				<Error message={$errors.english_proficiency_listening} />
+			</div>
+			<div class="">
+				<Label label_for="english_proficiency_speaking" label="Speaking" />
+				<Input
+					type="text"
+					id="english_proficiency_speaking"
+					name="english_proficiency_speaking"
+					placeholder="Speaking"
+				/>
+				<Error message={$errors.english_proficiency_speaking} />
+			</div>
+			<div class="">
+				<Label label_for="english_proficiency_reading" label="Reading" />
+				<Input
+					type="text"
+					id="english_proficiency_reading"
+					name="english_proficiency_reading"
+					placeholder="Reading"
+				/>
+				<Error message={$errors.english_proficiency_reading} />
+			</div>
+			<div class="">
+				<Label label_for="english_proficiency_writing" label="Writing" />
+				<Input
+					type="text"
+					id="english_proficiency_writing"
+					name="english_proficiency_writing"
+					placeholder="Writing"
+				/>
+				<Error message={$errors.english_proficiency_writing} />
+			</div>
+		</div>
+	</section>
+	<section class="form-section">
+		<h2>SAT</h2>
+		<div class="grid grid-cols-1 md:grid-cols-6 gap-6">
+			<div class="col-span-2">
+				<Label label_for="sat_score" label="SAT Score" />
+				<Input type="text" id="sat_score" name="sat_score" placeholder="SAT Score" />
+				<Error message={$errors.sat_score} />
+			</div>
+			<div class="col-span-2">
+				<Label label_for="sat_date_of_examination" label="Date of Examination" />
+				<IconInput
+					type="date"
+					id="sat_date_of_examination"
+					name="sat_date_of_examination"
+					placeholder="Date of Examination"><CalendarDays /></IconInput
+				>
+				<Error message={$errors.sat_date_of_examination} />
+			</div>
+			<div class="col-start-1 col-span-6">
+				<Label label_for="sat_ebrw" label="SAT EBRW" />
+				<Input type="text" id="sat_ebrw" name="sat_ebrw" placeholder="SAT Score" />
+				<Error message={$errors.sat_ebrw} />
+			</div>
+			<div class="col-start-1 col-span-6">
+				<Label label_for="sat_math" label="SAT Math" />
+				<Input type="text" id="sat_math" name="sat_math" placeholder="SAT Math" />
+				<Error message={$errors.sat_math} />
+			</div>
+		</div>
+	</section>
+	<section class="form-section">
+		<h2>ACT</h2>
+		<div class="grid grid-cols-1 md:grid-cols-6 gap-6">
+			<div class="col-span-2">
+				<Label label_for="act_score" label="ACT Score" />
+				<Input type="text" id="act_score" name="act_score" placeholder="ACT Score" />
+				<Error message={$errors.act_score} />
+			</div>
+			<div class="col-span-2">
+				<Label label_for="act_date_of_examination" label="Date of Examination" />
+				<IconInput
+					type="date"
+					id="act_date_of_examination"
+					name="act_date_of_examination"
+					placeholder="Date of Examination"><CalendarDays /></IconInput
+				>
+				<Error message={$errors.act_date_of_examination} />
+			</div>
+			<div class="col-start-1">
+				<Label label_for="act_english" label="English" />
+				<Input type="text" id="act_english" name="act_english" placeholder="English" />
+				<Error message={$errors.act_english} />
+			</div>
+			<div class="">
+				<Label label_for="act_math" label="Math" />
+				<Input type="text" id="act_math" name="act_math" placeholder="Math" />
+				<Error message={$errors.act_math} />
+			</div>
+			<div class="">
+				<Label label_for="act_reading" label="Reading" />
+				<Input type="text" id="act_reading" name="act_reading" placeholder="Reading" />
+				<Error message={$errors.act_reading} />
+			</div>
+			<div class="">
+				<Label label_for="act_science" label="Science" />
+				<Input type="text" id="act_science" name="act_science" placeholder="Science" />
+				<Error message={$errors.act_science} />
+			</div>
+			<div class="">
+				<Label label_for="act_writing" label="Writing" />
+				<Input type="text" id="act_writing" name="act_writing" placeholder="Writing" />
+				<Error message={$errors.act_writing} />
+			</div>
+		</div>
+	</section>
+	{#each $data.work_experience as _, i}
+		<section
+			in:fly={{ y: -50, duration: 500 }}
+			out:fly={{ y: 50, duration: 300 }}
+			class="form-section"
+		>
+			<h2>Work Experience {i + 1}</h2>
+			<div class="grid grid-cols-1 md:grid-cols-6 gap-6">
+				<div class="col-span-4">
+					<Label label_for="company_name_{i}" label="Company Name" />
+					<InputExposed
+						bind:value={$data.work_experience[i].company_name}
+						type="text"
+						id="company_name_{i}"
+						name="company_name_{i}"
+						placeholder="Company Name"
+					/>
+				</div>
+				<div class="col-span-4">
+					<Label label_for="company_address_{i}" label="Company Address" />
+					<InputExposed
+						bind:value={$data.work_experience[i].company_address}
+						type="text"
+						id="company_address_{i}"
+						name="company_address_{i}"
+						placeholder="Company Address"
+					/>
+				</div>
+				<div class="col-start-1 col-span-2">
+					<Label label_for="company_designation_{i}" label="Designation" />
+					<InputExposed
+						bind:value={$data.work_experience[i].position}
+						type="text"
+						id="company_designation_{i}"
+						name="company_designation_{i}"
+						placeholder="Designation"
+					/>
+				</div>
+				<div class="col-span-2">
+					<Label label_for="company_mode_of_salary_{i}" label="Mode of Salary" />
+					<InputExposed
+						bind:value={$data.work_experience[i].mode_of_salary}
+						type="text"
+						id="company_mode_of_salary_{i}"
+						name="company_mode_of_salary_{i}"
+						placeholder="Mode of Salary"
+					/>
+				</div>
+				<div class="col-start-1 col-span-2">
+					<Label label_for="company_start_date_{i}" label="Start Date" />
+					<IconInputExposed
+						type="date"
+						id="company_start_date_{i}"
+						name="company_start_date_{i}"
+						placeholder="Start Date"
+						bind:value={$data.work_experience[i].start_date}><CalendarDays /></IconInputExposed
+					>
+				</div>
+				<div class="col-span-2">
+					<Label label_for="company_end_date_{i}" label="End Date" />
+					<IconInputExposed
+						type="date"
+						id="company_end_date_{i}"
+						name="company_end_date_{i}"
+						placeholder="End Date"
+						bind:value={$data.work_experience[i].end_date}><CalendarDays /></IconInputExposed
+					>
+				</div>
+				<div class="flex items-center gap-x-4 col-start-1 col-span-3">
+					<Button
+						type="text"
+						on:click={addWorkExperience}
+						text="Add work experience"
+						defaultClass=""
+						classes="bg-white hover:bg-primary border border-primary text-primary hover:text-white font-bold px-4 py-3 w-full rounded-xl"
+					/>
+					<Button
+						type="text"
+						on:click={deleteWorkExperience}
+						text="Remove"
+						defaultClass=""
+						classes="bg-white border-0 text-red-600 hover:text-red-700 font-bold"
+					/>
+				</div>
+			</div>
+		</section>
+	{/each}
+	<section class="form-section">
+		<h2>Study Gap</h2>
+		<div class="grid grid-cols-1 md:grid-cols-6 gap-6">
+			<div class="col-span-4">
+				<Label label_for="has_gap" label="Do you have study gap?" />
+				<Select id="has_gap" name="has_gap" error={$errors.has_gap}>
+					<option value={false}>No</option>
+					<option value={true}>Yes</option>
+				</Select>
+				<Error message={$errors.has_gap} />
+			</div>
+			{#if $data.has_gap === 'true'}
+				<div
+					in:fly={{ y: -50, duration: 500 }}
+					out:fly={{ y: 50, duration: 300 }}
+					class="col-span-4"
+				>
+					<Label label_for="gap_explanation" label="Provide an explanation for your study gap" />
+					<TextArea
+						rows={8}
+						id="gap_explanation"
+						name="gap_explanation"
+						placeholder="Provide an explanation for your study gap"
+					/>
+					<Error message={$errors.gap_explanation} />
+				</div>
+			{/if}
+		</div>
+	</section>
 	<section class="form-section">
 		<div class="flex w-full justify-end">
 			<Button type="submit" classes="px-20 py-4" text="Submit" disabled={!$isValid} />
