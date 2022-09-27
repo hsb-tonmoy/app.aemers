@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import {
 		Button,
 		Error,
@@ -15,37 +15,11 @@
 	import { validator } from '@felte/validator-yup';
 	import { createForm } from 'felte';
 	import { fly } from 'svelte/transition';
-	import * as yup from 'yup';
+
+	import { education_data, education_level, schema, work_experience } from './constants';
+
 	export let profile_data;
 	export let pre_application_form;
-
-	let education_data = {
-		name_of_exam: '',
-		name_of_board: '',
-		name_of_institution: '',
-		country_of_study: '',
-		state_of_study: '',
-		city_of_study: '',
-		degree_achieved: '',
-		grading_system: '',
-		score: '',
-		primary_language: '',
-		start_date: '',
-		end_date: ''
-	};
-
-	let work_experience = [
-		{
-			company_name: '',
-			company_address: '',
-			position: '',
-			job_profile: '',
-			mode_of_salary: '',
-			currently_working: null,
-			start_date: '',
-			end_date: ''
-		}
-	];
 
 	function addWorkExperience() {
 		$data.work_experience = $data.work_experience.concat(work_experience);
@@ -54,13 +28,6 @@
 	function deleteWorkExperience() {
 		$data.work_experience = $data.work_experience.slice(0, -1);
 	}
-
-	const schema = yup.object({
-		first_name: yup.string().required('First name is required'),
-		middle_name: yup.string(),
-		last_name: yup.string().required('Last name is required'),
-		email: yup.string().email().required()
-	});
 
 	const { form, data, errors, isValid } = createForm({
 		initialValues: {
@@ -154,6 +121,16 @@
 			console.log(values);
 		}
 	});
+
+	let education_level_value: number;
+
+	$: {
+		education_level.findIndex((item, index) => {
+			if (item.value === $data.highest_education_level) {
+				education_level_value = index;
+			}
+		});
+	}
 </script>
 
 <form use:form class="w-full mt-8">
@@ -670,14 +647,9 @@
 					name="highest_education_level"
 					error={$errors.highest_education_level}
 				>
-					<option value="pre-high">Pre-high School</option>
-					<option value="high-school">High School</option>
-					<option value="diploma">Diploma</option>
-					<option value="associate">Associate's Degree</option>
-					<option value="bachelor">Bachelor's Degree</option>
-					<option value="master">Master's Degree</option>
-					<option value="phd">PhD</option>
-					<option value="doctorate">Doctorate</option>
+					{#each education_level as level}
+						<option value={level.value}>{level.label}</option>
+					{/each}
 				</Select>
 				<Error message={$errors.highest_education_level} />
 			</div>
@@ -696,401 +668,424 @@
 			</div>
 		</div>
 	</section>
-	<section class="form-section">
-		<h2>Grade 10th or Equivalent</h2>
-		<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-			<div class="col-span-3">
-				<Label label_for="grade_10th_name_of_exam" label="Name of the Examination" />
-				<InputExposed
-					type="text"
-					id="grade_10th_name_of_exam"
-					name="grade_10th_name_of_exam"
-					placeholder="Name of the Examination"
-					bind:value={$data.grade_10th_or_equivalent.name_of_exam}
-				/>
+	{#if education_level_value >= 1}
+		<section
+			in:fly={{ y: -50, duration: 500 }}
+			out:fly={{ y: 50, duration: 300 }}
+			class="form-section"
+		>
+			<h2>Grade 10th or Equivalent</h2>
+			<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+				<div class="col-span-3">
+					<Label label_for="grade_10th_name_of_exam" label="Name of the Examination" />
+					<InputExposed
+						type="text"
+						id="grade_10th_name_of_exam"
+						name="grade_10th_name_of_exam"
+						placeholder="Name of the Examination"
+						bind:value={$data.grade_10th_or_equivalent.name_of_exam}
+					/>
+				</div>
+				<div class="">
+					<Label label_for="grade_10th_primary_language" label="Primary Language of Study" />
+					<InputExposed
+						type="text"
+						id="grade_10th_primary_language"
+						name="grade_10th_primary_language"
+						placeholder="Primary Language of Study"
+						bind:value={$data.grade_10th_or_equivalent.primary_language}
+					/>
+				</div>
+				<div class="">
+					<Label label_for="grade_10th_name_of_board" label="Name of Board" />
+					<InputExposed
+						type="text"
+						id="grade_10th_name_of_board"
+						name="grade_10th_name_of_board"
+						placeholder="Name of Board"
+						bind:value={$data.grade_10th_or_equivalent.name_of_board}
+					/>
+				</div>
+				<div class="col-span-2">
+					<Label label_for="grade_10th_name_of_institution" label="Name of Institution" />
+					<InputExposed
+						type="text"
+						id="grade_10th_name_of_institution"
+						name="grade_10th_name_of_institution"
+						placeholder="Name of Institution"
+						bind:value={$data.grade_10th_or_equivalent.name_of_institution}
+					/>
+				</div>
+				<div class="">
+					<Label label_for="grade_10th_country_of_study" label="Country of Education" />
+					<SelectExposed
+						bind:value={$data.grade_10th_or_equivalent.country_of_study}
+						id="grade_10th_country_of_study"
+						name="grade_10th_country_of_study"
+					>
+						{#each countries as country}
+							<option value={country.name}>{country.name}</option>
+						{/each}
+					</SelectExposed>
+				</div>
+				<div class="">
+					<Label label_for="grade_10th_grading_system" label="Grading System" />
+					<InputExposed
+						type="text"
+						id="grade_10th_grading_system"
+						name="grade_10th_grading_system"
+						placeholder="Grading System"
+						bind:value={$data.grade_10th_or_equivalent.grading_system}
+					/>
+				</div>
+				<div class="">
+					<Label label_for="grade_10th_score" label="Score" />
+					<InputExposed
+						type="text"
+						id="grade_10th_score"
+						name="grade_10th_score"
+						placeholder="Score"
+						bind:value={$data.grade_10th_or_equivalent.score}
+					/>
+				</div>
+				<div class="">
+					<Label label_for="grade_10th_start_date" label="Start Date" />
+					<IconInputExposed
+						type="date"
+						id="grade_10th_start_date"
+						name="grade_10th_start_date"
+						placeholder="Start Date"
+						bind:value={$data.grade_10th_or_equivalent.start_date}
+						><CalendarDays /></IconInputExposed
+					>
+				</div>
+				<div class="">
+					<Label label_for="grade_10th_end_date" label="End Date" />
+					<IconInputExposed
+						type="date"
+						id="grade_10th_end_date"
+						name="grade_10th_end_date"
+						placeholder="End Date"
+						bind:value={$data.grade_10th_or_equivalent.end_date}><CalendarDays /></IconInputExposed
+					>
+				</div>
 			</div>
-			<div class="">
-				<Label label_for="grade_10th_primary_language" label="Primary Language of Study" />
-				<InputExposed
-					type="text"
-					id="grade_10th_primary_language"
-					name="grade_10th_primary_language"
-					placeholder="Primary Language of Study"
-					bind:value={$data.grade_10th_or_equivalent.primary_language}
-				/>
+		</section>
+		<section class="form-section">
+			<h2>Grade 12th or Equivalent</h2>
+			<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+				<div class="col-span-3">
+					<Label label_for="grade_12th_name_of_exam" label="Name of the Examination" />
+					<InputExposed
+						type="text"
+						id="grade_12th_name_of_exam"
+						name="grade_12th_name_of_exam"
+						placeholder="Name of the Examination"
+						bind:value={$data.grade_12th_or_equivalent.name_of_exam}
+					/>
+				</div>
+				<div class="">
+					<Label label_for="grade_12th_primary_language" label="Primary Language of Study" />
+					<InputExposed
+						type="text"
+						id="grade_12th_primary_language"
+						name="grade_12th_primary_language"
+						placeholder="Primary Language of Study"
+						bind:value={$data.grade_12th_or_equivalent.primary_language}
+					/>
+				</div>
+				<div class="">
+					<Label label_for="grade_12th_name_of_board" label="Name of Board" />
+					<InputExposed
+						type="text"
+						id="grade_12th_name_of_board"
+						name="grade_12th_name_of_board"
+						placeholder="Name of Board"
+						bind:value={$data.grade_12th_or_equivalent.name_of_board}
+					/>
+				</div>
+				<div class="col-span-2">
+					<Label label_for="grade_12th_name_of_institution" label="Name of Institution" />
+					<InputExposed
+						type="text"
+						id="grade_12th_name_of_institution"
+						name="grade_12th_name_of_institution"
+						placeholder="Name of Institution"
+						bind:value={$data.grade_12th_or_equivalent.name_of_institution}
+					/>
+				</div>
+				<div class="">
+					<Label label_for="grade_12th_country_of_study" label="Country of Education" />
+					<SelectExposed
+						bind:value={$data.grade_12th_or_equivalent.country_of_study}
+						id="grade_12th_country_of_study"
+						name="grade_12th_country_of_study"
+					>
+						{#each countries as country}
+							<option value={country.name}>{country.name}</option>
+						{/each}
+					</SelectExposed>
+				</div>
+				<div class="">
+					<Label label_for="grade_12th_grading_system" label="Grading System" />
+					<InputExposed
+						type="text"
+						id="grade_12th_grading_system"
+						name="grade_12th_grading_system"
+						placeholder="Grading System"
+						bind:value={$data.grade_12th_or_equivalent.grading_system}
+					/>
+				</div>
+				<div class="">
+					<Label label_for="grade_12th_score" label="Score" />
+					<InputExposed
+						type="text"
+						id="grade_12th_score"
+						name="grade_12th_score"
+						placeholder="Score"
+						bind:value={$data.grade_12th_or_equivalent.score}
+					/>
+				</div>
+				<div class="">
+					<Label label_for="grade_12th_start_date" label="Start Date" />
+					<IconInputExposed
+						type="date"
+						id="grade_12th_start_date"
+						name="grade_12th_start_date"
+						placeholder="Start Date"
+						bind:value={$data.grade_12th_or_equivalent.start_date}
+						><CalendarDays /></IconInputExposed
+					>
+				</div>
+				<div class="">
+					<Label label_for="grade_12th_end_date" label="End Date" />
+					<IconInputExposed
+						type="date"
+						id="grade_12th_end_date"
+						name="grade_12th_end_date"
+						placeholder="End Date"
+						bind:value={$data.grade_12th_or_equivalent.end_date}><CalendarDays /></IconInputExposed
+					>
+				</div>
 			</div>
-			<div class="">
-				<Label label_for="grade_10th_name_of_board" label="Name of Board" />
-				<InputExposed
-					type="text"
-					id="grade_10th_name_of_board"
-					name="grade_10th_name_of_board"
-					placeholder="Name of Board"
-					bind:value={$data.grade_10th_or_equivalent.name_of_board}
-				/>
-			</div>
-			<div class="col-span-2">
-				<Label label_for="grade_10th_name_of_institution" label="Name of Institution" />
-				<InputExposed
-					type="text"
-					id="grade_10th_name_of_institution"
-					name="grade_10th_name_of_institution"
-					placeholder="Name of Institution"
-					bind:value={$data.grade_10th_or_equivalent.name_of_institution}
-				/>
-			</div>
-			<div class="">
-				<Label label_for="grade_10th_country_of_study" label="Country of Education" />
-				<SelectExposed
-					bind:value={$data.grade_10th_or_equivalent.country_of_study}
-					id="grade_10th_country_of_study"
-					name="grade_10th_country_of_study"
-				>
-					{#each countries as country}
-						<option value={country.name}>{country.name}</option>
-					{/each}
-				</SelectExposed>
-			</div>
-			<div class="">
-				<Label label_for="grade_10th_grading_system" label="Grading System" />
-				<InputExposed
-					type="text"
-					id="grade_10th_grading_system"
-					name="grade_10th_grading_system"
-					placeholder="Grading System"
-					bind:value={$data.grade_10th_or_equivalent.grading_system}
-				/>
-			</div>
-			<div class="">
-				<Label label_for="grade_10th_score" label="Score" />
-				<InputExposed
-					type="text"
-					id="grade_10th_score"
-					name="grade_10th_score"
-					placeholder="Score"
-					bind:value={$data.grade_10th_or_equivalent.score}
-				/>
-			</div>
-			<div class="">
-				<Label label_for="grade_10th_start_date" label="Start Date" />
-				<IconInputExposed
-					type="date"
-					id="grade_10th_start_date"
-					name="grade_10th_start_date"
-					placeholder="Start Date"
-					bind:value={$data.grade_10th_or_equivalent.start_date}><CalendarDays /></IconInputExposed
-				>
-			</div>
-			<div class="">
-				<Label label_for="grade_10th_end_date" label="End Date" />
-				<IconInputExposed
-					type="date"
-					id="grade_10th_end_date"
-					name="grade_10th_end_date"
-					placeholder="End Date"
-					bind:value={$data.grade_10th_or_equivalent.end_date}><CalendarDays /></IconInputExposed
-				>
-			</div>
-		</div>
-	</section>
-	<section class="form-section">
-		<h2>Grade 12th or Equivalent</h2>
-		<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-			<div class="col-span-3">
-				<Label label_for="grade_12th_name_of_exam" label="Name of the Examination" />
-				<InputExposed
-					type="text"
-					id="grade_12th_name_of_exam"
-					name="grade_12th_name_of_exam"
-					placeholder="Name of the Examination"
-					bind:value={$data.grade_12th_or_equivalent.name_of_exam}
-				/>
-			</div>
-			<div class="">
-				<Label label_for="grade_12th_primary_language" label="Primary Language of Study" />
-				<InputExposed
-					type="text"
-					id="grade_12th_primary_language"
-					name="grade_12th_primary_language"
-					placeholder="Primary Language of Study"
-					bind:value={$data.grade_12th_or_equivalent.primary_language}
-				/>
-			</div>
-			<div class="">
-				<Label label_for="grade_12th_name_of_board" label="Name of Board" />
-				<InputExposed
-					type="text"
-					id="grade_12th_name_of_board"
-					name="grade_12th_name_of_board"
-					placeholder="Name of Board"
-					bind:value={$data.grade_12th_or_equivalent.name_of_board}
-				/>
-			</div>
-			<div class="col-span-2">
-				<Label label_for="grade_12th_name_of_institution" label="Name of Institution" />
-				<InputExposed
-					type="text"
-					id="grade_12th_name_of_institution"
-					name="grade_12th_name_of_institution"
-					placeholder="Name of Institution"
-					bind:value={$data.grade_12th_or_equivalent.name_of_institution}
-				/>
-			</div>
-			<div class="">
-				<Label label_for="grade_12th_country_of_study" label="Country of Education" />
-				<SelectExposed
-					bind:value={$data.grade_12th_or_equivalent.country_of_study}
-					id="grade_12th_country_of_study"
-					name="grade_12th_country_of_study"
-				>
-					{#each countries as country}
-						<option value={country.name}>{country.name}</option>
-					{/each}
-				</SelectExposed>
-			</div>
-			<div class="">
-				<Label label_for="grade_12th_grading_system" label="Grading System" />
-				<InputExposed
-					type="text"
-					id="grade_12th_grading_system"
-					name="grade_12th_grading_system"
-					placeholder="Grading System"
-					bind:value={$data.grade_12th_or_equivalent.grading_system}
-				/>
-			</div>
-			<div class="">
-				<Label label_for="grade_12th_score" label="Score" />
-				<InputExposed
-					type="text"
-					id="grade_12th_score"
-					name="grade_12th_score"
-					placeholder="Score"
-					bind:value={$data.grade_12th_or_equivalent.score}
-				/>
-			</div>
-			<div class="">
-				<Label label_for="grade_12th_start_date" label="Start Date" />
-				<IconInputExposed
-					type="date"
-					id="grade_12th_start_date"
-					name="grade_12th_start_date"
-					placeholder="Start Date"
-					bind:value={$data.grade_12th_or_equivalent.start_date}><CalendarDays /></IconInputExposed
-				>
-			</div>
-			<div class="">
-				<Label label_for="grade_12th_end_date" label="End Date" />
-				<IconInputExposed
-					type="date"
-					id="grade_12th_end_date"
-					name="grade_12th_end_date"
-					placeholder="End Date"
-					bind:value={$data.grade_12th_or_equivalent.end_date}><CalendarDays /></IconInputExposed
-				>
-			</div>
-		</div>
-	</section>
-	<section class="form-section">
-		<h2>Undergraduate (Bachelor's) or Equivalent</h2>
-		<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-			<div class="col-span-3">
-				<Label label_for="undergraduate_degree_name_of_exam" label="Name of the Examination" />
-				<InputExposed
-					type="text"
-					id="undergraduate_degree_name_of_exam"
-					name="undergraduate_degree_name_of_exam"
-					placeholder="Name of the Examination"
-					bind:value={$data.undergraduate_degree_or_equivalent.name_of_exam}
-				/>
-			</div>
-			<div class="">
-				<Label
-					label_for="undergraduate_degree_primary_language"
-					label="Primary Language of Study"
-				/>
-				<InputExposed
-					type="text"
-					id="undergraduate_degree_primary_language"
-					name="undergraduate_degree_primary_language"
-					placeholder="Primary Language of Study"
-					bind:value={$data.undergraduate_degree_or_equivalent.primary_language}
-				/>
-			</div>
-			<div class="">
-				<Label label_for="undergraduate_degree_name_of_board" label="Name of Board" />
-				<InputExposed
-					type="text"
-					id="undergraduate_degree_name_of_board"
-					name="undergraduate_degree_name_of_board"
-					placeholder="Name of Board"
-					bind:value={$data.undergraduate_degree_or_equivalent.name_of_board}
-				/>
-			</div>
-			<div class="col-span-2">
-				<Label label_for="undergraduate_degree_name_of_institution" label="Name of Institution" />
-				<InputExposed
-					type="text"
-					id="undergraduate_degree_name_of_institution"
-					name="undergraduate_degree_name_of_institution"
-					placeholder="Name of Institution"
-					bind:value={$data.undergraduate_degree_or_equivalent.name_of_institution}
-				/>
-			</div>
-			<div class="">
-				<Label label_for="undergraduate_degree_country_of_study" label="Country of Education" />
-				<SelectExposed
-					bind:value={$data.undergraduate_degree_or_equivalent.country_of_study}
-					id="undergraduate_degree_country_of_study"
-					name="undergraduate_degree_country_of_study"
-				>
-					{#each countries as country}
-						<option value={country.name}>{country.name}</option>
-					{/each}
-				</SelectExposed>
-			</div>
-			<div class="">
-				<Label label_for="undergraduate_degree_grading_system" label="Grading System" />
-				<InputExposed
-					type="text"
-					id="undergraduate_degree_grading_system"
-					name="undergraduate_degree_grading_system"
-					placeholder="Grading System"
-					bind:value={$data.undergraduate_degree_or_equivalent.grading_system}
-				/>
-			</div>
-			<div class="">
-				<Label label_for="undergraduate_degree_score" label="Score" />
-				<InputExposed
-					type="text"
-					id="undergraduate_degree_score"
-					name="undergraduate_degree_score"
-					placeholder="Score"
-					bind:value={$data.undergraduate_degree_or_equivalent.score}
-				/>
-			</div>
-			<div class="">
-				<Label label_for="undergraduate_degree_start_date" label="Start Date" />
-				<IconInputExposed
-					type="date"
-					id="undergraduate_degree_start_date"
-					name="undergraduate_degree_start_date"
-					placeholder="Start Date"
-					bind:value={$data.undergraduate_degree_or_equivalent.start_date}
-					><CalendarDays /></IconInputExposed
-				>
-			</div>
-			<div class="">
-				<Label label_for="undergraduate_degree_end_date" label="End Date" />
-				<IconInputExposed
-					type="date"
-					id="undergraduate_degree_end_date"
-					name="undergraduate_degree_end_date"
-					placeholder="End Date"
-					bind:value={$data.undergraduate_degree_or_equivalent.end_date}
-					><CalendarDays /></IconInputExposed
-				>
-			</div>
-		</div>
-	</section>
-	<section class="form-section">
-		<h2>Graduate (Master's) or Equivalent</h2>
-		<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-			<div class="col-span-3">
-				<Label label_for="graduate_degree_name_of_exam" label="Name of the Examination" />
-				<InputExposed
-					type="text"
-					id="graduate_degree_name_of_exam"
-					name="graduate_degree_name_of_exam"
-					placeholder="Name of the Examination"
-					bind:value={$data.graduate_degree_or_equivalent.name_of_exam}
-				/>
-			</div>
-			<div class="">
-				<Label label_for="graduate_degree_primary_language" label="Primary Language of Study" />
-				<InputExposed
-					type="text"
-					id="graduate_degree_primary_language"
-					name="graduate_degree_primary_language"
-					placeholder="Primary Language of Study"
-					bind:value={$data.graduate_degree_or_equivalent.primary_language}
-				/>
-			</div>
-			<div class="">
-				<Label label_for="graduate_degree_name_of_board" label="Name of Board" />
-				<InputExposed
-					type="text"
-					id="graduate_degree_name_of_board"
-					name="graduate_degree_name_of_board"
-					placeholder="Name of Board"
-					bind:value={$data.graduate_degree_or_equivalent.name_of_board}
-				/>
-			</div>
-			<div class="col-span-2">
-				<Label label_for="graduate_degree_name_of_institution" label="Name of Institution" />
-				<InputExposed
-					type="text"
-					id="graduate_degree_name_of_institution"
-					name="graduate_degree_name_of_institution"
-					placeholder="Name of Institution"
-					bind:value={$data.graduate_degree_or_equivalent.name_of_institution}
-				/>
-			</div>
-			<div class="">
-				<Label label_for="graduate_degree_country_of_study" label="Country of Education" />
-				<SelectExposed
-					bind:value={$data.graduate_degree_or_equivalent.country_of_study}
-					id="graduate_degree_country_of_study"
-					name="graduate_degree_country_of_study"
-				>
-					{#each countries as country}
-						<option value={country.name}>{country.name}</option>
-					{/each}
-				</SelectExposed>
-			</div>
-			<div class="">
-				<Label label_for="graduate_degree_grading_system" label="Grading System" />
-				<InputExposed
-					type="text"
-					id="graduate_degree_grading_system"
-					name="graduate_degree_grading_system"
-					placeholder="Grading System"
-					bind:value={$data.graduate_degree_or_equivalent.grading_system}
-				/>
-			</div>
-			<div class="">
-				<Label label_for="graduate_degree_score" label="Score" />
-				<InputExposed
-					type="text"
-					id="graduate_degree_score"
-					name="graduate_degree_score"
-					placeholder="Score"
-					bind:value={$data.graduate_degree_or_equivalent.score}
-				/>
-			</div>
-			<div class="">
-				<Label label_for="graduate_degree_start_date" label="Start Date" />
-				<IconInputExposed
-					type="date"
-					id="graduate_degree_start_date"
-					name="graduate_degree_start_date"
-					placeholder="Start Date"
-					bind:value={$data.graduate_degree_or_equivalent.start_date}
-					><CalendarDays /></IconInputExposed
-				>
-			</div>
-			<div class="">
-				<Label label_for="graduate_degree_end_date" label="End Date" />
-				<IconInputExposed
-					type="date"
-					id="graduate_degree_end_date"
-					name="graduate_degree_end_date"
-					placeholder="End Date"
-					bind:value={$data.graduate_degree_or_equivalent.end_date}
-					><CalendarDays /></IconInputExposed
-				>
-			</div>
-		</div>
-	</section>
+		</section>
+		{#if education_level_value >= 4}
+			<section
+				in:fly={{ y: -50, duration: 500 }}
+				out:fly={{ y: 50, duration: 300 }}
+				class="form-section"
+			>
+				<h2>Undergraduate (Bachelor's) or Equivalent</h2>
+				<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+					<div class="col-span-3">
+						<Label label_for="undergraduate_degree_name_of_exam" label="Name of the Examination" />
+						<InputExposed
+							type="text"
+							id="undergraduate_degree_name_of_exam"
+							name="undergraduate_degree_name_of_exam"
+							placeholder="Name of the Examination"
+							bind:value={$data.undergraduate_degree_or_equivalent.name_of_exam}
+						/>
+					</div>
+					<div class="">
+						<Label
+							label_for="undergraduate_degree_primary_language"
+							label="Primary Language of Study"
+						/>
+						<InputExposed
+							type="text"
+							id="undergraduate_degree_primary_language"
+							name="undergraduate_degree_primary_language"
+							placeholder="Primary Language of Study"
+							bind:value={$data.undergraduate_degree_or_equivalent.primary_language}
+						/>
+					</div>
+					<div class="">
+						<Label label_for="undergraduate_degree_name_of_board" label="Name of Board" />
+						<InputExposed
+							type="text"
+							id="undergraduate_degree_name_of_board"
+							name="undergraduate_degree_name_of_board"
+							placeholder="Name of Board"
+							bind:value={$data.undergraduate_degree_or_equivalent.name_of_board}
+						/>
+					</div>
+					<div class="col-span-2">
+						<Label
+							label_for="undergraduate_degree_name_of_institution"
+							label="Name of Institution"
+						/>
+						<InputExposed
+							type="text"
+							id="undergraduate_degree_name_of_institution"
+							name="undergraduate_degree_name_of_institution"
+							placeholder="Name of Institution"
+							bind:value={$data.undergraduate_degree_or_equivalent.name_of_institution}
+						/>
+					</div>
+					<div class="">
+						<Label label_for="undergraduate_degree_country_of_study" label="Country of Education" />
+						<SelectExposed
+							bind:value={$data.undergraduate_degree_or_equivalent.country_of_study}
+							id="undergraduate_degree_country_of_study"
+							name="undergraduate_degree_country_of_study"
+						>
+							{#each countries as country}
+								<option value={country.name}>{country.name}</option>
+							{/each}
+						</SelectExposed>
+					</div>
+					<div class="">
+						<Label label_for="undergraduate_degree_grading_system" label="Grading System" />
+						<InputExposed
+							type="text"
+							id="undergraduate_degree_grading_system"
+							name="undergraduate_degree_grading_system"
+							placeholder="Grading System"
+							bind:value={$data.undergraduate_degree_or_equivalent.grading_system}
+						/>
+					</div>
+					<div class="">
+						<Label label_for="undergraduate_degree_score" label="Score" />
+						<InputExposed
+							type="text"
+							id="undergraduate_degree_score"
+							name="undergraduate_degree_score"
+							placeholder="Score"
+							bind:value={$data.undergraduate_degree_or_equivalent.score}
+						/>
+					</div>
+					<div class="">
+						<Label label_for="undergraduate_degree_start_date" label="Start Date" />
+						<IconInputExposed
+							type="date"
+							id="undergraduate_degree_start_date"
+							name="undergraduate_degree_start_date"
+							placeholder="Start Date"
+							bind:value={$data.undergraduate_degree_or_equivalent.start_date}
+							><CalendarDays /></IconInputExposed
+						>
+					</div>
+					<div class="">
+						<Label label_for="undergraduate_degree_end_date" label="End Date" />
+						<IconInputExposed
+							type="date"
+							id="undergraduate_degree_end_date"
+							name="undergraduate_degree_end_date"
+							placeholder="End Date"
+							bind:value={$data.undergraduate_degree_or_equivalent.end_date}
+							><CalendarDays /></IconInputExposed
+						>
+					</div>
+				</div>
+			</section>
+		{/if}
+		{#if education_level_value >= 5}
+			<section
+				in:fly={{ y: -50, duration: 500 }}
+				out:fly={{ y: 50, duration: 300 }}
+				class="form-section"
+			>
+				<h2>Graduate (Master's) or Equivalent</h2>
+				<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+					<div class="col-span-3">
+						<Label label_for="graduate_degree_name_of_exam" label="Name of the Examination" />
+						<InputExposed
+							type="text"
+							id="graduate_degree_name_of_exam"
+							name="graduate_degree_name_of_exam"
+							placeholder="Name of the Examination"
+							bind:value={$data.graduate_degree_or_equivalent.name_of_exam}
+						/>
+					</div>
+					<div class="">
+						<Label label_for="graduate_degree_primary_language" label="Primary Language of Study" />
+						<InputExposed
+							type="text"
+							id="graduate_degree_primary_language"
+							name="graduate_degree_primary_language"
+							placeholder="Primary Language of Study"
+							bind:value={$data.graduate_degree_or_equivalent.primary_language}
+						/>
+					</div>
+					<div class="">
+						<Label label_for="graduate_degree_name_of_board" label="Name of Board" />
+						<InputExposed
+							type="text"
+							id="graduate_degree_name_of_board"
+							name="graduate_degree_name_of_board"
+							placeholder="Name of Board"
+							bind:value={$data.graduate_degree_or_equivalent.name_of_board}
+						/>
+					</div>
+					<div class="col-span-2">
+						<Label label_for="graduate_degree_name_of_institution" label="Name of Institution" />
+						<InputExposed
+							type="text"
+							id="graduate_degree_name_of_institution"
+							name="graduate_degree_name_of_institution"
+							placeholder="Name of Institution"
+							bind:value={$data.graduate_degree_or_equivalent.name_of_institution}
+						/>
+					</div>
+					<div class="">
+						<Label label_for="graduate_degree_country_of_study" label="Country of Education" />
+						<SelectExposed
+							bind:value={$data.graduate_degree_or_equivalent.country_of_study}
+							id="graduate_degree_country_of_study"
+							name="graduate_degree_country_of_study"
+						>
+							{#each countries as country}
+								<option value={country.name}>{country.name}</option>
+							{/each}
+						</SelectExposed>
+					</div>
+					<div class="">
+						<Label label_for="graduate_degree_grading_system" label="Grading System" />
+						<InputExposed
+							type="text"
+							id="graduate_degree_grading_system"
+							name="graduate_degree_grading_system"
+							placeholder="Grading System"
+							bind:value={$data.graduate_degree_or_equivalent.grading_system}
+						/>
+					</div>
+					<div class="">
+						<Label label_for="graduate_degree_score" label="Score" />
+						<InputExposed
+							type="text"
+							id="graduate_degree_score"
+							name="graduate_degree_score"
+							placeholder="Score"
+							bind:value={$data.graduate_degree_or_equivalent.score}
+						/>
+					</div>
+					<div class="">
+						<Label label_for="graduate_degree_start_date" label="Start Date" />
+						<IconInputExposed
+							type="date"
+							id="graduate_degree_start_date"
+							name="graduate_degree_start_date"
+							placeholder="Start Date"
+							bind:value={$data.graduate_degree_or_equivalent.start_date}
+							><CalendarDays /></IconInputExposed
+						>
+					</div>
+					<div class="">
+						<Label label_for="graduate_degree_end_date" label="End Date" />
+						<IconInputExposed
+							type="date"
+							id="graduate_degree_end_date"
+							name="graduate_degree_end_date"
+							placeholder="End Date"
+							bind:value={$data.graduate_degree_or_equivalent.end_date}
+							><CalendarDays /></IconInputExposed
+						>
+					</div>
+				</div>
+			</section>
+		{/if}
+	{/if}
 	<section class="form-section">
 		<div class="flex w-full justify-end">
 			<Button type="submit" classes="px-20 py-4" text="Submit" disabled={!$isValid} />
