@@ -3,11 +3,21 @@ import { error } from '@sveltejs/kit';
 
 export async function POST({ request, locals }) {
 	const values = await request.formData();
-	console.log(values);
-	// const res = await api.patch(`document/`, values, locals.access);
+	// const res = await api.post(`document/`, values, locals.access, true);
 
-	// if (!res.ok) {
-	// 	throw error(res.status, 'Something went wrong');
-	// }
+	const res = await fetch('http://127.0.0.1:8000/api/v1/document/', {
+		method: 'POST',
+		headers: {
+			Authorization: `JWT ${locals.access}`
+		},
+		body: values
+	});
+
+	console.log(res);
+	console.log(await res.json());
+
+	if (!res.ok) {
+		throw error(res.status, 'Something went wrong');
+	}
 	return new Response(JSON.stringify({ success: true }));
 }

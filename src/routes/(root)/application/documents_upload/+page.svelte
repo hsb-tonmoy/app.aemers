@@ -1,5 +1,5 @@
 <script>
-	import UploadComponent from '$lib/components/Upload/UploadComponent.svelte';
+	import CategorySection from './CategorySection.svelte';
 </script>
 
 <div class="flex flex-col px-14 py-8 xl:px-20 xl:py-12 bg-white rounded-2xl w-full">
@@ -21,5 +21,5 @@
 			</ol>
 		</div>
 	</div>
-	<UploadComponent />
+	<CategorySection />
 </div>

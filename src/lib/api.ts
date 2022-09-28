@@ -1,6 +1,6 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
-async function send({ method, path, data, token, file = null }) {
+async function send({ method, path, data, token, file = false }) {
 	const opts = {
 		method,
 		headers: {}
@@ -13,6 +13,9 @@ async function send({ method, path, data, token, file = null }) {
 
 	if (data && file) {
 		opts.body = data;
+		opts.headers = {
+			Accept: 'application/json'
+		};
 	}
 
 	if (token) {
