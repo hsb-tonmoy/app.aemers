@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let iconAlign: string = 'right';
-	export let iconClass: string = 'block w-5 h-5';
+	export let iconClass: string = 'block w-7 h-7 text-primary mr-6';
 	export let type: string = 'text';
 	export let name: string;
 	export let value = '';
@@ -10,6 +10,9 @@
 	export let disabled: boolean = false;
 	export let touched: boolean = false;
 	export let error: boolean = false;
+	const setType = (node) => {
+		node.type = type;
+	};
 </script>
 
 <div class="relative">
@@ -21,10 +24,10 @@
 		</div>
 	{/if}
 	<input
-		{type}
+		use:setType
 		{id}
 		{name}
-		{value}
+		bind:value
 		{disabled}
 		class={`form-input border border-borderColor focus:border-primary focus:ring focus:ring-primary disabled:bg-gray-300 ${
 			error ? 'border-red-600 focus:border-red-600 focus:ring-red-600' : ''

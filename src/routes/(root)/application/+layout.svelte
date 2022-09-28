@@ -3,9 +3,10 @@
 	import { page } from '$app/stores';
 	import { application_steps } from '$lib/data/stores';
 	import { Tooltip } from 'flowbite-svelte';
-	import { showNextToolTip } from './stores';
+	import { formSaved, showNextToolTip } from './stores';
 
-	import { LeftArrow } from '$lib/components/Icons';
+	import { CloudDone, LeftArrow } from '$lib/components/Icons';
+	import { onMount } from 'svelte';
 
 	let pageTitle = '';
 	let previousURL = null;
@@ -28,6 +29,10 @@
 		goto(nextURL);
 		$showNextToolTip === true ? ($showNextToolTip = false) : null;
 	};
+
+	onMount(() => {
+		formSaved.set(false);
+	});
 </script>
 
 <div class="flex flex-col h-full">
@@ -40,6 +45,13 @@
 				<span class="block h-4 w-4 md:w-6 md:h-6 text-primary"><LeftArrow /></span>
 			</button>
 			<h1 class="text-secondary font-bold text-xl md:text-3xl">{pageTitle}</h1>
+			{#if $formSaved}
+				<div class="flex items-center gap-x-1">
+					<span class="block text-primary w-4 h-4 mt-1"><CloudDone /></span><span
+						class="text-sm text-secondary">Saved</span
+					>
+				</div>
+			{/if}
 		</div>
 		<nav class="flex items-center gap-x-3">
 			<button

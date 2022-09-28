@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let iconAlign: string = 'right';
-	export let iconClass: string = 'block w-5 h-5';
+	export let iconClass: string = 'block w-7 h-7 text-primary mr-6';
 	export let type: string = 'text';
 	export let name: string;
 	export let id: string;

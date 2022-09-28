@@ -13,10 +13,12 @@
 	} from '$lib/components/Form';
 	import { CalendarDays } from '$lib/components/Icons';
 	import { countries } from '$lib/data/countries';
+	import { notificationToast } from '$lib/NotificationToast';
 	import { validator } from '@felte/validator-yup';
+	import { useMutation } from '@sveltestack/svelte-query';
 	import { createForm } from 'felte';
 	import { fly } from 'svelte/transition';
-
+	import { formSaved } from '../stores';
 	import {
 		education_data,
 		education_level,
@@ -36,21 +38,43 @@
 		$data.work_experience = $data.work_experience.slice(0, -1);
 	}
 
-	const { form, data, errors, isValid } = createForm({
+	const submitData = useMutation(
+		(formData) => {
+			return fetch('/application/pre_application_form', {
+				method: 'PATCH',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(formData)
+			});
+		},
+		{
+			onSettled: async (data, error, variables, context) => {
+				if (!data.ok || error) {
+					notificationToast('Something went wrong, please try again later');
+					console.log(await data.json(), error);
+				} else {
+					formSaved.set(true);
+				}
+			}
+		}
+	);
+
+	const { form, data, errors, isValid, isDirty, interacted } = createForm({
 		initialValues: {
 			first_name: pre_application_form.first_name || profile_data.first_name,
-			middle_initials: pre_application_form.middle_initials || '',
+			middle_initials: pre_application_form.middle_initials,
 			last_name: pre_application_form.last_name || profile_data.last_name,
 			email: pre_application_form.email || profile_data.email,
 			phone: pre_application_form.phone || profile_data.profile.phone,
-			date_of_birth: pre_application_form.date_of_birth || '',
-			gender: pre_application_form.gender || '',
-			marital_status: pre_application_form.marital_status || '',
-			address_line_1: pre_application_form.address_line_1 || '',
-			address_line_2: pre_application_form.address_line_2 || '',
-			city: pre_application_form.city || '',
-			state: pre_application_form.state || '',
-			zip_code: pre_application_form.zip_code || '',
+			date_of_birth: pre_application_form.date_of_birth,
+			gender: pre_application_form.gender,
+			marital_status: pre_application_form.marital_status,
+			address_line_1: pre_application_form.address_line_1,
+			address_line_2: pre_application_form.address_line_2,
+			city: pre_application_form.city,
+			state: pre_application_form.state,
+			zip_code: pre_application_form.zip_code,
 			country: pre_application_form.country || profile_data.profile.country,
 			perma_address_line_1: pre_application_form.perma_address_line_1,
 			perma_address_line_2: pre_application_form.perma_address_line_2,
@@ -91,19 +115,19 @@
 				pre_application_form.english_proficiency || profile_data.profile.english_proficiency,
 			english_proficiency_score: pre_application_form.english_proficiency_score,
 			english_proficiency_date_of_examination:
-				pre_application_form.english_proficiency_date_of_examination || '',
-			english_proficiency_trf_no: pre_application_form.english_proficiency_trf_no || '',
-			english_proficiency_waivers: String(pre_application_form.english_proficiency_waivers) || '',
-			english_proficiency_listening: pre_application_form.english_proficiency_listening || '',
-			english_proficiency_speaking: pre_application_form.english_proficiency_speaking || '',
-			english_proficiency_reading: pre_application_form.english_proficiency_reading || '',
-			english_proficiency_writing: pre_application_form.english_proficiency_writing || '',
+				pre_application_form.english_proficiency_date_of_examination,
+			english_proficiency_trf_no: pre_application_form.english_proficiency_trf_no,
+			english_proficiency_waivers: String(pre_application_form.english_proficiency_waivers),
+			english_proficiency_listening: pre_application_form.english_proficiency_listening,
+			english_proficiency_speaking: pre_application_form.english_proficiency_speaking,
+			english_proficiency_reading: pre_application_form.english_proficiency_reading,
+			english_proficiency_writing: pre_application_form.english_proficiency_writing,
 			sat_score: pre_application_form.sat_score,
 			sat_date_of_examination: pre_application_form.sat_date_of_examination,
 			sat_ebrw: pre_application_form.sat_ebrw,
 			sat_math: pre_application_form.sat_math,
-			sat_reading: pre_application_form.sat_reading || '',
-			sat_writing: pre_application_form.sat_writing || '',
+			sat_reading: pre_application_form.sat_reading,
+			sat_writing: pre_application_form.sat_writing,
 			act_score: pre_application_form.act_score,
 			act_date_of_examination: pre_application_form.act_date_of_examination,
 			act_english: pre_application_form.act_english,
@@ -118,9 +142,14 @@
 
 		extend: validator({ schema }),
 		onSubmit(values, context) {
-			console.log(values);
+			$submitData.mutate(values);
+			console.log($isDirty);
 		}
 	});
+
+	$: if ($interacted) {
+		console.log('imet');
+	}
 
 	let education_level_value: number;
 
@@ -176,7 +205,6 @@
 			<div class="">
 				<Label label_for="date_of_birth" label="Date of Birth" />
 				<IconInput
-					iconClass="block w-7 h-7 text-primary mr-3"
 					type="date"
 					id="date_of_birth"
 					name="date_of_birth"
@@ -432,7 +460,6 @@
 			<div class="">
 				<Label label_for="passport_issue_date" label="Issue Date" />
 				<IconInput
-					iconClass="block w-7 h-7 text-primary mr-3"
 					type="date"
 					id="passport_issue_date"
 					name="passport_issue_date"
@@ -445,7 +472,6 @@
 			<div class="">
 				<Label label_for="passport_expiry_date" label="Expiry Date" />
 				<IconInput
-					iconClass="block w-7 h-7 text-primary mr-3"
 					type="date"
 					id="passport_expiry_date"
 					name="passport_expiry_date"
@@ -1327,14 +1353,14 @@
 				</div>
 				<div class="flex items-center gap-x-4 col-start-1 col-span-3">
 					<Button
-						type="text"
+						type="button"
 						on:click={addWorkExperience}
 						text="Add work experience"
 						defaultClass=""
 						classes="bg-white hover:bg-primary border border-primary text-primary hover:text-white font-bold px-4 py-3 w-full rounded-xl"
 					/>
 					<Button
-						type="text"
+						type="button"
 						on:click={deleteWorkExperience}
 						text="Remove"
 						defaultClass=""
@@ -1375,7 +1401,12 @@
 	</section>
 	<section class="form-section">
 		<div class="flex w-full justify-end">
-			<Button type="submit" classes="px-20 py-4" text="Submit" disabled={!$isValid} />
+			<Button
+				classes="px-20 py-4"
+				text="Submit"
+				loading={$submitData.isLoading}
+				disabled={!$isValid}
+			/>
 		</div>
 	</section>
 </form>

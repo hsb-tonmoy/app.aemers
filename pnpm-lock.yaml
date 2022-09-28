@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@felte/validator-yup': ^1.0.9
+  '@felte/validator-yup': ^1.0.10
   '@sveltejs/adapter-auto': next
   '@sveltejs/adapter-netlify': next
   '@sveltejs/kit': next
@@ -15,14 +15,14 @@ specifiers:
   eslint: ^7.32.0
   eslint-config-prettier: ^8.5.0
   eslint-plugin-svelte3: ^3.4.1
-  felte: ^1.2.3
+  felte: ^1.2.5
   flowbite: ^1.5.3
   flowbite-svelte: 0.26.6
   javascript-time-ago: ^2.5.7
   jwt-decode: ^3.1.2
   postcss: ^8.4.16
   prettier: ^2.7.1
-  prettier-plugin-svelte: ^2.7.0
+  prettier-plugin-svelte: ^2.7.1
   svelte: ^3.50.1
   svelte-file-dropzone: ^1.0.0
   svelte-forms-lib: ^2.0.1
@@ -34,18 +34,18 @@ specifiers:
   tailwindcss: ^3.1.8
   toastify-js: ^1.12.0
   tslib: ^2.4.0
-  typescript: ^4.8.3
+  typescript: ^4.8.4
   vite: 3.1.0
   yup: ^0.32.11
   yup-password: ^0.2.2
 
 dependencies:
-  '@felte/validator-yup': 1.0.9_yup@0.32.11
+  '@felte/validator-yup': 1.0.10_yup@0.32.11
   '@tailwindcss/forms': 0.4.1_tailwindcss@3.1.8
   broadcast-channel: 4.17.0
   cookie: 0.4.2
   country-data-list: 1.2.2
-  felte: 1.2.3_svelte@3.50.1
+  felte: 1.2.5_svelte@3.50.1
   javascript-time-ago: 2.5.7
   jwt-decode: 3.1.2
   svelte-file-dropzone: 1.0.0
@@ -59,7 +59,7 @@ dependencies:
 devDependencies:
   '@sveltejs/adapter-auto': 1.0.0-next.80
   '@sveltejs/adapter-netlify': 1.0.0-next.78
-  '@sveltejs/kit': 1.0.0-next.503_svelte@3.50.1+vite@3.1.0
+  '@sveltejs/kit': 1.0.0-next.504_svelte@3.50.1+vite@3.1.0
   '@sveltestack/svelte-query': 1.6.0_broadcast-channel@4.17.0
   '@zerodevx/svelte-toast': 0.7.2
   autoprefixer: 10.4.12_postcss@8.4.16
@@ -70,14 +70,14 @@ devDependencies:
   flowbite-svelte: 0.26.6
   postcss: 8.4.16
   prettier: 2.7.1
-  prettier-plugin-svelte: 2.7.0_nk6d2fkgcllkkdynqbuearcure
+  prettier-plugin-svelte: 2.7.1_nk6d2fkgcllkkdynqbuearcure
   svelte: 3.50.1
   svelte-pdf: 1.0.13
-  svelte-preprocess: 4.10.7_snqnsttluzgwj6kbxzouwakc4q
+  svelte-preprocess: 4.10.7_u4iw5w2ir6rz2qc6xbgyfkliw4
   svelte-time: 0.7.1
   tailwindcss: 3.1.8_postcss@8.4.16
   tslib: 2.4.0
-  typescript: 4.8.3
+  typescript: 4.8.4
   vite: 3.1.0
 
 packages:
@@ -147,25 +147,25 @@ packages:
       - supports-color
     dev: true
 
-  /@felte/common/1.1.2:
-    resolution: {integrity: sha512-RNSuI+x5BG7oocz0uY+jdkxYRFlRR/C4PZTvfi4mx9U23LzhNSSRG7gPhbQgO75L5YTB1lPwFKJry4uiVXxtwA==}
+  /@felte/common/1.1.3:
+    resolution: {integrity: sha512-47OJYohloUT9FOgXRxEIaSkaveDB70/eRv3+6MfYDZbc44XfojHJLiUOz3uSWRwfl8f2wonhkhIPCYkzIUltTg==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dev: false
 
-  /@felte/core/1.3.3:
-    resolution: {integrity: sha512-RcK3VBx6CL8O37tw8mWS44pfYkJQdxraT+eO5yHr9AjDpeqF4n864AcXnX7r6ists1EFXCXGMLSRrvY99cLFzw==}
+  /@felte/core/1.3.5:
+    resolution: {integrity: sha512-PaHZKw6ihIGyjF9tj5IJrRfzzxGfBT7gypEr49/paHSX+axWx4My2PZZOXRce8Hq8SSH4MBK+2HxzjFhAKvdYQ==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dependencies:
-      '@felte/common': 1.1.2
+      '@felte/common': 1.1.3
     dev: false
 
-  /@felte/validator-yup/1.0.9_yup@0.32.11:
-    resolution: {integrity: sha512-G+l55qruWeJnO2x+dZ+A4o5YDclYUBoazCzVf3i3eUDO2aUgWxP0QEsEnjPAtJOU3rXYvjFO+0JTKNGUsybVeA==}
+  /@felte/validator-yup/1.0.10_yup@0.32.11:
+    resolution: {integrity: sha512-Ps7HN/ZI+OMJkYlxf84qG4g1mzd0PZt8yXbs9t/yS2kiJQ3XywPDDF/uJ0hAL7qutCLrL/nIPDztlxskwKIP/A==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     peerDependencies:
       yup: ^0.32.9
     dependencies:
-      '@felte/common': 1.1.2
+      '@felte/common': 1.1.3
       yup: 0.32.11
     dev: false
 
@@ -287,8 +287,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.503_svelte@3.50.1+vite@3.1.0:
-    resolution: {integrity: sha512-QSEHe40qMOYjXirxS57dIa9NU4FntlYh+KYslBzasjMCfSiUkHGaWMJRz8uU+R4BWnThD9SdCo7F/NwDxu5LRQ==}
+  /@sveltejs/kit/1.0.0-next.504_svelte@3.50.1+vite@3.1.0:
+    resolution: {integrity: sha512-KrhlSHT3aCVnhRgUoN6aGIjIw3nWEdNwfoZcE1x65F5D7Ju/K9D8dQwyal9v0aBAZyN9nFuXxsYGaMLE9sppfw==}
     engines: {node: '>=16.14'}
     hasBin: true
     requiresBuild: true
@@ -367,8 +367,8 @@ packages:
     resolution: {integrity: sha512-evMDG1bC4rgQg4ku9tKpuMh5iBNEwNa3tf9zRHdP1qlv+1WUg44xat4IxCE14gIpZRGUUWAx2VhItCZc25NfMA==}
     dev: false
 
-  /@types/node/18.7.21:
-    resolution: {integrity: sha512-rLFzK5bhM0YPyCoTC8bolBjMk7bwnZ8qeZUBslBfjZQou2ssJdWslx9CZ8DGM+Dx7QXQiiTVZ/6QO6kwtHkZCA==}
+  /@types/node/18.7.23:
+    resolution: {integrity: sha512-DWNcCHolDq0ZKGizjx2DZjR/PqsYwAcYUJmfMWqtVU2MBMG5Mo+xFZrhGId5r/O5HOuMPyQEcM6KUBp5lBZZBg==}
     dev: true
 
   /@types/pug/2.0.6:
@@ -378,7 +378,7 @@ packages:
   /@types/sass/1.43.1:
     resolution: {integrity: sha512-BPdoIt1lfJ6B7rw35ncdwBZrAssjcwzI5LByIrYs+tpXlj/CAkuVdRsgZDdP4lq5EjyWzwxZCqAoFyHKFwp32g==}
     dependencies:
-      '@types/node': 18.7.21
+      '@types/node': 18.7.23
     dev: true
 
   /@vercel/nft/0.22.1:
@@ -583,7 +583,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001412
-      electron-to-chromium: 1.4.262
+      electron-to-chromium: 1.4.265
       node-releases: 2.0.6
       update-browserslist-db: 1.0.9_browserslist@4.21.4
     dev: true
@@ -671,7 +671,7 @@ packages:
     dev: true
 
   /concat-map/0.0.1:
-    resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
+    resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
 
   /console-control-strings/1.1.0:
     resolution: {integrity: sha512-ty/fTekppD2fIwRvnZAVdeOiGd1c7YXEixbgJTNzqcxJWKQnjJ/V1bNEEE6hygpM3WjwHFUVK6HTjWSzV4a8sQ==}
@@ -796,8 +796,8 @@ packages:
     resolution: {integrity: sha512-l32Xp/TLgWb8ReqbVJAFIvXmY7go4nTxxlWiAFyhoQw9RKEOHBZNnyGvJWqDVSPmq3Y9HlM4npqF/T6VMOXhww==}
     dev: true
 
-  /electron-to-chromium/1.4.262:
-    resolution: {integrity: sha512-Ckn5haqmGh/xS8IbcgK3dnwAVnhDyo/WQnklWn6yaMucYTq7NNxwlGE8ElzEOnonzRLzUCo2Ot3vUb2GYUF2Hw==}
+  /electron-to-chromium/1.4.265:
+    resolution: {integrity: sha512-38KaYBNs0oCzWCpr6j7fY/W9vF0vSp4tKFIshQTgdZMhUpkxgotkQgjJP6iGMdmlsgMs3i0/Hkko4UXLTrkYVQ==}
     dev: true
 
   /emoji-regex/8.0.0:
@@ -1216,13 +1216,13 @@ packages:
     dependencies:
       reusify: 1.0.4
 
-  /felte/1.2.3_svelte@3.50.1:
-    resolution: {integrity: sha512-AUxizK3LP+S14TvnPyOgJMEJfzKE4FPz+A4386kRdpOEEYFyh+pwKOvIkGZWO7c6LIuDIs6DDmP0VS9Cjq4Qhg==}
+  /felte/1.2.5_svelte@3.50.1:
+    resolution: {integrity: sha512-BmWjRwSQZ4VONIZoUJ+GEA9jYO4CJf+aCkMf9z9CK8kdZ75ILsoAovnWVAvsLLhGvLdh76FCXg2uU9v7Xk6Tww==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     peerDependencies:
       svelte: ^3.31.0
     dependencies:
-      '@felte/core': 1.3.3
+      '@felte/core': 1.3.5
       svelte: 3.50.1
     dev: false
 
@@ -1873,8 +1873,8 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prettier-plugin-svelte/2.7.0_nk6d2fkgcllkkdynqbuearcure:
-    resolution: {integrity: sha512-fQhhZICprZot2IqEyoiUYLTRdumULGRvw0o4dzl5jt0jfzVWdGqeYW27QTWAeXhoupEZJULmNoH3ueJwUWFLIA==}
+  /prettier-plugin-svelte/2.7.1_nk6d2fkgcllkkdynqbuearcure:
+    resolution: {integrity: sha512-H33qjhCBZyd9Zr1A5hUAYDh7j0Mf97uvy7XcA7CP4nNSYrNcPvBUf7wI8K9NptWTIs0S41QtgTWmJIUiGlEBtw==}
     peerDependencies:
       prettier: ^1.16.4 || ^2.0.0
       svelte: ^3.2.0
@@ -2189,7 +2189,7 @@ packages:
       - worker-loader
     dev: true
 
-  /svelte-preprocess/4.10.7_snqnsttluzgwj6kbxzouwakc4q:
+  /svelte-preprocess/4.10.7_u4iw5w2ir6rz2qc6xbgyfkliw4:
     resolution: {integrity: sha512-sNPBnqYD6FnmdBrUmBCaqS00RyCsCpj2BG58A1JBswNF7b0OKviwxqVrOL/CKyJrLSClrSeqQv5BXNg2RUbPOw==}
     engines: {node: '>= 9.11.2'}
     requiresBuild: true
@@ -2238,7 +2238,7 @@ packages:
       sorcery: 0.10.0
       strip-indent: 3.0.0
       svelte: 3.50.1
-      typescript: 4.8.3
+      typescript: 4.8.4
     dev: true
 
   /svelte-time/0.7.1:
@@ -2359,8 +2359,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /typescript/4.8.3:
-    resolution: {integrity: sha512-goMHfm00nWPa8UvR/CPSvykqf6dVV8x/dp0c5mFTMTIu0u0FlGWRioyy7Nn0PGAdHxpJZnuO/ut+PpQ8UiHAig==}
+  /typescript/4.8.4:
+    resolution: {integrity: sha512-QCh+85mCy+h0IGff8r5XWzOVSbBO+KfeYrMQh7NJ58QujwcE22u+NUSmUxqF+un70P9GXKxa2HCNiTTMJknyjQ==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true

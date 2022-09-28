@@ -19,7 +19,6 @@
 	export let light = 'var(--bs-light, white)';
 	export let dark = 'var(--bs-dark, black)';
 	export let borderRadius = '50%';
-	export let iconBorder = true;
 	export let lineColor = '#d9d9d9';
 	export let reverse = false;
 	export let clickable = true;
