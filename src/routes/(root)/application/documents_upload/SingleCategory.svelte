@@ -11,55 +11,32 @@
 		accepted: []
 	};
 
-	// const submitData = useMutation(
-	// 	(data) => {
-	// 		let formData = new FormData();
-	// 		formData.append('document', data.document);
-	// 		formData.append('category', data.category);
-	// 		formData.append('description', data.description);
-	// 		formData.append('name', data.name);
-	// 		formData.append('user', '1');
+	const submitData = useMutation(
+		(values) => {
+			let formData = new FormData();
+			formData.append('document', values.document);
+			formData.append('category', values.category);
+			formData.append('description', values.description);
+			formData.append('title', values.name);
+			formData.append('user', '1');
 
-	// 		return fetch('/application/documents_upload', {
-	// 			method: 'POST',
-	// 			body: formData
-	// 		});
-	// 	},
-	// 	{
-	// 		onSettled: async (data, error, variables, context) => {
-	// 			if (!data.ok || error) {
-	// 				notificationToast('Something went wrong, please try again later');
-	// 				console.log(await data.json(), error);
-	// 			} else {
-	// 				// formSaved.set(true);
-	// 				console.log('success');
-	// 			}
-	// 		}
-	// 	}
-	// );
-
-	async function handleUpload(values) {
-		let formData = new FormData();
-		formData.append('title', values.title);
-		formData.append('description', values.description);
-		formData.append('category', values.category);
-		formData.append('student_data', values.student_data);
-		formData.append('document', $data.document);
-
-		const res = await fetch('/application/documents_upload', {
-			method: 'POST',
-			credentials: 'include',
-
-			body: formData
-		});
-
-		if (res.ok) {
-			console.log('success');
-			files.accepted = [];
-		} else {
-			console.log(res);
+			return fetch('/application/documents_upload', {
+				method: 'POST',
+				body: formData
+			});
+		},
+		{
+			onSettled: async (data, error, variables, context) => {
+				if (!data.ok || error) {
+					notificationToast('Something went wrong, please try again later');
+					console.log(await data.json(), error);
+				} else {
+					// formSaved.set(true);
+					console.log('success');
+				}
+			}
 		}
-	}
+	);
 
 	const schema = yup.object({
 		title: yup.string().required()
@@ -74,7 +51,7 @@
 			user: 1
 		},
 		onSubmit: async (values) => {
-			handleUpload(values);
+			$submitData.mutate(values);
 		},
 		extend: validator({ schema })
 	});
