@@ -1,5 +1,7 @@
 <script>
 	import CategorySection from './CategorySection.svelte';
+
+	export let data;
 </script>
 
 <div class="flex flex-col px-14 py-8 xl:px-20 xl:py-12 bg-white rounded-2xl w-full">
@@ -21,5 +23,5 @@
 			</ol>
 		</div>
 	</div>
-	<CategorySection />
+	<CategorySection user={data.user} />
 </div>

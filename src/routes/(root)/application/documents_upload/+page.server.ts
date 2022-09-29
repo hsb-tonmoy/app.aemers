@@ -4,15 +4,7 @@ export const actions = {
 	default: async ({ cookies, request, locals }) => {
 		const data = await request.formData();
 
-		// const res = await api.post(`document/`, data, locals.access, true);
-
-		const res = await fetch('http://127.0.0.1:8000/api/v1/document/', {
-			method: 'POST',
-			headers: {
-				Authorization: `JWT ${locals.access}`
-			},
-			body: data
-		});
+		const res = await api.post(`document/`, data, locals.access, true);
 
 		if (!res.ok) {
 			console.log(res);
