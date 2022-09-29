@@ -45,6 +45,7 @@
 		"felte": "^1.2.5",
 		"javascript-time-ago": "^2.5.7",
 		"jwt-decode": "^3.1.2",
+		"node-fetch": "^3.2.10",
 		"svelte-file-dropzone": "^1.0.0",
 		"svelte-forms-lib": "^2.0.1",
 		"svelte-heros": "^2.3.5",
