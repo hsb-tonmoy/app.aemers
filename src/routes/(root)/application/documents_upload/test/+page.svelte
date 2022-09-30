@@ -24,5 +24,5 @@
 			</ol>
 		</div>
 	</div>
-	<DragDrop {uppy} plugins={['Webcam']} />
+	<DragDrop {uppy} />
 </div>
