@@ -61,8 +61,6 @@
 
 	$: $data.document = files.accepted && files.accepted[0];
 	$: $data.title = files.accepted[0] && files.accepted[0].name;
-
-	$: console.log($data.title);
 </script>
 
 <form use:form>

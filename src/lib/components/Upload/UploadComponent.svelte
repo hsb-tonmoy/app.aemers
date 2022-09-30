@@ -1,4 +1,5 @@
 <script>
+	import { Upload } from '$lib/components/Icons';
 	import Dropzone from 'svelte-file-dropzone';
 	import { extractExtension, humanFileSize } from './helper';
 	export let files = {
@@ -14,26 +15,31 @@
 		files.accepted.splice(index, 1);
 		files.accepted = [...files.accepted];
 	}
+
+	let drag_entered = false;
+
+	$: dropzone_container_classes = `flex flex-col justify-center items-center rounded-xl py-12 ${
+		drag_entered ? 'dropzone-container-entered' : 'dropzone-container'
+	}`;
 </script>
 
 <Dropzone
 	on:drop={handleFilesSelect}
+	on:dragenter={() => (drag_entered = true)}
+	on:dragleave={() => (drag_entered = false)}
 	multiple={false}
 	accept={['.pdf', '.doc', '.docx', '.jpg', '.png', '.jpeg']}
 	disableDefaultStyles={true}
-	containerClasses="border-dashed border-2 border-gray-400 py-6 flex flex-col justify-center items-center"
+	containerClasses={dropzone_container_classes}
 >
-	<p class="mb-3 font-semibold text-gray-900 flex flex-wrap justify-center">
-		<span>Drag and drop your</span>&nbsp;<span>files here or</span>
+	<span class="block w-10 h-10 text-dividerColor mb-2"><Upload /></span>
+	<p class="text-lighterText flex justify-center">
+		<span>Drop your document here or</span>&nbsp;<button
+			type="button"
+			class="text-primary font-bold bg-transparent underline">Browse</button
+		>
 	</p>
 	<input id="hidden-input" type="file" class="hidden" />
-	<button
-		id="button"
-		type="button"
-		class="mt-2 rounded-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:shadow-outline focus:outline-none"
-	>
-		Click here to select
-	</button>
 </Dropzone>
 {#each files.accepted as item, i}
 	<div class="flex justify-between items-center mt-6">
@@ -56,3 +62,15 @@
 		>
 	</div>
 {/each}
+
+<style global>
+	.dropzone-container {
+		background-color: #fafafa;
+		background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='20' ry='20' stroke='%23E3D9FFFF' stroke-width='2' stroke-dasharray='9%2c 20%2c 11%2c 21' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+	}
+
+	.dropzone-container-entered {
+		background-color: #eeeeee;
+		background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='20' ry='20' stroke='%23E3D9FFFF' stroke-width='6' stroke-dasharray='9%2c 20%2c 11%2c 21' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+	}
+</style>
