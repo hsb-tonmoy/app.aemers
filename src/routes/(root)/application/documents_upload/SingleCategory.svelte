@@ -102,6 +102,7 @@
 			{#each category.documents as document}
 				<FileDetailsComponent
 					has_uploaded={true}
+					loading={$handleFileDelete.isLoading}
 					filename={document.title}
 					status={document.status}
 					date={document.uploaded_at}

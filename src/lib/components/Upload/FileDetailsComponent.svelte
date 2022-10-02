@@ -1,10 +1,12 @@
 <script>
 	import { Trash } from '$lib/components/Icons';
 	import { convertDate } from '$lib/convertDate';
+	import { Spinner } from 'flowbite-svelte';
 	export let has_uploaded = false;
 	export let filename;
 	export let status;
 	export let date;
+	export let loading = false;
 	export let handleRemoveFile;
 	export let handleDeleteFile;
 
@@ -51,11 +53,18 @@
 	</div>
 	<div class="prop-container self-end">
 		<button
+			disabled={loading}
 			on:click={handleDel}
 			class="inline-flex items-center gap-x-2 font-bold text-redSignal text-base"
-			><span class="w-4 h-4">
-				<Trash />
-			</span>{has_uploaded ? 'Delete' : 'Remove'}</button
+		>
+			{#if loading}
+				<Spinner currentFill="red" size="3" />
+			{:else}
+				<span class="w-4 h-4">
+					<Trash />
+				</span>
+			{/if}
+			{has_uploaded ? 'Delete' : 'Remove'}</button
 		>
 	</div>
 </div>

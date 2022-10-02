@@ -41,6 +41,12 @@ export async function load({ parent }) {
 			status: application_status_data.documents_upload
 		},
 		{
+			text: 'Application Submission',
+			path: '/application/application_submission',
+
+			status: application_status_data.application_submission
+		},
+		{
 			text: 'I-20 Upload',
 			path: '/application/i_20_upload',
 
@@ -83,6 +89,8 @@ export async function load({ parent }) {
 			status: application_status_data.welcome_to_usa
 		}
 	];
+
+	console.log(application_steps_data);
 
 	return {
 		application_status: application_status_data,

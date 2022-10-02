@@ -8,6 +8,7 @@ export const application_percentage = derived(application_status, ($application_
 		$application_status.orientation,
 		$application_status.pre_application_form,
 		$application_status.documents_upload,
+		$application_status.applicaton_submission,
 		$application_status.i_20_upload,
 		$application_status.ds_160_filed,
 		$application_status.sevis_payment,
