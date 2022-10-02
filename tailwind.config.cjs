@@ -16,7 +16,8 @@ const config = {
 				borderColor: '#E3D9FF',
 				bgColor: '#F9F6FF',
 				dividerColor: '#BEBEBE',
-				greenSignal: '#01CF85'
+				greenSignal: '#01CF85',
+				redSignal: '#FF6D6D'
 			},
 			width: {
 				120: '30rem'

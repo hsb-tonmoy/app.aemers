@@ -2,7 +2,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 import nodeFetch from 'node-fetch';
 
-async function send({ method, path, data, token, file = false }) {
+async function send({ method, path, data, token = '', file = false }) {
 	const opts = {
 		method,
 		headers: {}

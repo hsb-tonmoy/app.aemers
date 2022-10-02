@@ -5,7 +5,7 @@
 </script>
 
 <div class="flex flex-col px-14 py-8 xl:px-20 xl:py-12 bg-white rounded-2xl w-full">
-	<div class="flex gap-x-20 w-full">
+	<div class="flex gap-x-20 w-full mb-40">
 		<div class="w-2/4">
 			<p class="text-secondary leading-relaxed text-base">
 				Submit all of your authentic documents here. Our team will review and approve these
@@ -23,5 +23,5 @@
 			</ol>
 		</div>
 	</div>
-	<CategorySection user={data.user} />
+	<CategorySection documents={data.documents} categories={data.categories} user={data.user} />
 </div>
