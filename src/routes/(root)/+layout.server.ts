@@ -90,8 +90,6 @@ export async function load({ parent }) {
 		}
 	];
 
-	console.log(application_steps_data);
-
 	return {
 		application_status: application_status_data,
 		application_steps: application_steps_data

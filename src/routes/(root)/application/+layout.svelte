@@ -27,7 +27,7 @@
 
 	const handleNext = () => {
 		goto(nextURL);
-		$showNextToolTip === true ? ($showNextToolTip = false) : null;
+		$showNextToolTip === true ? showNextToolTip.set(false) : null;
 	};
 
 	onMount(() => {
@@ -75,7 +75,6 @@
 				color="nextButtonToolTip bg-white text-primary text-center w-52 border-2 border-primary"
 				offset="20"
 				placement="bottom"
-				triggeredBy="#nextButton"
 				trigger="click"><span class="font-bold">Click here to go next!</span></Tooltip
 			>
 		</nav>
