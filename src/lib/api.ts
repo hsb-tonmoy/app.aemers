@@ -1,6 +1,6 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
-import nodeFetch from 'node-fetch';
+// import nodeFetch from 'node-fetch';
 
 async function send({ method, path, data, token = '', file = false }) {
 	const opts = {
@@ -24,7 +24,7 @@ async function send({ method, path, data, token = '', file = false }) {
 		opts.headers['Authorization'] = `JWT ${token}`;
 	}
 
-	return nodeFetch(`${API_URL}/${path}`, opts);
+	return fetch(`${API_URL}/${path}`, opts);
 }
 
 export function get(path, token) {

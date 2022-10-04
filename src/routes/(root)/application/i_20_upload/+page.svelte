@@ -1,12 +1,38 @@
 <script>
+	import { invalidateAll } from '$app/navigation';
 	import { Upload } from '$lib/components/Icons';
-	import UploadComponent from '$lib/components/Upload/UploadComponent.svelte';
+	import FileDetailsComponent from '$lib/components/Upload/FileDetailsComponent.svelte';
+	import { notificationSuccessToast, notificationToast } from '$lib/NotificationToast';
+	import { useMutation } from '@sveltestack/svelte-query';
+	import Form from './Form.svelte';
 
 	let upload_show = false;
 
-	let files = {
-		accepted: []
-	};
+	export let data;
+
+	console.log(data.i_20);
+
+	const handleFileDelete = useMutation(
+		(id) => {
+			let formData = new FormData();
+			formData.append('id', id);
+			return fetch('/application/i_20_upload?/deleteDocument', {
+				method: 'POST',
+				body: formData
+			});
+		},
+		{
+			onSettled: async (data, error, variables, context) => {
+				if (!data.ok || error) {
+					notificationToast('Something went wrong, please try again later');
+					console.log(await data.json(), error);
+				} else {
+					notificationSuccessToast(`Document successfully deleted!`);
+					invalidateAll();
+				}
+			}
+		}
+	);
 </script>
 
 <div class="flex gap-8 px-14 py-8 xl:px-20 xl:py-12 bg-white rounded-2xl w-full">
@@ -16,14 +42,25 @@
 			>Wait untill you get an I20. After recieving it, upload it here. Watch the video to learn more
 			about I-20.</span
 		>
-		{#if upload_show}
-			<UploadComponent bind:files />
+		{#if data.i_20 == null}
+			{#if upload_show}
+				<Form user={data.user} />
+			{:else}
+				<button
+					on:click={() => (upload_show = true)}
+					class="self-start inline-flex items-center gap-x-2 text-white bg-primary text-base font-bold px-12 py-4 rounded-xl"
+					><span class="w-6 h-6"><Upload /></span>Upload</button
+				>
+			{/if}
 		{:else}
-			<button
-				on:click={() => (upload_show = true)}
-				class="self-start inline-flex items-center gap-x-2 text-white bg-primary text-base font-bold px-12 py-4 rounded-xl"
-				><span class="w-6 h-6"><Upload /></span>Upload</button
-			>
+			<FileDetailsComponent
+				has_uploaded={true}
+				loading={$handleFileDelete.isLoading}
+				filename=""
+				status={data.i_20.status}
+				date={data.i_20.uploaded_at}
+				handleDeleteFile={() => $handleFileDelete.mutate(data.i_20.id)}
+			/>
 		{/if}
 	</div>
 	<div class="w-2/5 flex-shrink">
