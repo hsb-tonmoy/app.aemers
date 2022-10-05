@@ -8,7 +8,7 @@
 	export let data;
 
 	$: application_status.set(data.application_status);
-	$: application_steps.set(data.application_steps);
+	// $: application_steps.set(data.application_steps);
 </script>
 
 <svelte:head><title>app.aemers.com - US Scholarship Mentoring</title></svelte:head>

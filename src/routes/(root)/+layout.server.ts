@@ -21,77 +21,7 @@ export async function load({ parent }) {
 		throw redirect(302, '/evaluation');
 	}
 
-	const application_steps_data = [
-		{
-			text: 'Open a File',
-			path: '/application/file_opening',
-
-			status: application_status_data.file_opening
-		},
-		{
-			text: 'Pre-Application Form',
-			path: '/application/pre_application_form',
-
-			status: application_status_data.pre_application_form
-		},
-		{
-			text: 'Documents Upload',
-			path: '/application/documents_upload',
-
-			status: application_status_data.documents_upload
-		},
-		{
-			text: 'Application Submission',
-			path: '/application/application_submission',
-
-			status: application_status_data.application_submission
-		},
-		{
-			text: 'I-20 Upload',
-			path: '/application/i_20_upload',
-
-			status: application_status_data.i_20_upload
-		},
-		{
-			text: 'DS-160 Filed',
-			path: '/application/ds_160',
-
-			status: application_status_data.ds_160_filed
-		},
-		{
-			text: 'SEVIS Payment',
-			path: '/application/sevis_payment',
-
-			status: application_status_data.sevis_payment
-		},
-		{
-			text: 'Visa Fee Payment',
-			path: '/application/visa_fee_payment',
-
-			status: application_status_data.visa_fee_payment
-		},
-		{
-			text: 'Visa Interview',
-			path: '/application/visa_interview',
-
-			status: application_status_data.visa_interview
-		},
-		{
-			text: 'Pre-Departure Session',
-			path: '/application/pre_departure_session',
-
-			status: application_status_data.pre_departure_session
-		},
-		{
-			text: 'Welcome to USA',
-			path: '/application/welcome_to_usa',
-
-			status: application_status_data.welcome_to_usa
-		}
-	];
-
 	return {
-		application_status: application_status_data,
-		application_steps: application_steps_data
+		application_status: application_status_data
 	};
 }

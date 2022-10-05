@@ -39,7 +39,7 @@
 	</div>
 	<div class="steps sidebarpadding">
 		<Steps
-			bind:steps={$application_steps}
+			steps={$application_steps}
 			clickable={true}
 			vertical={true}
 			bind:current={currentIndex}

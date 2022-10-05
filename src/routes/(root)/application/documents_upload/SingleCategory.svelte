@@ -27,10 +27,6 @@
 
 			return fetch('/application/documents_upload?/upload', {
 				method: 'POST',
-				headers: {
-					'Content-Type': 'multipart/form-data',
-					Accept: 'application/json'
-				},
 				body: formData
 			});
 		},
@@ -57,8 +53,10 @@
 			category: category.id,
 			document: null
 		},
-		onSubmit: async (values) => {
+		onSubmit: async (values, context) => {
 			$submitData.mutate(values);
+			context.reset();
+			files.accepted = [];
 		},
 		extend: validator({ schema })
 	});
