@@ -27,6 +27,10 @@
 
 			return fetch('/application/documents_upload?/upload', {
 				method: 'POST',
+				headers: {
+					'Content-Type': 'multipart/form-data',
+					Accept: 'application/json'
+				},
 				body: formData
 			});
 		},

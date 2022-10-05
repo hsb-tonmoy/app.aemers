@@ -10,8 +10,6 @@
 
 	export let data;
 
-	console.log(data.i_20);
-
 	const handleFileDelete = useMutation(
 		(id) => {
 			let formData = new FormData();
@@ -63,9 +61,11 @@
 			/>
 		{/if}
 	</div>
-	<div class="w-2/5 flex-shrink">
-		<img src="/images/i20+upload.png" alt="I-20 Upload" />
-	</div>
+	{#if upload_show || !data.i_20 == null}
+		<div class="w-2/5 flex-shrink">
+			<img src="/images/i20+upload.png" alt="I-20 Upload" />
+		</div>
+	{/if}
 </div>
 
 <style lang="postcss">

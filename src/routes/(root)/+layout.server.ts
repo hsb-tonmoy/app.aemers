@@ -54,7 +54,7 @@ export async function load({ parent }) {
 		},
 		{
 			text: 'DS-160 Filed',
-			path: '/application/ds_160_filed',
+			path: '/application/ds_160',
 
 			status: application_status_data.ds_160_filed
 		},
