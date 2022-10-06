@@ -15,6 +15,8 @@ export { default as Cross } from './Cross.svelte';
 export { default as Engineering } from './Engineering.svelte';
 export { default as Eye } from './Eye.svelte';
 export { default as EyeOff } from './EyeOff.svelte';
+export { default as Facebook } from './Facebook.svelte';
+export { default as Google } from './Google.svelte';
 export { default as GraduationCap } from './GraduationCap.svelte';
 export { default as Health_Sciences } from './Health_Sciences.svelte';
 export { default as Home } from './Home.svelte';

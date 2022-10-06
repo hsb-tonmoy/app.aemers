@@ -2,7 +2,7 @@
 	const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 	const GOOGLE_REDIRECT_URI = import.meta.env.VITE_GOOGLE_REDIRECT_URI;
 
-	import { google } from '$lib/svg/home';
+	import { Google } from '$lib/components/Icons';
 
 	const openGoogleLoginPage = () => {
 		const googleAuthUrl = 'https://accounts.google.com/o/oauth2/v2/auth';
@@ -32,7 +32,7 @@
 	on:click={openGoogleLoginPage}
 	type="button"
 	class="flex gap-x-2 items-center text-secondary text-lg font-bold border border-borderColor rounded-xl px-10 py-3"
-	><span class="block w-4 h-4">{@html google}</span>Google</button
+	><span class="block w-4 h-4"><Google /></span>Google</button
 >
 
 <style lang="postcss">
