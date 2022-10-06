@@ -1,11 +1,12 @@
 <script>
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { sidebarState } from '$lib/dashboard/home/stores';
 	import { application_steps } from '$lib/data/stores';
 	import { Tooltip } from 'flowbite-svelte';
 	import { formSaved, showNextToolTip } from './stores';
 
-	import { CloudDone, LeftArrow } from '$lib/components/Icons';
+	import { CloudDone, LeftArrow, LeftChevron, Menu, RightChevron } from '$lib/components/Icons';
 	import { onMount } from 'svelte';
 
 	let pageTitle = '';
@@ -38,6 +39,11 @@
 <div class="flex flex-col h-full">
 	<header class="flex justify-between items-center border-b border-borderColor pb-4 mb-6">
 		<div class="flex items-center gap-x-6">
+			<button
+				on:click={() => ($sidebarState = !$sidebarState)}
+				class="lg:hidden w-6 h-6 md:w-10 md:h-10 text-secondary hover:text-primary cursor-pointer"
+				><Menu /></button
+			>
 			<button
 				on:click={() => goto('/welcome_application')}
 				class="border border-borderColor rounded-2xl px-4 md:px-5 py-2 bg-transparent"

@@ -34,7 +34,7 @@
 </script>
 
 <div class="flex gap-8 px-14 py-8 xl:px-20 xl:py-12 bg-white rounded-2xl w-full">
-	<div class="flex flex-col w-3/5">
+	<div class="flex flex-col w-3/4">
 		<h2>Upload your I-20 here...</h2>
 		<span class="text-lighterText text-sm mb-4"
 			>Wait untill you get an I20. After recieving it, upload it here. Watch the video to learn more
@@ -61,10 +61,12 @@
 			/>
 		{/if}
 	</div>
-	{#if upload_show || !data.i_20 == null}
-		<div class="w-2/5 flex-shrink">
-			<img src="/images/i20+upload.png" alt="I-20 Upload" />
-		</div>
+	{#if !data.i_20 == null}
+		{#if !upload_show}
+			<div class="w-1/4 flex-shrink">
+				<img src="/images/i20+upload.png" alt="I-20 Upload" />
+			</div>
+		{/if}
 	{/if}
 </div>
 

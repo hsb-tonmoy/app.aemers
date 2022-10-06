@@ -1,7 +1,9 @@
 <script>
 	import { page } from '$app/stores';
+	import { Cross } from '$lib/components/Icons';
 	import Steps from '$lib/components/UI/ApplicationSteps.svelte';
 	import CircularProgress from '$lib/components/UI/CircularProgress.svelte';
+	import { sidebarState } from '$lib/dashboard/home/stores';
 	import Logo from '$lib/dashboard/layout/Sidebar/Logo.svelte';
 	import { application_percentage, application_steps } from '$lib/data/stores';
 
@@ -16,8 +18,11 @@
 </script>
 
 <div class="bg-white flex flex-col">
-	<div class="sidebarpadding py-3">
+	<div class="flex items-center justify-between sidebarpadding py-3">
 		<Logo />
+		<button on:click={() => sidebarState.set(true)} class="block xl:hidden w-7 h-7 text-primary"
+			><Cross /></button
+		>
 	</div>
 	<div class="bg-primary flex flex-col text-white sidebarpadding py-10">
 		<div class="self-center">

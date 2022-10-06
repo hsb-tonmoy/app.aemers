@@ -13,10 +13,10 @@
 		<h6 class="text-lighterText text-base md:text-lg 2xl:text-xl">Explore Aemers from here...</h6>
 	</div>
 	<div class="flex items-center gap-x-6">
-		<span
+		<button
 			on:click={() => ($sidebarState = !$sidebarState)}
 			class="lg:hidden w-6 h-6 md:w-10 md:h-10 text-secondary hover:text-primary cursor-pointer"
-			><Menu /></span
+			><Menu /></button
 		>
 
 		<NotificationDropDown {notifications} />
