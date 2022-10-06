@@ -106,6 +106,7 @@
 					has_uploaded={true}
 					loading={$handleFileDelete.isLoading}
 					filename={document.title}
+					url={`/application/documents_upload/document/${document.id}`}
 					status={document.status}
 					date={document.uploaded_at}
 					handleDeleteFile={() => $handleFileDelete.mutate(document.id)}

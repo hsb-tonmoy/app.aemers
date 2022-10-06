@@ -4,6 +4,7 @@
 	import { Spinner } from 'flowbite-svelte';
 	export let has_uploaded = false;
 	export let filename;
+	export let url = '';
 	export let status;
 	export let date;
 	export let loading = false;
@@ -41,7 +42,7 @@
 <div class="grid grid-cols-4 justify-items-center rounded-xl py-12 bg-[#fafafa]">
 	<div class="prop-container">
 		<span class="prop-header">File Name</span>
-		<span class="text-primary font-bold text-base underline">{filename}</span>
+		<a href={url} class="text-primary font-bold text-base underline">{filename}</a>
 	</div>
 	<div class="prop-container">
 		<span class="prop-header">Status</span>
