@@ -37,53 +37,56 @@
 </script>
 
 <div class="flex flex-col h-full">
-	<header class="flex justify-between items-center border-b border-borderColor pb-4 mb-6">
-		<div class="flex items-center gap-x-6">
-			<button
-				on:click={() => ($sidebarState = !$sidebarState)}
-				class="lg:hidden w-6 h-6 md:w-10 md:h-10 text-secondary hover:text-primary cursor-pointer"
-				><Menu /></button
-			>
-			<button
-				on:click={() => goto('/welcome_application')}
-				class="border border-borderColor rounded-2xl px-4 md:px-5 py-2 bg-transparent"
-			>
-				<span class="block h-4 w-4 md:w-6 md:h-6 text-primary"><LeftArrow /></span>
-			</button>
-			<h1 class="text-secondary font-bold text-xl md:text-3xl">{pageTitle}</h1>
-			{#if $formSaved}
-				<div class="flex items-center gap-x-1">
-					<span class="block text-primary w-4 h-4 mt-1"><CloudDone /></span><span
-						class="text-sm text-secondary">Saved</span
-					>
-				</div>
-			{/if}
+	<header class="flex flex-col border-b border-borderColor pb-4 mb-6">
+		<div class="flex justify-between items-center">
+			<div class="flex items-center gap-x-6 w-full">
+				<button
+					on:click={() => ($sidebarState = !$sidebarState)}
+					class="lg:hidden w-6 h-6 md:w-10 md:h-10 text-secondary hover:text-primary cursor-pointer"
+					><Menu /></button
+				>
+				<button
+					on:click={() => goto('/welcome_application')}
+					class="border border-borderColor rounded-2xl px-4 md:px-5 py-2 bg-transparent"
+				>
+					<span class="block h-4 w-4 md:w-6 md:h-6 text-primary"><LeftArrow /></span>
+				</button>
+				<h1 class="hidden md:block text-secondary font-bold text-xl md:text-3xl">{pageTitle}</h1>
+				{#if $formSaved}
+					<div class="flex items-center gap-x-1">
+						<span class="block text-primary w-4 h-4 mt-1"><CloudDone /></span><span
+							class="text-sm text-secondary">Saved</span
+						>
+					</div>
+				{/if}
+			</div>
+			<nav class="flex items-center gap-x-3">
+				<button
+					id="previousButton"
+					disabled={!previousURL}
+					on:click={handlePrevious}
+					class="border-2 border-lighterText disabled:border-lighterText/60 text-lighterText disabled:text-lighterText/60 text-sm md:text-base font-bold hover:text-lightText px-4 py-2 rounded-2xl"
+					>Previous</button
+				>
+				<button
+					id="nextButton"
+					disabled={!nextURL}
+					on:click={handleNext}
+					class="border-2 border-primary disabled:border-primary/60 text-white bg-primary hover:bg-primaryDarker disabled:bg-primary/60 text-sm md:text-base font-bold px-4 py-2 rounded-2xl"
+					>Next</button
+				>
+				<Tooltip
+					bind:open={$showNextToolTip}
+					style="custom"
+					defaultClass=""
+					color="nextButtonToolTip bg-white text-primary text-center w-52 border-2 border-primary"
+					offset="20"
+					placement="bottom"
+					trigger="click"><span class="font-bold">Click here to go next!</span></Tooltip
+				>
+			</nav>
 		</div>
-		<nav class="flex items-center gap-x-3">
-			<button
-				id="previousButton"
-				disabled={!previousURL}
-				on:click={handlePrevious}
-				class="border-2 border-lighterText disabled:border-lighterText/60 text-lighterText disabled:text-lighterText/60 text-sm md:text-base font-bold hover:text-lightText px-4 py-2 rounded-2xl"
-				>Previous</button
-			>
-			<button
-				id="nextButton"
-				disabled={!nextURL}
-				on:click={handleNext}
-				class="border-2 border-primary disabled:border-primary/60 text-white bg-primary hover:bg-primaryDarker disabled:bg-primary/60 text-sm md:text-base font-bold px-4 py-2 rounded-2xl"
-				>Next</button
-			>
-			<Tooltip
-				bind:open={$showNextToolTip}
-				style="custom"
-				defaultClass=""
-				color="nextButtonToolTip bg-white text-primary text-center w-52 border-2 border-primary"
-				offset="20"
-				placement="bottom"
-				trigger="click"><span class="font-bold">Click here to go next!</span></Tooltip
-			>
-		</nav>
+		<h1 class="md:hidden mt-4 text-secondary font-bold text-xl md:text-3xl">{pageTitle}</h1>
 	</header>
 
 	<div class="flex-1">
