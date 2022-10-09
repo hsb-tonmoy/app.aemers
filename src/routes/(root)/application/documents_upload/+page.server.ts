@@ -13,7 +13,7 @@ export const load = async ({ locals }) => {
 	}
 
 	if (!document_fetch.ok) {
-		throw error(category_fetch.status, 'Error fetching document data');
+		throw error(document_fetch.status, 'Error fetching document data');
 	}
 
 	// Group documents by category
