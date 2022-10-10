@@ -1,10 +1,10 @@
 <script lang="ts">
-	// A bootstrap step component
 	import { cubicOut } from 'svelte/easing';
 	import { tweened } from 'svelte/motion';
 
+	import { goto } from '$app/navigation';
 	import { createEventDispatcher } from 'svelte';
-	import { CheckMark as Check, Circle } from '../Icons';
+	import { CheckMark as Check } from '../Icons';
 
 	export let steps: any[];
 	export let current = 0;
@@ -21,7 +21,6 @@
 	export let borderRadius = '50%';
 	export let lineColor = '#d9d9d9';
 	export let reverse = false;
-	export let clickable = true;
 	export let minStepSize = '5rem';
 
 	export let stepLabelSpace = '0.75rem';
@@ -82,11 +81,12 @@
 	}
 
 	const dispatch = createEventDispatcher();
-	let onClick = (i: number) => {
-		if (clickable && i < current) {
+	let onClick = (step, i: number) => {
+		if (step.status >= 1) {
 			let last = current;
 			current = i;
 			// $progress = i
+			goto(step.path);
 			dispatch('click', { current, last });
 		}
 	};
@@ -162,14 +162,15 @@
 				>
 					<!-- circle -->
 					<div
-						class="step 
+						class="step
+						cursor-pointer 
                 {i <= $progress ? `text-primary` : `text-white`}
                 "
 						class:step__completed={step.status === 2}
 						class:step-border={step.status === 2}
 						class:shadow={i == current}
 						on:click={() => {
-							onClick(i);
+							onClick(step, i);
 						}}
 					>
 						{#if step.status === 2 || i < $progress}
@@ -194,7 +195,7 @@
 					<!-- text label -->
 					<div
 						class="steps__label"
-						class:hover-highlight={clickable}
+						class:hover-highlight={i < $progress}
 						style:margin-left={vertical ? (reverse ? null : stepLabelSpace) : null}
 						style:margin-right={vertical ? (reverse ? stepLabelSpace : null) : null}
 						style:margin-top={vertical ? null : stepLabelSpace}
@@ -202,10 +203,11 @@
 					>
 						{#if typeof step.text != 'undefined'}
 							<div
+								class="cursor-pointer"
 								class:text-primary={i === $progress}
 								class:font-bold={i === $progress}
 								on:click={() => {
-									onClick(i);
+									onClick(step, i);
 								}}
 							>
 								{step.text}
