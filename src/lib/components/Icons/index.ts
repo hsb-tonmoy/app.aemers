@@ -12,6 +12,7 @@ export { default as ClosedEnvelope } from './ClosedEnvelope.svelte';
 export { default as CloudDone } from './CloudDone.svelte';
 export { default as Computer } from './Computer.svelte';
 export { default as Cross } from './Cross.svelte';
+export { default as Download } from './Download.svelte';
 export { default as Engineering } from './Engineering.svelte';
 export { default as Eye } from './Eye.svelte';
 export { default as EyeOff } from './EyeOff.svelte';

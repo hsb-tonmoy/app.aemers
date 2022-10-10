@@ -6,6 +6,10 @@
 		accepted: []
 	};
 
+	let drag_entered = false;
+
+	export let file_dropped = false;
+
 	function handleFilesSelect(e) {
 		const { acceptedFiles, fileRejections } = e.detail;
 		files.accepted = [...acceptedFiles];
@@ -17,9 +21,6 @@
 		files.accepted = [...files.accepted];
 		file_dropped = false;
 	}
-
-	let drag_entered = false;
-	let file_dropped = false;
 
 	$: dropzone_container_classes = `flex flex-col justify-center items-center rounded-xl py-12 ${
 		drag_entered ? 'dropzone-container-entered' : 'dropzone-container'

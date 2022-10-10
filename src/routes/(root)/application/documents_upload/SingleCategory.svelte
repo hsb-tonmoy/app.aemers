@@ -14,6 +14,8 @@
 	let files = {
 		accepted: []
 	};
+	let file_dropped = false;
+
 	export let category;
 	export let user;
 
@@ -38,6 +40,8 @@
 				} else {
 					notificationSuccessToast(`Document successfully uploaded!`);
 					invalidateAll();
+					file_dropped = false;
+					files.accepted = [];
 				}
 			}
 		}
@@ -56,7 +60,6 @@
 		onSubmit: async (values, context) => {
 			$submitData.mutate(values);
 			context.reset();
-			files.accepted = [];
 		},
 		extend: validator({ schema })
 	});
@@ -113,7 +116,7 @@
 				/>
 			{/each}
 		{:else}
-			<UploadComponent bind:files />
+			<UploadComponent bind:file_dropped bind:files />
 			{#if files.accepted.length > 0}
 				<Button
 					loading={$submitData.isLoading}
