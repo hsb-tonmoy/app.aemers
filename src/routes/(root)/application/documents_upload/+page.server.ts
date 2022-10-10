@@ -42,6 +42,18 @@ export const actions = {
 
 		return { success: true };
 	},
+	editDocument: async ({ request, locals, params }) => {
+		const values = await request.formData();
+		const res = await api.patch(`document/${values.get('id')}/`, values, locals.access, false);
+
+		if (!res.ok) {
+			console.log(res);
+			console.log(await res.json());
+			throw error(res.status, 'Error editing document');
+		}
+
+		return { success: true };
+	},
 	deleteDocument: async ({ request, locals }) => {
 		const values = await request.formData();
 		const id = values.get('id');

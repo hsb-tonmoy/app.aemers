@@ -66,7 +66,7 @@
 		on:click={() => goto('/')}
 		class="absolute right-8 top-10 flex justify-center items-center bg-borderColor rounded-full cursor-pointer"
 	>
-		<span class="block p-1 w-8 h-8 md:w-12 md:h-12"><Cross /></span>
+		<span class="block text-primary p-1 w-8 h-8 md:w-12 md:h-12"><Cross /></span>
 	</button>
 	<h6 class="text-3xl font-bold ml-4 mb-6">Personal Info</h6>
 	<div class="flex items-center gap-x-10 mb-10">
