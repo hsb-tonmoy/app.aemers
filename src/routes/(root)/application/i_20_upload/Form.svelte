@@ -38,6 +38,7 @@
 
 	const { form, data, isValid } = createForm({
 		initialValues: {
+			title: '',
 			document: null
 		},
 		onSubmit: async (values) => {
@@ -46,8 +47,7 @@
 	});
 
 	$: $data.document = files.accepted && files.accepted[0];
-
-	$: console.log($data.document);
+	$: $data.title = files.accepted && files.accepted[0].name;
 </script>
 
 <form use:form>

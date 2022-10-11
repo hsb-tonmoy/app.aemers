@@ -54,7 +54,8 @@
 			<FileDetailsComponent
 				has_uploaded={true}
 				loading={$handleFileDelete.isLoading}
-				filename=""
+				filename={data.i_20.title}
+				url={data.i_20.document}
 				status={data.i_20.status}
 				date={data.i_20.uploaded_at}
 				handleDeleteFile={() => $handleFileDelete.mutate(data.i_20.id)}
