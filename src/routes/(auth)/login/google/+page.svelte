@@ -1,7 +1,7 @@
 <script>
-	import { onMount } from 'svelte';
-	import { page, session } from '$app/stores';
 	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
+	import { onMount } from 'svelte';
 
 	import { login_message } from '$lib/login/stores';
 
@@ -17,8 +17,8 @@
 		const data = await res.json();
 
 		if (res.ok && data.user) {
-			$session.user = data.user;
-			goto('/dashboard');
+			// $session.user = data.user;
+			goto('/');
 		} else if (!res.ok) {
 			if (
 				data.non_field_errors &&
