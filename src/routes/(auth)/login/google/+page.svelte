@@ -17,8 +17,7 @@
 		const data = await res.json();
 
 		if (res.ok && data.user) {
-			// $session.user = data.user;
-			goto('/');
+			console.log(data);
 		} else if (!res.ok) {
 			if (
 				data.non_field_errors &&
@@ -29,7 +28,7 @@
 					'An account already exists with this e-mail address. Please use the form below to login.';
 			}
 
-			goto('/login');
+			console.log(data);
 		} else {
 			console.log(data);
 		}
