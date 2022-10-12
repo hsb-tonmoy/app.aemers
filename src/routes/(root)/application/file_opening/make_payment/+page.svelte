@@ -7,12 +7,12 @@
 	<h3 class="text-secondary font-bold text-2xl mb-8">Choose a Payment Method</h3>
 	<section class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
 		<button
-			on:click={() => goto('/application/file_opening/complete')}
 			class="flex justify-center items-center border-2 border-borderColor hover:bg-bgColor rounded-2xl w-full h-full px-8 py-5 md:px-16 md:py-10"
 		>
 			<img src="/images/bkash.png" alt="bKash" />
 		</button>
 		<button
+			on:click={() => goto('/application/file_opening/make_payment/card')}
 			class="grid grid-cols-2  items-center gap-x-8 gap-y-4 border-2 border-borderColor hover:bg-bgColor rounded-2xl w-full px-8 py-5 md:px-16 md:py-10"
 		>
 			<img class="justify-self-end w-20" src="/images/cards/visa.png" alt="Visa" />

@@ -1,6 +1,7 @@
 <script>
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { error } from '@sveltejs/kit';
 	import { onMount } from 'svelte';
 
 	import { login_message } from '$lib/login/stores';
@@ -17,7 +18,7 @@
 		const data = await res.json();
 
 		if (res.ok && data.user) {
-			console.log(data);
+			window.location.href = '/';
 		} else if (!res.ok) {
 			if (
 				data.non_field_errors &&
@@ -28,9 +29,10 @@
 					'An account already exists with this e-mail address. Please use the form below to login.';
 			}
 
-			console.log(data);
+			goto('/login');
 		} else {
 			console.log(data);
+			throw error(500, 'Something went wrong');
 		}
 	});
 </script>

@@ -46,7 +46,7 @@
 
 <StepTemplate heading="Tell us about your language proficiency test">
 	<form use:form>
-		<fieldset class="flex flex-wrap gap-4">
+		<fieldset class="flex flex-wrap md:flex-nowrap gap-4">
 			<select
 				id="english_proficiency"
 				name="english_proficiency"
