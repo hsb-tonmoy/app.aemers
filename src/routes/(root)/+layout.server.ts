@@ -2,11 +2,12 @@ import * as api from '$lib/api';
 
 import { error, redirect } from '@sveltejs/kit';
 
-export async function load({ parent }) {
+export async function load({ url, parent }) {
 	const { user, access } = await parent();
 
 	if (!user) {
-		throw redirect(302, '/login');
+		const { pathname } = url;
+		throw redirect(302, `/login?redirect=${pathname}`);
 	}
 
 	const application_status_fetch = await api.get(`application_status/${user.pk}/`, access);

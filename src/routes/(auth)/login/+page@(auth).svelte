@@ -1,4 +1,5 @@
 <script>
+	import { page } from '$app/stores';
 	import { notificationToast } from '$lib/NotificationToast';
 	import { validator } from '@felte/validator-yup';
 	import { useMutation } from '@sveltestack/svelte-query';
@@ -38,7 +39,7 @@
 				if (json.user) {
 					// $session.user = json.user;
 
-					window.location.href = '/';
+					window.location.href = $page.url.searchParams.get('redirect') || '/';
 				} else if (
 					json.non_field_errors &&
 					json.non_field_errors[0] == 'Unable to log in with provided credentials.'
