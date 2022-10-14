@@ -22,7 +22,7 @@
 	}
 </script>
 
-<Dropdown label="Notifications" class="min-w-[30rem] w-full rounded-none">
+<Dropdown label="Notifications" class="min-w-[20rem] md:min-w-[30rem] w-full rounded-none">
 	<div slot="trigger" class="relative inline-flex items-center">
 		<button
 			type="button"

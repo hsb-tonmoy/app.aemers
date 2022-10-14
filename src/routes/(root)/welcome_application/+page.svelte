@@ -1,7 +1,7 @@
 <script>
 	import { goto, invalidateAll } from '$app/navigation';
 	import { Button } from '$lib/components/Form';
-	import { application_status } from '$lib/data/stores';
+	import { application_status, application_steps } from '$lib/data/stores';
 	import { notificationToast } from '$lib/NotificationToast';
 	import { useMutation } from '@sveltestack/svelte-query';
 
@@ -34,7 +34,18 @@
 		if (!$application_status.application_started) {
 			$start.mutate();
 		} else {
-			goto('/application/file_opening');
+			let url;
+			url = $application_steps.find((step) => step.status === 1);
+			if (url) {
+				goto(url.path);
+			} else {
+				url = $application_steps
+					.slice()
+					.reverse()
+					.find((step) => step.status === 2);
+				goto(url.path);
+			}
+			return;
 		}
 	}
 </script>

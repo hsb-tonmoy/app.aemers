@@ -46,7 +46,7 @@
 					><Menu /></button
 				>
 				<button
-					on:click={() => goto('/welcome_application')}
+					on:click={() => goto('/')}
 					class="border border-borderColor rounded-2xl px-4 md:px-5 py-2 bg-transparent"
 				>
 					<span class="block h-4 w-4 md:w-6 md:h-6 text-primary"><LeftArrow /></span>
