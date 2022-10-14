@@ -1,5 +1,4 @@
 <script>
-	import CircularProgress from '$lib/components/UI/CircularProgress.svelte';
 	import ApplicationProgress from '$lib/dashboard/home/Tiles/ApplicationTile/ApplicationProgress.svelte';
 
 	import { application_percentage } from '$lib/data/stores';
@@ -21,7 +20,7 @@
 		</h6>
 	</div>
 	<div class="flex items-center gap-x-6 2xl:w-3/4 mt-6">
-		<div class="text-white">
+		<!-- <div class="text-white">
 			<CircularProgress
 				rotate={-90}
 				size={150}
@@ -34,7 +33,7 @@
 					<span class="font-normal text-xs">Completed</span>
 				</div>
 			</CircularProgress>
-		</div>
+		</div> -->
 		<ApplicationProgress />
 	</div>
 </div>

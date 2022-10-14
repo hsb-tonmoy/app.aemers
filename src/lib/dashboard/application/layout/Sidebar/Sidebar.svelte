@@ -2,7 +2,6 @@
 	import { page } from '$app/stores';
 	import { Cross } from '$lib/components/Icons';
 	import Steps from '$lib/components/UI/ApplicationSteps.svelte';
-	import CircularProgress from '$lib/components/UI/CircularProgress.svelte';
 	import { sidebarState } from '$lib/dashboard/home/stores';
 	import Logo from '$lib/dashboard/layout/Sidebar/Logo.svelte';
 	import { application_percentage, application_steps } from '$lib/data/stores';
@@ -25,7 +24,7 @@
 		>
 	</div>
 	<div class="bg-primary flex flex-col text-white sidebarpadding py-10">
-		<div class="self-center">
+		<!-- <div class="self-center">
 			<CircularProgress
 				rotate={-90}
 				size={150}
@@ -40,7 +39,7 @@
 			</CircularProgress>
 		</div>
 		<h6 class="font-bold text-xl mt-4">File Completion</h6>
-		<p class="text-xs">Follow the steps to complete your File for US Admission.</p>
+		<p class="text-xs">Follow the steps to complete your File for US Admission.</p> -->
 	</div>
 	<div class="steps sidebarpadding">
 		<Steps
