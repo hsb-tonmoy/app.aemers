@@ -16,7 +16,7 @@
 		<DropdownItem class="flex items-center gap-x-4 text-lighterText">
 			<span class="w-6 h-6">
 				<Account />
-			</span> Edit Profile
+			</span> <a href="/profile/edit">Edit Profile</a>
 		</DropdownItem>
 		<DropdownDivider divClass="my-1 h-px bg-lighterText" />
 		<DropdownItem class="flex items-center gap-x-4 text-lighterText">
