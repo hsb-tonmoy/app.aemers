@@ -16,6 +16,7 @@
 		(values) => {
 			let formData = new FormData();
 			formData.append('document', values.document);
+			formData.append('title', values.title);
 			formData.append('user', user.pk);
 
 			return fetch('/application/i_20_upload?/upload', {
@@ -47,7 +48,7 @@
 	});
 
 	$: $data.document = files.accepted && files.accepted[0];
-	$: $data.title = files.accepted && files.accepted[0].name;
+	$: $data.title = $data.document && files.accepted[0].name;
 </script>
 
 <form use:form>

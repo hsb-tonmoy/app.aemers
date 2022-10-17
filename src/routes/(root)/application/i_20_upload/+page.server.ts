@@ -34,7 +34,7 @@ export const actions = {
 		const values = await request.formData();
 		const id = values.get('id');
 
-		const res = await api.del(`i_20/${id}/`, locals.access);
+		const res = await api.del(`i_20/${locals.user.pk}/`, locals.access);
 
 		if (!res.ok) {
 			console.log(res);

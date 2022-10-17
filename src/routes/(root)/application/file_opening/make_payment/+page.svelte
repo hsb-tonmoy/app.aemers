@@ -4,17 +4,17 @@
 	import { fly } from 'svelte/transition';
 	import Cash from './Cash.svelte';
 
-	let cash = false;
+	let cash = true;
 </script>
 
 <div class="flex flex-col mx-auto px-10 py-6 xl:px-20 xl:py-12 bg-white rounded-2xl">
 	<h3 class="text-secondary font-bold text-2xl mb-8">Choose a Payment Method</h3>
 	<section class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-8 w-full">
-		<button class="pay-option flex justify-center items-center">
+		<button on:click={() => (cash = false)} class="pay-option flex justify-center items-center">
 			<img src="/images/bkash.png" alt="bKash" />
 		</button>
 		<button
-			on:click={() => goto('/application/file_opening/make_payment/card')}
+			on:click={() => (cash = false)}
 			class="pay-option grid grid-cols-2 items-center gap-x-8 gap-y-4"
 		>
 			<img class="justify-self-end w-20" src="/images/cards/visa.png" alt="Visa" />
@@ -37,6 +37,15 @@
 		<section in:fly={{ y: -100, duration: 800 }} out:fly={{ y: -200, duration: 800 }} class="flex">
 			<Cash />
 		</section>
+	{:else}
+		<div class="my-10 bg-borderColor h-px w-full" />
+		<h6
+			in:fly={{ y: -100, duration: 1000 }}
+			out:fly={{ y: -200, duration: 200 }}
+			class="text-3xl text-center font-bold"
+		>
+			Coming Soon....
+		</h6>
 	{/if}
 	<Button
 		on:click={() => goto('/application/file_opening/confirm_info')}
