@@ -55,6 +55,10 @@
 	let deleteModal = false;
 </script>
 
+<svelte:head>
+	<title>app.aemers - {data.document.title}</title>
+</svelte:head>
+
 <div class="relative bg-white rounded-2xl px-10 py-12 md:px-16 md:py-20">
 	<button
 		on:click={() => goto('/application/documents_upload')}

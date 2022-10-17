@@ -70,6 +70,9 @@
 		{/if}
 	{/if}
 </div>
+<svelte:head>
+	<title>app.aemers - I-20 Upload</title>
+</svelte:head>
 
 <style lang="postcss">
 	h2 {

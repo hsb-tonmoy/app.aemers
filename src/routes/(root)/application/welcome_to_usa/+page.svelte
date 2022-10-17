@@ -9,6 +9,10 @@
 	];
 </script>
 
+<svelte:head>
+	<title>app.aemers - Welcome to USA</title>
+</svelte:head>
+
 <div
 	style="background-image:
   linear-gradient(to bottom, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 1)),

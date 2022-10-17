@@ -4,6 +4,10 @@
 	export let data;
 </script>
 
+<svelte:head>
+	<title>app.aemers - Pre-Departure Session</title>
+</svelte:head>
+
 <div class="flex flex-col gap-8 px-14 py-8 xl:px-20 xl:py-12 bg-white rounded-2xl w-full">
 	<div class="flex flex-col w-full md:w-3/4 xl:w-2/4 2xl:w-1/3 mb-6">
 		<h2 class="text-secondary font-bold text-2xl mb-2">RSVP for a Session</h2>

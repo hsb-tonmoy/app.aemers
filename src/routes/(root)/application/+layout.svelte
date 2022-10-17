@@ -17,7 +17,9 @@
 		if ($page.url.pathname.includes(step.path)) {
 			pageTitle = step.text;
 			previousURL = $application_steps[index - 1]?.path;
-			nextURL = $application_steps[index + 1]?.status >= 1 && $application_steps[index + 1]?.path;
+			nextURL =
+				($application_steps[index + 1]?.status >= 1 || $application_steps[index]?.status === 2) &&
+				$application_steps[index + 1]?.path;
 			return;
 		}
 	});

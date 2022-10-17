@@ -4,6 +4,10 @@
 	export let data;
 </script>
 
+<svelte:head>
+	<title>app.aemers - Documents Upload</title>
+</svelte:head>
+
 <div class="flex flex-col px-14 py-8 xl:px-20 xl:py-12 bg-white rounded-2xl w-full">
 	<div class="flex gap-x-20 w-full mb-40">
 		<div class="w-2/4">

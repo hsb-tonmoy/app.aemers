@@ -29,6 +29,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>app.aemers - DS-160 Submission</title>
+</svelte:head>
+
 <div class="flex gap-8 px-14 py-8 xl:px-20 xl:py-12 bg-white rounded-2xl w-full">
 	<div class="flex flex-col w-3/5">
 		<h2 class="text-secondary font-bold text-2xl mb-2">Have you submitted your DS-160?</h2>
