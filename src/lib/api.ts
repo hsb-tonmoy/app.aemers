@@ -1,6 +1,6 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
-import fetch from 'node-fetch';
+// import fetch from 'node-fetch';
 
 async function send({ method, path, data, token = '', file = false }) {
 	const opts = {
@@ -15,9 +15,9 @@ async function send({ method, path, data, token = '', file = false }) {
 
 	if (data && file) {
 		opts.body = data;
-		opts.headers = {
-			Accept: 'application/json'
-		};
+		// opts.headers = {
+		// 	Accept: 'application/json'
+		// };
 	}
 
 	if (token) {
