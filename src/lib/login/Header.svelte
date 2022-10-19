@@ -3,5 +3,7 @@
 </script>
 
 <header class="flex items-center p-12 w-full h-12" style={`background: ${$header_bg} `}>
-	<img src="/logo.png" alt="app.aemers.com" class="w-[30vw] md:w-[15vw] lg:w-[9vw]" />
+	<a href="/login"
+		><img src="/logo.png" alt="app.aemers.com" class="w-[30vw] md:w-[15vw] lg:w-[9vw]" /></a
+	>
 </header>

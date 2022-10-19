@@ -34,12 +34,29 @@
 	};
 
 	onMount(() => {
-		formSaved.set(false);
+		const header = document.getElementById('app-header');
+
+		let sticky = header.offsetTop;
+
+		window.onscroll = function () {
+			myFunction();
+		};
+
+		function myFunction() {
+			if (window.pageYOffset > sticky) {
+				header.classList.add('sticky-header');
+			} else {
+				header.classList.remove('sticky-header');
+			}
+		}
 	});
 </script>
 
 <div class="flex flex-col h-full">
-	<header class="flex flex-col border-b border-borderColor pb-4 mb-6">
+	<header
+		id="app-header"
+		class="top-0 flex flex-col border-b border-borderColor pb-4 mb-6 transition-all ease-in-out duration-150"
+	>
 		<div class="flex justify-between items-center">
 			<div class="flex items-center gap-x-6 w-full">
 				<button
@@ -86,3 +103,9 @@
 		<slot />
 	</div>
 </div>
+
+<style global lang="postcss">
+	.sticky-header {
+		@apply md:sticky top-0 pt-4 px-6 bg-white shadow-sm z-[99999];
+	}
+</style>
