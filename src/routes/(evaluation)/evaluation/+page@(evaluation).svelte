@@ -2,6 +2,7 @@
 	import { AccountFilled, GraduationCap, Language, OpenBook, Pound } from '$lib/components/Icons';
 	import Steps from '$lib/components/UI/EvaluationSteps.svelte';
 	import MultiStepForm from '$lib/evalutation/MultiStepForm.svelte';
+	import { onMount } from 'svelte';
 
 	let steps = [
 		{ icon: AccountFilled },
@@ -12,6 +13,10 @@
 	];
 
 	let currentIndex: number = 0;
+
+	onMount(() => {
+		localStorage.setItem('dashboardTour', 'true');
+	});
 </script>
 
 <svelte:head>

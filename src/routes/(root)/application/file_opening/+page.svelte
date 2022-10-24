@@ -19,7 +19,7 @@
 				on:click={() => goto('/application/file_opening/open_a_file')}
 				type="button"
 				text="Open a File"
-				classes="self-start px-8 py-3"
+				classes="self-start px-8 py-3 hover:bg-primaryDarker"
 			/>
 		</div>
 	</div>

@@ -25,7 +25,7 @@
 			first_name: $evaluationData.first_name || '',
 			last_name: $evaluationData.last_name || '',
 			phone: $evaluationData.profile.phone || '',
-			country: $evaluationData.profile.country || ''
+			country: $evaluationData.profile.country || 'Bangladesh'
 		},
 		extend: validator({ schema }),
 		onSubmit: (values, context) => {
@@ -102,7 +102,6 @@
 							: ''
 					} text-sm rounded-xl block py-4 px-5`}
 				>
-					<option value="" disabled selected hidden>Bangladesh</option>
 					{#each countries as country}
 						<option value={country.name}>{country.name}</option>
 					{/each}
