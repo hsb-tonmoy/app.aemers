@@ -8,7 +8,7 @@ export async function load({ params, parent, fetch }) {
 
 	const key = params.key;
 
-	const res = await fetch('auth/verify-email', {
+	const res = await fetch('/auth/verify-email', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'

@@ -6,7 +6,7 @@ export async function POST({ request, locals }) {
 	const application_status_update = {
 		isEvaluated: true
 	};
-	const req = await api.patch(`accounts/${locals.user.username}/`, values, locals.access);
+	const req = await api.patch(`accounts/${locals.user.pk}/`, values, locals.access);
 	const update = await api.patch(
 		`application_status/${locals.user.pk}/`,
 		application_status_update,
