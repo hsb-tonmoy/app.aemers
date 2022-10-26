@@ -191,6 +191,6 @@
 
 <style lang="postcss">
 	.bg {
-		background-image: url('/images/register-bg.png');
+		background-image: url('/images/register-bg.jpg');
 	}
 </style>

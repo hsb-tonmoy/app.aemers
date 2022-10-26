@@ -171,6 +171,6 @@
 
 <style lang="postcss">
 	.bg {
-		background-image: url('/images/login-bg.png');
+		background-image: url('/images/login-bg.jpg');
 	}
 </style>
