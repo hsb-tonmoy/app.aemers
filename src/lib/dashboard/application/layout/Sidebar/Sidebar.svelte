@@ -4,12 +4,12 @@
 	import Steps from '$lib/components/UI/ApplicationSteps.svelte';
 	import { sidebarState } from '$lib/dashboard/home/stores';
 	import Logo from '$lib/dashboard/layout/Sidebar/Logo.svelte';
-	import { application_percentage, application_steps } from '$lib/data/stores';
+	import { application_steps } from '$lib/data/stores';
 
 	export let currentIndex = 1;
 
 	$: $application_steps.map((step, index) => {
-		if ($page.url.pathname === step.path) {
+		if ($page.url.pathname.includes(step.path)) {
 			currentIndex = index;
 			return;
 		}

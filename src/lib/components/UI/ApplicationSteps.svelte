@@ -166,14 +166,14 @@
 						cursor-pointer 
                 {i <= $progress ? `text-primary` : `text-white`}
                 "
-						class:step__completed={step.status === 2}
-						class:step-border={step.status === 2}
+						class:step__completed={step.status >= 1}
+						class:step-border={step.status >= 1}
 						class:shadow={i == current}
 						on:click={() => {
 							onClick(step, i);
 						}}
 					>
-						{#if step.status === 2 || i < $progress}
+						{#if step.status === 2}
 							<div
 								class="inline-flex justify-center items-center bg-primary rounded-full"
 								style="width: {iconSize}; height: {iconSize}"
@@ -184,6 +184,16 @@
 								>
 									<Check />
 								</span>
+							</div>
+						{:else if step.status === 1}
+							<div
+								class="inline-flex justify-center items-center bg-primary rounded-full"
+								style="width: {iconSize}; height: {iconSize}"
+							>
+								<span
+									class="block text-white"
+									style="width: calc({iconSize} - .5rem); height: calc({iconSize} - .5rem)"
+								/>
 							</div>
 						{:else}
 							<div
