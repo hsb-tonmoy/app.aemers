@@ -2,8 +2,15 @@
 	import { goto } from '$app/navigation';
 	import Button from '$lib/components/Form/Button.svelte';
 	import { Priority } from '$lib/components/Icons';
+	import { onMount } from 'svelte';
 
 	const items = ['College Placement', 'Mentorship from experts.', 'Access to premium contents.'];
+
+	onMount(() => {
+		if (!localStorage.getItem('fileOpeningTour')) {
+			localStorage.setItem('fileOpeningTour', 'true');
+		}
+	});
 </script>
 
 <div class="flex flex-col mx-auto px-10 py-6 xl:px-20 xl:py-12 bg-white rounded-2xl">

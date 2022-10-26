@@ -1,12 +1,37 @@
 <script>
 	import { goto } from '$app/navigation';
 	import Button from '$lib/components/Form/Button.svelte';
+	import { onMount } from 'svelte';
 	const items = ['Click ‘Open a File', 'Confirm Personal Info', 'Make Payment', 'Done!'];
+
+	let fileOpeningTour;
+
+	onMount(() => {
+		fileOpeningTour = localStorage.getItem('fileOpeningTour');
+	});
+
+	function handleClick() {
+		localStorage.setItem('fileOpeningTour', 'true');
+		goto('/application/file_opening/open_a_file');
+	}
 </script>
 
 <div
 	class="flex flex-wrap justify-center gap-y-8 px-14 py-8 xl:px-20 xl:py-12 bg-white rounded-2xl w-full"
 >
+	{#if !fileOpeningTour}
+		<div
+			on:click={() => {
+				localStorage.setItem('fileOpeningTour', 'true');
+				fileOpeningTour = 'false';
+			}}
+			on:keypress={() => {
+				localStorage.setItem('fileOpeningTour', 'true');
+				fileOpeningTour = 'false';
+			}}
+			class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 h-modal md:h-full z-[6000] md:inset-0 bg-black/60"
+		/>
+	{/if}
 	<div class="w-full md:w-2/4">
 		<div class="flex flex-col w-3/4">
 			<img src="/images/file.png" alt="File" class="w-32 md:w-52" />
@@ -16,10 +41,10 @@
 				it’s worth it!
 			</p>
 			<Button
-				on:click={() => goto('/application/file_opening/open_a_file')}
+				on:click={handleClick}
 				type="button"
 				text="Open a File"
-				classes="self-start px-8 py-3 hover:bg-primaryDarker"
+				classes="self-start px-8 py-3 hover:bg-primaryDarker z-[6001]"
 			/>
 		</div>
 	</div>
