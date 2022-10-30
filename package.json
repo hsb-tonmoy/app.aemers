@@ -17,7 +17,7 @@
 		"@sveltejs/kit": "next",
 		"@sveltestack/svelte-query": "^1.6.0",
 		"@zerodevx/svelte-toast": "^0.7.2",
-		"autoprefixer": "^10.4.12",
+		"autoprefixer": "^10.4.13",
 		"eslint": "^7.32.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-svelte3": "^3.4.1",
