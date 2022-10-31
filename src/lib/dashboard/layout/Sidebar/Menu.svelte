@@ -16,7 +16,7 @@
 		{
 			name: 'Mock Interview',
 			icon: Video,
-			link: '/interview'
+			link: '/visa_interview'
 		},
 		{
 			name: 'Edit Profile',
