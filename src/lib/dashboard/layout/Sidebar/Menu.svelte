@@ -6,34 +6,44 @@
 		{
 			name: 'Home',
 			icon: Home,
-			link: '/'
+			link: '/',
+			alternate_links: []
 		},
 		{
 			name: 'Application',
 			icon: Application,
-			link: '/welcome_application'
+			link: '/welcome_application',
+			alternate_links: []
 		},
 		{
 			name: 'Mock Interview',
 			icon: Video,
-			link: '/visa_interview'
+			link: '/mock_visa_interview',
+			alternate_links: ['mock_visa_interview']
 		},
 		{
 			name: 'Edit Profile',
 			icon: Account,
-			link: '/profile/edit'
+			link: '/profile/edit',
+			alternate_links: []
 		},
 		{
 			name: 'Logout',
 			icon: Logout,
-			link: '/logout'
+			link: '/logout',
+			alternate_links: []
 		}
 	];
 </script>
 
 <section id="menu" class="flex flex-col gap-y-10">
 	{#each menuitems as item}
-		<a href={item.link} class="menuItem {$page.url.pathname === item.link ? 'menuItem-active' : ''}"
+		<a
+			href={item.link}
+			class="menuItem {$page.url.pathname === item.link ||
+			item.alternate_links.includes($page.url.pathname)
+				? 'menuItem-active'
+				: ''}"
 			><span class="w-4 h-4 md:w-7 md:h-7">
 				<svelte:component this={item.icon} />
 			</span> <span class="">{item.name}</span></a
