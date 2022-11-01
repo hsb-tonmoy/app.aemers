@@ -1,5 +1,7 @@
 <script>
 	import SingleSession from './SingleSession.svelte';
+
+	export let data;
 </script>
 
 <main class="flex flex-col gap-y-4">
@@ -31,11 +33,11 @@
 			>
 		</div>
 	</div>
-	<div class="bg-white px-6 py-4 md:px-8 md:py-6 xl:px-12 xl:py-10">
+	<div class="bg-white px-6 py-4 md:px-8 md:py-6 xl:px-12 xl:py-10 rounded-2xl">
 		<h6 class="font-bold text-xl md:text-2xl mb-4">Completed Free Mock Tests</h6>
 		<div class="grid grid-cols-1 md:grid-cols-3 2xl:grid-cols-4 gap-4">
-			{#each Array(4) as _, i}
-				<SingleSession />
+			{#each data.sessions as session}
+				<SingleSession id={session.id} date={session.created_at} />
 			{/each}
 		</div>
 	</div>
