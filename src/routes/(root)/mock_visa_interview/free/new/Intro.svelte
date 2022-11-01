@@ -1,5 +1,9 @@
 <script>
 	import { Equalizer, Hourglass, QuestionMark } from '$lib/components/Icons';
+	import { notificationToast } from '$lib/NotificationToast';
+	import { useMutation } from '@sveltestack/svelte-query';
+
+	import { Button } from '$lib/components/Form';
 
 	const rules = [
 		{ text: 'Answer 10 questions.', icon: QuestionMark },
@@ -8,6 +12,32 @@
 	];
 
 	export let started = false;
+
+	export let session;
+
+	export let user;
+
+	const submitData = useMutation(
+		() => {
+			return fetch('/mock_visa_interview/free/new', {
+				method: 'POST',
+				body: JSON.stringify({
+					user: user.pk
+				})
+			});
+		},
+		{
+			onSettled: async (data, error, variables, context) => {
+				if (!data.ok || error) {
+					notificationToast('Something went wrong, please try again later');
+				} else {
+					let response = await data.json();
+					session = response;
+					started = true;
+				}
+			}
+		}
+	);
 </script>
 
 <div class="p-10">
@@ -26,11 +56,13 @@
 			</li>
 		{/each}
 	</div>
-	<button
+	<Button
 		on:click={() => {
-			started = true;
+			$submitData.mutate();
 		}}
-		class="bg-primary hover:bg-primaryDarker text-white font-bold px-6 py-4 text-base md:text-lg rounded-2xl self-start"
-		>Start Test</button
-	>
+		type="button"
+		loading={$submitData.isLoading}
+		text="Start Test"
+		classes="hover:bg-primaryDarker text-white font-bold px-6 py-4 text-base md:text-lg rounded-2xl self-start"
+	/>
 </div>

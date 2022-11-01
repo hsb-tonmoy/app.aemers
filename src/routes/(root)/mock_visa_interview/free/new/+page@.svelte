@@ -2,9 +2,13 @@
 	import { LeftArrow } from '$lib/components/Icons';
 	import Logo from '$lib/dashboard/layout/Sidebar/Logo.svelte';
 	import Intro from './Intro.svelte';
-	import SingleQuestion from './SingleQuestion.svelte';
+	import Questions from './Questions.svelte';
 
 	let started = false;
+
+	export let data;
+
+	let session;
 </script>
 
 <svelte:head>
@@ -22,11 +26,14 @@
 			><span class="w-4 h-4 block"><LeftArrow /></span> Exit Test</button
 		>
 	</header>
-	<div style="margin: auto;" class="bg-white p-10 rounded-2xl">
+	<div
+		style="margin: auto;"
+		class="bg-white p-10 rounded-2xl min-h-[50vh] min-w-[80vw] xl:min-w-[70vw] 2xl:min-w-[50vw]"
+	>
 		{#if started}
-			<SingleQuestion />
+			<Questions {session} questions={data.questions} user={data.user} />
 		{:else}
-			<Intro bind:started />
+			<Intro bind:session user={data.user} bind:started />
 		{/if}
 	</div>
 </main>

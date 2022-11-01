@@ -1,12 +1,15 @@
 <script>
 	import AudioRecordComponent from '$lib/components/Audio/AudioRecordComponent.svelte';
+	import { RightChevron } from '$lib/components/Icons';
 	import { notificationToast } from '$lib/NotificationToast';
 	import Timer from '$lib/timer';
-	import { useMutation } from '@sveltestack/svelte-query';
+	import { IsMutating, useMutation } from '@sveltestack/svelte-query';
 	import { onMount } from 'svelte';
 
 	let timer;
 	let countdown;
+
+	export let currentIndex, question, length, session, user;
 
 	onMount(() => {
 		timer = new Timer();
@@ -14,7 +17,9 @@
 		timer.pause();
 	});
 
-	let recording, recorded, blob;
+	let recording = false,
+		recorded = false,
+		blob;
 
 	function msToTime(s) {
 		function pad(n, z) {
@@ -39,10 +44,10 @@
 	const submitData = useMutation(
 		() => {
 			let formData = new FormData();
-			formData.append('session', '1');
-			formData.append('question', '1');
+			formData.append('session', session.id);
+			formData.append('question', question.id);
 			formData.append('answer', blob);
-			formData.append('user', '1');
+			formData.append('user', user.pk);
 
 			return fetch('/mock_visa_interview/free/new?/upload', {
 				method: 'POST',
@@ -62,19 +67,26 @@
 	function handleRecordingFinished() {
 		$submitData.mutate();
 	}
+
+	function handleNext() {
+		if (currentIndex < length - 1) {
+			currentIndex++;
+		}
+	}
 </script>
 
-<section class="flex flex-col pb-20">
+<section class="flex flex-col h-full">
 	<div class="flex justify-between items-center">
-		<span class="bg-bgColor text-primary text-base font-bold px-3 py-1 rounded-xl">1/10</span>
+		<span class="bg-bgColor text-primary text-base font-bold px-3 py-1 rounded-xl"
+			>{currentIndex + 1}/{length}</span
+		>
 		<span class="text-primary text-lg font-bold"
 			>{countdown || (timer && msToTime(timer.time))}</span
 		>
 	</div>
-	<div class="flex flex-col items-center text-center xl:w-3/5 mx-auto">
+	<div class="self-center flex flex-col items-center text-center xl:w-3/5 m-auto">
 		<h3 class="font-bold text-secondary text-xl md:text-2xl mt-6 mb-10">
-			Can you not continue your education in your home country? Why choose the United States of
-			America?
+			{question.question}
 		</h3>
 		<div class="flex items-center gap-x-4">
 			<AudioRecordComponent
@@ -85,8 +97,21 @@
 				bind:recorded
 			/>
 			{#if !(recording || recorded)}
-				<button class="text-lighterText font-bold text-lg">Skip</button>
+				<button on:click={handleNext} class="text-lighterText font-bold text-lg">Skip</button>
 			{/if}
 		</div>
+		{#if recorded}
+			<button
+				disabled={$submitData.isLoading}
+				on:click={handleNext}
+				class="flex items-center gap-x-2 bg-primary hover:bg-primaryDarker text-white font-bold py-2 px-6 rounded-2xl mt-8"
+				>{currentIndex < length - 1 ? 'Next Question' : 'Finish'}
+				<span class="inline-flex items-center bg-white w-6 h-6 rounded-full p-1"
+					><span class="text-primary block w-full">
+						<RightChevron stroke={3} />
+					</span></span
+				></button
+			>
+		{/if}
 	</div>
 </section>
