@@ -1,9 +1,10 @@
 <script>
+	import { goto } from '$app/navigation';
 	import AudioRecordComponent from '$lib/components/Audio/AudioRecordComponent.svelte';
 	import { RightChevron } from '$lib/components/Icons';
 	import { notificationToast } from '$lib/NotificationToast';
 	import Timer from '$lib/timer';
-	import { IsMutating, useMutation } from '@sveltestack/svelte-query';
+	import { useMutation } from '@sveltestack/svelte-query';
 	import { onMount } from 'svelte';
 
 	let timer;
@@ -71,6 +72,8 @@
 	function handleNext() {
 		if (currentIndex < length - 1) {
 			currentIndex++;
+		} else {
+			goto(`/mock_visa_interview/free/${session.id}`);
 		}
 	}
 </script>

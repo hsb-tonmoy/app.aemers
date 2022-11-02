@@ -2,7 +2,9 @@
 	import { Pause, Play } from '$lib/components/Icons';
 	import AudioWaveform from './AudioWaveform.svelte';
 
+	export let audioBlob = false;
 	export let audioSrc = '';
+	export let many = false;
 
 	let wavesurfer;
 
@@ -36,5 +38,5 @@
 			{/if}
 		</span>
 	</button>
-	<AudioWaveform bind:wavesurfer {audioSrc} />
+	<AudioWaveform {many} {audioBlob} bind:wavesurfer {audioSrc} />
 </div>

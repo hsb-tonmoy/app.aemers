@@ -3,9 +3,15 @@
 
 	let containerID = (Math.random() + 1).toString(36).substring(7);
 
+	let container = `#waveform-${containerID}`;
+
 	let waveSurfer;
 
-	export let audioSrc = '';
+	export let many = false;
+
+	export let audioBlob = false;
+
+	export let audioSrc;
 
 	export let wavesurfer;
 
@@ -25,7 +31,8 @@
 		try {
 			waveSurfer = (await import('wavesurfer.js')).default;
 			wavesurfer = waveSurfer.create({
-				container: `#waveform-${containerID}`,
+				container: many ? container : '#waveform',
+				backend: audioBlob ? 'MediaElement' : 'WebAudio',
 				waveColor: waveColor,
 				progressColor: progressColor,
 				cursorColor: cursorColor,
@@ -34,7 +41,17 @@
 				barGap: barGap,
 				responsive: true
 			});
-			wavesurfer.load(audioSrc);
+			if (audioBlob) {
+				let audio = new Audio();
+				try {
+					audio.srcObject = audioSrc;
+				} catch (error) {
+					audio.src = URL.createObjectURL(audioSrc);
+				}
+				wavesurfer.load(audio);
+			} else {
+				wavesurfer.load(audioSrc);
+			}
 		} catch (error) {
 			console.error(error);
 		}
@@ -45,4 +62,8 @@
 	});
 </script>
 
-<div id="waveform-{containerID}" class="w-full" />
+{#if many}
+	<div id="waveform-{containerID}" class="w-full" />
+{:else}
+	<div id="waveform" class="w-full" />
+{/if}

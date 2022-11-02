@@ -16,6 +16,6 @@
 		{question}
 	</h3>
 	<div class="w-full relative my-6">
-		<AudioPlayer {audioSrc} />
+		<AudioPlayer many={true} {audioSrc} />
 	</div>
 </div>
