@@ -1,5 +1,1 @@
-<script lang="ts">
-	export let width: string = 'auto';
-</script>
-
-<iframe title="success" {width} src="https://embed.lottiefiles.com/animation/79952" />
+<img src="/images/success.png" alt="Successful" class="object-cover" />

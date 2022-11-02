@@ -41,6 +41,7 @@ specifiers:
   tslib: ^2.4.0
   typescript: ^4.8.4
   vite: 3.1.0
+  wavesurfer.js: ^6.3.0
   yup: ^0.32.11
   yup-password: ^0.2.2
 
@@ -59,6 +60,7 @@ dependencies:
   svelte-heros: 2.3.5
   svrollbar: 0.12.0
   toastify-js: 1.12.0
+  wavesurfer.js: 6.3.0
   yup: 0.32.11
   yup-password: 0.2.2
 
@@ -2461,6 +2463,10 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
+
+  /wavesurfer.js/6.3.0:
+    resolution: {integrity: sha512-x7efObHMHY3nwqWzIC0yeZTo0u/aC9T5Av6KhSdhTlsgtKdTG7JAE3mNqnYBXUjq0yGYfTB9F85/pks9830Vjw==}
+    dev: false
 
   /web-streams-polyfill/3.2.1:
     resolution: {integrity: sha512-e0MO3wdXWKrLbL0DgGnUV7WHVuw9OUvL4hjgnPkIeEvESk74gAITi5G606JtZPp39cd8HA9VQzCIvA49LpPN5Q==}

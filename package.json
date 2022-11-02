@@ -55,6 +55,7 @@
 		"svelte-heros": "^2.3.5",
 		"svrollbar": "^0.12.0",
 		"toastify-js": "^1.12.0",
+		"wavesurfer.js": "^6.3.0",
 		"yup": "^0.32.11",
 		"yup-password": "^0.2.2"
 	}

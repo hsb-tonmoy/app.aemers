@@ -17,3 +17,17 @@ export async function POST({ request, locals }) {
 
 	return json(session);
 }
+
+export async function DELETE({ locals, url }) {
+	const id = url.searchParams.get('id');
+
+	const res = await api.del(`mock_visa_interview_session/${id}/`, locals.access);
+
+	if (!res.ok) {
+		console.log(res);
+		console.log(await res.json());
+		throw error(res.status, 'Error deleting session');
+	}
+
+	return json({ success: true });
+}

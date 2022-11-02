@@ -19,7 +19,7 @@
 
 	const submitData = useMutation(
 		() => {
-			return fetch('/mock_visa_interview/free/new', {
+			return fetch('/mock_visa_interview/free/new/session', {
 				method: 'POST',
 				body: JSON.stringify({
 					user: user.pk
@@ -40,7 +40,7 @@
 	);
 </script>
 
-<div class="p-10">
+<div class="flex flex-col justify-center h-full px-10">
 	<h6 class="text-3xl xl:text-4xl text-primary font-bold">Start your free mock test</h6>
 	<span class="text-lighterText text-sm"
 		>You are ready to go. Start the test and answer the questions by clicking on the microphone
