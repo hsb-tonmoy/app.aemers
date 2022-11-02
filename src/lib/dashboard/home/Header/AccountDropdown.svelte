@@ -13,16 +13,20 @@
 		</button>
 	</div>
 	<ul slot="content" class="rounded-3xl py-2">
-		<DropdownItem class="flex items-center gap-x-4 text-lighterText">
-			<span class="w-6 h-6">
-				<Account />
-			</span> <a href="/profile/edit">Edit Profile</a>
-		</DropdownItem>
+		<a href="/profile/edit">
+			<DropdownItem class="flex items-center gap-x-4 text-lighterText">
+				<span class="w-6 h-6">
+					<Account />
+				</span> Edit Profile
+			</DropdownItem>
+		</a>
 		<DropdownDivider divClass="my-1 h-px bg-lighterText" />
-		<DropdownItem class="flex items-center gap-x-4 text-lighterText">
-			<span class="w-6 h-6">
-				<Logout />
-			</span> <a href="/logout">Logout</a>
-		</DropdownItem>
+		<a href="/logout">
+			<DropdownItem class="flex items-center gap-x-4 text-lighterText">
+				<span class="w-6 h-6">
+					<Logout />
+				</span> Logout
+			</DropdownItem>
+		</a>
 	</ul>
 </Dropdown>

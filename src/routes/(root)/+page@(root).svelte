@@ -48,6 +48,6 @@
 		<KnowledgebaseTile />
 		<MockVisaTile />
 		<!-- <NewsPortalTile /> -->
-		<!-- <MentorshipTile /> -->
+		<MentorshipTile />
 	</div>
 </div>

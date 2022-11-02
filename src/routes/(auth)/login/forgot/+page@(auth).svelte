@@ -9,13 +9,14 @@
 	import { Cross } from '$lib/components/Icons';
 
 	import { Button, Error, Input, Label } from '$lib/components/Form';
+	import { notificationSuccessToast, notificationToast } from '$lib/NotificationToast';
 
 	let success = false;
 
 	const schema = yup.object({
 		email: yup.string().email('Please enter a valid email').required('Email is required')
 	});
-	const { form, isValid, errors } = createForm({
+	const { form, isValid, errors, isSubmitting } = createForm({
 		initialValues: {
 			email: ''
 		},
@@ -35,7 +36,11 @@
 				body: email
 			});
 			success = true;
-			// notificationToast('A password reset link has been sent to the email address.', true, 10000);
+			notificationSuccessToast(
+				'A password reset link has been sent to the email address.',
+				true,
+				10000
+			);
 		} catch (e) {
 			console.log(e);
 		}
@@ -85,7 +90,13 @@
 					{/if}
 				</div>
 
-				<Button type="submit" text="Submit" classes="py-4" disabled={!$isValid} />
+				<Button
+					loading={$isSubmitting}
+					type="submit"
+					text="Submit"
+					classes="py-4"
+					disabled={!$isValid}
+				/>
 			</fieldset>
 		</form>
 	</div>

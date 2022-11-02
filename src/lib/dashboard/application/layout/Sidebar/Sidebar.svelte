@@ -4,9 +4,15 @@
 	import Steps from '$lib/components/UI/ApplicationSteps.svelte';
 	import { sidebarState } from '$lib/dashboard/home/stores';
 	import Logo from '$lib/dashboard/layout/Sidebar/Logo.svelte';
-	import { application_steps } from '$lib/data/stores';
+	import { application_status, application_steps } from '$lib/data/stores';
 
 	export let currentIndex = 1;
+
+	export let user;
+
+	let paid = false;
+
+	$: $application_status.file_opening === 2 ? (paid = true) : (paid = false);
 
 	$: $application_steps.map((step, index) => {
 		if ($page.url.pathname.includes(step.path)) {
@@ -23,7 +29,16 @@
 			><Cross /></button
 		>
 	</div>
-	<div class="bg-primary flex flex-col text-white sidebarpadding py-10">
+	<div class="status bg-cover bg-center flex flex-col text-white sidebarpadding py-6">
+		<h6 class="font-bold text-white text-lg md:text-xl">Hey, {user.first_name}</h6>
+		<div class="flex items-center gap-x-2 mt-2">
+			Status: <span
+				class="{paid
+					? 'bg-greenSignal text-white'
+					: 'bg-[#FFCD50] text-secondary'} font-bold px-3 rounded-md text-xs md:text-sm"
+				>{paid ? 'Paid' : 'Unpaid'}</span
+			>
+		</div>
 		<!-- <div class="self-center">
 			<CircularProgress
 				rotate={-90}
@@ -61,5 +76,9 @@
 <style lang="postcss">
 	.sidebarpadding {
 		@apply px-4 md:px-6;
+	}
+
+	.status {
+		background-image: url('/images/user_status_bg.png');
 	}
 </style>

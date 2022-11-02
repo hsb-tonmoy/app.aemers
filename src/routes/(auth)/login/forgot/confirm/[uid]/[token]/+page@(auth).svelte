@@ -38,7 +38,7 @@
 			.oneOf([yup.ref('new_password1'), null], 'Passwords must match')
 			.required('Confirm Password is required')
 	});
-	const { form, errors, isValid } = createForm({
+	const { form, errors, isValid, isSubmitting } = createForm({
 		initialValues: {
 			uid: uid,
 			token: token,
@@ -65,7 +65,7 @@
 			if (response.ok) {
 				success = true;
 				setTimeout(() => {
-					goto('login/forgot/success');
+					goto('/login/forgot/success');
 				}, 3000);
 			} else if (data.token) {
 				notificationToast(
@@ -98,13 +98,6 @@
 			You are just one step away! Set a new password for your account.
 		</p>
 
-		{#if success}
-			<div class="mt-12">
-				<span class="text-green-600 text-sm text-center font-medium"
-					>A password reset link has been sent to the email address.</span
-				>
-			</div>
-		{/if}
 		<form use:form>
 			<fieldset class="flex flex-col mt-8 border-b border-dividerColor">
 				<Label label="Password" label_for="new_password1" />
@@ -160,7 +153,13 @@
 					<Error classes="self-start mt-2 w-full" message={$errors.new_password2} />
 				{/if}
 
-				<Button type="submit" text="Submit" classes="py-4 mt-8" disabled={!$isValid} />
+				<Button
+					loading={$isSubmitting}
+					type="submit"
+					text="Submit"
+					classes="py-4 mt-8"
+					disabled={!$isValid}
+				/>
 			</fieldset>
 		</form>
 	</div>
