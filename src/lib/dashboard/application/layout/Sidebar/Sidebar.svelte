@@ -22,7 +22,7 @@
 	});
 </script>
 
-<div class="bg-white flex flex-col">
+<div class="bg-white flex flex-col min-h-screen h-full">
 	<div class="flex items-center justify-between sidebarpadding py-3">
 		<Logo />
 		<button on:click={() => sidebarState.set(true)} class="block xl:hidden w-7 h-7 text-primary"
@@ -31,11 +31,11 @@
 	</div>
 	<div class="status bg-cover bg-center flex flex-col text-white sidebarpadding py-6">
 		<h6 class="font-bold text-white text-lg md:text-xl">Hey, {user.first_name}</h6>
-		<div class="flex items-center gap-x-2 mt-2">
+		<div class="flex items-center gap-x-2 mt-2 text-sm">
 			Status: <span
 				class="{paid
 					? 'bg-greenSignal text-white'
-					: 'bg-[#FFCD50] text-secondary'} font-bold px-3 rounded-md text-xs md:text-sm"
+					: 'bg-[#FFCD50] text-secondary'} font-bold px-3 rounded-md"
 				>{paid ? 'Paid' : 'Unpaid'}</span
 			>
 		</div>

@@ -16,6 +16,8 @@
 	});
 </script>
 
+<svelte:head><title>Dashboard | app.aemers</title></svelte:head>
+
 <div class="flex flex-col">
 	<Header notifications={data.notifications} user={data.user} />
 	<div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mt-5">
