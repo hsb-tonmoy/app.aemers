@@ -1,10 +1,13 @@
 <script>
 	import { goto } from '$app/navigation';
+	import AudioPlayer from '$lib/components/Audio/AudioPlayer.svelte';
 	import AudioRecordComponent from '$lib/components/Audio/AudioRecordComponent.svelte';
+	import { msToTime } from '$lib/components/Audio/utils';
 	import { RightChevron } from '$lib/components/Icons';
 	import { notificationToast } from '$lib/NotificationToast';
 	import Timer from '$lib/timer';
 	import { useMutation } from '@sveltestack/svelte-query';
+	import { Spinner } from 'flowbite-svelte';
 	import { onMount } from 'svelte';
 
 	let timer;
@@ -20,22 +23,8 @@
 
 	let recording = false,
 		recorded = false,
-		blob;
-
-	function msToTime(s) {
-		function pad(n, z) {
-			z = z || 2;
-			return ('00' + n).slice(-z);
-		}
-
-		let ms = s % 1000;
-		s = (s - ms) / 1000;
-		let secs = s % 60;
-		s = (s - secs) / 60;
-		let mins = s % 60;
-
-		return pad(mins) + ':' + pad(secs);
-	}
+		blob,
+		duration;
 
 	$: timer &&
 		timer.on('tick', (ms) => {
@@ -65,7 +54,8 @@
 		}
 	);
 
-	function handleRecordingFinished() {
+	function handleRecordingFinished(e) {
+		duration = msToTime(e.detail.duration);
 		$submitData.mutate();
 	}
 
@@ -79,13 +69,20 @@
 </script>
 
 <section class="flex flex-col h-full">
-	<div class="flex justify-between items-center">
+	<div class="flex gap-x-4 justify-between items-center">
 		<span class="bg-bgColor text-primary text-base font-bold px-3 py-1 rounded-xl"
 			>{currentIndex + 1}/{length}</span
 		>
-		<span class="text-primary text-lg font-bold"
-			>{countdown || (timer && msToTime(timer.time))}</span
-		>
+		{#if !recorded}
+			{#if question.question_audio}
+				<div class="w-2/4">
+					<AudioPlayer autoPlay={true} many={false} audioSrc={question.question_audio} />
+				</div>
+			{/if}
+			<span class="text-primary text-lg font-bold"
+				>{countdown || (timer && msToTime(timer.time))}</span
+			>
+		{/if}
 	</div>
 	<div class="self-center flex flex-col items-center text-center xl:w-3/5 m-auto">
 		<h3 class="font-bold text-secondary text-xl md:text-2xl mt-6 mb-10">
@@ -101,20 +98,26 @@
 			/>
 			{#if !(recording || recorded)}
 				<button on:click={handleNext} class="text-lighterText font-bold text-lg">Skip</button>
+			{:else if recorded && duration}
+				<span class="text-lighterText font-bold text-lg">{duration}</span>
 			{/if}
 		</div>
 		{#if recorded}
 			<button
 				disabled={$submitData.isLoading}
 				on:click={handleNext}
-				class="flex items-center gap-x-2 bg-primary hover:bg-primaryDarker text-white font-bold py-2 px-6 rounded-2xl mt-8"
+				class="flex items-center gap-x-2 bg-primary hover:bg-primaryDarker disabled:bg-borderColor text-white font-bold py-2 px-6 rounded-2xl mt-8"
 				>{currentIndex < length - 1 ? 'Next Question' : 'Finish'}
-				<span class="inline-flex items-center bg-white w-6 h-6 rounded-full p-1"
-					><span class="text-primary block w-full">
-						<RightChevron stroke={3} />
-					</span></span
-				></button
-			>
+				{#if $submitData.isLoading}
+					<Spinner color="white" size="4" />
+				{:else}
+					<span class="inline-flex items-center bg-white w-6 h-6 rounded-full p-1"
+						><span class="text-primary block w-full">
+							<RightChevron stroke={3} />
+						</span></span
+					>
+				{/if}
+			</button>
 		{/if}
 	</div>
 </section>

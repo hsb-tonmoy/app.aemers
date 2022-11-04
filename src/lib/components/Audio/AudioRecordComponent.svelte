@@ -10,20 +10,26 @@
 	export let recording = false;
 	export let recorded = false;
 	export let timer;
+	let startTime = 0;
+	let stopTime = 0;
 
 	onMount(async () => {
 		const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
 		mediaRecorder = new MediaRecorder(stream);
 		mediaRecorder.ondataavailable = (e) => media.push(e.data);
 		mediaRecorder.onstop = function () {
+			stopTime = Date.now();
 			blob = new Blob(media, { type: 'audio/ogg; codecs=opus' });
 			media = [];
-			dispatch('finished');
+			dispatch('finished', {
+				duration: stopTime - startTime
+			});
 		};
 	});
 
 	function startRecording() {
 		mediaRecorder.start();
+		startTime = Date.now();
 		recording = true;
 		timer.resume();
 	}

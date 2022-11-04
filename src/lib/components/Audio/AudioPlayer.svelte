@@ -5,6 +5,7 @@
 	export let audioBlob = false;
 	export let audioSrc = '';
 	export let many = false;
+	export let autoPlay = false;
 
 	let wavesurfer;
 
@@ -22,6 +23,10 @@
 
 	function handlePlayPause() {
 		wavesurfer.playPause();
+	}
+
+	$: if (wavesurfer && autoPlay) {
+		wavesurfer.on('ready', wavesurfer.play.bind(wavesurfer));
 	}
 </script>
 
