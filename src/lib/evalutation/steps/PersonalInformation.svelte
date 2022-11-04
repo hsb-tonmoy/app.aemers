@@ -15,9 +15,18 @@
 	}
 
 	const schema = yup.object().shape({
-		first_name: yup.string().required('First Name is required').trim(),
-		last_name: yup.string().required('Last Name is required').trim(),
-		phone: yup.string().required('Phone Number is required').trim(),
+		first_name: yup
+			.string()
+			.required('First Name is required')
+			.matches(/^(.*)?\S+(.*)?$/, 'Field cannot be empty'),
+		last_name: yup
+			.string()
+			.required('Last Name is required')
+			.matches(/^(.*)?\S+(.*)?$/, 'Field cannot be empty'),
+		phone: yup
+			.string()
+			.required('Phone Number is required')
+			.matches(/^(.*)?\S+(.*)?$/, 'Field cannot be empty'),
 		country: yup.string().required('Country is required').trim()
 	});
 	const { form, data, errors, isValid, touched } = createForm({

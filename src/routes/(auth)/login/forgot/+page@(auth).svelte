@@ -69,7 +69,8 @@
 		{#if success}
 			<div class="mt-12">
 				<span class="text-green-600 text-sm text-center font-medium"
-					>A password reset link has been sent to the email address.</span
+					>If an account exists with the email address you submitted, a password reset link will be
+					sent.</span
 				>
 			</div>
 		{/if}

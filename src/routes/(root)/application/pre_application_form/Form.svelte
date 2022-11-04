@@ -1359,13 +1359,15 @@
 						defaultClass=""
 						classes="bg-white hover:bg-primary border border-primary text-primary hover:text-white font-bold px-4 py-3 w-full rounded-xl"
 					/>
-					<Button
-						type="button"
-						on:click={deleteWorkExperience}
-						text="Remove"
-						defaultClass=""
-						classes="bg-white border-0 text-red-600 hover:text-red-700 font-bold"
-					/>
+					{#if $data.work_experience.length > 1}
+						<Button
+							type="button"
+							on:click={deleteWorkExperience}
+							text="Remove"
+							defaultClass=""
+							classes="bg-white border-0 text-red-600 hover:text-red-700 font-bold"
+						/>
+					{/if}
 				</div>
 			</div>
 		</section>

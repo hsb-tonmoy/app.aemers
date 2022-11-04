@@ -1,5 +1,6 @@
 <script>
 	import { Pause, Play } from '$lib/components/Icons';
+	import { onDestroy } from 'svelte';
 	import AudioWaveform from './AudioWaveform.svelte';
 
 	export let audioBlob = false;
@@ -28,6 +29,10 @@
 	$: if (wavesurfer && autoPlay) {
 		wavesurfer.on('ready', wavesurfer.play.bind(wavesurfer));
 	}
+
+	onDestroy(() => {
+		wavesurfer.destroy();
+	});
 </script>
 
 <div class="flex items-center gap-x-2">
