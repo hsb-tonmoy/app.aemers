@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { Button } from '$lib/components/Form';
-	import { Cross, Medal, Play } from '$lib/components/Icons';
+	import { Cross, Medal, Play, Restart } from '$lib/components/Icons';
 	import Divider from '$lib/components/UI/Divider.svelte';
 	import Success from '$lib/components/UI/Success.svelte';
 
@@ -83,10 +83,20 @@
 				</button>
 				<img src="/images/waveform.png" alt="Waveform" class="object-cover w-full" />
 			</div>
-			<Button
-				text="Download"
-				classes="border border-white bg-transparent hover:border-primary hover:bg-white hover:text-primary px-6 py-2 rounded-xl text-sm md:text=base text-white"
-			/>
+			<div class="flex items-center gap-x-4">
+				<Button
+					text="Download"
+					classes="border border-white bg-transparent hover:border-primary hover:bg-white hover:text-primary px-6 py-2 rounded-xl text-sm md:text=base text-white"
+				/>
+				{#if finished}
+					<a href="/mock_visa_interview/free/new">
+						<button
+							class="inline-flex items-center gap-x-2 border border-white bg-white hover:border-primaryDarker hover:bg-primaryDarker hover:text-white px-6 py-2 rounded-xl text-sm md:text=base text-primary font-bold"
+							><span class="block w-5 h-5"><Restart /></span> Restart The Test</button
+						>
+					</a>
+				{/if}
+			</div>
 		</div>
 		<div class="w-full md:w-3/4 2xl:w-2/4">
 			<Divider

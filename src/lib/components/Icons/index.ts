@@ -50,6 +50,7 @@ export { default as QuestionMarkCircular } from './QuestionMarkCircular.svelte';
 export { default as Randomization } from './Randomization.svelte';
 export { default as RedCircularCross } from './RedCircularCross.svelte';
 export { default as Rename } from './Rename.svelte';
+export { default as Restart } from './Restart.svelte';
 export { default as RightChevron } from './RightChevron.svelte';
 export { default as RoundArrows } from './RoundArrows.svelte';
 export { default as Sciences } from './Sciences.svelte';
