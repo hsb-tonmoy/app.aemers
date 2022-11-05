@@ -19,7 +19,11 @@
 			><Menu /></button
 		>
 
-		<NotificationDropDown {notifications} />
-		<AccountDropdown />
+		<div id="notif-tour">
+			<NotificationDropDown {notifications} />
+		</div>
+		<div id="acc-tour">
+			<AccountDropdown />
+		</div>
 	</div>
 </header>
