@@ -22,17 +22,43 @@
 			stepsContainer: shepherdContainer,
 			useModalOverlay: true,
 			defaultStepOptions: {
-				classes: 'rounded-2xl',
-				scrollTo: true
+				title: "Let's show you around...",
+				scrollTo: true,
+				popperOptions: {
+					modifiers: [{ name: 'offset', options: { offset: [0, 20] } }]
+				},
+				modalOverlayOpeningRadius: 16,
+				when: {
+					show: function () {
+						const currentStepElement = tour.currentStep.el;
+						const header = currentStepElement.querySelector('.shepherd-footer');
+						//create progress holder
+						const progress = document.createElement('div');
+						//create the progress bar
+						const innerBar = document.createElement('span');
+						//calculate the progress in percentages
+						const progressPercentage =
+							((tour.steps.indexOf(tour.currentStep) + 1) / tour.steps.length) * 100 + '%';
+
+						//add class to the progress holder
+						progress.className = 'shepherd-progress-bar';
+						//add the width dynamically
+						innerBar.style.width = progressPercentage;
+						//if it is only one button, expand progress holder
+						if (document.getElementsByClassName('shepherd-button').length == 1) {
+							progress.style.minWidth = '260px';
+						}
+						progress.appendChild(innerBar);
+						header.insertBefore(progress, currentStepElement.querySelector('.shepherd-button'));
+					}
+				}
 			}
 		});
 
 		tour.addSteps([
 			{
 				id: 'application-step',
-				title: 'Your Application',
-				text: 'Click here to start your study abroad application!',
-				classes: 'p-6',
+				text: 'Here you can start and review your study abroad application!',
 				attachTo: {
 					element: '#application',
 					on: 'bottom'
@@ -40,15 +66,18 @@
 				buttons: [
 					{
 						text: 'Next',
-						action: tour.next,
-						classes: 'bg-primary text-white font-bold py-1 px-6 rounded-xl'
+						action: tour.next
+					},
+					{
+						text: 'Skip',
+						action: tour.cancel,
+						secondary: true
 					}
-				],
-				modalOverlayOpeningRadius: 16
+				]
 			},
 			{
 				id: 'knowledgebase-step',
-				text: 'Click here to visit our amazing knowledgebase!',
+				text: 'Here you will find a well curated collection of study abroad articles!',
 				attachTo: {
 					element: '#knowledgebase',
 					on: 'bottom'
@@ -57,13 +86,17 @@
 					{
 						text: 'Next',
 						action: tour.next
+					},
+					{
+						text: 'Skip',
+						action: tour.cancel,
+						secondary: true
 					}
-				],
-				modalOverlayOpeningRadius: 16
+				]
 			},
 			{
 				id: 'interview-step',
-				text: 'Click here to take a Free Mock Visa Interview!',
+				text: 'Here you can take a FREE Visa Interview Mock Test!',
 				attachTo: {
 					element: '#interview',
 					on: 'bottom'
@@ -72,13 +105,17 @@
 					{
 						text: 'Next',
 						action: tour.next
+					},
+					{
+						text: 'Skip',
+						action: tour.cancel,
+						secondary: true
 					}
-				],
-				modalOverlayOpeningRadius: 16
+				]
 			},
 			{
 				id: 'mentorship-step',
-				text: 'Click here to take a look at mentorship opportunities!',
+				text: 'Here you can explore the mentorship opportunities available to you!',
 				attachTo: {
 					element: '#mentorship',
 					on: 'bottom'
@@ -87,27 +124,47 @@
 					{
 						text: 'Next',
 						action: tour.next
+					},
+					{
+						text: 'Skip',
+						action: tour.cancel,
+						secondary: true
 					}
-				],
-				modalOverlayOpeningRadius: 16
+				]
 			},
 			{
 				id: 'notif-step',
-				text: 'You will find all the important notifications here!',
+				text: 'All your important notifications can be found here!',
 				attachTo: {
 					element: '#notif-tour',
-					on: 'bottom'
+					on: 'left'
 				},
 				buttons: [
 					{
-						text: 'Next',
-						action: tour.next
+						text: 'Finish',
+						action: () => {
+							dismissTour();
+							tour.complete();
+						}
 					}
 				],
 				modalOverlayOpeningPadding: 5,
 				modalOverlayOpeningRadius: 25
 			}
 		]);
+
+		function dismissTour() {
+			if (!localStorage.getItem('dashboard-tour')) {
+				localStorage.setItem('dashboard-tour', 'yes');
+			}
+		}
+
+		tour.on('cancel', dismissTour);
+
+		// if (!localStorage.getItem('dashboard-tour')) {
+		// 	tour.start();
+		// }
+
 		tour.start();
 	});
 </script>
@@ -135,7 +192,55 @@
 </div>
 
 <style lang="postcss" global>
+	.shepherd-modal-overlay-container {
+		opacity: 0.8 !important;
+	}
+	.shepherd-element {
+		@apply rounded-2xl px-6 pt-6 pb-4 !important;
+	}
+	.shepherd-header {
+		@apply bg-white p-0 !important;
+	}
+	.shepherd-footer {
+		@apply p-0 !important;
+	}
+	.shepherd-title {
+		@apply text-primary text-lg font-bold !important;
+	}
+	.shepherd-text {
+		@apply text-lighterText p-0 text-base mt-1 mb-4 !important;
+	}
 	.shepherd-button {
-		@apply bg-primary;
+		@apply bg-primary hover:bg-primaryDarker text-white font-bold py-2 px-6 rounded-xl !important;
+	}
+	.shepherd-button-secondary {
+		@apply bg-transparent text-lighterText hover:text-lightText hover:bg-transparent font-bold px-2 py-0 !important;
+	}
+
+	[data-popper-arrow]::after {
+		@apply invisible;
+	}
+	.shepherd-arrow::before {
+		@apply bg-white !important;
+	}
+
+	.shepherd-progress-bar {
+		position: absolute;
+		left: 2%;
+		bottom: 9%;
+		font-size: 14px;
+		border-radius: 9px;
+		height: 20px;
+		width: 100%;
+		max-width: 180px;
+		padding: 3px;
+		background: #d9d9d9;
+	}
+	.shepherd-progress-bar span {
+		display: block;
+		background: #7443ff;
+		width: 50%;
+		height: 100%;
+		border-radius: 9px;
 	}
 </style>
