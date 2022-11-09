@@ -57,7 +57,7 @@
 	const updateSession = useMutation(
 		() => {
 			return fetch(`/mock_visa_interview/free/new/session/?id=${session.id}`, {
-				method: 'POST',
+				method: 'PATCH',
 				body: JSON.stringify({
 					final: true
 				})
