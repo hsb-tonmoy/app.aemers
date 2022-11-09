@@ -18,6 +18,24 @@ export async function POST({ request, locals }) {
 	return json(session);
 }
 
+export async function PATCH({ request, locals, url }) {
+	const id = url.searchParams.get('id');
+
+	const data = await request.json();
+
+	const res = await api.patch(`mock_visa_interview_session/${id}/`, data, locals.access, false);
+
+	const session = await res.json();
+
+	if (!res.ok) {
+		console.log(res);
+		console.log(session);
+		throw error(res.status, 'Error updating session');
+	}
+
+	return json(session);
+}
+
 export async function DELETE({ locals, url }) {
 	const id = url.searchParams.get('id');
 

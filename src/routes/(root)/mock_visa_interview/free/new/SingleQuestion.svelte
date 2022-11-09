@@ -54,6 +54,25 @@
 		}
 	);
 
+	const updateSession = useMutation(
+		() => {
+			return fetch(`/mock_visa_interview/free/new/session/?id=${session.id}`, {
+				method: 'POST',
+				body: JSON.stringify({
+					final: true
+				})
+			});
+		},
+		{
+			onSettled: async (data, error, variables, context) => {
+				if (!data.ok || error) {
+					notificationToast('Something went wrong, please try again later');
+					console.log(await data.json(), error);
+				}
+			}
+		}
+	);
+
 	function handleRecordingFinished(e) {
 		duration = msToTime(e.detail.duration);
 		$submitData.mutate();
@@ -63,6 +82,7 @@
 		if (currentIndex < length - 1) {
 			currentIndex++;
 		} else {
+			$updateSession.mutate();
 			goto(`/mock_visa_interview/free/${session.id}`);
 		}
 	}
