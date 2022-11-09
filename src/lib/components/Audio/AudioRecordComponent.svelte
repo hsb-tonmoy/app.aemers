@@ -1,6 +1,9 @@
 <script>
-	import { CheckMark, Microphone, Square } from '$lib/components/Icons';
 	import { createEventDispatcher, onDestroy, onMount } from 'svelte';
+	import { CheckMark, Microphone, Square } from '$lib/components/Icons';
+
+	import { MediaRecorder, register } from 'extendable-media-recorder';
+	import { connect } from 'extendable-media-recorder-wav-encoder';
 
 	const dispatch = createEventDispatcher();
 	let stream;
@@ -14,12 +17,13 @@
 	let stopTime = 0;
 
 	onMount(async () => {
+		await register(await connect());
 		stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-		mediaRecorder = new MediaRecorder(stream);
+		mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/wav' });
 		mediaRecorder.ondataavailable = (e) => media.push(e.data);
 		mediaRecorder.onstop = function () {
 			stopTime = Date.now();
-			blob = new Blob(media, { type: 'audio/ogg; codecs=opus' });
+			blob = new Blob(media, { type: 'audio/wav' });
 			media = [];
 			stream.getTracks().forEach((track) => track.stop());
 			dispatch('finished', {
