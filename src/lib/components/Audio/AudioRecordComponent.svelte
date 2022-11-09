@@ -2,9 +2,6 @@
 	import { createEventDispatcher, onDestroy, onMount } from 'svelte';
 	import { CheckMark, Microphone, Square } from '$lib/components/Icons';
 
-	import { MediaRecorder, register } from 'extendable-media-recorder';
-	import { connect } from 'extendable-media-recorder-wav-encoder';
-
 	const dispatch = createEventDispatcher();
 	let stream;
 	let media = [];
@@ -17,7 +14,8 @@
 	let stopTime = 0;
 
 	onMount(async () => {
-		await register(await connect());
+		const { MediaRecorder } = await import('extendable-media-recorder');
+
 		stream = await navigator.mediaDevices.getUserMedia({ audio: true });
 		mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/wav' });
 		mediaRecorder.ondataavailable = (e) => media.push(e.data);
