@@ -21,7 +21,6 @@
 				popperOptions: {
 					modifiers: [{ name: 'offset', options: { offset: [0, 20] } }]
 				},
-				// modalOverlayOpeningRadius: 16,
 				when: {
 					show: function () {
 						const currentStepElement = tour.currentStep.el;
@@ -95,6 +94,7 @@
 					element: '#exit',
 					on: 'bottom'
 				},
+				modalOverlayOpeningRadius: 16,
 				buttons: [
 					{
 						text: 'Finish',

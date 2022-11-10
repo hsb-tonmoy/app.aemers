@@ -15,6 +15,7 @@
 		accepted: []
 	};
 	let file_dropped = false;
+	let file_size;
 
 	export let category;
 	export let user;
@@ -67,6 +68,8 @@
 	$: $data.document = files.accepted && files.accepted[0];
 	$: $data.title = files.accepted[0] && files.accepted[0].name;
 
+	$: file_size = files.accepted[0] && files.accepted[0].size;
+
 	const handleFileDelete = useMutation(
 		(id) => {
 			let formData = new FormData();
@@ -106,25 +109,27 @@
 		{#if category.documents.length > 0}
 			{#each category.documents as document}
 				<FileDetailsComponent
+					uploading={$submitData.isLoading}
 					has_uploaded={true}
-					loading={$handleFileDelete.isLoading}
+					deleting={$handleFileDelete.isLoading}
 					filename={document.title}
 					url={`/application/documents_upload/document/${document.id}`}
 					status={document.status}
 					date={document.uploaded_at}
+					bind:file_size
 					handleDeleteFile={() => $handleFileDelete.mutate(document.id)}
 				/>
 			{/each}
 		{:else}
 			<UploadComponent bind:file_dropped bind:files />
-			{#if files.accepted.length > 0}
+			<!-- {#if files.accepted.length > 0}
 				<Button
 					loading={$submitData.isLoading}
 					disabled={!$isValid || $submitData.isLoading}
 					text="Upload"
 					classes="mt-4 self-end px-6 py-3"
 				/>
-			{/if}
+			{/if} -->
 		{/if}
 	</div>
 </form>

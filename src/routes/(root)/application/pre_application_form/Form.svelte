@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import {
 		Button,
 		Error,
@@ -55,6 +56,7 @@
 					console.log(await data.json(), error);
 				} else {
 					formSaved.set(true);
+					goto('/application/documents_upload');
 				}
 			}
 		}
@@ -143,13 +145,8 @@
 		extend: validator({ schema }),
 		onSubmit(values, context) {
 			$submitData.mutate(values);
-			console.log($isDirty);
 		}
 	});
-
-	$: if ($interacted) {
-		console.log('imet');
-	}
 
 	let education_level_value: number;
 
@@ -1401,16 +1398,23 @@
 			{/if}
 		</div>
 	</section>
-	<section class="form-section">
-		<div class="flex w-full justify-end">
+
+	<div class="flex gap-x-4 w-full justify-end">
+		<a href="/application/file_opening">
 			<Button
-				classes="px-20 py-4"
-				text="Submit"
-				loading={$submitData.isLoading}
-				disabled={!$isValid}
+				type="button"
+				text="Go back"
+				defaultClass=""
+				classes="bg-transparent px-6 py-4 text-lighterText font-bold border border-borderColor hover:text-secondary hover:border-secondary rounded-2xl"
 			/>
-		</div>
-	</section>
+		</a>
+		<Button
+			classes="px-20 py-4"
+			text="Save & Continue"
+			loading={$submitData.isLoading}
+			disabled={!$isValid}
+		/>
+	</div>
 </form>
 
 <style lang="postcss">

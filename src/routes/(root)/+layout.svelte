@@ -31,3 +31,55 @@
 	</div>
 	<Footer />
 </div>
+
+<style lang="postcss" global>
+	.shepherd-modal-overlay-container {
+		opacity: 0.8 !important;
+	}
+	.shepherd-element {
+		@apply rounded-2xl px-6 pt-6 pb-4 !important;
+	}
+	.shepherd-header {
+		@apply bg-white p-0 !important;
+	}
+	.shepherd-footer {
+		@apply p-0 justify-start items-center !important;
+	}
+	.shepherd-title {
+		@apply text-primary text-lg font-bold !important;
+	}
+	.shepherd-text {
+		@apply text-lighterText p-0 text-base mt-1 mb-4 !important;
+	}
+	.shepherd-button {
+		@apply bg-primary hover:bg-primaryDarker text-white font-bold py-2 px-6 rounded-xl !important;
+	}
+	.shepherd-button-secondary {
+		@apply bg-transparent text-lighterText hover:text-lightText hover:bg-transparent font-bold px-2 py-0 !important;
+	}
+
+	[data-popper-arrow]::after {
+		@apply invisible;
+	}
+	.shepherd-arrow::before {
+		@apply bg-white !important;
+	}
+
+	.shepherd-progress-bar {
+		margin-right: auto;
+		font-size: 14px;
+		border-radius: 9px;
+		height: 20px;
+		width: 100%;
+		max-width: 180px;
+		padding: 3px;
+		background: #d9d9d9;
+	}
+	.shepherd-progress-bar span {
+		display: block;
+		background: #7443ff;
+		width: 50%;
+		height: 100%;
+		border-radius: 9px;
+	}
+</style>
