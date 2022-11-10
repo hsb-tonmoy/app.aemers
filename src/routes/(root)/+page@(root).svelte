@@ -202,7 +202,7 @@
 		@apply bg-white p-0 !important;
 	}
 	.shepherd-footer {
-		@apply p-0 !important;
+		@apply p-0 justify-start items-center !important;
 	}
 	.shepherd-title {
 		@apply text-primary text-lg font-bold !important;
@@ -225,9 +225,7 @@
 	}
 
 	.shepherd-progress-bar {
-		position: absolute;
-		left: 2%;
-		bottom: 9%;
+		margin-right: auto;
 		font-size: 14px;
 		border-radius: 9px;
 		height: 20px;
