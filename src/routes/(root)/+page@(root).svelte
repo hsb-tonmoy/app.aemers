@@ -161,18 +161,16 @@
 
 		tour.on('cancel', dismissTour);
 
-		// if (!localStorage.getItem('dashboard-tour')) {
-		// 	tour.start();
-		// }
-
-		tour.start();
+		if (!localStorage.getItem('dashboard-tour')) {
+			tour.start();
+		}
 	});
 </script>
 
 <svelte:head><title>Dashboard | app.aemers</title></svelte:head>
 
 <div class="flex flex-col">
-	<Header notifications={data.notifications} user={data.user} />
+	<Header notifications={data.notifications} first_name={data.profile.first_name} />
 	<div class="relative grid grid-cols-1 xl:grid-cols-2 gap-6 mt-5">
 		<div id="application">
 			<ApplicationTile />

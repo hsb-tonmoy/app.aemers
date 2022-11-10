@@ -29,7 +29,7 @@
 			><Cross /></button
 		>
 	</div>
-	<div class="status bg-cover bg-center flex flex-col text-white sidebarpadding py-6">
+	<div id="status" class="bg-cover bg-center flex flex-col text-white sidebarpadding py-6">
 		<h6 class="font-bold text-white text-lg md:text-xl">Hey, {user.first_name}</h6>
 		<div class="flex items-center gap-x-2 mt-2 text-sm">
 			Status: <span
@@ -56,7 +56,7 @@
 		<h6 class="font-bold text-xl mt-4">File Completion</h6>
 		<p class="text-xs">Follow the steps to complete your File for US Admission.</p> -->
 	</div>
-	<div class="steps sidebarpadding">
+	<div id="steps" class="sidebarpadding">
 		<Steps
 			steps={$application_steps}
 			clickable={true}
@@ -78,7 +78,7 @@
 		@apply px-4 md:px-6;
 	}
 
-	.status {
+	#status {
 		background-image: url('/images/user_status_bg.png');
 	}
 </style>

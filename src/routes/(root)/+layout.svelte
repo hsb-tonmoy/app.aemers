@@ -20,7 +20,7 @@
 			class="xl:block fixed xl:sticky left-0 top-0 w-3/4 md:w-2/4 xl:w-[25%] 2xl:w-[15%] h-full z-[5000] overflow-y-auto"
 		>
 			{#if $page.url.pathname.startsWith('/application')}
-				<ApplicationSidebar user={data.user} />
+				<ApplicationSidebar user={data.profile} />
 			{:else}
 				<Sidebar />
 			{/if}

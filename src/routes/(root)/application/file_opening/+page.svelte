@@ -1,67 +1,147 @@
 <script>
 	import { goto } from '$app/navigation';
 	import Button from '$lib/components/Form/Button.svelte';
+	import 'shepherd.js/dist/css/shepherd.css';
 	import { onMount } from 'svelte';
-	const items = ['Click ‘Open a File', 'Confirm Personal Info', 'Make Payment', 'Done!'];
 
-	let fileOpeningTour;
+	let tour;
 
-	onMount(() => {
-		fileOpeningTour = localStorage.getItem('fileOpeningTour');
+	onMount(async () => {
+		const obj = await import('shepherd.js');
+		const Shepherd = obj.default;
+
+		const shepherdContainer = document.getElementById('svelte');
+		tour = new Shepherd.Tour({
+			modalContainer: shepherdContainer,
+			stepsContainer: shepherdContainer,
+			useModalOverlay: true,
+			defaultStepOptions: {
+				title: "Let's show you around...",
+				scrollTo: true,
+				popperOptions: {
+					modifiers: [{ name: 'offset', options: { offset: [0, 20] } }]
+				},
+				// modalOverlayOpeningRadius: 16,
+				when: {
+					show: function () {
+						const currentStepElement = tour.currentStep.el;
+						const header = currentStepElement.querySelector('.shepherd-footer');
+						//create progress holder
+						const progress = document.createElement('div');
+						//create the progress bar
+						const innerBar = document.createElement('span');
+						//calculate the progress in percentages
+						const progressPercentage =
+							((tour.steps.indexOf(tour.currentStep) + 1) / tour.steps.length) * 100 + '%';
+
+						//add class to the progress holder
+						progress.className = 'shepherd-progress-bar';
+						//add the width dynamically
+						innerBar.style.width = progressPercentage;
+						//if it is only one button, expand progress holder
+						if (document.getElementsByClassName('shepherd-button').length == 1) {
+							progress.style.minWidth = '260px';
+						}
+						progress.appendChild(innerBar);
+						header.insertBefore(progress, currentStepElement.querySelector('.shepherd-button'));
+					}
+				}
+			}
+		});
+
+		tour.addSteps([
+			{
+				id: 'status-step',
+				text: 'You can review your status here',
+				attachTo: {
+					element: '#status',
+					on: 'right'
+				},
+				buttons: [
+					{
+						text: 'Next',
+						action: tour.next
+					},
+					{
+						text: 'Skip',
+						action: tour.cancel,
+						secondary: true
+					}
+				]
+			},
+			{
+				id: 'steps-step',
+				text: 'Here you can track your progress and navigate between the pages!',
+				attachTo: {
+					element: '#steps',
+					on: 'right'
+				},
+				buttons: [
+					{
+						text: 'Next',
+						action: tour.next
+					},
+					{
+						text: 'Skip',
+						action: tour.cancel,
+						secondary: true
+					}
+				]
+			},
+			{
+				id: 'exit-step',
+				text: 'Save and exit your application anytime!',
+				attachTo: {
+					element: '#exit',
+					on: 'bottom'
+				},
+				buttons: [
+					{
+						text: 'Finish',
+						action: () => {
+							dismissTour();
+							tour.complete();
+						}
+					}
+				]
+			}
+		]);
+
+		function dismissTour() {
+			if (!localStorage.getItem('fileOpen-tour')) {
+				localStorage.setItem('fileOpen-tour', 'yes');
+			}
+		}
+
+		tour.on('cancel', dismissTour);
+
+		if (!localStorage.getItem('fileOpen-tour')) {
+			tour.start();
+		}
 	});
 
 	function handleClick() {
-		localStorage.setItem('fileOpeningTour', 'true');
 		goto('/application/file_opening/open_a_file');
 	}
 </script>
 
 <div
-	class="flex flex-wrap justify-center gap-y-8 px-14 py-8 xl:px-20 xl:py-12 bg-white rounded-2xl w-full"
+	class="flex flex-wrap md:flex-nowrap justify-center gap-8 px-14 py-8 xl:px-20 xl:py-12 bg-white rounded-2xl w-full"
 >
-	{#if !fileOpeningTour}
-		<div
-			on:click={() => {
-				localStorage.setItem('fileOpeningTour', 'true');
-				fileOpeningTour = 'false';
-			}}
-			on:keypress={() => {
-				localStorage.setItem('fileOpeningTour', 'true');
-				fileOpeningTour = 'false';
-			}}
-			class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 h-modal md:h-full z-[6000] md:inset-0 bg-black/60"
-		/>
-	{/if}
-	<div class="w-full md:w-2/4">
-		<div class="flex flex-col w-3/4">
-			<img src="/images/file.png" alt="File" class="w-32 md:w-52" />
-			<h3 class="text-secondary font-bold text-2xl mb-2">Opening a file is really simple!</h3>
-			<p class="text-lighterText text-sm mb-4">
-				All your data is stored under the file. You have to pay 15000 BDT to open a file. Trust me,
-				it’s worth it!
-			</p>
-			<Button
-				on:click={handleClick}
-				type="button"
-				text="Open a File"
-				classes="self-start px-8 py-3 hover:bg-primaryDarker z-[6001]"
-			/>
-		</div>
+	<div class="w-full md:w-1/4">
+		<img src="/images/video_file.png" alt="Video" class="w-60 md:w-80" />
 	</div>
-	<div class="flex flex-col w-full md:w-2/4">
-		<img src="/images/video_file.png" alt="Video" class="w-80 md:w-120" />
-
-		<ol class="relative border-l-[3px] border-dashed border-primary mt-6 ml-2">
-			{#each items as item, index}
-				<li class="{index === items.length - 1 ? 'mb-4' : 'mb-10'} ml-5">
-					<div
-						class="absolute inline-flex justify-center items-center w-6 h-6 bg-primary rounded-full -left-3.5 border border-primary"
-					>
-						<span class="text-white text-xs font-bold">{index + 1}</span>
-					</div>
-					<h3 class="text-base font-bold text-gray-900">{item}</h3>
-				</li>
-			{/each}
-		</ol>
+	<div class="flex flex-col justify-center w-full md:w-2/4">
+		<h3 class="text-secondary font-bold text-2xl mb-2">Opening a file is really simple!</h3>
+		<p class="text-lighterText text-sm mb-4">
+			All your data is stored under the file. You have to pay 15000 BDT to open a file. Trust me,
+			it’s worth it!
+		</p>
+		<Button
+			on:click={handleClick}
+			type="button"
+			text="Open a File"
+			classes="self-start px-8 py-3 hover:bg-primaryDarker"
+		/>
 	</div>
 </div>

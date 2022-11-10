@@ -6,7 +6,7 @@ export async function load({ locals }) {
 	const profile_data = await profile_fetch.json();
 
 	if (!profile_fetch.ok) {
-		throw error(profile_fetch.status, 'Error fetching application status');
+		throw error(profile_fetch.status, 'Error fetching profile data');
 	}
 
 	return {

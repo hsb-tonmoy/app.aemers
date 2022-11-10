@@ -79,6 +79,7 @@
 				</div>
 			{/if}
 			<button
+				id="exit"
 				on:click={() => goto('/')}
 				class="ml-auto inline-flex items-center gap-x-2 border border-lighterText text-lighterText hover:text-secondary hover:border-secondary text-sm md:text-base rounded-xl px-4 md:px-5 py-2 bg-transparent font-bold"
 			>
