@@ -6,6 +6,8 @@
 	import Divider from '$lib/components/UI/Divider.svelte';
 	import Success from '$lib/components/UI/Success.svelte';
 
+	import AudioPlayer from '$lib/components/Audio/AudioPlayer.svelte';
+
 	let finished = $page.url.searchParams.get('finished') === 'true';
 
 	import SingleQuestion from './SingleQuestion.svelte';
@@ -75,19 +77,24 @@
 			<span class="text-xs text-center md:text-sm mt-1"
 				>Listen to and download your complete interview to evaluate your performance</span
 			>
-			<div class="flex items-center gap-x-4 my-6">
-				<button
-					class="group shrink-0 inline-flex items-center bg-white hover:bg-primaryDarker w-6 h-6 md:w-12 md:h-12 xl:w-14 xl:h-14 rounded-full p-1 md:p-3 xl:p-4"
-				>
-					<span class="block w-full text-primary group-hover:text-white"><Play /></span>
-				</button>
-				<img src="/images/waveform.png" alt="Waveform" class="object-cover w-full" />
-			</div>
+			{#if data.session && data.session.full_recording}
+				<div class="w-full">
+					<AudioPlayer dark={true} many={false} audioSrc={data.session.full_recording} />
+				</div>
+			{:else}
+				<h3 class="text-center">
+					The audio is still being processed. Please come back in a few minutes
+				</h3>
+			{/if}
 			<div class="flex items-center gap-x-4">
-				<Button
-					text="Download"
-					classes="border border-white bg-transparent hover:border-primary hover:bg-white hover:text-primary px-6 py-2 rounded-xl text-sm md:text=base text-white"
-				/>
+				{#if data.session && data.session.full_recording}
+					<a href={data.session.full_recording} download>
+						<Button
+							text="Download"
+							classes="border border-white bg-transparent hover:border-primary hover:bg-white hover:text-primary px-6 py-2 rounded-xl text-sm md:text=base text-white"
+						/>
+					</a>
+				{/if}
 				{#if finished}
 					<a href="/mock_visa_interview/free/new">
 						<button
