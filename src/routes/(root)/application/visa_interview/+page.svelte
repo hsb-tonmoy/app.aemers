@@ -1,5 +1,6 @@
 <script>
 	import { CheckedCircle } from '$lib/components/Icons';
+	import { Button } from '$lib/components/Form';
 	import { application_status } from '$lib/data/stores';
 	import Card from './Card.svelte';
 
@@ -50,14 +51,14 @@
 			heading="Free Mock Visa Interview with Simulator"
 			description="Prepare with the interview simulator for free."
 			button="Start For Free"
-			url=""
+			url="/mock_visa_interview"
 		/>
 		<Card
 			img="/images/visa_sim2.png"
 			img_alt="Free Mock visa with Dr. Mamoon Rashid"
 			heading="Free Mock visa with Dr. Mamoon Rashid"
 			description="Get interviewed by Dr. Mamoon Rashid for free."
-			button="Book a Session"
+			button="Coming Soon..."
 			url=""
 		/>
 		<Card
@@ -65,7 +66,7 @@
 			img_alt="Mock visa with American Native-Speaking officials"
 			heading="Mock visa with Native English Speakers"
 			description="Get interviewed by Native English Speakers."
-			button="Learn More"
+			button="Coming Soon..."
 			url=""
 		/>
 	</div>
@@ -76,16 +77,23 @@
 			>Have you already received your student visa? Congratulations!</span
 		>
 	</div>
-	<button
-		on:click={handleComplete}
-		class="self-start inline-flex items-center gap-x-2 font-bold text-lg px-8 py-3 rounded-2xl border-2 {completed
-			? 'bg-white text-greenSignal border-greenSignal'
-			: 'bg-primary text-white border-primary'}"
-	>
+	<div class="flex flex-col md:flex-row md:items-center gap-4 mt-6">
+		<button
+			on:click={handleComplete}
+			class="inline-flex items-center gap-x-2 font-bold text-lg px-8 py-3 rounded-2xl border-2 {completed
+				? 'bg-white text-greenSignal border-greenSignal'
+				: 'bg-primary text-white border-primary'}"
+		>
+			{#if completed}
+				<span class="w-5 h-5"><CheckedCircle /></span>Completed
+			{:else}
+				Mark as Completed
+			{/if}
+		</button>
 		{#if completed}
-			<span class="w-5 h-5"><CheckedCircle /></span>Completed
-		{:else}
-			Mark as Completed
+			<a href="/application/pre_departure_session"
+				><Button text="Next Step" classes="px-6 py-3 md:px-10 md:py-4" /></a
+			>
 		{/if}
-	</button>
+	</div>
 </div>

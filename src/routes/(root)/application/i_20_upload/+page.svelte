@@ -1,10 +1,13 @@
 <script>
 	import { invalidateAll } from '$app/navigation';
 	import { Upload } from '$lib/components/Icons';
+	import { Button } from '$lib/components/Form';
 	import FileDetailsComponent from '$lib/components/Upload/FileDetailsComponent.svelte';
 	import { notificationSuccessToast, notificationToast } from '$lib/NotificationToast';
 	import { useMutation } from '@sveltestack/svelte-query';
 	import Form from './Form.svelte';
+
+	import { application_status } from '$lib/data/stores';
 
 	let upload_show = false;
 
@@ -33,8 +36,10 @@
 	);
 </script>
 
-<div class="flex gap-8 px-14 py-8 xl:px-20 xl:py-12 bg-white rounded-2xl w-full">
-	<div class="flex flex-col w-3/4">
+<div
+	class="flex flex-wrap xl:flex-nowrap flex-col gap-8 px-14 py-8 xl:px-20 xl:py-12 bg-white rounded-2xl w-full"
+>
+	<div class="flex flex-col w-full xl:w-3/4">
 		<h2>Upload your I-20 here...</h2>
 		<span class="text-lighterText text-sm mb-4"
 			>Wait untill you get an I20. After recieving it, upload it here. Watch the video to learn more
@@ -64,10 +69,15 @@
 	</div>
 	{#if !data.i_20 == null}
 		{#if !upload_show}
-			<div class="w-1/4 flex-shrink">
+			<div class="w-full xl:w-1/4 flex-shrink">
 				<img src="/images/i20+upload.png" alt="I-20 Upload" />
 			</div>
 		{/if}
+	{/if}
+	{#if $application_status.i_20_upload === 2}
+		<a href="/application/ds_160" class="self-end "
+			><Button text="Next Step" classes="px-6 py-3 md:px-10 md:py-4" /></a
+		>
 	{/if}
 </div>
 <svelte:head>

@@ -1,14 +1,38 @@
 <script lang="ts">
 	import { CalendarDays, Clock, Map } from '$lib/components/Icons';
+	import { Button } from '$lib/components/Form';
+	import { notificationSuccessToast, notificationToast } from '$lib/NotificationToast';
+	import { useMutation } from '@sveltestack/svelte-query';
+	export let id: string;
+	export let user_id: string;
 	export let img: string;
 	export let img_alt: string;
 	export let heading: string;
 	export let date: string;
 	export let time: string;
 	export let location: string;
-	export let url: string;
-	export let external: boolean = false;
-	export let isRegistered: boolean = false;
+
+	const registerSession = useMutation(
+		() => {
+			return fetch(`/application/pre_departure_session`, {
+				method: 'POST',
+				body: JSON.stringify({
+					pre_departure_session: id,
+					user: user_id
+				})
+			});
+		},
+		{
+			onSettled: async (data, error, variables, context) => {
+				if (!data.ok || error) {
+					notificationToast('Something went wrong, please try again later');
+					console.log(await data.json(), error);
+				} else {
+					notificationSuccessToast(`You have successfully registered for the session!`);
+				}
+			}
+		}
+	);
 </script>
 
 <div class="border border-borderColor rounded-2xl p-6">
@@ -28,13 +52,11 @@
 				<span class="text-primary block w-4 h-4"><Map /></span>{location}
 			</div>
 		</div>
-		<a
-			href={url}
-			target={external ? '_blank' : '_self'}
-			class="self-start {isRegistered
-				? 'bg-greenSignal'
-				: 'bg-primary hover:bg-primaryDarker'} text-white font-bold text-sm md:text-base px-4 py-2 mt-4 rounded-xl"
-			>{isRegistered ? 'Registered!' : 'Register'}</a
-		>
+		<Button
+			on:click={() => $registerSession.mutate()}
+			loading={$registerSession.isLoading}
+			classes="self-start px-4 py-2 mt-4"
+			text="Register"
+		/>
 	</div>
 </div>
