@@ -214,7 +214,7 @@
 						{#if typeof step.text != 'undefined'}
 							<div
 								class="cursor-pointer"
-								class:text-primary={i === $progress}
+								class:text-primary={step.status >= 1}
 								class:font-bold={i === $progress}
 								on:click={() => {
 									onClick(step, i);

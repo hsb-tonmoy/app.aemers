@@ -30,16 +30,16 @@
 	</div>
 	<CategorySection documents={data.documents} categories={data.categories} user={data.user} />
 </div>
-<div class="flex gap-x-4 w-full justify-end mt-4">
+<div class="flex gap-x-4 w-full justify-end my-4">
 	<a href="/application/pre_application_form">
 		<Button
 			type="button"
 			text="Go back"
 			defaultClass=""
-			classes="bg-transparent px-6 py-4 text-lighterText font-bold border border-borderColor hover:text-secondary hover:border-secondary rounded-2xl"
+			classes="bg-transparent px-4 md:px-6 py-4 text-lighterText font-bold border border-borderColor hover:text-secondary hover:border-secondary rounded-2xl"
 		/>
 	</a>
 	<a href="/application/application_submission">
-		<Button type="button" classes="px-20 py-4" text="Save & Continue" />
+		<Button type="button" classes=" px-6 md:px-20 py-4" text="Save & Continue" />
 	</a>
 </div>

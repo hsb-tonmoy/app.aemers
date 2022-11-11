@@ -1405,11 +1405,11 @@
 				type="button"
 				text="Go back"
 				defaultClass=""
-				classes="bg-transparent px-6 py-4 text-lighterText font-bold border border-borderColor hover:text-secondary hover:border-secondary rounded-2xl"
+				classes="bg-transparent px-4 md:px-6 py-4 text-lighterText font-bold border border-borderColor hover:text-secondary hover:border-secondary rounded-2xl"
 			/>
 		</a>
 		<Button
-			classes="px-20 py-4"
+			classes="px-6 md:px-20 py-4"
 			text="Save & Continue"
 			loading={$submitData.isLoading}
 			disabled={!$isValid}

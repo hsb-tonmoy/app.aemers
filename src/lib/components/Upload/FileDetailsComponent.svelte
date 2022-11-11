@@ -48,6 +48,9 @@
 	<div class="prop-container">
 		<span class="prop-header">File Name</span>
 		<a href={url} class="text-primary font-bold text-base underline">{filename}</a>
+		{#if file_size && file_size > 2000000}
+			<span class="text-redSignal text-xs">File size cannot be more than 2MB</span>
+		{/if}
 	</div>
 	<div class="prop-container">
 		<span class="prop-header">Status</span>
@@ -78,7 +81,7 @@
 			{#if !has_uploaded}
 				<button
 					disabled={uploading || (file_size && file_size > 2000000)}
-					class="inline-flex items-center gap-x-2 font-bold text-white text-sm 2xl:text-base bg-primary hover:bg-primaryDarker border border-primary rounded-xl px-6 py-3"
+					class="inline-flex items-center gap-x-2 font-bold text-white text-sm 2xl:text-base bg-primary hover:bg-primaryDarker border border-primary disabled:bg-primary/60 disabled:border-primary/60 rounded-xl px-6 py-3"
 				>
 					{#if uploading}
 						<Spinner currentFill="white" size="3" />

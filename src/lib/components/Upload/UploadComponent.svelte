@@ -10,6 +10,8 @@
 
 	export let file_dropped = false;
 
+	export let uploading = false;
+
 	function handleFilesSelect(e) {
 		const { acceptedFiles, fileRejections } = e.detail;
 		files.accepted = [...acceptedFiles];
@@ -22,7 +24,7 @@
 		file_dropped = false;
 	}
 
-	$: dropzone_container_classes = `flex flex-col justify-center items-center rounded-xl py-12 ${
+	$: dropzone_container_classes = `flex flex-col justify-center items-center rounded-xl px-6 py-12 ${
 		drag_entered ? 'dropzone-container-entered' : 'dropzone-container'
 	}`;
 </script>
@@ -38,7 +40,7 @@
 		containerClasses={dropzone_container_classes}
 	>
 		<span class="block w-10 h-10 text-dividerColor mb-2"><Upload /></span>
-		<p class="text-lighterText flex justify-center">
+		<p class="text-lighterText text-center flex flex-wrap md:flex-nowrap justify-center">
 			<span>Drop your document here or</span>&nbsp;<button
 				type="button"
 				class="text-primary font-bold bg-transparent underline">Browse</button
@@ -47,7 +49,13 @@
 		<input id="hidden-input" type="file" class="hidden" />
 	</Dropzone>
 {:else}
-	<FileDetailsComponent filename={files.accepted[0].name} date={Date.now()} {handleRemoveFile} />
+	<FileDetailsComponent
+		{uploading}
+		file_size={files.accepted[0].size}
+		filename={files.accepted[0].name}
+		date={Date.now()}
+		{handleRemoveFile}
+	/>
 {/if}
 
 <style global>

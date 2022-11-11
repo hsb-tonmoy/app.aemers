@@ -1,4 +1,5 @@
 <script>
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { Cross } from '$lib/components/Icons';
 	import Steps from '$lib/components/UI/ApplicationSteps.svelte';
@@ -20,6 +21,13 @@
 			return;
 		}
 	});
+
+	function handleStatusClick() {
+		if (paid) {
+			return;
+		}
+		goto('/application/file_opening');
+	}
 </script>
 
 <div class="bg-white flex flex-col min-h-screen h-full">
@@ -31,14 +39,18 @@
 	</div>
 	<div id="status" class="bg-cover bg-center flex flex-col text-white sidebarpadding py-6">
 		<h6 class="font-bold text-white text-lg md:text-xl">Hey, {user.first_name}</h6>
-		<div class="flex items-center gap-x-2 mt-2 text-sm">
+		<button
+			on:click={handleStatusClick}
+			type="button"
+			class="flex items-center gap-x-2 mt-2 text-sm"
+		>
 			Status: <span
 				class="{paid
 					? 'bg-greenSignal text-white'
 					: 'bg-[#FFCD50] text-secondary'} font-bold px-3 rounded-md"
 				>{paid ? 'Paid' : 'Unpaid'}</span
 			>
-		</div>
+		</button>
 		<!-- <div class="self-center">
 			<CircularProgress
 				rotate={-90}

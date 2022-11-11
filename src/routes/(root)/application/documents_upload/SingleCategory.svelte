@@ -109,19 +109,17 @@
 		{#if category.documents.length > 0}
 			{#each category.documents as document}
 				<FileDetailsComponent
-					uploading={$submitData.isLoading}
 					has_uploaded={true}
 					deleting={$handleFileDelete.isLoading}
 					filename={document.title}
 					url={`/application/documents_upload/document/${document.id}`}
 					status={document.status}
 					date={document.uploaded_at}
-					bind:file_size
 					handleDeleteFile={() => $handleFileDelete.mutate(document.id)}
 				/>
 			{/each}
 		{:else}
-			<UploadComponent bind:file_dropped bind:files />
+			<UploadComponent uploading={$submitData.isLoading} bind:file_dropped bind:files />
 			<!-- {#if files.accepted.length > 0}
 				<Button
 					loading={$submitData.isLoading}
