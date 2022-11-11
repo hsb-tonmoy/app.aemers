@@ -1,15 +1,17 @@
 <script>
 	import { invalidateAll } from '$app/navigation';
-	import { Button } from '$lib/components/Form';
-	import { QuestionMarkCircular } from '$lib/components/Icons';
+	import { QuestionMarkCircular, RedCircularCross, Upload } from '$lib/components/Icons';
 	import FileDetailsComponent from '$lib/components/Upload/FileDetailsComponent.svelte';
 	import UploadComponent from '$lib/components/Upload/UploadComponent.svelte';
+	import { convertDate } from '$lib/convertDate';
 	import { notificationSuccessToast, notificationToast } from '$lib/NotificationToast';
 	import { validator } from '@felte/validator-yup';
 	import { useMutation } from '@sveltestack/svelte-query';
 	import { createForm } from 'felte';
 	import { Tooltip } from 'flowbite-svelte';
 	import * as yup from 'yup';
+
+	import RejectionNote from './RejectionNote.svelte';
 
 	let files = {
 		accepted: []
@@ -116,18 +118,12 @@
 					status={document.status}
 					date={document.uploaded_at}
 					handleDeleteFile={() => $handleFileDelete.mutate(document.id)}
+					category_name={category.name}
+					rejection_notes={document.rejection_notes}
 				/>
 			{/each}
 		{:else}
 			<UploadComponent uploading={$submitData.isLoading} bind:file_dropped bind:files />
-			<!-- {#if files.accepted.length > 0}
-				<Button
-					loading={$submitData.isLoading}
-					disabled={!$isValid || $submitData.isLoading}
-					text="Upload"
-					classes="mt-4 self-end px-6 py-3"
-				/>
-			{/if} -->
 		{/if}
 	</div>
 </form>

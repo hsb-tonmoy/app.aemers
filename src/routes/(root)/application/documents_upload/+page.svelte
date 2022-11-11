@@ -9,7 +9,7 @@
 	<title>app.aemers - Documents Upload</title>
 </svelte:head>
 
-<div class="flex flex-col px-14 py-8 xl:px-20 xl:py-12 bg-white rounded-2xl w-full">
+<div class="flex flex-col px-6 py-4 xl:px-20 xl:py-12 bg-white rounded-2xl w-full">
 	<div class="flex flex-wrap md:flex-nowrap gap-y-10 gap-x-20 w-full mb-40">
 		<div class="w-full md:w-2/4">
 			<p class="text-secondary leading-relaxed text-base">

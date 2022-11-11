@@ -18,6 +18,7 @@
 	import { validator } from '@felte/validator-yup';
 	import { useMutation } from '@sveltestack/svelte-query';
 	import { createForm } from 'felte';
+	import { onDestroy } from 'svelte';
 	import { fly } from 'svelte/transition';
 	import { formSaved } from '../stores';
 	import {
@@ -61,6 +62,10 @@
 			}
 		}
 	);
+
+	onDestroy(() => {
+		formSaved.set(false);
+	});
 
 	const { form, data, errors, isValid, isDirty, interacted } = createForm({
 		initialValues: {

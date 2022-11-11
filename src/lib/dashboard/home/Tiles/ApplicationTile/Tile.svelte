@@ -2,6 +2,8 @@
 	import ApplicationProgress from '$lib/dashboard/home/Tiles/ApplicationTile/ApplicationProgress.svelte';
 
 	import { application_percentage } from '$lib/data/stores';
+
+	let applicationComplete = false;
 </script>
 
 <div class="flex flex-col rounded-2xl py-8 px-10 bg-primary ">
@@ -10,9 +12,9 @@
 			<h2 class="font-bold text-white text-xl md:text-2xl 2xl:text-3xl">My Application</h2>
 			<span
 				class={`${
-					$application_percentage === 100 ? 'bg-greenSignal' : 'bg-primaryDarker'
+					applicationComplete ? 'bg-greenSignal' : 'bg-primaryDarker'
 				} text-white font-bold text-xs px-2 py-1 rounded`}
-				>{$application_percentage === 100 ? 'Complete' : 'Incomplete'}</span
+				>{applicationComplete ? 'Complete' : 'Incomplete'}</span
 			>
 		</div>
 		<h6 class="text-xs md:text-sm text-white mt-1">

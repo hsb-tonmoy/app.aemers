@@ -31,15 +31,6 @@
 		}
 	});
 
-	// const handlePrevious = () => {
-	// 	goto(previousURL);
-	// };
-
-	// const handleNext = () => {
-	// 	goto(nextURL);
-	// 	$showNextToolTip === true ? showNextToolTip.set(false) : null;
-	// };
-
 	onMount(() => {
 		const header = document.getElementById('app-header');
 
@@ -70,14 +61,16 @@
 				class="lg:hidden w-6 h-6 md:w-10 md:h-10 text-secondary hover:text-primary cursor-pointer"
 				><Menu /></button
 			>
-			<h1 class="text-secondary font-bold text-xl md:text-3xl">{pageTitle}</h1>
-			{#if $formSaved}
-				<div class="flex items-center gap-x-1">
-					<span class="block text-primary w-4 h-4 mt-1"><CloudDone /></span><span
-						class="text-sm text-secondary">Saved</span
-					>
-				</div>
-			{/if}
+			<div class="flex flex-col md:flex-row items-center gap-6">
+				<h1 class="text-secondary font-bold text-xl md:text-3xl">{pageTitle}</h1>
+				{#if $formSaved}
+					<div class="flex items-center gap-x-1">
+						<span class="block text-primary w-4 h-4 mt-1"><CloudDone /></span><span
+							class="text-sm text-secondary">Saved</span
+						>
+					</div>
+				{/if}
+			</div>
 			<button
 				id="exit"
 				on:click={() => goto('/')}

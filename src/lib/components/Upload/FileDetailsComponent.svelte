@@ -2,6 +2,8 @@
 	import { Trash, Upload } from '$lib/components/Icons';
 	import { convertDate } from '$lib/convertDate';
 	import { Spinner } from 'flowbite-svelte';
+	import RejectionNote from './RejectionNote.svelte';
+
 	export let has_uploaded = false;
 	export let uploading = false;
 	export let filename;
@@ -13,6 +15,9 @@
 	export let handleDeleteFile;
 
 	export let file_size;
+
+	export let category_name = '',
+		rejection_notes = '';
 
 	let statusClass = '';
 	let statusText = '';
@@ -43,25 +48,25 @@
 </script>
 
 <div
-	class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 xl:justify-items-center gap-y-8 rounded-xl px-10 py-12 bg-[#fafafa]"
+	class="flex flex-col gap-y-6 md:grid md:grid-cols-2 xl:grid-cols-4 xl:justify-items-center gap-x-4 rounded-xl px-6 py-8 md:px-10 md:py-12 bg-[#fafafa]"
 >
 	<div class="prop-container">
 		<span class="prop-header">File Name</span>
 		<a href={url} class="text-primary font-bold text-base underline">{filename}</a>
 		{#if file_size && file_size > 2000000}
-			<span class="text-redSignal text-xs">File size cannot be more than 2MB</span>
+			<span class="text-redSignal text-xs">File size cannot be more than 2 MB</span>
 		{/if}
 	</div>
 	<div class="prop-container">
 		<span class="prop-header">Status</span>
-		<span class={`font-bold ${statusClass}`}>{statusText}</span>
+		<span class={`font-bold text-base ${statusClass}`}>{statusText}</span>
 	</div>
 	<div class="prop-container">
 		<span class="prop-header">Upload Date</span>
-		<span class="text-secondary text-sm xl:text-base">{convertDate(date)}</span>
+		<span class="text-secondary text-base">{convertDate(date)}</span>
 	</div>
-	{#if status != 2}
-		<div class="flex gap-x-4 self-end">
+	{#if status != 1}
+		<div class="flex gap-x-4 self-end col-span-4 md:col-span-1">
 			<button
 				type="button"
 				disabled={deleting}
@@ -94,11 +99,16 @@
 			{/if}
 		</div>
 	{/if}
+	{#if status === 2 && rejection_notes}
+		<div class="col-span-4 w-full">
+			<RejectionNote {deleting} {handleDeleteFile} {category_name} {rejection_notes} />
+		</div>
+	{/if}
 </div>
 
 <style lang="postcss">
 	.prop-container {
-		@apply flex flex-col gap-y-3;
+		@apply flex flex-col md:gap-y-3;
 	}
 	.prop-header {
 		@apply text-lighterText font-medium text-base;
