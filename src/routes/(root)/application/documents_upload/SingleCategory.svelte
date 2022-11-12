@@ -11,8 +11,6 @@
 	import { Tooltip } from 'flowbite-svelte';
 	import * as yup from 'yup';
 
-	import RejectionNote from './RejectionNote.svelte';
-
 	let files = {
 		accepted: []
 	};
