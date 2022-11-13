@@ -8,7 +8,9 @@
 	export let audioSrc;
 </script>
 
-<div class="border border-borderColor px-4 md:px-6 2xl:px-10 md:py-6 xl:py-8 rounded-2xl w-full">
+<div
+	class="border border-borderColor px-4 py-4 md:px-6 2xl:px-10 md:py-6 xl:py-8 rounded-2xl w-full"
+>
 	<span class="bg-[#F6F3FF] text-primary text-sm md:text-base font-bold px-4 py-1 rounded-2xl"
 		>Question {questionID}</span
 	>

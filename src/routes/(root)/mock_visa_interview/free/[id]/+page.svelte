@@ -73,7 +73,7 @@
 		<div
 			class="flex flex-col items-center justify-center bg-primary text-white rounded-2xl px-6 md:px-10 py-6 my-10 md:min-w-[50vw] 2xl:min-w-[40vw]"
 		>
-			<span class="text-base font-bold md:text-lg">Full recording here...</span>
+			<span class="text-base font-bold md:text-xl">Full recording here...</span>
 			<span class="text-xs text-center md:text-sm mt-1"
 				>Listen to and download your complete interview to evaluate your performance</span
 			>
@@ -82,9 +82,14 @@
 					<AudioPlayer dark={true} many={false} audioSrc={data.session.full_recording} />
 				</div>
 			{:else}
-				<h3 class="text-center">
-					The audio is still being processed. Please come back in a few minutes
-				</h3>
+				<div class="border border-white rounded-2xl text-center px-6 md:px-20 py-4 mt-4">
+					<h3 class="text-xs md:text-sm">
+						<span class="font-medium md:text-base"
+							>The full recording is still being processed,</span
+						>
+						<br /> You will receive an email when it is ready
+					</h3>
+				</div>
 			{/if}
 			<div class="flex items-center gap-x-4">
 				{#if data.session && data.session.full_recording}
@@ -112,7 +117,7 @@
 			>
 		</div>
 
-		<section class="flex flex-col gap-y-4 md:min-w-[50vw] 2xl:min-w-[40vw] my-10">
+		<section class="flex flex-col gap-y-4 md:min-w-[50vw] 2xl:min-w-[40vw] my-10 w-full">
 			{#each data.session.mock_visa_interview_answers as answer, index}
 				<SingleQuestion
 					question={answer.question.question}

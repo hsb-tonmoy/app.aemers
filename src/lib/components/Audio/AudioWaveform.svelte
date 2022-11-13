@@ -38,8 +38,7 @@
 				cursorColor: cursorColor,
 				barWidth: barWidth,
 				barRadius: barRadius,
-				barGap: barGap,
-				responsive: true
+				barGap: barGap
 			});
 			if (audioBlob) {
 				let audio = new Audio();
