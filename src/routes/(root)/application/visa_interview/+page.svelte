@@ -6,7 +6,7 @@
 
 	export let data;
 
-	let completed = data.visa_interview.submitted;
+	let completed = data.visa_interview && data.visa_interview.submitted;
 
 	async function handleComplete() {
 		completed = !completed;
@@ -80,7 +80,7 @@
 	<div class="flex flex-col md:flex-row md:items-center gap-4 mt-6">
 		<button
 			on:click={handleComplete}
-			class="inline-flex items-center gap-x-2 font-bold text-lg px-8 py-3 rounded-2xl border-2 {completed
+			class="whitespace-nowrap inline-flex items-center gap-x-2 font-bold text-base md:text-lg px-8 py-3 rounded-2xl border-2 {completed
 				? 'bg-white text-greenSignal border-greenSignal'
 				: 'bg-primary text-white border-primary'}"
 		>
@@ -92,7 +92,11 @@
 		</button>
 		{#if completed}
 			<a href="/application/pre_departure_session"
-				><Button text="Next Step" classes="px-6 py-3 md:px-10 md:py-4" /></a
+				><Button
+					type="button"
+					classes="px-6 md:px-10 py-4"
+					text="Next Step: Pre-Departure Session"
+				/></a
 			>
 		{/if}
 	</div>

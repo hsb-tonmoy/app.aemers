@@ -60,3 +60,4 @@ export { default as Success } from './Success.svelte';
 export { default as Trash } from './Trash.svelte';
 export { default as Upload } from './Upload.svelte';
 export { default as Video } from './Video.svelte';
+export { default as Robot } from './Robot.svelte';

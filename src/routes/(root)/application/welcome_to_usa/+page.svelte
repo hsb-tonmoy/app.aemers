@@ -17,7 +17,7 @@
 	style="background-image:
   linear-gradient(to bottom, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 1)),
   url('/images/{backgrounds[Math.floor(Math.random() * backgrounds.length)]}')"
-	class="welcome bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center px-14 py-8 xl:px-20 xl:py-12 bg-white rounded-2xl w-full"
+	class="welcome bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center px-14 py-8 xl:px-20 xl:py-12 bg-white rounded-2xl w-full h-full"
 >
 	<img src="/images/i20+upload.png" alt="I-20 Upload" />
 	<h6 class="font-bold text-secondary text-xl md:text-3xl mt-10">

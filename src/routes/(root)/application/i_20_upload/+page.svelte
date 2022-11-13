@@ -36,48 +36,50 @@
 	);
 </script>
 
-<div
-	class="flex flex-wrap xl:flex-nowrap flex-col gap-8 px-14 py-8 xl:px-20 xl:py-12 bg-white rounded-2xl w-full"
->
-	<div class="flex flex-col w-full xl:w-3/4">
-		<h2>Upload your I-20 here...</h2>
-		<span class="text-lighterText text-sm mb-4"
-			>Wait untill you get an I20. After recieving it, upload it here. Watch the video to learn more
-			about I-20.</span
-		>
-		{#if data.i_20 == null}
-			{#if upload_show}
-				<Form user={data.user} />
+<div class="px-14 py-8 xl:px-20 xl:py-12 bg-white rounded-2xl w-full">
+	<div class="flex flex-wrap xl:flex-nowrap gap-8 w-full">
+		<div class="flex flex-col w-full xl:w-3/4">
+			<h2>Upload your I-20 here...</h2>
+			<span class="text-lighterText text-sm mb-4"
+				>Wait untill you get an I20. After recieving it, upload it here. Watch the video to learn
+				more about I-20.</span
+			>
+			{#if data.i_20 == null}
+				{#if upload_show}
+					<Form user={data.user} />
+				{:else}
+					<button
+						on:click={() => (upload_show = true)}
+						class="self-start inline-flex items-center gap-x-2 text-white bg-primary text-base font-bold px-12 py-4 rounded-xl"
+						><span class="w-6 h-6"><Upload /></span>Upload</button
+					>
+				{/if}
 			{:else}
-				<button
-					on:click={() => (upload_show = true)}
-					class="self-start inline-flex items-center gap-x-2 text-white bg-primary text-base font-bold px-12 py-4 rounded-xl"
-					><span class="w-6 h-6"><Upload /></span>Upload</button
-				>
+				<FileDetailsComponent
+					has_uploaded={true}
+					loading={$handleFileDelete.isLoading}
+					filename={data.i_20.title}
+					url={data.i_20.document}
+					status={data.i_20.status}
+					date={data.i_20.uploaded_at}
+					handleDeleteFile={() => $handleFileDelete.mutate(data.i_20.id)}
+				/>
 			{/if}
-		{:else}
-			<FileDetailsComponent
-				has_uploaded={true}
-				loading={$handleFileDelete.isLoading}
-				filename={data.i_20.title}
-				url={data.i_20.document}
-				status={data.i_20.status}
-				date={data.i_20.uploaded_at}
-				handleDeleteFile={() => $handleFileDelete.mutate(data.i_20.id)}
-			/>
+		</div>
+		{#if data.i_20 == null}
+			{#if !upload_show}
+				<div class="w-full xl:w-1/4 flex-shrink">
+					<img src="/images/i20+upload.png" alt="I-20 Upload" />
+				</div>
+			{/if}
 		{/if}
 	</div>
-	{#if !data.i_20 == null}
-		{#if !upload_show}
-			<div class="w-full xl:w-1/4 flex-shrink">
-				<img src="/images/i20+upload.png" alt="I-20 Upload" />
-			</div>
-		{/if}
-	{/if}
 	{#if $application_status.i_20_upload === 2}
-		<a href="/application/ds_160" class="self-end "
-			><Button text="Next Step" classes="px-6 py-3 md:px-10 md:py-4" /></a
-		>
+		<div class="flex justify-end">
+			<a href="/application/ds_160">
+				<Button type="button" classes=" px-6 md:px-10 py-4 mt-6" text="Next Step: DS-160" />
+			</a>
+		</div>
 	{/if}
 </div>
 <svelte:head>

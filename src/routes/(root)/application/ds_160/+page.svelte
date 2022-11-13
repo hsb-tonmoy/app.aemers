@@ -35,7 +35,7 @@
 </svelte:head>
 
 <div
-	class="flex flex-wrap xl:flex-nowrap gap-8 px-14 py-8 xl:px-20 xl:py-12 bg-white rounded-2xl w-full"
+	class="flex flex-wrap-reverse xl:flex-nowrap gap-8 px-14 py-8 xl:px-20 xl:py-12 bg-white rounded-2xl w-full"
 >
 	<div class="flex flex-col w-full xl:w-3/5">
 		<h2 class="text-secondary font-bold text-2xl mb-2">Have you submitted your DS-160?</h2>
@@ -58,7 +58,7 @@
 			</button>
 			{#if completed}
 				<a href="/application/sevis_payment"
-					><Button text="Next Step" classes="px-6 py-3 md:px-10 md:py-4" /></a
+					><Button type="button" classes="px-6 md:px-10 py-4" text="Next Step: SEVIS Payment" /></a
 				>
 			{/if}
 		</div>

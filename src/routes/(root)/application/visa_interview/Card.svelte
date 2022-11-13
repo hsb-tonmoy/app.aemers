@@ -5,7 +5,6 @@
 	export let description: string;
 	export let button: string;
 	export let url: string;
-	export let external: boolean = false;
 </script>
 
 <div class="card flex flex-col bg-bgColor rounded-2xl">
@@ -17,7 +16,6 @@
 		<span class="text-lighterText text-xs md:text-sm">{description}</span>
 		<a
 			href={url}
-			target={external ? '_blank' : '_self'}
 			class="self-start bg-secondary hover:bg-primary text-white font-bold text-sm md:text-base px-4 py-2 mt-4 rounded-xl"
 			>{button}</a
 		>

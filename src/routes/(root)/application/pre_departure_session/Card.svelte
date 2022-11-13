@@ -3,6 +3,7 @@
 	import { Button } from '$lib/components/Form';
 	import { notificationSuccessToast, notificationToast } from '$lib/NotificationToast';
 	import { useMutation } from '@sveltestack/svelte-query';
+	import { invalidateAll } from '$app/navigation';
 	export let id: string;
 	export let user_id: string;
 	export let img: string;
@@ -29,6 +30,7 @@
 					console.log(await data.json(), error);
 				} else {
 					notificationSuccessToast(`You have successfully registered for the session!`);
+					invalidateAll();
 				}
 			}
 		}

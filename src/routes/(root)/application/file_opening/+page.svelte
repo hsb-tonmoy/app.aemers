@@ -125,23 +125,38 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Open a File | app.aemers</title>
+</svelte:head>
+
 <div
-	class="flex flex-wrap md:flex-nowrap justify-center gap-8 px-14 py-8 xl:px-20 xl:py-12 bg-white rounded-2xl w-full"
+	class="flex flex-wrap xl:flex-nowrap justify-center gap-8 px-14 py-8 xl:px-20 xl:py-12 bg-white rounded-2xl w-full"
 >
-	<div class="w-full md:w-1/4">
+	<div class="w-full xl:w-1/4">
 		<img src="/images/video_file.png" alt="Video" class="w-60 md:w-80" />
 	</div>
-	<div class="flex flex-col justify-center w-full md:w-2/4">
+	<div class="flex flex-col justify-center w-full xl:w-2/4">
 		<h3 class="text-secondary font-bold text-2xl mb-2">Opening a file is really simple!</h3>
 		<p class="text-lighterText text-sm mb-4">
 			All your data is stored under the file. You have to pay 15000 BDT to open a file. Trust me,
 			it’s worth it!
 		</p>
-		<Button
-			on:click={handleClick}
-			type="button"
-			text="Open a File"
-			classes="self-start px-8 py-3 hover:bg-primaryDarker"
-		/>
+		<div class="flex items-center gap-x-4">
+			<Button
+				on:click={() => {
+					goto('/application/pre_application_form');
+				}}
+				type="button"
+				text="Skip for Now"
+				defaultClass=""
+				classes="bg-transparent px-8 py-3 text-lighterText font-bold border border-borderColor hover:text-secondary hover:border-secondary rounded-2xl"
+			/>
+			<Button
+				on:click={handleClick}
+				type="button"
+				text="Open a File"
+				classes="self-start px-8 py-3 hover:bg-primaryDarker"
+			/>
+		</div>
 	</div>
 </div>

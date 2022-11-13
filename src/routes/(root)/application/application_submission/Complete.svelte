@@ -1,5 +1,6 @@
 <script>
 	import Success from '$lib/components/UI/Success.svelte';
+	import { Button } from '$lib/components/Form';
 </script>
 
 <Success width="800px" />
@@ -11,3 +12,6 @@
 		>I-20</a
 	></span
 >
+<a href="/application/i_20_upload">
+	<Button type="button" classes=" px-6 md:px-10 py-4 mt-6" text="Next Step: I-20 Upload" />
+</a>

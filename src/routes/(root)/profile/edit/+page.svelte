@@ -1,5 +1,5 @@
 <script>
-	import { goto } from '$app/navigation';
+	import { goto, invalidateAll } from '$app/navigation';
 	import { Button, Error, Input, Label } from '$lib/components/Form';
 	import { Cross, Trash } from '$lib/components/Icons';
 	import { countries } from '$lib/data/countries';
@@ -14,7 +14,7 @@
 
 	const submitData = useMutation(
 		(formData) => {
-			return fetch('/evaluation/submit', {
+			return fetch('/profile/submit', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -29,6 +29,7 @@
 					console.log(await data.json(), error);
 				} else {
 					notificationSuccessToast('Changes successfully saved!');
+					invalidateAll();
 				}
 			}
 		}
@@ -73,9 +74,9 @@
 		<div class="avatar">
 			<img
 				class="w-32 md:w-48"
-				src={`https://ui-avatars.com/api/?name=${data.user.first_name}+${data.user.last_name}
+				src={`https://ui-avatars.com/api/?name=${data.profile.first_name}+${data.profile.last_name}
 				}&background=FFA26D&format=svg&rounded=true&bold=true`}
-				alt={data.user.first_name + ' ' + data.user.last_name}
+				alt={data.profile.first_name + ' ' + data.profile.last_name}
 			/>
 		</div>
 		<div class="buttons flex flex-col gap-y-4 font-bold text-sm md:text-base">

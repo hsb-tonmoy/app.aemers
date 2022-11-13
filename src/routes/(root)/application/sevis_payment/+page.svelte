@@ -57,7 +57,11 @@
 			</button>
 			{#if completed}
 				<a href="/application/visa_fee_payment"
-					><Button text="Next Step" classes="px-6 py-3 md:px-10 md:py-4" /></a
+					><Button
+						type="button"
+						classes="px-6 md:px-10 py-4"
+						text="Next Step: Visa Fee Payment"
+					/></a
 				>
 			{/if}
 		</div>

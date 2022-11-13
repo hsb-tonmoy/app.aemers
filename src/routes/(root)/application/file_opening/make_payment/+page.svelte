@@ -53,18 +53,21 @@
 			Coming Soon....
 		</h6>
 	{/if}
-	<div class="flex justify-between items-center">
+	<div class="flex flex-wrap md:justify-end items-center gap-4 w-full mt-8">
 		<Button
-			on:click={() => goto('/application/file_opening/confirm_info')}
+			on:click={() => {
+				goto('/application/file_opening/confirm_info');
+			}}
 			type="button"
-			text="Go Back"
-			classes="px-4 py-3 md:px-12 md:py-4 text-sm md:text-base font-bold mt-8 self-start bg-lightText text-white"
+			text="Go back"
+			defaultClass=""
+			classes="whitespace-nowrap bg-transparent px-4 py-3 md:px-8 md:py-4 text-lighterText font-bold border border-borderColor hover:text-secondary hover:border-secondary rounded-xl"
 		/>
 		<Button
 			on:click={() => goto('/application/pre_application_form')}
 			type="button"
-			text="Next"
-			classes="px-4 py-3 md:px-12 md:py-4 text-sm md:text-base font-bold mt-8 self-start hover:bg-primaryDarker"
+			text="Next Step: Pre-Application Form"
+			classes="px-4 py-3 md:px-12 md:py-4 text-sm md:text-base font-bold self-start hover:bg-primaryDarker"
 		/>
 	</div>
 </div>
