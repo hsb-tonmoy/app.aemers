@@ -9,7 +9,7 @@
 		{ title: 'Randomized unique questions' }
 	];
 
-	const heading = 'Free Visa Mock Test';
+	const heading = 'Free Visa Mock Interview';
 	const subheading =
 		'Practice for your visa interview for free! You can also book an interview with real interviewer!';
 </script>
@@ -29,7 +29,7 @@
 				<button
 					type="button"
 					class="self-start text-white bg-primary hover:bg-primaryDarker rounded-xl px-4 py-2 md:py-3 font-bold text-sm md:text-base mt-3 transition-all ease-in-out duration-150"
-					>Start a Free Test</button
+					>Start a Free Session</button
 				>
 			</a>
 			<button

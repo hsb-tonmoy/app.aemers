@@ -30,7 +30,7 @@
 				goto('/mock_visa_interview/free/new');
 			}}
 			class="whitespace-nowrap bg-white border border-white hover:bg-primary hover:text-white text-base xl:text-lg font-bold text-primary px-6 py-3 xl:px-10 xl:py-4 rounded-xl"
-			>Start Test</button
+			>Start an Interview</button
 		>
 	</div>
 	<div class="bg-white px-6 py-4 md:px-8 md:py-6 xl:px-12 xl:py-10 rounded-2xl">
