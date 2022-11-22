@@ -31,6 +31,7 @@
 		"prettier-plugin-svelte": "^2.8.0",
 		"stripe": "^10.16.0",
 		"svelte": "^3.52.0",
+		"svelte-pdf": "^1.0.14",
 		"svelte-preprocess": "^4.10.7",
 		"svelte-stripe": "^0.0.19",
 		"svelte-time": "^0.7.1",

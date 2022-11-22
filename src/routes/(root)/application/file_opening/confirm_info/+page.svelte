@@ -58,7 +58,7 @@
 				delete values.email;
 				$submitData.mutate(values);
 			}
-			goto('/application/file_opening/make_payment');
+			goto('/application/file_opening/terms_conditions');
 		}
 	});
 </script>
