@@ -56,7 +56,7 @@
 	<div class="flex flex-wrap md:justify-end items-center gap-4 w-full mt-8">
 		<Button
 			on:click={() => {
-				goto('/application/file_opening/confirm_info');
+				goto('/application/file_opening/terms_conditions');
 			}}
 			type="button"
 			text="Go back"
