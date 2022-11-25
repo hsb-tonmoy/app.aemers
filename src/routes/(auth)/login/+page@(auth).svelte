@@ -79,7 +79,7 @@
 
 <main class="flex flex-wrap flex-1">
 	<aside class="flex justify-center items-center w-full md:w-3/5 xl:w-3/4">
-		<div class="flex flex-col justify-center px-20 xl:px-0 xl:w-1/3">
+		<div class="flex flex-col justify-center px-6 xl:px-0 xl:w-1/3">
 			<h2 class="text-3xl font-bold">Log in to your Account</h2>
 			<p class="mt-2 text-sm text-lightText leading-normal">
 				Welcome back! Enter your email and password here to log in to your account!

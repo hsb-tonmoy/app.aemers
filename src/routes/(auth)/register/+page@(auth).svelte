@@ -91,7 +91,7 @@
 <main class="flex flex-wrap flex-1">
 	<aside class="hidden md:block bg bg-cover bg-center bg-no-repeat w-full md:w-2/5 xl:w-1/4" />
 	<aside class="flex justify-center items-center w-full md:w-3/5 xl:w-3/4">
-		<div class="flex flex-col justify-center px-20 xl:px-0 xl:w-1/3">
+		<div class="flex flex-col justify-center px-6 xl:px-0 xl:w-1/3">
 			<h2 class="text-3xl font-bold">Create an Account</h2>
 			<p class="mt-2 text-sm text-lightText leading-normal">
 				Creating an account is the easiest task ever. You are about to land in the universe of

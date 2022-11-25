@@ -44,7 +44,7 @@
 			item.alternate_links.includes($page.url.pathname)
 				? 'menuItem-active'
 				: ''}"
-			><span class="w-4 h-4 md:w-7 md:h-7">
+			><span class="w-7 h-7">
 				<svelte:component this={item.icon} />
 			</span> <span class="">{item.name}</span></a
 		>
@@ -53,7 +53,7 @@
 
 <style lang="postcss">
 	.menuItem {
-		@apply flex items-center gap-x-4 text-lighterText hover:text-primary text-sm md:text-base font-normal;
+		@apply flex items-center gap-x-4 text-lighterText hover:text-primary text-base font-normal;
 	}
 
 	.menuItem-active {
