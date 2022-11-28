@@ -1,7 +1,7 @@
 <script>
 	export let first_name;
 	export let notifications;
-	import { Menu } from '$lib/components/Icons';
+	import { Menu, Cross } from '$lib/components/Icons';
 	import { sidebarState } from '../stores';
 	import AccountDropdown from './AccountDropdown.svelte';
 	import NotificationDropDown from './Notifications/NotificationDropDown.svelte';
@@ -15,9 +15,14 @@
 	<div class="flex items-center gap-x-6">
 		<button
 			on:click={() => ($sidebarState = !$sidebarState)}
-			class="lg:hidden w-6 h-6 md:w-10 md:h-10 text-secondary hover:text-primary cursor-pointer"
-			><Menu /></button
+			class="xl:hidden w-6 h-6 md:w-10 md:h-10 text-secondary hover:text-primary cursor-pointer"
 		>
+			{#if $sidebarState}
+				<Menu />
+			{:else}
+				<Cross />
+			{/if}
+		</button>
 
 		<div id="notif-tour">
 			<NotificationDropDown {notifications} />

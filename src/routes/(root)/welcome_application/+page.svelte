@@ -4,6 +4,7 @@
 	import { application_status, application_steps } from '$lib/data/stores';
 	import { notificationToast } from '$lib/NotificationToast';
 	import { useMutation } from '@sveltestack/svelte-query';
+	import Youtube from 'svelte-youtube-embed';
 
 	const start = useMutation(
 		() => {
@@ -66,5 +67,13 @@
 		text={$application_status.application_started ? 'Continue...' : 'Start Now'}
 		classes="py-3 px-10 mb-8"
 	/>
-	<img src="/images/video.png" alt="Application Process Video" />
+	<iframe
+		width="560"
+		height="315"
+		src="https://www.youtube-nocookie.com/embed/g-iO6JQWUbY"
+		title="Application Process Explained - app.aemers.com"
+		frameborder="0"
+		allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+		allowfullscreen
+	/>
 </div>

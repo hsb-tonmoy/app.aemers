@@ -40,6 +40,7 @@ specifiers:
   svelte-preprocess: ^4.10.7
   svelte-stripe: ^0.0.19
   svelte-time: ^0.7.1
+  svelte-youtube-embed: ^0.1.8
   svrollbar: ^0.12.0
   tailwindcss: ^3.2.2
   toastify-js: ^1.12.0
@@ -78,7 +79,7 @@ devDependencies:
   '@popperjs/core': 2.11.6
   '@sveltejs/adapter-auto': 1.0.0-next.89
   '@sveltejs/adapter-netlify': 1.0.0-next.84
-  '@sveltejs/kit': 1.0.0-next.557_svelte@3.52.0+vite@3.2.4
+  '@sveltejs/kit': 1.0.0-next.563_svelte@3.52.0+vite@3.2.4
   '@sveltestack/svelte-query': 1.6.0_broadcast-channel@4.18.1
   '@zerodevx/svelte-toast': 0.7.2
   autoprefixer: 10.4.13_postcss@8.4.18
@@ -97,6 +98,7 @@ devDependencies:
   svelte-preprocess: 4.10.7_thgq75zisbcmm7d6lsbrpbdhti
   svelte-stripe: 0.0.19
   svelte-time: 0.7.1
+  svelte-youtube-embed: 0.1.8
   tailwindcss: 3.2.2_postcss@8.4.18
   tslib: 2.4.1
   typescript: 4.8.4
@@ -258,8 +260,8 @@ packages:
       set-cookie-parser: 2.5.1
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.557_svelte@3.52.0+vite@3.2.4:
-    resolution: {integrity: sha512-DtEJJMiGnTvLCnVR8UTJtHDXK8wvDvGfqtFA3s6gfCkBgZ18jnICXU4CdXlTCroTxrxcm1KOH9qfN1M/S2oL1A==}
+  /@sveltejs/kit/1.0.0-next.563_svelte@3.52.0+vite@3.2.4:
+    resolution: {integrity: sha512-RvQSE6dOuH4vE2hM5K/DezJlm9RjC5EMQK8X46mBXIggp8unaDH+YJyF+KRvAZE5sV93Hk5xaq0WZa8jtU42Jw==}
     engines: {node: '>=16.14'}
     hasBin: true
     requiresBuild: true
@@ -267,7 +269,7 @@ packages:
       svelte: ^3.44.0
       vite: ^3.2.0
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 1.1.0_svelte@3.52.0+vite@3.2.4
+      '@sveltejs/vite-plugin-svelte': 1.3.1_svelte@3.52.0+vite@3.2.4
       '@types/cookie': 0.5.1
       cookie: 0.5.0
       devalue: 4.2.0
@@ -286,8 +288,8 @@ packages:
       - supports-color
     dev: true
 
-  /@sveltejs/vite-plugin-svelte/1.1.0_svelte@3.52.0+vite@3.2.4:
-    resolution: {integrity: sha512-cFRfEdztubtj1c/rYh7ArK7XCfFJn6wG6+J8/e9amFsKtEJILovoBrK0/mxt1AjPQg0vaX+fHPKvhx+q8mTPaQ==}
+  /@sveltejs/vite-plugin-svelte/1.3.1_svelte@3.52.0+vite@3.2.4:
+    resolution: {integrity: sha512-2Uu2sDdIR+XQWF7QWOVSF2jR9EU6Ciw1yWfYnfLYj8HIgnNxkh/8g22Fw2pBUI8QNyW/KxtqJUWBI+8ypamSrQ==}
     engines: {node: ^14.18.0 || >= 16}
     peerDependencies:
       diff-match-patch: ^1.0.5
@@ -302,8 +304,9 @@ packages:
       kleur: 4.1.5
       magic-string: 0.26.7
       svelte: 3.52.0
-      svelte-hmr: 0.15.0_svelte@3.52.0
+      svelte-hmr: 0.15.1_svelte@3.52.0
       vite: 3.2.4
+      vitefu: 0.2.2_vite@3.2.4
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -2123,8 +2126,8 @@ packages:
     resolution: {integrity: sha512-08PdccaeRPP1pVa90AGieTwGzrNtXpC1Fry+i95OTvcR3xbGRU/hxK4rnaFYvGgk1Pxj9YT6GKGTEX8uXE9XJQ==}
     dev: false
 
-  /svelte-hmr/0.15.0_svelte@3.52.0:
-    resolution: {integrity: sha512-Aw21SsyoohyVn4yiKXWPNCSW2DQNH/76kvUnE9kpt4h9hcg9tfyQc6xshx9hzgMfGF0kVx0EGD8oBMWSnATeOg==}
+  /svelte-hmr/0.15.1_svelte@3.52.0:
+    resolution: {integrity: sha512-BiKB4RZ8YSwRKCNVdNxK/GfY+r4Kjgp9jCLEy0DuqAKfmQtpL38cQK3afdpjw4sqSs4PLi3jIPJIFp259NkZtA==}
     engines: {node: ^12.20 || ^14.13.1 || >= 16}
     peerDependencies:
       svelte: '>=3.19.0'
@@ -2203,6 +2206,10 @@ packages:
     resolution: {integrity: sha512-E7IL/85j7oj5fhxvmlau616TUbFfa6Vyy1PFTL3Y8SJGY6NXJaUj7DOYJrXVdoS3Rm9RVST0M6qWd6vqrYgM+w==}
     dependencies:
       dayjs: 1.11.6
+    dev: true
+
+  /svelte-youtube-embed/0.1.8:
+    resolution: {integrity: sha512-91FmRL0G9x64Qxf7vRIycuRon3cIOjO6YMeUvEjhRD+MUeIMZs4XuPv/ULtK/xvKmSH/T9DE0FgtFaBqZ4HxWg==}
     dev: true
 
   /svelte/3.52.0:
@@ -2376,6 +2383,17 @@ packages:
       rollup: 2.79.1
     optionalDependencies:
       fsevents: 2.3.2
+    dev: true
+
+  /vitefu/0.2.2_vite@3.2.4:
+    resolution: {integrity: sha512-8CKEIWPm4B4DUDN+h+hVJa9pyNi7rzc5MYmbxhs1wcMakueGFNWB5/DL30USm9qU3xUPnL4/rrLEAwwFiD1tag==}
+    peerDependencies:
+      vite: ^3.0.0
+    peerDependenciesMeta:
+      vite:
+        optional: true
+    dependencies:
+      vite: 3.2.4
     dev: true
 
   /wavesurfer.js/6.3.0:
