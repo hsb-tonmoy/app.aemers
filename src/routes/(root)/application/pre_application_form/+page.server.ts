@@ -24,12 +24,15 @@ export async function load({ locals }) {
 			first_name: profile_data.first_name,
 			last_name: profile_data.last_name,
 			email: profile_data.email,
-			phone: profile_data.profile.phone
+			phone: profile_data.profile.phone,
+			desired_level_of_study: profile_data.profile.degree,
+			desired_field_of_study: profile_data.profile.major
 		};
 		const pre_application_form_fetch = await api.post(
 			`pre_application_form/`,
 			values,
-			locals.access
+			locals.access,
+			false
 		);
 		pre_application_form_data = await pre_application_form_fetch.json();
 	} else if (!pre_application_form_fetch.ok) {

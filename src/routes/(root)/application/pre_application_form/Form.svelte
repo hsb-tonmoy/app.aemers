@@ -22,9 +22,14 @@
 	import { fly } from 'svelte/transition';
 	import { formSaved } from '../stores';
 	import {
+		dependents_info,
+		parents_info,
 		education_data,
+		subjects_data,
 		education_level,
 		english_proficiency_tests,
+		eca_specific_achievements,
+		eca_activities,
 		schema,
 		work_experience
 	} from './constants';
@@ -73,6 +78,11 @@
 			middle_initials: pre_application_form.middle_initials,
 			last_name: pre_application_form.last_name || profile_data.last_name,
 			email: pre_application_form.email || profile_data.email,
+			desired_level_of_study:
+				pre_application_form.desired_level_of_study || profile_data.profile.degree,
+			desired_field_of_study:
+				pre_application_form.desired_field_of_study || profile_data.profile.major,
+			total_number_of_visa_needed: pre_application_form.total_number_of_visa_needed || 1,
 			phone: pre_application_form.phone || profile_data.profile.phone,
 			date_of_birth: pre_application_form.date_of_birth,
 			gender: pre_application_form.gender,
@@ -110,14 +120,21 @@
 			emergency_contact_phone: pre_application_form.emergency_contact_phone,
 			emergency_contact_email: pre_application_form.emergency_contact_email,
 			emergency_contact_relationship: pre_application_form.emergency_contact_relationship,
+			dependents: pre_application_form.dependents || dependents_info,
+			parents: pre_application_form.parents || parents_info,
 			highest_education_level: pre_application_form.highest_education_level,
 			country_of_education: pre_application_form.country_of_education,
 			grade_10th_or_equivalent: pre_application_form.grade_10th_or_equivalent || education_data,
+			grade_10th_subjects: pre_application_form.grade_10th_subjects || subjects_data,
 			grade_12th_or_equivalent: pre_application_form.grade_12th_or_equivalent || education_data,
+			grade_12th_subjects: pre_application_form.grade_12th_subjects || subjects_data,
 			undergraduate_degree_or_equivalent:
 				pre_application_form.undergraduate_degree_or_equivalent || education_data,
+			undergraduate_degree_subjects:
+				pre_application_form.undergraduate_degree_subjects || subjects_data,
 			graduate_degree_or_equivalent:
 				pre_application_form.graduate_degree_or_equivalent || education_data,
+			graduate_degree_subjects: pre_application_form.graduate_degree_subjects || subjects_data,
 			english_proficiency:
 				pre_application_form.english_proficiency || profile_data.profile.english_proficiency,
 			english_proficiency_score: pre_application_form.english_proficiency_score,
@@ -142,6 +159,9 @@
 			act_reading: pre_application_form.act_reading,
 			act_science: pre_application_form.act_science,
 			act_writing: pre_application_form.act_writing,
+			eca_specific_achievements:
+				pre_application_form.eca_specific_achievements || eca_specific_achievements,
+			eca_activities: pre_application_form.eca_activities || eca_activities,
 			has_gap: String(pre_application_form.has_gap),
 			gap_explanation: pre_application_form.gap_explanation,
 			work_experience: pre_application_form.work_experience || work_experience
@@ -242,6 +262,40 @@
 					<option value="prefer_not">Prefer Not to Say</option>
 				</Select>
 				<Error message={$errors.marital_status} />
+			</div>
+			<div class="">
+				<Label label_for="desired_level_of_study" label="Desired Level of Study" />
+				<Select
+					id="desired_level_of_study"
+					name="desired_level_of_study"
+					placeholder="Desired Level of Study"
+					error={$errors.desired_level_of_study}
+				>
+					{#each education_level as level}
+						<option value={level.value}>{level.label}</option>
+					{/each}
+				</Select>
+				<Error message={$errors.desired_level_of_study} />
+			</div>
+			<div class="">
+				<Label label_for="desired_field_of_study" label="Desired Field of Study" />
+				<Input
+					id="desired_field_of_study"
+					name="desired_field_of_study"
+					type="text"
+					error={$errors.desired_field_of_study}
+				/>
+				<Error message={$errors.desired_field_of_study} />
+			</div>
+			<div class="">
+				<Label label_for="total_number_of_visa_needed" label="Total Number of Visa Needed" />
+				<Input
+					id="total_number_of_visa_needed"
+					name="total_number_of_visa_needed"
+					type="text"
+					error={$errors.total_number_of_visa_needed}
+				/>
+				<Error message={$errors.total_number_of_visa_needed} />
 			</div>
 		</div>
 	</section>
@@ -665,6 +719,79 @@
 			</div>
 		</div>
 	</section>
+	{#if $data.total_number_of_visa_needed > 1}
+		{#each $data.dependents as _, i}
+			<section
+				in:fly={{ y: -50, duration: 500 }}
+				out:fly={{ y: 50, duration: 300 }}
+				class="form-section"
+			>
+				<h2>Dependent {i + 1}</h2>
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+					<div class="col-span-2">
+						<Label label_for="dependent_full_name_{i}" label="Full Name" />
+						<InputExposed
+							bind:value={$data.dependents[i].full_name}
+							type="text"
+							id="dependent_full_name_{i}"
+							name="dependent_full_name_{i}"
+							placeholder="Full Name of Dependent"
+						/>
+					</div>
+					<div class="">
+						<Label label_for="dependent_relationship_{i}" label="Relationship" />
+						<SelectExposed
+							bind:value={$data.dependents[i].relationship}
+							id="dependent_relationship{i}"
+							name="dependent_relationship{i}"
+						>
+							<option value="spouse">Spouse</option>
+							<option value="child">Child</option>
+						</SelectExposed>
+					</div>
+					<div class="">
+						<Label label_for="dependent_phone{i}" label="Phone" />
+						<InputExposed
+							bind:value={$data.dependents[i].phone}
+							type="text"
+							id="dependent_phone{i}"
+							name="dependent_phone{i}"
+							placeholder="+8801XXXXXXXXX"
+						/>
+					</div>
+					<div class="">
+						<Label label_for="dependent_email{i}" label="Email" />
+						<InputExposed
+							bind:value={$data.dependents[i].phone}
+							type="text"
+							id="dependent_email{i}"
+							name="dependent_email{i}"
+							placeholder="example@example.com"
+						/>
+					</div>
+					<div class="">
+						<Label label_for="dependent_address{i}" label="Phone" />
+						<InputExposed
+							bind:value={$data.dependents[i].address}
+							type="text"
+							id="dependent_address{i}"
+							name="dependent_address{i}"
+							placeholder=""
+						/>
+					</div>
+					<div class="">
+						<Label label_for="dependent_dob{i}" label="Date of Birth" />
+						<IconInputExposed
+							bind:value={$data.dependents[i].date_of_birth}
+							type="date"
+							id="dependent_dob{i}"
+							name="dependent_dob{i}"><CalendarDays /></IconInputExposed
+						>
+					</div>
+				</div>
+			</section>
+		{/each}
+	{/if}
 	<section class="form-section">
 		<h2>Academic Qualifications</h2>
 		<div class="grid grid-cols-1 md:grid-cols-3 gap-6">

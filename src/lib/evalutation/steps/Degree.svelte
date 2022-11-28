@@ -6,6 +6,7 @@
 	import Buttons from '../Buttons.svelte';
 	import StepTemplate from '../StepTemplate.svelte';
 	import { evaluationData } from './stores';
+	import { education_level } from '../../../routes/(root)/application/pre_application_form/constants';
 
 	export let steps;
 	export let currentIndex: number;
@@ -32,11 +33,9 @@
 <StepTemplate heading="Select the Degree you wish to achieve!">
 	<form use:form>
 		<fieldset class="flex flex-wrap gap-6">
-			<RadioNoIcon name="degree" value="undergrad">Undergraduate</RadioNoIcon>
-			<RadioNoIcon name="degree" value="master's">Master's</RadioNoIcon>
-			<RadioNoIcon name="degree" value="phd">PhD</RadioNoIcon>
-			<RadioNoIcon name="degree" value="pharmd">MPH or PharmD</RadioNoIcon>
-			<RadioNoIcon name="degree" value="other">Other</RadioNoIcon>
+			{#each education_level as level}
+				<RadioNoIcon name="degree" value={level.value}>{level.label}</RadioNoIcon>
+			{/each}
 		</fieldset>
 		{#if $errors.degree}
 			<Error classes="self-start mt-4" message={$errors.degree} />
