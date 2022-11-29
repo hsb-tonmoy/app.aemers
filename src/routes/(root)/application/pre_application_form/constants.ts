@@ -10,14 +10,16 @@ export const dependents_info = [
 		date_of_birth: ''
 	}
 ];
-export const parents_info = {
-	full_name: '',
-	relationship: '',
-	phone: '',
-	email: '',
-	address: '',
-	highest_level_of_education: ''
-};
+export const parents_info = [
+	{
+		full_name: '',
+		relationship: '',
+		phone: '',
+		email: '',
+		address: '',
+		highest_level_of_education: ''
+	}
+];
 
 export const education_data = {
 	name_of_exam: '',
@@ -34,10 +36,12 @@ export const education_data = {
 	end_date: ''
 };
 
-export const subjects_data = {
-	subject: '',
-	grade: ''
-};
+export const subjects_data = [
+	{
+		subject: '',
+		grade: ''
+	}
+];
 
 export const work_experience = [
 	{

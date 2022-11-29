@@ -88,6 +88,6 @@
 
 <style global lang="postcss">
 	.sticky-header {
-		@apply md:sticky top-0 pt-4 px-6 bg-white shadow-sm z-[99999];
+		@apply md:sticky top-0 pt-4 px-6 bg-white shadow-sm z-[7999];
 	}
 </style>

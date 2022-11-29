@@ -37,12 +37,67 @@
 	export let profile_data;
 	export let pre_application_form;
 
+	function addDependent() {
+		$data.dependents = $data.dependents.concat(dependents_info);
+	}
+
+	function removeDependent(index: number) {
+		$data.dependents.splice(index, 1);
+		$data.dependents = $data.dependents;
+	}
+
+	function addParent() {
+		$data.parents = $data.parents.concat(parents_info);
+	}
+
+	function removeParent(index: number) {
+		$data.parents.splice(index, 1);
+		$data.parents = $data.parents;
+	}
+
+	function add10thGradeSubject() {
+		$data.grade_10th_subjects = $data.grade_10th_subjects.concat(subjects_data);
+	}
+
+	function remove10thGradeSubject(index: number) {
+		$data.grade_10th_subjects.splice(index, 1);
+		$data.grade_10th_subjects = $data.grade_10th_subjects;
+	}
+
+	function add12thGradeSubject() {
+		$data.grade_12th_subjects = $data.grade_12th_subjects.concat(subjects_data);
+	}
+
+	function remove12thGradeSubject(index: number) {
+		$data.grade_12th_subjects.splice(index, 1);
+		$data.grade_12th_subjects = $data.grade_12th_subjects;
+	}
+
+	function addUndergradSubject() {
+		$data.undergraduate_degree_subjects = $data.undergraduate_degree_subjects.concat(subjects_data);
+	}
+
+	function removeUndergradSubject(index: number) {
+		$data.undergraduate_degree_subjects.splice(index, 1);
+		$data.undergraduate_degree_subjects = $data.undergraduate_degree_subjects;
+	}
+
+	function addGraduateSubject() {
+		$data.graduate_degree_subjects = $data.graduate_degree_subjects.concat(subjects_data);
+	}
+
+	function removeGraduateSubject(index: number) {
+		$data.graduate_degree_subjects.splice(index, 1);
+		$data.graduate_degree_subjects = $data.graduate_degree_subjects;
+	}
+
 	function addWorkExperience() {
 		$data.work_experience = $data.work_experience.concat(work_experience);
 	}
 
-	function deleteWorkExperience() {
-		$data.work_experience = $data.work_experience.slice(0, -1);
+	function removeWorkExperience(index: number) {
+		$data.work_experience.splice(index, 1);
+		$data.work_experience = $data.work_experience;
 	}
 
 	const submitData = useMutation(
@@ -580,7 +635,7 @@
 				<Error message={$errors.nationality} />
 			</div>
 
-			<div class="">
+			<div class="col-start-1 md:col-auto">
 				<Label label_for="country_of_citizenship" label="Country of Citizenship" />
 				<Select
 					id="country_of_citizenship"
@@ -612,8 +667,8 @@
 			</div>
 			{#if $data.are_you_citizen_of_more_than_one_country == 'true'}
 				<div
-					in:fly={{ y: -50, duration: 500 }}
-					out:fly={{ y: 50, duration: 300 }}
+					in:fly={{ y: -50, duration: 200 }}
+					out:fly={{ y: 50, duration: 200 }}
 					class="col-span-2"
 				>
 					<Label
@@ -648,8 +703,8 @@
 			</div>
 			{#if $data.are_you_living_in_other_country == 'true'}
 				<div
-					in:fly={{ y: -50, duration: 500 }}
-					out:fly={{ y: 50, duration: 300 }}
+					in:fly={{ y: -50, duration: 200 }}
+					out:fly={{ y: 50, duration: 200 }}
 					class="col-span-2"
 				>
 					<Label
@@ -722,12 +777,12 @@
 	{#if $data.total_number_of_visa_needed > 1}
 		{#each $data.dependents as _, i}
 			<section
-				in:fly={{ y: -50, duration: 500 }}
-				out:fly={{ y: 50, duration: 300 }}
+				in:fly={{ y: -50, duration: 200 }}
+				out:fly={{ y: 50, duration: 200 }}
 				class="form-section"
 			>
 				<h2>Dependent {i + 1}</h2>
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+				<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
 					<div class="col-span-2">
 						<Label label_for="dependent_full_name_{i}" label="Full Name" />
 						<InputExposed
@@ -762,7 +817,7 @@
 					<div class="">
 						<Label label_for="dependent_email{i}" label="Email" />
 						<InputExposed
-							bind:value={$data.dependents[i].phone}
+							bind:value={$data.dependents[i].email}
 							type="text"
 							id="dependent_email{i}"
 							name="dependent_email{i}"
@@ -770,13 +825,13 @@
 						/>
 					</div>
 					<div class="">
-						<Label label_for="dependent_address{i}" label="Phone" />
+						<Label label_for="dependent_address{i}" label="Address" />
 						<InputExposed
 							bind:value={$data.dependents[i].address}
 							type="text"
 							id="dependent_address{i}"
 							name="dependent_address{i}"
-							placeholder=""
+							placeholder="Dependent's Address"
 						/>
 					</div>
 					<div class="">
@@ -788,10 +843,125 @@
 							name="dependent_dob{i}"><CalendarDays /></IconInputExposed
 						>
 					</div>
+					<div class="flex items-center gap-x-4 col-start-1 col-span-2">
+						<Button
+							type="button"
+							on:click={addDependent}
+							text="Add another dependent"
+							defaultClass=""
+							classes="bg-white hover:bg-primary border border-primary text-primary hover:text-white font-bold px-4 py-3 w-full rounded-xl"
+						/>
+						{#if $data.dependents.length > 1}
+							<Button
+								type="button"
+								on:click={() => {
+									removeDependent(i);
+								}}
+								text="Remove"
+								defaultClass=""
+								classes="bg-white border-0 text-red-600 hover:text-red-700 font-bold"
+							/>
+						{/if}
+					</div>
 				</div>
 			</section>
 		{/each}
 	{/if}
+
+	{#each $data.parents as _, i}
+		<section
+			in:fly={{ y: -50, duration: 200 }}
+			out:fly={{ y: 50, duration: 200 }}
+			class="form-section"
+		>
+			<h2>Parent {i + 1}</h2>
+			<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+				<div class="col-span-2">
+					<Label label_for="parent_full_name_{i}" label="Full Name" />
+					<InputExposed
+						bind:value={$data.parents[i].full_name}
+						type="text"
+						id="parent_full_name_{i}"
+						name="parent_full_name_{i}"
+						placeholder="Full Name of Parent"
+					/>
+				</div>
+				<div class="col-start-1 col-span-2 md:col-auto">
+					<Label label_for="parent_relationship_{i}" label="Relationship" />
+					<SelectExposed
+						bind:value={$data.parents[i].relationship}
+						id="parent_relationship{i}"
+						name="parent_relationship{i}"
+					>
+						<option value="father">Father</option>
+						<option value="mother">Mother</option>
+					</SelectExposed>
+				</div>
+				<div class="col-start-1 col-span-2 md:col-auto">
+					<Label label_for="parent_phone{i}" label="Phone" />
+					<InputExposed
+						bind:value={$data.parents[i].phone}
+						type="text"
+						id="parent_phone{i}"
+						name="parent_phone{i}"
+						placeholder="+8801XXXXXXXXX"
+					/>
+				</div>
+				<div class="col-start-1 col-span-2 md:col-auto">
+					<Label label_for="parent_email{i}" label="Email" />
+					<InputExposed
+						bind:value={$data.parents[i].email}
+						type="text"
+						id="parent_email{i}"
+						name="parent_email{i}"
+						placeholder="example@example.com"
+					/>
+				</div>
+				<div class="col-start-1 col-span-2 md:col-auto">
+					<Label label_for="parent_address{i}" label="Address" />
+					<InputExposed
+						bind:value={$data.parents[i].address}
+						type="text"
+						id="parent_address{i}"
+						name="parent_address{i}"
+						placeholder="Parent's Address"
+					/>
+				</div>
+				<div class="col-start-1 col-span-2 md:col-auto">
+					<Label label_for="parent_dob{i}" label="Date of Birth" />
+					<SelectExposed
+						bind:value={$data.parents[i].highest_level_of_education}
+						id="parent_dob{i}"
+						name="parent_dob{i}"
+					>
+						{#each education_level as level}
+							<option value={level.value}>{level.label}</option>
+						{/each}
+					</SelectExposed>
+				</div>
+				<div class="flex items-center gap-x-4 col-start-1 col-span-2">
+					<Button
+						type="button"
+						on:click={addParent}
+						text="Add another parent"
+						defaultClass=""
+						classes="bg-white hover:bg-primary border border-primary text-primary hover:text-white font-bold px-4 py-3 w-full rounded-xl"
+					/>
+					{#if $data.parents.length > 1}
+						<Button
+							type="button"
+							on:click={() => {
+								removeParent(i);
+							}}
+							text="Remove"
+							defaultClass=""
+							classes="bg-white border-0 text-red-600 hover:text-red-700 font-bold"
+						/>
+					{/if}
+				</div>
+			</div>
+		</section>
+	{/each}
 	<section class="form-section">
 		<h2>Academic Qualifications</h2>
 		<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -825,8 +995,8 @@
 	</section>
 	{#if education_level_value >= 1}
 		<section
-			in:fly={{ y: -50, duration: 500 }}
-			out:fly={{ y: 50, duration: 300 }}
+			in:fly={{ y: -50, duration: 200 }}
+			out:fly={{ y: 50, duration: 200 }}
 			class="form-section"
 		>
 			<h2>Grade 10th or Equivalent</h2>
@@ -841,7 +1011,7 @@
 						bind:value={$data.grade_10th_or_equivalent.name_of_exam}
 					/>
 				</div>
-				<div class="">
+				<div class="col-start-1 col-span-3 md:col-auto">
 					<Label label_for="grade_10th_primary_language" label="Primary Language of Study" />
 					<InputExposed
 						type="text"
@@ -851,7 +1021,7 @@
 						bind:value={$data.grade_10th_or_equivalent.primary_language}
 					/>
 				</div>
-				<div class="">
+				<div class="col-start-1 col-span-3 md:col-auto">
 					<Label label_for="grade_10th_name_of_board" label="Name of Board" />
 					<InputExposed
 						type="text"
@@ -861,7 +1031,7 @@
 						bind:value={$data.grade_10th_or_equivalent.name_of_board}
 					/>
 				</div>
-				<div class="col-span-2">
+				<div class="col-start-1 col-span-3 md:col-2">
 					<Label label_for="grade_10th_name_of_institution" label="Name of Institution" />
 					<InputExposed
 						type="text"
@@ -871,7 +1041,7 @@
 						bind:value={$data.grade_10th_or_equivalent.name_of_institution}
 					/>
 				</div>
-				<div class="">
+				<div class="col-start-1 col-span-3 md:col-auto">
 					<Label label_for="grade_10th_country_of_study" label="Country of Education" />
 					<SelectExposed
 						bind:value={$data.grade_10th_or_equivalent.country_of_study}
@@ -883,7 +1053,7 @@
 						{/each}
 					</SelectExposed>
 				</div>
-				<div class="">
+				<div class="col-start-1 col-span-3 md:col-auto">
 					<Label label_for="grade_10th_grading_system" label="Grading System" />
 					<InputExposed
 						type="text"
@@ -893,7 +1063,7 @@
 						bind:value={$data.grade_10th_or_equivalent.grading_system}
 					/>
 				</div>
-				<div class="">
+				<div class="col-start-1 col-span-3 md:col-auto">
 					<Label label_for="grade_10th_score" label="Score" />
 					<InputExposed
 						type="text"
@@ -903,7 +1073,7 @@
 						bind:value={$data.grade_10th_or_equivalent.score}
 					/>
 				</div>
-				<div class="">
+				<div class="col-start-1 col-span-3 md:col-auto">
 					<Label label_for="grade_10th_start_date" label="Start Date" />
 					<IconInputExposed
 						type="date"
@@ -914,7 +1084,7 @@
 						><CalendarDays /></IconInputExposed
 					>
 				</div>
-				<div class="">
+				<div class="col-start-1 col-span-3 md:col-auto">
 					<Label label_for="grade_10th_end_date" label="End Date" />
 					<IconInputExposed
 						type="date"
@@ -924,6 +1094,49 @@
 						bind:value={$data.grade_10th_or_equivalent.end_date}><CalendarDays /></IconInputExposed
 					>
 				</div>
+			</div>
+			<div class="grid grid-cols-4 gap-6">
+				<h3 class="subheading">Subjects Studied At This Level</h3>
+				{#each $data.grade_10th_subjects as _, i}
+					<div class="col-start-1 col-span-4 md:col-auto md:col-start-1">
+						<Label label_for="grade_10th_subject{i}" label="Subject Name" />
+						<InputExposed
+							type="text"
+							id="grade_10th_subject{i}"
+							name="grade_10th_subject{i}"
+							placeholder="Name of the Subject/Course"
+							bind:value={$data.grade_10th_subjects[i].subject}
+						/>
+					</div>
+					<div class="col-start-1 col-span-3 md:col-auto">
+						<Label label_for="grade_10th_subject_grade{i}" label="Grade Achieved" />
+						<InputExposed
+							type="text"
+							id="grade_10th_subject_grade{i}"
+							name="grade_10th_subject_grade{i}"
+							placeholder="Grade Achieved"
+							bind:value={$data.grade_10th_subjects[i].grade}
+						/>
+					</div>
+					{#if $data.grade_10th_subjects.length > 1}
+						<Button
+							type="button"
+							on:click={() => {
+								remove10thGradeSubject(i);
+							}}
+							text="Remove"
+							defaultClass=""
+							classes="justify-self-start mt-4 bg-white border-0 text-red-600 hover:text-red-700 font-bold"
+						/>
+					{/if}
+				{/each}
+				<Button
+					type="button"
+					on:click={add10thGradeSubject}
+					text="Add Subject"
+					defaultClass=""
+					classes="col-start-1 col-span-3 md:col-span-2 bg-white hover:bg-primary border border-primary text-primary hover:text-white font-bold px-4 py-3 w-full rounded-xl"
+				/>
 			</div>
 		</section>
 		<section class="form-section">
@@ -939,7 +1152,7 @@
 						bind:value={$data.grade_12th_or_equivalent.name_of_exam}
 					/>
 				</div>
-				<div class="">
+				<div class="col-start-1 col-span-3 md:col-auto">
 					<Label label_for="grade_12th_primary_language" label="Primary Language of Study" />
 					<InputExposed
 						type="text"
@@ -949,7 +1162,7 @@
 						bind:value={$data.grade_12th_or_equivalent.primary_language}
 					/>
 				</div>
-				<div class="">
+				<div class="col-start-1 col-span-3 md:col-auto">
 					<Label label_for="grade_12th_name_of_board" label="Name of Board" />
 					<InputExposed
 						type="text"
@@ -959,7 +1172,7 @@
 						bind:value={$data.grade_12th_or_equivalent.name_of_board}
 					/>
 				</div>
-				<div class="col-span-2">
+				<div class="col-start-1 col-span-3 md:col-2">
 					<Label label_for="grade_12th_name_of_institution" label="Name of Institution" />
 					<InputExposed
 						type="text"
@@ -969,7 +1182,7 @@
 						bind:value={$data.grade_12th_or_equivalent.name_of_institution}
 					/>
 				</div>
-				<div class="">
+				<div class="col-start-1 col-span-3 md:col-auto">
 					<Label label_for="grade_12th_country_of_study" label="Country of Education" />
 					<SelectExposed
 						bind:value={$data.grade_12th_or_equivalent.country_of_study}
@@ -981,7 +1194,7 @@
 						{/each}
 					</SelectExposed>
 				</div>
-				<div class="">
+				<div class="col-start-1 col-span-3 md:col-auto">
 					<Label label_for="grade_12th_grading_system" label="Grading System" />
 					<InputExposed
 						type="text"
@@ -991,7 +1204,7 @@
 						bind:value={$data.grade_12th_or_equivalent.grading_system}
 					/>
 				</div>
-				<div class="">
+				<div class="col-start-1 col-span-3 md:col-auto">
 					<Label label_for="grade_12th_score" label="Score" />
 					<InputExposed
 						type="text"
@@ -1001,7 +1214,7 @@
 						bind:value={$data.grade_12th_or_equivalent.score}
 					/>
 				</div>
-				<div class="">
+				<div class="col-start-1 col-span-3 md:col-auto">
 					<Label label_for="grade_12th_start_date" label="Start Date" />
 					<IconInputExposed
 						type="date"
@@ -1012,7 +1225,7 @@
 						><CalendarDays /></IconInputExposed
 					>
 				</div>
-				<div class="">
+				<div class="col-start-1 col-span-3 md:col-auto">
 					<Label label_for="grade_12th_end_date" label="End Date" />
 					<IconInputExposed
 						type="date"
@@ -1026,8 +1239,8 @@
 		</section>
 		{#if education_level_value >= 4}
 			<section
-				in:fly={{ y: -50, duration: 500 }}
-				out:fly={{ y: 50, duration: 300 }}
+				in:fly={{ y: -50, duration: 200 }}
+				out:fly={{ y: 50, duration: 200 }}
 				class="form-section"
 			>
 				<h2>Undergraduate (Bachelor's) or Equivalent</h2>
@@ -1042,7 +1255,7 @@
 							bind:value={$data.undergraduate_degree_or_equivalent.name_of_exam}
 						/>
 					</div>
-					<div class="">
+					<div class="col-start-1 col-span-3 md:col-auto">
 						<Label
 							label_for="undergraduate_degree_primary_language"
 							label="Primary Language of Study"
@@ -1055,7 +1268,7 @@
 							bind:value={$data.undergraduate_degree_or_equivalent.primary_language}
 						/>
 					</div>
-					<div class="">
+					<div class="col-start-1 col-span-3 md:col-auto">
 						<Label label_for="undergraduate_degree_name_of_board" label="Name of Board" />
 						<InputExposed
 							type="text"
@@ -1065,7 +1278,7 @@
 							bind:value={$data.undergraduate_degree_or_equivalent.name_of_board}
 						/>
 					</div>
-					<div class="col-span-2">
+					<div class="col-start-1 col-span-3 md:col-2">
 						<Label
 							label_for="undergraduate_degree_name_of_institution"
 							label="Name of Institution"
@@ -1078,7 +1291,7 @@
 							bind:value={$data.undergraduate_degree_or_equivalent.name_of_institution}
 						/>
 					</div>
-					<div class="">
+					<div class="col-start-1 col-span-3 md:col-auto">
 						<Label label_for="undergraduate_degree_country_of_study" label="Country of Education" />
 						<SelectExposed
 							bind:value={$data.undergraduate_degree_or_equivalent.country_of_study}
@@ -1090,7 +1303,7 @@
 							{/each}
 						</SelectExposed>
 					</div>
-					<div class="">
+					<div class="col-start-1 col-span-3 md:col-auto">
 						<Label label_for="undergraduate_degree_grading_system" label="Grading System" />
 						<InputExposed
 							type="text"
@@ -1100,7 +1313,7 @@
 							bind:value={$data.undergraduate_degree_or_equivalent.grading_system}
 						/>
 					</div>
-					<div class="">
+					<div class="col-start-1 col-span-3 md:col-auto">
 						<Label label_for="undergraduate_degree_score" label="Score" />
 						<InputExposed
 							type="text"
@@ -1110,7 +1323,7 @@
 							bind:value={$data.undergraduate_degree_or_equivalent.score}
 						/>
 					</div>
-					<div class="">
+					<div class="col-start-1 col-span-3 md:col-auto">
 						<Label label_for="undergraduate_degree_start_date" label="Start Date" />
 						<IconInputExposed
 							type="date"
@@ -1121,7 +1334,7 @@
 							><CalendarDays /></IconInputExposed
 						>
 					</div>
-					<div class="">
+					<div class="col-start-1 col-span-3 md:col-auto">
 						<Label label_for="undergraduate_degree_end_date" label="End Date" />
 						<IconInputExposed
 							type="date"
@@ -1137,8 +1350,8 @@
 		{/if}
 		{#if education_level_value >= 5}
 			<section
-				in:fly={{ y: -50, duration: 500 }}
-				out:fly={{ y: 50, duration: 300 }}
+				in:fly={{ y: -50, duration: 200 }}
+				out:fly={{ y: 50, duration: 200 }}
 				class="form-section"
 			>
 				<h2>Graduate (Master's) or Equivalent</h2>
@@ -1153,7 +1366,7 @@
 							bind:value={$data.graduate_degree_or_equivalent.name_of_exam}
 						/>
 					</div>
-					<div class="">
+					<div class="col-start-1 col-span-3 md:col-auto">
 						<Label label_for="graduate_degree_primary_language" label="Primary Language of Study" />
 						<InputExposed
 							type="text"
@@ -1163,7 +1376,7 @@
 							bind:value={$data.graduate_degree_or_equivalent.primary_language}
 						/>
 					</div>
-					<div class="">
+					<div class="col-start-1 col-span-3 md:col-auto">
 						<Label label_for="graduate_degree_name_of_board" label="Name of Board" />
 						<InputExposed
 							type="text"
@@ -1173,7 +1386,7 @@
 							bind:value={$data.graduate_degree_or_equivalent.name_of_board}
 						/>
 					</div>
-					<div class="col-span-2">
+					<div class="col-start-1 col-span-3 md:col-2">
 						<Label label_for="graduate_degree_name_of_institution" label="Name of Institution" />
 						<InputExposed
 							type="text"
@@ -1183,7 +1396,7 @@
 							bind:value={$data.graduate_degree_or_equivalent.name_of_institution}
 						/>
 					</div>
-					<div class="">
+					<div class="col-start-1 col-span-3 md:col-auto">
 						<Label label_for="graduate_degree_country_of_study" label="Country of Education" />
 						<SelectExposed
 							bind:value={$data.graduate_degree_or_equivalent.country_of_study}
@@ -1195,7 +1408,7 @@
 							{/each}
 						</SelectExposed>
 					</div>
-					<div class="">
+					<div class="col-start-1 col-span-3 md:col-auto">
 						<Label label_for="graduate_degree_grading_system" label="Grading System" />
 						<InputExposed
 							type="text"
@@ -1205,7 +1418,7 @@
 							bind:value={$data.graduate_degree_or_equivalent.grading_system}
 						/>
 					</div>
-					<div class="">
+					<div class="col-start-1 col-span-3 md:col-auto">
 						<Label label_for="graduate_degree_score" label="Score" />
 						<InputExposed
 							type="text"
@@ -1215,7 +1428,7 @@
 							bind:value={$data.graduate_degree_or_equivalent.score}
 						/>
 					</div>
-					<div class="">
+					<div class="col-start-1 col-span-3 md:col-auto">
 						<Label label_for="graduate_degree_start_date" label="Start Date" />
 						<IconInputExposed
 							type="date"
@@ -1226,7 +1439,7 @@
 							><CalendarDays /></IconInputExposed
 						>
 					</div>
-					<div class="">
+					<div class="col-start-1 col-span-3 md:col-auto">
 						<Label label_for="graduate_degree_end_date" label="End Date" />
 						<IconInputExposed
 							type="date"
@@ -1244,7 +1457,7 @@
 	<section class="form-section">
 		<h2>Language Proficiency Test</h2>
 		<div class="grid grid-cols-1 md:grid-cols-6 gap-6">
-			<div class="col-span-4">
+			<div class="col-span-full xl:col-span-4">
 				<Label label_for="english_proficiency" label="Name of the Test" />
 				<Select id="english_proficiency" name="english_proficiency" placeholder="Name of the Test">
 					{#each english_proficiency_tests as test}
@@ -1253,7 +1466,7 @@
 				</Select>
 				<Error message={$errors.english_proficiency} />
 			</div>
-			<div class="col-start-1 col-span-2">
+			<div class="col-start-1 col-span-3 xl:col-span-2">
 				<Label label_for="english_proficiency_waivers" label="Do you have IELTS Waiver?" />
 				<Select
 					id="english_proficiency_waivers"
@@ -1265,7 +1478,7 @@
 				</Select>
 				<Error message={$errors.english_proficiency_waivers} />
 			</div>
-			<div class="col-span-2">
+			<div class="col-span-3 xl:col-span-2">
 				<Label label_for="english_proficiency_date_of_examination" label="Date of Examination" />
 				<IconInput
 					type="date"
@@ -1275,7 +1488,7 @@
 				>
 				<Error message={$errors.english_proficiency_date_of_examination} />
 			</div>
-			<div class="col-start-1 col-span-2">
+			<div class="col-start-1 col-span-3 xl:col-span-2">
 				<Label label_for="english_proficiency_score" label="Overall Score" />
 				<Input
 					type="text"
@@ -1285,7 +1498,7 @@
 				/>
 				<Error message={$errors.english_proficiency_score} />
 			</div>
-			<div class="col-span-2">
+			<div class="col-span-3 xl:col-span-2">
 				<Label label_for="english_proficiency_trf_no" label="IELTS TRF No." />
 				<Input
 					type="text"
@@ -1295,7 +1508,7 @@
 				/>
 				<Error message={$errors.english_proficiency_trf_no} />
 			</div>
-			<div class="col-start-1">
+			<div class="col-span-3 xl:col-span-1">
 				<Label label_for="english_proficiency_listening" label="Listening" />
 				<Input
 					type="text"
@@ -1305,7 +1518,7 @@
 				/>
 				<Error message={$errors.english_proficiency_listening} />
 			</div>
-			<div class="">
+			<div class="col-span-3 xl:col-span-1">
 				<Label label_for="english_proficiency_speaking" label="Speaking" />
 				<Input
 					type="text"
@@ -1315,7 +1528,7 @@
 				/>
 				<Error message={$errors.english_proficiency_speaking} />
 			</div>
-			<div class="">
+			<div class="col-span-3 xl:col-span-1">
 				<Label label_for="english_proficiency_reading" label="Reading" />
 				<Input
 					type="text"
@@ -1325,7 +1538,7 @@
 				/>
 				<Error message={$errors.english_proficiency_reading} />
 			</div>
-			<div class="">
+			<div class="col-span-3 xl:col-span-1">
 				<Label label_for="english_proficiency_writing" label="Writing" />
 				<Input
 					type="text"
@@ -1340,12 +1553,12 @@
 	<section class="form-section">
 		<h2>SAT</h2>
 		<div class="grid grid-cols-1 md:grid-cols-6 gap-6">
-			<div class="col-span-2">
+			<div class="col-span-6 md:col-span-2">
 				<Label label_for="sat_score" label="SAT Score" />
 				<Input type="text" id="sat_score" name="sat_score" placeholder="SAT Score" />
 				<Error message={$errors.sat_score} />
 			</div>
-			<div class="col-span-2">
+			<div class="col-span-6 md:col-span-2">
 				<Label label_for="sat_date_of_examination" label="Date of Examination" />
 				<IconInput
 					type="date"
@@ -1370,12 +1583,12 @@
 	<section class="form-section">
 		<h2>ACT</h2>
 		<div class="grid grid-cols-1 md:grid-cols-6 gap-6">
-			<div class="col-span-2">
+			<div class="col-span-3 xl:col-span-2">
 				<Label label_for="act_score" label="ACT Score" />
 				<Input type="text" id="act_score" name="act_score" placeholder="ACT Score" />
 				<Error message={$errors.act_score} />
 			</div>
-			<div class="col-span-2">
+			<div class="col-span-3 xl:col-span-2">
 				<Label label_for="act_date_of_examination" label="Date of Examination" />
 				<IconInput
 					type="date"
@@ -1385,27 +1598,27 @@
 				>
 				<Error message={$errors.act_date_of_examination} />
 			</div>
-			<div class="col-start-1">
+			<div class="col-start-1 col-span-3 md:col-span-1">
 				<Label label_for="act_english" label="English" />
 				<Input type="text" id="act_english" name="act_english" placeholder="English" />
 				<Error message={$errors.act_english} />
 			</div>
-			<div class="">
+			<div class="col-span-3 md:col-span-1">
 				<Label label_for="act_math" label="Math" />
 				<Input type="text" id="act_math" name="act_math" placeholder="Math" />
 				<Error message={$errors.act_math} />
 			</div>
-			<div class="">
+			<div class="col-span-3 md:col-span-1">
 				<Label label_for="act_reading" label="Reading" />
 				<Input type="text" id="act_reading" name="act_reading" placeholder="Reading" />
 				<Error message={$errors.act_reading} />
 			</div>
-			<div class="">
+			<div class="col-span-3 md:col-span-1">
 				<Label label_for="act_science" label="Science" />
 				<Input type="text" id="act_science" name="act_science" placeholder="Science" />
 				<Error message={$errors.act_science} />
 			</div>
-			<div class="">
+			<div class="col-span-3 md:col-span-1">
 				<Label label_for="act_writing" label="Writing" />
 				<Input type="text" id="act_writing" name="act_writing" placeholder="Writing" />
 				<Error message={$errors.act_writing} />
@@ -1414,13 +1627,13 @@
 	</section>
 	{#each $data.work_experience as _, i}
 		<section
-			in:fly={{ y: -50, duration: 500 }}
-			out:fly={{ y: 50, duration: 300 }}
+			in:fly={{ y: -50, duration: 200 }}
+			out:fly={{ y: 50, duration: 200 }}
 			class="form-section"
 		>
 			<h2>Work Experience {i + 1}</h2>
 			<div class="grid grid-cols-1 md:grid-cols-6 gap-6">
-				<div class="col-span-4">
+				<div class="col-span-full xl:col-span-4">
 					<Label label_for="company_name_{i}" label="Company Name" />
 					<InputExposed
 						bind:value={$data.work_experience[i].company_name}
@@ -1430,7 +1643,7 @@
 						placeholder="Company Name"
 					/>
 				</div>
-				<div class="col-span-4">
+				<div class="col-span-full xl:col-span-4">
 					<Label label_for="company_address_{i}" label="Company Address" />
 					<InputExposed
 						bind:value={$data.work_experience[i].company_address}
@@ -1440,7 +1653,7 @@
 						placeholder="Company Address"
 					/>
 				</div>
-				<div class="col-start-1 col-span-2">
+				<div class="col-start-1 col-span-3 xl:col-span-2">
 					<Label label_for="company_designation_{i}" label="Designation" />
 					<InputExposed
 						bind:value={$data.work_experience[i].position}
@@ -1450,7 +1663,7 @@
 						placeholder="Designation"
 					/>
 				</div>
-				<div class="col-span-2">
+				<div class="col-span-3 xl:col-span-2">
 					<Label label_for="company_mode_of_salary_{i}" label="Mode of Salary" />
 					<InputExposed
 						bind:value={$data.work_experience[i].mode_of_salary}
@@ -1460,7 +1673,7 @@
 						placeholder="Mode of Salary"
 					/>
 				</div>
-				<div class="col-start-1 col-span-2">
+				<div class="col-start-1 col-span-3 xl:col-span-2">
 					<Label label_for="company_start_date_{i}" label="Start Date" />
 					<IconInputExposed
 						type="date"
@@ -1470,7 +1683,7 @@
 						bind:value={$data.work_experience[i].start_date}><CalendarDays /></IconInputExposed
 					>
 				</div>
-				<div class="col-span-2">
+				<div class="col-span-3 xl:col-span-2">
 					<Label label_for="company_end_date_{i}" label="End Date" />
 					<IconInputExposed
 						type="date"
@@ -1491,7 +1704,9 @@
 					{#if $data.work_experience.length > 1}
 						<Button
 							type="button"
-							on:click={deleteWorkExperience}
+							on:click={() => {
+								removeWorkExperience(i);
+							}}
 							text="Remove"
 							defaultClass=""
 							classes="bg-white border-0 text-red-600 hover:text-red-700 font-bold"
@@ -1504,7 +1719,7 @@
 	<section class="form-section">
 		<h2>Study Gap</h2>
 		<div class="grid grid-cols-1 md:grid-cols-6 gap-6">
-			<div class="col-span-4">
+			<div class="col-span-full xl:col-span-4">
 				<Label label_for="has_gap" label="Do you have study gap?" />
 				<Select id="has_gap" name="has_gap" error={$errors.has_gap}>
 					<option value={false}>No</option>
@@ -1514,9 +1729,9 @@
 			</div>
 			{#if $data.has_gap === 'true'}
 				<div
-					in:fly={{ y: -50, duration: 500 }}
-					out:fly={{ y: 50, duration: 300 }}
-					class="col-span-4"
+					in:fly={{ y: -50, duration: 200 }}
+					out:fly={{ y: 50, duration: 200 }}
+					class="col-span-full xl:col-span-4"
 				>
 					<Label label_for="gap_explanation" label="Provide an explanation for your study gap" />
 					<TextArea
@@ -1531,7 +1746,7 @@
 		</div>
 	</section>
 
-	<div class="flex gap-x-4 w-full justify-end">
+	<div class="flex gap-x-4 w-full justify-end mb-6">
 		<a href="/application/file_opening">
 			<Button
 				type="button"
@@ -1556,5 +1771,9 @@
 
 	h2 {
 		@apply text-secondary font-bold text-2xl mb-8;
+	}
+
+	.subheading {
+		@apply col-span-4 text-lighterText font-bold text-xl mt-8;
 	}
 </style>
