@@ -113,6 +113,8 @@ export const eca_specific_achievements = [
 	{ name: 'National Olympiads', description: '' },
 	{ name: 'International Olympiads', description: '' }
 ];
+export const eca_specific_activity = [{ name: '', description: '' }];
+
 export const eca_activities = [];
 
 export const schema = yup.object({

@@ -10,7 +10,8 @@
 		Label,
 		Select,
 		SelectExposed,
-		TextArea
+		TextArea,
+		TextAreaExposed
 	} from '$lib/components/Form';
 	import { CalendarDays } from '$lib/components/Icons';
 	import { countries } from '$lib/data/countries';
@@ -29,6 +30,7 @@
 		education_level,
 		english_proficiency_tests,
 		eca_specific_achievements,
+		eca_specific_activity,
 		eca_activities,
 		schema,
 		work_experience
@@ -89,6 +91,15 @@
 	function removeGraduateSubject(index: number) {
 		$data.graduate_degree_subjects.splice(index, 1);
 		$data.graduate_degree_subjects = $data.graduate_degree_subjects;
+	}
+
+	function addECA() {
+		$data.eca_specific_achievements = $data.eca_specific_achievements.concat(eca_specific_activity);
+	}
+
+	function removeECA(index: number) {
+		$data.eca_specific_achievements.splice(index, 1);
+		$data.eca_specific_achievements = $data.eca_specific_achievements;
 	}
 
 	function addWorkExperience() {
@@ -215,7 +226,7 @@
 			act_science: pre_application_form.act_science,
 			act_writing: pre_application_form.act_writing,
 			eca_specific_achievements:
-				pre_application_form.eca_specific_achievements || eca_specific_achievements,
+				pre_application_form.eca_specific_achievements || eca_specific_activity,
 			eca_activities: pre_application_form.eca_activities || eca_activities,
 			has_gap: String(pre_application_form.has_gap),
 			gap_explanation: pre_application_form.gap_explanation,
@@ -1135,7 +1146,7 @@
 					on:click={add10thGradeSubject}
 					text="Add Subject"
 					defaultClass=""
-					classes="col-start-1 col-span-3 md:col-span-2 bg-white hover:bg-primary border border-primary text-primary hover:text-white font-bold px-4 py-3 w-full rounded-xl"
+					classes="col-start-1 col-span-3 md:col-start-1 md:col-span-1 bg-white hover:bg-primary border border-primary text-primary hover:text-white font-bold px-4 py-3 w-full rounded-xl"
 				/>
 			</div>
 		</section>
@@ -1235,6 +1246,49 @@
 						bind:value={$data.grade_12th_or_equivalent.end_date}><CalendarDays /></IconInputExposed
 					>
 				</div>
+			</div>
+			<div class="grid grid-cols-4 gap-6">
+				<h3 class="subheading">Subjects Studied At This Level</h3>
+				{#each $data.grade_12th_subjects as _, i}
+					<div class="col-start-1 col-span-4 md:col-auto md:col-start-1">
+						<Label label_for="grade_12th_subject{i}" label="Subject Name" />
+						<InputExposed
+							type="text"
+							id="grade_12th_subject{i}"
+							name="grade_12th_subject{i}"
+							placeholder="Name of the Subject/Course"
+							bind:value={$data.grade_12th_subjects[i].subject}
+						/>
+					</div>
+					<div class="col-start-1 col-span-3 md:col-auto">
+						<Label label_for="grade_12th_subject_grade{i}" label="Grade Achieved" />
+						<InputExposed
+							type="text"
+							id="grade_12th_subject_grade{i}"
+							name="grade_12th_subject_grade{i}"
+							placeholder="Grade Achieved"
+							bind:value={$data.grade_12th_subjects[i].grade}
+						/>
+					</div>
+					{#if $data.grade_12th_subjects.length > 1}
+						<Button
+							type="button"
+							on:click={() => {
+								remove12thGradeSubject(i);
+							}}
+							text="Remove"
+							defaultClass=""
+							classes="justify-self-start mt-4 bg-white border-0 text-red-600 hover:text-red-700 font-bold"
+						/>
+					{/if}
+				{/each}
+				<Button
+					type="button"
+					on:click={add12thGradeSubject}
+					text="Add Subject"
+					defaultClass=""
+					classes="col-start-1 col-span-3 md:col-start-1 md:col-span-1 bg-white hover:bg-primary border border-primary text-primary hover:text-white font-bold px-4 py-3 w-full rounded-xl"
+				/>
 			</div>
 		</section>
 		{#if education_level_value >= 4}
@@ -1346,6 +1400,49 @@
 						>
 					</div>
 				</div>
+				<div class="grid grid-cols-4 gap-6">
+					<h3 class="subheading">Subjects Studied At This Level</h3>
+					{#each $data.undergraduate_degree_subjects as _, i}
+						<div class="col-start-1 col-span-4 md:col-auto md:col-start-1">
+							<Label label_for="undergraduate_degree_subject{i}" label="Subject Name" />
+							<InputExposed
+								type="text"
+								id="undergraduate_degree_subject{i}"
+								name="undergraduate_degree_subject{i}"
+								placeholder="Name of the Subject/Course"
+								bind:value={$data.undergraduate_degree_subjects[i].subject}
+							/>
+						</div>
+						<div class="col-start-1 col-span-3 md:col-auto">
+							<Label label_for="grade_12th_subject_grade{i}" label="Grade Achieved" />
+							<InputExposed
+								type="text"
+								id="undergraduate_degree_subject{i}"
+								name="undergraduate_degree_subject{i}"
+								placeholder="Grade Achieved"
+								bind:value={$data.undergraduate_degree_subjects[i].grade}
+							/>
+						</div>
+						{#if $data.undergraduate_degree_subjects.length > 1}
+							<Button
+								type="button"
+								on:click={() => {
+									removeUndergradSubject(i);
+								}}
+								text="Remove"
+								defaultClass=""
+								classes="justify-self-start mt-4 bg-white border-0 text-red-600 hover:text-red-700 font-bold"
+							/>
+						{/if}
+					{/each}
+					<Button
+						type="button"
+						on:click={addUndergradSubject}
+						text="Add Subject"
+						defaultClass=""
+						classes="col-start-1 col-span-3 md:col-start-1 md:col-span-1 bg-white hover:bg-primary border border-primary text-primary hover:text-white font-bold px-4 py-3 w-full rounded-xl"
+					/>
+				</div>
 			</section>
 		{/if}
 		{#if education_level_value >= 5}
@@ -1450,6 +1547,49 @@
 							><CalendarDays /></IconInputExposed
 						>
 					</div>
+				</div>
+				<div class="grid grid-cols-4 gap-6">
+					<h3 class="subheading">Subjects Studied At This Level</h3>
+					{#each $data.graduate_degree_subjects as _, i}
+						<div class="col-start-1 col-span-4 md:col-auto md:col-start-1">
+							<Label label_for="undergraduate_degree_subject{i}" label="Subject Name" />
+							<InputExposed
+								type="text"
+								id="graduate_degree_subject{i}"
+								name="graduate_degree_subject{i}"
+								placeholder="Name of the Subject/Course"
+								bind:value={$data.graduate_degree_subjects[i].subject}
+							/>
+						</div>
+						<div class="col-start-1 col-span-3 md:col-auto">
+							<Label label_for="grade_12th_subject_grade{i}" label="Grade Achieved" />
+							<InputExposed
+								type="text"
+								id="graduate_degree_subject{i}"
+								name="graduate_degree_subject{i}"
+								placeholder="Grade Achieved"
+								bind:value={$data.graduate_degree_subjects[i].grade}
+							/>
+						</div>
+						{#if $data.graduate_degree_subjects.length > 1}
+							<Button
+								type="button"
+								on:click={() => {
+									removeGraduateSubject(i);
+								}}
+								text="Remove"
+								defaultClass=""
+								classes="justify-self-start mt-4 bg-white border-0 text-red-600 hover:text-red-700 font-bold"
+							/>
+						{/if}
+					{/each}
+					<Button
+						type="button"
+						on:click={addGraduateSubject}
+						text="Add Subject"
+						defaultClass=""
+						classes="col-start-1 col-span-3 md:col-start-1 md:col-span-1 bg-white hover:bg-primary border border-primary text-primary hover:text-white font-bold px-4 py-3 w-full rounded-xl"
+					/>
 				</div>
 			</section>
 		{/if}
@@ -1623,6 +1763,50 @@
 				<Input type="text" id="act_writing" name="act_writing" placeholder="Writing" />
 				<Error message={$errors.act_writing} />
 			</div>
+		</div>
+	</section>
+	<section class="form-section">
+		<h2>Extracurricular Activities</h2>
+		<div class="grid grid-cols-1 md:grid-cols-6 gap-6">
+			{#each $data.eca_specific_achievements as activity, i}
+				<div class="col-span-3 space-y-2">
+					<Label label_for="eca_{i}" label="Activity - {i + 1}" />
+					<SelectExposed
+						bind:value={$data.eca_specific_achievements[i].name}
+						id="eca_{i}"
+						name="eca_{i}"
+					>
+						{#each eca_specific_achievements as achievement}
+							<option value={achievement.name}>{achievement.name}</option>
+						{/each}
+					</SelectExposed>
+
+					<TextAreaExposed
+						bind:value={$data.eca_specific_achievements[i].description}
+						rows={8}
+						id="eca_desc{i}"
+						name="eca_desc{i}"
+						placeholder="Describe your experience"
+					/>
+					<Button
+						type="button"
+						on:click={() => {
+							removeECA(i);
+						}}
+						text="Remove"
+						defaultClass=""
+						classes="justify-self-start mt-4 bg-white border-0 text-red-600 hover:text-red-700 font-bold"
+					/>
+				</div>
+			{/each}
+
+			<Button
+				type="button"
+				on:click={addECA}
+				text="Add Activity"
+				defaultClass=""
+				classes="col-start-1 col-span-2 md:col-start-1 md:col-span-1 bg-white hover:bg-primary border border-primary text-primary hover:text-white font-bold px-4 py-3 w-full rounded-xl"
+			/>
 		</div>
 	</section>
 	{#each $data.work_experience as _, i}
